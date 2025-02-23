@@ -1,6 +1,6 @@
 // GreekTextAnalyzer.js
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import wordDatabase from './wordDatabase';
 
 const GreekTextAnalyzer = () => {
@@ -21,13 +21,22 @@ const GreekTextAnalyzer = () => {
     'DEMONSTRATIVE PRONOUN'
   ];
 
+  // Mapping for analysis card background colors per group
+  const bgMapping = {
+    'VERB': 'bg-pink-200',
+    'NOUN': 'bg-blue-200',
+    'ADJECTIVE': 'bg-green-200',
+    'RED': 'bg-red-200',
+    'ADVERB': 'bg-yellow-200'
+  };
+
   // Helper Functions
   const cleanWord = (word) => {
     return word
       .replace(/[,.;']$/g, '')
       .replace(/^['']/, '')
       .replace(/[᾽]/g, '')
-      .replace(/·/g, '') // Strip the middle dot "·"
+      .replace(/·/g, '') // Remove the middle dot "·"
       .trim();
   };
 
@@ -38,28 +47,60 @@ const GreekTextAnalyzer = () => {
     );
   };
 
-  // Determine if a word's type is active
-  const isWordTypeActive = (info) => {
+  // Custom function to check if a word's info matches any active type
+  const isWordTypeActiveCustom = (info, types) => {
     const part = info.partOfSpeech.toUpperCase();
-    // Check for specific type toggles
-    if (activeTypes.includes(part)) return true;
-    // Check if the RED group is active and the part belongs to it
-    if (activeTypes.includes('RED') && redGroup.includes(part)) return true;
+    if (types.includes(part)) return true;
+    if (types.includes('RED') && redGroup.includes(part)) return true;
     return false;
   };
 
-  // Check if a word should be highlighted
-  const isHighlighted = (word) => {
-    const clean = cleanWord(word);
-    const info = wordDatabase[clean];
-    return info && isWordTypeActive(info);
+  // Update word analysis based on current text and provided types
+  const updateWordAnalysis = (text, types) => {
+    const newMatrix = createTextMatrix(text);
+    const analysis = [];
+    newMatrix.forEach(row => {
+      row.forEach(word => {
+        const cleaned = cleanWord(word);
+        const info = wordDatabase[cleaned];
+        if (info && isWordTypeActiveCustom(info, types)) {
+          analysis.push({
+            word: cleaned,
+            ...info
+          });
+        }
+      });
+    });
+    setWordAnalysis(analysis);
   };
 
-  // Return the appropriate Tailwind class based on the word's part of speech
+  // useEffect to update wordAnalysis whenever text or activeTypes changes
+  useEffect(() => {
+    updateWordAnalysis(text, activeTypes);
+  }, [text, activeTypes]);
+
+  // Event Handlers
+  const handleTextChange = (e) => {
+    const newText = e.target.value;
+    setText(newText);
+    setMatrix(createTextMatrix(newText));
+  };
+
+  const handleTypeClick = (type) => {
+    let newActiveTypes;
+    if (activeTypes.includes(type)) {
+      newActiveTypes = activeTypes.filter(t => t !== type);
+    } else {
+      newActiveTypes = [...activeTypes, type];
+    }
+    setActiveTypes(newActiveTypes);
+  };
+
+  // getHighlightClass uses the current activeTypes state
   const getHighlightClass = (word) => {
-    const clean = cleanWord(word);
-    const info = wordDatabase[clean];
-    if (info && isWordTypeActive(info)) {
+    const cleaned = cleanWord(word);
+    const info = wordDatabase[cleaned];
+    if (info && isWordTypeActiveCustom(info, activeTypes)) {
       const part = info.partOfSpeech.toUpperCase();
       if (part === 'VERB' && activeTypes.includes('VERB')) return 'bg-pink-200';
       if (part === 'ADJECTIVE' && activeTypes.includes('ADJECTIVE')) return 'bg-green-200';
@@ -70,45 +111,23 @@ const GreekTextAnalyzer = () => {
     return 'bg-white border';
   };
 
-  // Update word analysis based on the current text and active types
-  const updateWordAnalysis = (text, types) => {
-    const newMatrix = createTextMatrix(text);
-    const analysis = [];
-    newMatrix.forEach(row => {
-      row.forEach(word => {
-        const clean = cleanWord(word);
-        const info = wordDatabase[clean];
-        if (info && isWordTypeActive(info)) {
-          analysis.push({
-            word: clean,
-            ...info
-          });
-        }
-      });
-    });
-    setWordAnalysis(analysis);
-  };
-
-  // Event Handlers
-  const handleTextChange = (e) => {
-    const newText = e.target.value;
-    setText(newText);
-    setMatrix(createTextMatrix(newText));
-    updateWordAnalysis(newText, activeTypes);
-  };
-
-  // Toggle a type (or group) on/off.
-  // For the red group, we use 'RED' as the type indicator.
-  const handleTypeClick = (type) => {
-    let newActiveTypes;
-    if (activeTypes.includes(type)) {
-      newActiveTypes = activeTypes.filter(t => t !== type);
+  // Group the word analysis by active type
+  const groupedAnalysis = activeTypes.reduce((acc, type) => {
+    let filtered;
+    if (type === 'RED') {
+      filtered = wordAnalysis.filter(word =>
+        redGroup.includes(word.partOfSpeech.toUpperCase())
+      );
     } else {
-      newActiveTypes = [...activeTypes, type];
+      filtered = wordAnalysis.filter(word =>
+        word.partOfSpeech.toUpperCase() === type
+      );
     }
-    setActiveTypes(newActiveTypes);
-    updateWordAnalysis(text, newActiveTypes);
-  };
+    if (filtered.length > 0) {
+      acc[type] = filtered;
+    }
+    return acc;
+  }, {});
 
   return (
     <div className="p-4">
@@ -183,54 +202,69 @@ const GreekTextAnalyzer = () => {
           </div>
         </div>
 
-        {wordAnalysis.length > 0 && (
+        {Object.keys(groupedAnalysis).length > 0 && (
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-4">Word Analysis:</h2>
-            <div className="space-y-4">
-              {wordAnalysis.map((analysis, index) => (
-                <div key={index} className="border rounded p-4">
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="font-semibold">Word</div>
-                        <div className="font-serif text-lg">{analysis.word}</div>
+            {Object.keys(groupedAnalysis).map(type => (
+              <div key={type} className="mb-6">
+                <h3 className="text-lg font-semibold mb-2">{type} Analysis:</h3>
+                <div className="space-y-4">
+                  {groupedAnalysis[type].map((analysis, index) => (
+                    <div 
+                      key={index} 
+                      className={`border rounded p-4 ${bgMapping[type] || 'bg-white'}`}
+                    >
+                      {/* Top Section: Flex container for Word and Best Translation with Possible Meanings */}
+                      <div className="flex">
+                        {/* Left Column: Word details */}
+                        <div className="w-1/2">
+                          <div className="font-semibold">Word</div>
+                          <div className="font-serif text-lg">{analysis.word}</div>
+                          <div className="text-sm text-gray-500">
+                            Line {analysis.lineNumber}, Word {analysis.wordOrder}
+                          </div>
+                        </div>
+                        {/* Right Column: Best Translation and Possible Meanings */}
+                        <div className="w-1/2">
+                          <div className="font-semibold">Best Translation</div>
+                          <div>{analysis.bestTranslation}</div>
+                          <div className="mt-2">
+                            <div className="font-semibold">Possible Meanings</div>
+                            <ul className="list-disc pl-4">
+                              {analysis.meanings.map((meaning, i) => (
+                                <li key={i}>{meaning}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-sm text-gray-500">
-                        Line {analysis.lineNumber}, Word {analysis.wordOrder}
+                      {/* Second Section: Two-column layout for Lemma and Lemma Translation (swapped positions) */}
+                      <div className="grid grid-cols-2 gap-4 mt-2">
+                        <div>
+                          <div className="font-semibold">Lemma</div>
+                          <div className="font-serif">{analysis.lemma}</div>
+                        </div>
+                        <div>
+                          <div className="font-semibold">Lemma Translation</div>
+                          <div>{analysis.bestLemmaTranslation}</div>
+                        </div>
+                      </div>
+                      {/* Third Section: Two-column layout for Part of Speech and Morphology */}
+                      <div className="grid grid-cols-2 gap-4 mt-2">
+                        <div>
+                          <div className="font-semibold">Part of Speech</div>
+                          <div>{analysis.partOfSpeech}</div>
+                        </div>
+                        <div>
+                          <div className="font-semibold">Morphology</div>
+                          <div>{analysis.morphology}</div>
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <div className="font-semibold">Part of Speech</div>
-                      <div>{analysis.partOfSpeech}</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Morphology</div>
-                      <div>{analysis.morphology}</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Best Translation</div>
-                      <div>{analysis.bestTranslation}</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Possible Meanings</div>
-                      <ul className="list-disc pl-4">
-                        {analysis.meanings.map((meaning, i) => (
-                          <li key={i}>{meaning}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Lemma</div>
-                      <div className="font-serif">{analysis.lemma}</div>
-                    </div>
-                    <div>
-                      <div className="font-semibold">Lemma Translation</div>
-                      <div>{analysis.bestLemmaTranslation}</div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
