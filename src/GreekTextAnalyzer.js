@@ -1,16 +1,16 @@
 // GreekTextAnalyzer.js
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import wordDatabase from './wordDatabase';
 
 const GreekTextAnalyzer = () => {
   // State
-  const [text, setText] = React.useState('');
-  const [matrix, setMatrix] = React.useState([]);
-  const [activeTypes, setActiveTypes] = React.useState([]); // Array for multiple types
-  const [wordAnalysis, setWordAnalysis] = React.useState([]);
+  const [text, setText] = useState('');
+  const [matrix, setMatrix] = useState([]);
+  const [activeTypes, setActiveTypes] = useState([]); // Array for multiple types
+  const [wordAnalysis, setWordAnalysis] = useState([]);
+  const [hoveredAnalysis, setHoveredAnalysis] = useState(null);
 
-  // Define groups for special handling:
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
     'ARTICLE',
@@ -30,13 +30,13 @@ const GreekTextAnalyzer = () => {
     'ADVERB': 'bg-yellow-200'
   };
 
-  // Helper Functions
+  // Helper to clean the word string
   const cleanWord = (word) => {
     return word
       .replace(/[,.;']$/g, '')
       .replace(/^['']/, '')
       .replace(/[᾽]/g, '')
-      .replace(/·/g, '') // Remove the middle dot "·"
+      .replace(/·/g, '')
       .trim();
   };
 
@@ -55,7 +55,7 @@ const GreekTextAnalyzer = () => {
     return false;
   };
 
-  // Update word analysis based on current text and provided types
+  // Update word analysis based on current text and provided active types
   const updateWordAnalysis = (text, types) => {
     const newMatrix = createTextMatrix(text);
     const analysis = [];
@@ -96,7 +96,7 @@ const GreekTextAnalyzer = () => {
     setActiveTypes(newActiveTypes);
   };
 
-  // getHighlightClass uses the current activeTypes state
+  // Returns the appropriate highlight class for a given word
   const getHighlightClass = (word) => {
     const cleaned = cleanWord(word);
     const info = wordDatabase[cleaned];
@@ -111,7 +111,16 @@ const GreekTextAnalyzer = () => {
     return 'bg-white border';
   };
 
-  // Group the word analysis by active type
+  // Helper to determine tooltip background class based on analysis data
+  const getAnalysisBgClass = (analysisData) => {
+    const part = analysisData.partOfSpeech.toUpperCase();
+    if (redGroup.includes(part)) {
+      return bgMapping['RED'];
+    }
+    return bgMapping[part] || 'bg-white';
+  };
+
+  // Group analysis by active type
   const groupedAnalysis = activeTypes.reduce((acc, type) => {
     let filtered;
     if (type === 'RED') {
@@ -130,69 +139,71 @@ const GreekTextAnalyzer = () => {
   }, {});
 
   return (
-    <div className="p-4">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold mb-6">Greek Text Analyzer</h1>
+    <div className="p-4 relative">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4">
+        <h1 className="text-lg font-bold mb-4">Greek Text Analyzer</h1>
         
         <textarea 
           placeholder="Enter Greek text here (try: ἵπποι ἱκάνοι ...)"
           value={text}
           onChange={handleTextChange}
-          className="w-full h-32 p-2 border rounded mb-4 font-serif"
+          className="w-full h-24 p-2 border rounded mb-3 font-serif text-sm"
         />
 
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2 mb-3">
           <button 
             onClick={() => handleTypeClick('NOUN')}
-            className={`px-4 py-2 rounded ${
-              activeTypes.includes('NOUN') ? 'bg-blue-500 text-white' : 'bg-gray-200'
-            }`}
+            className={`px-3 py-1 rounded ${activeTypes.includes('NOUN') ? 'bg-blue-500 text-white' : 'bg-gray-200 text-sm'}`}
           >
             Highlight Nouns
           </button>
           <button 
             onClick={() => handleTypeClick('VERB')}
-            className={`px-4 py-2 rounded ${
-              activeTypes.includes('VERB') ? 'bg-pink-500 text-white' : 'bg-gray-200'
-            }`}
+            className={`px-3 py-1 rounded ${activeTypes.includes('VERB') ? 'bg-pink-500 text-white' : 'bg-gray-200 text-sm'}`}
           >
             Highlight Verbs
           </button>
           <button 
             onClick={() => handleTypeClick('ADJECTIVE')}
-            className={`px-4 py-2 rounded ${
-              activeTypes.includes('ADJECTIVE') ? 'bg-green-500 text-white' : 'bg-gray-200'
-            }`}
+            className={`px-3 py-1 rounded ${activeTypes.includes('ADJECTIVE') ? 'bg-green-500 text-white' : 'bg-gray-200 text-sm'}`}
           >
             Highlight Adjectives
           </button>
           <button 
             onClick={() => handleTypeClick('RED')}
-            className={`px-4 py-2 rounded ${
-              activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200'
-            }`}
+            className={`px-3 py-1 rounded ${activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200 text-sm'}`}
           >
             Highlight Articles/Pronouns/Particles/Prepositions/Conjunctions/Demonstrative Pronouns
           </button>
           <button 
             onClick={() => handleTypeClick('ADVERB')}
-            className={`px-4 py-2 rounded ${
-              activeTypes.includes('ADVERB') ? 'bg-yellow-500 text-white' : 'bg-gray-200'
-            }`}
+            className={`px-3 py-1 rounded ${activeTypes.includes('ADVERB') ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-sm'}`}
           >
             Highlight Adverbs
           </button>
         </div>
 
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Text Analysis:</h2>
-          <div className="border rounded p-4">
+        <div className="mt-4">
+          <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
+          <div className="border rounded p-2 text-sm">
             {matrix.map((row, rowIndex) => (
-              <div key={rowIndex} className="mb-4">
+              <div key={rowIndex} className="mb-2">
                 {row.map((word, colIndex) => (
                   <span 
                     key={`${rowIndex}-${colIndex}`}
-                    className={`inline-block px-2 py-1 m-1 rounded font-serif ${getHighlightClass(word)}`}
+                    className={`inline-block px-1 py-1 m-1 rounded font-serif ${getHighlightClass(word)}`}
+                    onMouseEnter={(e) => {
+                      const cleaned = cleanWord(word);
+                      const info = wordDatabase[cleaned];
+                      if (info && isWordTypeActiveCustom(info, activeTypes)) {
+                        setHoveredAnalysis({
+                          data: { ...info, word: cleaned },
+                          x: e.clientX + 10,
+                          y: e.clientY + 10
+                        });
+                      }
+                    }}
+                    onMouseLeave={() => setHoveredAnalysis(null)}
                   >
                     {word}
                   </span>
@@ -202,72 +213,78 @@ const GreekTextAnalyzer = () => {
           </div>
         </div>
 
+        {/* Display grouped analysis side by side */}
         {Object.keys(groupedAnalysis).length > 0 && (
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-4">Word Analysis:</h2>
-            {Object.keys(groupedAnalysis).map(type => (
-              <div key={type} className="mb-6">
-                <h3 className="text-lg font-semibold mb-2">{type} Analysis:</h3>
-                <div className="space-y-4">
-                  {groupedAnalysis[type].map((analysis, index) => (
-                    <div 
-                      key={index} 
-                      className={`border rounded p-4 ${bgMapping[type] || 'bg-white'}`}
-                    >
-                      {/* Top Section: Flex container for Word and Best Translation with Possible Meanings */}
-                      <div className="flex">
-                        {/* Left Column: Word details */}
-                        <div className="w-1/2">
-                          <div className="font-semibold">Word</div>
-                          <div className="font-serif text-lg">{analysis.word}</div>
-                          <div className="text-sm text-gray-500">
-                            Line {analysis.lineNumber}, Word {analysis.wordOrder}
+          <div className="mt-4">
+            <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
+            <div className="flex gap-2">
+              {Object.keys(groupedAnalysis).map(type => (
+                <div key={type} className="flex-1">
+                  <h3 className="text-base font-semibold mb-1">{type} Analysis:</h3>
+                  <div className="space-y-2">
+                    {groupedAnalysis[type].map((analysis, index) => (
+                      <div 
+                        key={index} 
+                        className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs`}
+                      >
+                        {/* Top Section: Flex container for Word and Best Translation with Possible Meanings */}
+                        <div className="flex">
+                          <div className="w-1/2">
+                            <div className="font-semibold">Word</div>
+                            <div className="font-serif">{analysis.word}</div>
+                          </div>
+                          <div className="w-1/2">
+                            <div className="font-semibold">Best Translation</div>
+                            <div>{analysis.bestTranslation}</div>
+                            <div className="mt-1">
+                              <div className="font-semibold">Possible Meanings</div>
+                              <ul className="list-disc pl-3">
+                                {analysis.meanings.map((meaning, i) => (
+                                  <li key={i}>{meaning}</li>
+                                ))}
+                              </ul>
+                            </div>
                           </div>
                         </div>
-                        {/* Right Column: Best Translation and Possible Meanings */}
-                        <div className="w-1/2">
-                          <div className="font-semibold">Best Translation</div>
-                          <div>{analysis.bestTranslation}</div>
-                          <div className="mt-2">
-                            <div className="font-semibold">Possible Meanings</div>
-                            <ul className="list-disc pl-4">
-                              {analysis.meanings.map((meaning, i) => (
-                                <li key={i}>{meaning}</li>
-                              ))}
-                            </ul>
+                        {/* Second Section: Two-column layout for Lemma and Lemma Translation */}
+                        <div className="grid grid-cols-2 gap-2 mt-1">
+                          <div>
+                            <div className="font-semibold">Lemma</div>
+                            <div className="font-serif">{analysis.lemma}</div>
+                          </div>
+                          <div>
+                            <div className="font-semibold">Lemma Translation</div>
+                            <div>{analysis.bestLemmaTranslation}</div>
                           </div>
                         </div>
                       </div>
-                      {/* Second Section: Two-column layout for Lemma and Lemma Translation (swapped positions) */}
-                      <div className="grid grid-cols-2 gap-4 mt-2">
-                        <div>
-                          <div className="font-semibold">Lemma</div>
-                          <div className="font-serif">{analysis.lemma}</div>
-                        </div>
-                        <div>
-                          <div className="font-semibold">Lemma Translation</div>
-                          <div>{analysis.bestLemmaTranslation}</div>
-                        </div>
-                      </div>
-                      {/* Third Section: Two-column layout for Part of Speech and Morphology */}
-                      <div className="grid grid-cols-2 gap-4 mt-2">
-                        <div>
-                          <div className="font-semibold">Part of Speech</div>
-                          <div>{analysis.partOfSpeech}</div>
-                        </div>
-                        <div>
-                          <div className="font-semibold">Morphology</div>
-                          <div>{analysis.morphology}</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </div>
+
+      {/* Tooltip for hovered word analysis */}
+      {hoveredAnalysis && (
+        <div
+          className={`p-1 text-xs shadow-lg ${getAnalysisBgClass(hoveredAnalysis.data)} text-black border`}
+          style={{
+            position: 'fixed',
+            top: hoveredAnalysis.y,
+            left: hoveredAnalysis.x,
+            zIndex: 1000
+          }}
+        >
+          <div><strong>Word:</strong> {hoveredAnalysis.data.word}</div>
+          <div><strong>Best Translation:</strong> {hoveredAnalysis.data.bestTranslation}</div>
+          <div><strong>Possible Meanings:</strong> {hoveredAnalysis.data.meanings.join(', ')}</div>
+          <div><strong>Lemma:</strong> {hoveredAnalysis.data.lemma}</div>
+          <div><strong>Lemma Translation:</strong> {hoveredAnalysis.data.bestLemmaTranslation}</div>
+        </div>
+      )}
     </div>
   );
 };
