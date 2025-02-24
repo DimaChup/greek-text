@@ -1,4 +1,4 @@
 npm start
 
 
-python improved-greek-processor.py --input data/input/parmenides.txt --limit 10
+python text2db.py --input data/input/parmenides.txt --limit 10
