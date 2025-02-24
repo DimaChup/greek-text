@@ -1,0 +1,74 @@
+[
+  {
+    "lineNumber": "1",
+    "wordOrder": "1",
+    "partOfSpeech": "Noun",
+    "morphology": "Nominative Singular, Masculine",
+    "meanings": [
+      "being",
+      "existence",
+      "entity",
+      "substance",
+      "essence"
+    ],
+    "bestTranslation": "being",
+    "lemma": "ὤν",
+    "bestLemmaTranslation": "being"
+  },
+  {
+    "lineNumber": "1",
+    "wordOrder": "2",
+    "partOfSpeech": "Noun",
+    "morphology": "Nominative Singular",
+    "meanings": [
+      "wrath",
+      "anger",
+      "rage",
+      "fury",
+      "ire"
+    ],
+    "bestTranslation": "wrath",
+    "lemma": "Μῆνις",
+    "bestLemmaTranslation": "wrath"
+  },
+  {
+    "lineNumber": "1",
+    "wordOrder": "3",
+    "partOfSpeech": "Verb",
+    "morphology": "Present Imperative Active 2nd Person Singular",
+    "meanings": [
+      "Sing",
+      "Chant",
+      "Tell",
+      "Recite",
+      "Narrate"
+    ],
+    "bestTranslation": "Sing",
+    "lemma": "ἀείδω",
+    "bestLemmaTranslation": "Sing"
+  },
+  {
+    "lineNumber": "1",
+    "wordOrder": "4",
+    "partOfSpeech": "Noun",
+    "morphology": "Nominative Singular Feminine",
+    "meanings": [
+      "Goddess"
+    ],
+    "bestTranslation": "Goddess",
+    "lemma": "θεά",
+    "bestLemmaTranslation": "Goddess"
+  },
+  {
+    "lineNumber": "1",
+    "wordOrder": "5",
+    "partOfSpeech": "Noun",
+    "morphology": "Genitive Singular Masculine",
+    "meanings": [
+      "Son of Peleus"
+    ],
+    "bestTranslation": "Son of Peleus",
+    "lemma": "Πηληϊάδης",
+    "bestLemmaTranslation": "Son of Peleus"
+  }
+]
