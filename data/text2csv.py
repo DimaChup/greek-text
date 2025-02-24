@@ -1,21 +1,42 @@
 import re
-import csv  # This line was missing!
+import csv
+import os
+from pathlib import Path
 
-def create_word_list_csv(text, output_filename="word_list.csv"):
+def create_word_list_csv(input_filepath):
     """
-    Creates a CSV file containing a list of words from the input text,
+    Creates a CSV file containing a list of words from an input text file,
     along with their line numbers and word order.
 
     Args:
-        text: The input text (as a single string).
-        output_filename: The name of the CSV file to be created.
+        input_filepath: Path to the input text file
     """
-
+    # Get the base name of the input file without extension
+    input_filename = Path(input_filepath).stem
+    
+    # Create output directory with correct path from script location
+    output_dir = os.path.join("data", f"output_{input_filename}")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Copy input file to output directory
+    output_text_path = os.path.join(output_dir, f"{input_filename}.txt")
+    
+    # Read input text
+    with open(input_filepath, 'r', encoding='utf-8') as file:
+        text = file.read()
+        
+    # Copy text to output directory
+    with open(output_text_path, 'w', encoding='utf-8') as file:
+        file.write(text)
+    
+    # Process the text
     lines = text.strip().split('\n')
-    word_list = []
     word_order = 1
-
-    with open(output_filename, 'w', newline='', encoding='utf-8') as csvfile:
+    
+    # Create CSV in output directory
+    csv_path = os.path.join(output_dir, f"{input_filename}_word_list.csv")
+    
+    with open(csv_path, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(["Line Number", "Word Order", "Word"])  # Header row
 
@@ -24,121 +45,31 @@ def create_word_list_csv(text, output_filename="word_list.csv"):
             line = re.sub(r"^\s*\d+\.\s*", "", line)
 
             # Tokenize, keeping apostrophes but removing other punctuation
-            # This regex handles splitting on spaces and most punctuation, but keeps
-            # apostrophes and hyphens within words.
-            words = re.findall(r"[\w’'\-]+|[,;]", line)
+            words = re.findall(r"[\w''\-]+|[,;]", line)
 
             for word in words:
-                #remove punctuation marks that we dont need seprately
+                # remove punctuation marks that we don't need separately
                 if word not in [",", "·", "..."]:
                     csv_writer.writerow([line_num, word_order, word])
                     word_order += 1
 
+def process_input_directory():
+    """
+    Process all .txt files in the data/input directory
+    """
+    # Define paths relative to root directory
+    input_dir = os.path.join("data", "input")
+    
+    # Create input directory if it doesn't exist
+    os.makedirs(input_dir, exist_ok=True)
+    
+    # Process each .txt file in the input directory
+    for filename in os.listdir(input_dir):
+        if filename.endswith('.txt'):
+            input_filepath = os.path.join(input_dir, filename)
+            print(f"Processing {filename}...")
+            create_word_list_csv(input_filepath)
+            print(f"Created output in data/output_{Path(filename).stem}")
 
-
-# Example Usage (with the first 32 lines of Parmenides):
-input_text = """
-1   Μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος
-2   οὐλομένην, ἣ μυρίʼ Ἀχαιοῖς ἄλγεʼ ἔθηκε,
-3   πολλὰς δʼ ἰφθίμους ψυχὰς Ἄϊδι προΐαψεν
-4   ἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν
-5   οἰωνοῖσί τε πᾶσι, Διὸς δʼ ἐτελείετο βουλή,
-6   ἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε
-7   Ἀτρεΐδης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς.
-8   Τίς τʼ ἄρ σφωε θεῶν ἔριδι ξυνέηκε μάχεσθαι;
-9   Λητοῦς καὶ Διὸς υἱός: ὃ γὰρ βασιλῆϊ χολωθεὶς
-10  νοῦσον ἀνὰ στρατὸν ὦρσε κακήν, ὀλέκοντο δὲ λαοί,
-11  οὕνεκα τὸν Χρύσην ἠτίμασεν ἀρητῆρα
-12  Ἀτρεΐδης: ὃ γὰρ ἦλθε θοὰς ἐπὶ νῆας Ἀχαιῶν
-13  λυσόμενός τε θύγατρα φέρων τʼ ἀπερείσιʼ ἄποινα,
-14  στέμματʼ ἔχων ἐν χερσὶν ἑκηβόλου Ἀπόλλωνος
-15  χρυσέῳ ἀνὰ σκήπτρῳ, καὶ λίσσετο πάντας Ἀχαιούς,
-16  Ἀτρεΐδα δὲ μάλιστα δύω, κοσμήτορε λαῶν:
-17  Ἀτρεΐδαι τε καὶ ἄλλοι ἐϋκνήμιδες Ἀχαιοί,
-18  ὑμῖν μὲν θεοὶ δοῖεν Ὀλύμπια δώματʼ ἔχοντες
-19  ἐκπέρσαι Πριάμοιο πόλιν, εὖ δʼ οἴκαδʼ ἱκέσθαι:
-20  παῖδα δʼ ἐμοὶ λύσαιτε φίλην, τὰ δʼ ἄποινα δέχεσθαι,
-21  ἁζόμενοι Διὸς υἱὸν ἑκηβόλον Ἀπόλλωνα.
-22  Ἔνθʼ ἄλλοι μὲν πάντες ἐπευφήμησαν Ἀχαιοὶ
-23  αἰδεῖσθαί θʼ ἱερῆα καὶ ἀγλαὰ δέχθαι ἄποινα:
-24  ἀλλʼ οὐκ Ἀτρεΐδῃ Ἀγαμέμνονι ἥνδανε θυμῷ,
-25  ἀλλὰ κακῶς ἀφίει, κρατερὸν δʼ ἐπὶ μῦθον ἔτελλε:
-26  μή σε, γέρον, κοίλῃσιν ἐγὼ παρὰ νηυσὶ κιχείω
-27  ἢ νῦν δηθύνοντʼ ἢ ὕστερον αὖτις ἰόντα,
-28  μή νύ τοι οὐ χραίσμῃ σκῆπτρον καὶ στέμμα θεοῖο:
-29  τὴν δʼ ἐγὼ οὐ λύσω: πρίν μιν καὶ γῆρας ἔπεισιν
-30  ἡμετέρῳ ἐνὶ οἴκῳ ἐν Ἄργεϊ τηλόθι πάτρης
-31  ἱστὸν ἐποιχομένην καὶ ἐμὸν λέχος ἀντιόωσαν:
-32  ἀλλʼ ἴθι, μή μʼ ἐρέθιζε, σαώτερος ὥς κε νέηαι.
-33  Ὣς ἔφατʼ, ἔδδεισεν δʼ ὃ γέρων καὶ ἐπείθετο μύθῳ:
-34  βῆ δʼ ἀκέων παρὰ θῖνα πολυφλοίσβοιο θαλάσσης:
-35  πολλὰ δʼ ἔπειτʼ ἀπάνευθε κιὼν ἠρᾶθʼ ὃ γεραιὸς
-36  Ἀπόλλωνι ἄνακτι, τὸν ἠΰκομος τέκε Λητώ:
-37  κλῦθί μευ, ἀργυρότοξʼ, ὃς Χρύσην ἀμφιβέβηκας
-38  Κίλλάν τε ζαθέην Τενέδοιό τε ἶφι ἀνάσσεις,
-39  Σμινθεῦ, εἴ ποτέ τοι χαρίεντʼ ἐπὶ νηὸν ἔρεψα,
-40  ἢ εἰ δή ποτέ τοι κατὰ πίονα μηρίʼ ἔκηα
-41  ταύρων ἠδʼ αἰγῶν, τὸ δέ μοι κρήηνον ἐέλδωρ:
-42  τίσειαν Δαναοὶ ἐμὰ δάκρυα σοῖσι βέλεσσιν.
-43  Ὣς ἔφατʼ εὐχόμενος, τοῦ δʼ ἔκλυε Φοῖβος Ἀπόλλων:
-44  βῆ δὲ κατʼ Οὐλύμποιο καρήνων χωόμενος κῆρ,
-45  τόξʼ ὤμοισιν ἔχων ἀμφηρεφέα τε φαρέτρην:
-46  ἔκλαγξαν δʼ ἄρʼ ὀϊστοὶ ἐπʼ ὤμων χωομένοιο,
-47  αὐτοῦ κινηθέντος: ὃ δʼ ἤϊε νυκτὶ ἐοικώς.
-48  ἕζετʼ ἔπειτʼ ἀπάνευθε νεῶν, μετὰ δʼ ἰὸν ἕηκε:
-49  δεινὴ δὲ κλαγγὴ γένετʼ ἀργυρέοιο βιοῖο:
-50  οὐρῆας μὲν πρῶτον ἐπῴχετο καὶ κύνας ἀργούς,
-51  αὐτὰρ ἔπειτʼ αὐτοῖσι βέλος ἐχεπευκὲς ἐφιεὶς
-52  βάλλʼ: αἰεὶ δὲ πυραὶ νεκύων καίοντο θαμειαί.
-53  Ἐννῆμαρ μὲν ἀνὰ στρατὸν ᾤχετο κῆλα θεοῖο,
-54  τῇ δεκάτῃ δʼ ἀγορήνδε καλέσσατο λαὸν Ἀχιλλεύς:
-55  τῷ γὰρ ἐπὶ φρεσὶ θῆκε θεὰ λευκώλενος Ἥρη:
-56  κήδετο γὰρ Δαναῶν, ὅτι ῥα θνήσκοντας ὁρᾶτο.
-57  οἳ δʼ ἐπεὶ οὖν ἤγερθεν ὁμηγερέες τε γένοντο,
-58  τοῖσι δʼ ἀνιστάμενος μετέφη πόδας ὠκὺς Ἀχιλλεύς:
-59  Ἀτρεΐδη, νῦν ἄμμε παλιμπλαγχθέντας ὀΐω
-60  ἂψ ἀπονοστήσειν, εἴ κεν θάνατόν γε φύγοιμεν,
-61  εἰ δὴ ὁμοῦ πόλεμός τε δαμᾷ καὶ λοιμὸς Ἀχαιούς:
-62  ἀλλʼ ἄγε δή τινα μάντιν ἐρείομεν ἢ ἱερῆα
-63  ἢ καὶ ὀνειροπόλον, καὶ γάρ τʼ ὄναρ ἐκ Διός ἐστιν,
-64  ὅς κʼ εἴποι ὅ τι τόσσον ἐχώσατο Φοῖβος Ἀπόλλων,
-65  εἴτʼ ἄρʼ ὃ γʼ εὐχωλῆς ἐπιμέμφεται ἠδʼ ἑκατόμβης,
-66  αἴ κέν πως ἀρνῶν κνίσης αἰγῶν τε τελείων
-67  βούλεται ἀντιάσας ἡμῖν ἀπὸ λοιγὸν ἀμῦναι.
-68  Ἦ ῥα, καὶ ἄρʼ ἕζετο κατὰ: τοῖσι δʼ ἀνέστη
-69  Κάλχας Θεστορίδης οἰωνοπόλων ὄχʼ ἄριστος,
-70  ὃς ᾔδη τά τʼ ἐόντα τά τʼ ἐσσόμενα πρό τʼ ἐόντα,
-71  καὶ νήεσσʼ ἡγήσατʼ Ἀχαιῶν Ἴλιον εἴσω
-72  ἣν διὰ μαντοσύνην, τήν οἱ πόρε Φοῖβος Ἀπόλλων:
-73  ὅ σφιν ἐϋφρονέων ἀγορήσατο καὶ μετέειπεν:
-74  ὦ Ἀχιλεῦ, κέλεαί με, Διῒ φίλε, μυθήσασθαι
-75  μῆνιν Ἀπόλλωνος ἑκατηβελέταο ἄνακτος:
-76  τοὶ γὰρ ἐγὼν ἐρέω: σὺ δὲ σύνθεο καί μοι ὄμοσσον
-77  ἦ μέν μοι πρόφρων ἔπεσιν καὶ χερσὶν ἀρήξειν:
-78  ἦ γὰρ ὀΐω ἄνδρα χολωσέμεν, ὃς μέγα πάντων
-79  Ἀργείων κρατέει καί οἱ πείθονται Ἀχαιοί:
-80  κρείσσων γὰρ βασιλεὺς ὅτε χώσεται ἀνδρὶ χέρηϊ:
-81  εἴ περ γάρ τε χόλον γε καὶ αὐτῆμαρ καταπέψῃ,
-82  ἀλλά τε καὶ μετόπισθεν ἔχει κότον, ὄφρα τελέσσῃ,
-83  ἐν στήθεσσιν ἑοῖσι: σὺ δὲ φράσαι εἴ με σαώσεις.
-84  Τὸν δʼ ἀπαμειβόμενος προσέφη πόδας ὠκὺς Ἀχιλλεύς:
-85  θαρσήσας μάλα εἰπὲ θεοπρόπιον ὅ τι οἶσθα:
-86  οὐ μὰ γὰρ Ἀπόλλωνα Διῒ φίλον, ᾧ τε σὺ, Κάλχαν,
-87  εὐχόμενος Δαναοῖσι θεοπροπίας ἀναφαίνεις,
-88  οὔ τις ἐμεῦ ζῶντος καὶ ἐπὶ χθονὶ δερκομένοιο
-89  σοὶ κοίλῃς παρὰ νηυσὶ βαρείας χεῖρας ἐποίσει
-90  συμπάντων Δαναῶν, οὐδʼ ἢν Ἀγαμέμνονα εἴπῃς,
-91  ὃς νῦν πολλὸν ἄριστος Ἀχαιῶν εὔχεται εἶναι.
-92  Καὶ τότε δὴ θάρσησε καὶ ηὔδα μάντις ἀμύμων:
-93  οὔ τʼ ἄρʼ ὃ γʼ εὐχωλῆς ἐπιμέμφεται οὔθʼ ἑκατόμβης,
-94  ἀλλʼ ἕνεκʼ ἀρητῆρος, ὃν ἠτίμησʼ Ἀγαμέμνων
-95  οὐδʼ ἀπέλυσε θύγατρα καὶ οὐκ ἀπεδέξατʼ ἄποινα,
-96  τοὔνεκʼ ἄρʼ ἄλγεʼ ἔδωκεν ἑκηβόλος ἠδʼ ἔτι δώσει:
-97  οὐδʼ ὅ γε πρὶν Δαναοῖσιν ἀεικέα λοιγὸν ἀπώσει
-98  πρίν γʼ ἀπὸ πατρὶ φίλῳ δόμεναι ἑλικώπιδα κούρην
-99  ἀπριάτην ἀνάποινον, ἄγειν θʼ ἱερὴν ἑκατόμβην
-100 ἐς Χρύσην: τότε κέν μιν ἱλασσάμενοι πεπίθοιμεν.
-"""
-
-create_word_list_csv(input_text, "data/word_list.csv")
-print("CSV file 'parmenides_word_list.csv' created successfully.")
+if __name__ == "__main__":
+    process_input_directory()
