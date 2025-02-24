@@ -1,43 +1,3 @@
-import re
-import csv  # This line was missing!
-
-def create_word_list_csv(text, output_filename="word_list.csv"):
-    """
-    Creates a CSV file containing a list of words from the input text,
-    along with their line numbers and word order.
-
-    Args:
-        text: The input text (as a single string).
-        output_filename: The name of the CSV file to be created.
-    """
-
-    lines = text.strip().split('\n')
-    word_list = []
-    word_order = 1
-
-    with open(output_filename, 'w', newline='', encoding='utf-8') as csvfile:
-        csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(["Line Number", "Word Order", "Word"])  # Header row
-
-        for line_num, line in enumerate(lines, 1):
-            # Remove line numbers like "1. " at the beginning of the line
-            line = re.sub(r"^\s*\d+\.\s*", "", line)
-
-            # Tokenize, keeping apostrophes but removing other punctuation
-            # This regex handles splitting on spaces and most punctuation, but keeps
-            # apostrophes and hyphens within words.
-            words = re.findall(r"[\w’'\-]+|[,;]", line)
-
-            for word in words:
-                #remove punctuation marks that we dont need seprately
-                if word not in [",", "·", "..."]:
-                    csv_writer.writerow([line_num, word_order, word])
-                    word_order += 1
-
-
-
-# Example Usage (with the first 32 lines of Parmenides):
-input_text = """
 1   Μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος
 2   οὐλομένην, ἣ μυρίʼ Ἀχαιοῖς ἄλγεʼ ἔθηκε,
 3   πολλὰς δʼ ἰφθίμους ψυχὰς Ἄϊδι προΐαψεν
@@ -138,7 +98,3 @@ input_text = """
 98  πρίν γʼ ἀπὸ πατρὶ φίλῳ δόμεναι ἑλικώπιδα κούρην
 99  ἀπριάτην ἀνάποινον, ἄγειν θʼ ἱερὴν ἑκατόμβην
 100 ἐς Χρύσην: τότε κέν μιν ἱλασσάμενοι πεπίθοιμεν.
-"""
-
-create_word_list_csv(input_text, "data/word_list.csv")
-print("CSV file 'parmenides_word_list.csv' created successfully.")
