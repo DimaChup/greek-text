@@ -12,45 +12,56 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Detailed prompt with instructions
 PROMPT_TEMPLATE = """
-You are a meticulous linguistic analyst specializing in Ancient Greek. Your task is to create a comprehensive JSON database from the following raw CSV data representing a fragment of an Ancient Greek text (likely Parmenides). This JSON database will serve as a detailed lexicon for this fragment.
+You are a meticulous linguistic analyst specializing in Ancient Greek. Analyze the following word and create a JavaScript object entry that exactly matches the format used in wordDatabase.js.
 
-Input Data (CSV):
+Input Word:
 Line Number: {lineNumber}
 Word Order: {wordOrder}
 Word: {word}
 
-Output Format (JSON):
-The output should be a single, valid JSON object with the following keys:
-{word}:
-- lineNumber: (String) The line number in the original text where the word appears.
-- wordOrder: (String) The word's position within its line.
-- partOfSpeech: (String) The grammatical part of speech (e.g., "Noun", "Verb", "Adjective", "Adverb", "Preposition", "Conjunction", "Pronoun", "Particle", "Article"). Be precise.
-- morphology: (String) A detailed morphological analysis. For Ancient Greek: Nouns, Adjectives, and Pronouns should include case, number, and gender; Verbs should include tense, mood, voice, person, and number; for particles, conjunctions, prepositions, and adverbs, use "" if not applicable.
-- meanings: (Array of Strings) Up to five possible English translations for the word, ordered from most likely to least likely.
-- bestTranslation: (String) The single best English translation of the word.
-- lemma: (String) The dictionary form of the word (nominative singular for nouns/adjectives/pronouns; present active infinitive for verbs).
-- bestLemmaTranslation: (String) The best English translation of the lemma.
+Required Format:
+'{word}': {{
+    lineNumber: '{lineNumber}',
+    wordOrder: '{wordOrder}',
+    partOfSpeech: '<part of speech in Title Case>',
+    morphology: '<detailed morphological analysis>',
+    meanings: [<array of 2-5 possible translations>],
+    bestTranslation: '<single best contextual translation>',
+    lemma: '<dictionary form>',
+    bestLemmaTranslation: '<primary meaning of lemma>'
+}}
 
-Process Instructions:
-- Process the input CSV data line by line.
-- For each row, generate a JSON object with the above keys.
-- Output only a valid JSON object.
+Rules for each field:
+1. partOfSpeech must be one of: 'Noun', 'Verb', 'Adjective', 'Adverb', 'Preposition', 'Conjunction', 'Pronoun', 'Particle', 'Article', 'Demonstrative Pronoun'
+2. morphology should include:
+   - For Nouns/Adjectives/Pronouns: case, number, gender
+   - For Verbs: tense, voice, mood, person, number
+   - For others: leave as '' if not applicable
+3. meanings should be an array of 2-5 possible translations, ordered by likelihood
+4. bestTranslation should include contextual notes in brackets if needed
+5. lemma should be the dictionary form in Greek
+6. bestLemmaTranslation should be the basic meaning of the lemma
 
-Output:
-Return only a valid JSON object.
+Output only a valid JSON object that matches this exact format. Do not include any explanatory text.
 """
 
-def create_word_list_from_text(text):
+def create_word_list_from_text(text, max_lines=None):
     """
     Creates a list of words with their line numbers and word order from input text.
     
     Args:
         text: Input text string
+        max_lines: Optional maximum number of lines to process
         
     Returns:
         List of dictionaries with keys: "Line Number", "Word Order", "Word"
     """
     lines = text.strip().split('\n')
+    
+    # Limit to max_lines if specified
+    if max_lines is not None:
+        lines = lines[:max_lines]
+        
     word_list = []
     word_order = 1
     
@@ -76,39 +87,41 @@ def create_word_list_from_text(text):
 def call_llm_for_word(word_data, retry_count=3, retry_delay=5):
     """
     Call the LLM API to analyze a word with retry logic.
-    
-    Args:
-        word_data: Dictionary with lineNumber, wordOrder, word
-        retry_count: Number of retries on failure
-        retry_delay: Delay between retries in seconds
-        
-    Returns:
-        JSON object with linguistic analysis or None on failure
     """
     prompt = PROMPT_TEMPLATE.format(**word_data)
     
     for attempt in range(retry_count + 1):
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4",  # Consider using GPT-4 for better accuracy
                 messages=[
-                    {"role": "system", "content": "You are a linguistic expert."},
+                    {"role": "system", "content": "You are a linguistic expert specializing in Ancient Greek. Output only valid JSON objects in the exact format requested."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.0,
-                max_tokens=300
+                temperature=0.0,  # Keep temperature at 0 for consistency
+                max_tokens=500
             )
             reply_text = response["choices"][0]["message"]["content"]
             
-            # Try to parse the JSON response
+            # Clean and validate the response
             try:
-                return json.loads(reply_text)
-            except json.JSONDecodeError:
-                # If not valid JSON, try to extract the JSON portion
-                json_match = re.search(r'({[\s\S]*})', reply_text)
-                if json_match:
-                    return json.loads(json_match.group(1))
-                raise Exception("Could not extract valid JSON from response")
+                # Remove any markdown formatting if present
+                reply_text = re.sub(r'```json\s*|\s*```', '', reply_text)
+                # Parse the JSON
+                parsed = json.loads(reply_text)
+                # Validate the structure matches wordDatabase.js format
+                if not all(key in next(iter(parsed.values())) for key in [
+                    'lineNumber', 'wordOrder', 'partOfSpeech', 'morphology',
+                    'meanings', 'bestTranslation', 'lemma', 'bestLemmaTranslation'
+                ]):
+                    raise ValueError("Response missing required fields")
+                return parsed
+            except (json.JSONDecodeError, ValueError) as e:
+                if attempt < retry_count:
+                    print(f"Invalid format for word '{word_data['word']}': {e}. Retrying...")
+                    time.sleep(retry_delay)
+                    continue
+                raise
                 
         except Exception as e:
             if attempt < retry_count:
@@ -118,7 +131,7 @@ def call_llm_for_word(word_data, retry_count=3, retry_delay=5):
                 print(f"Failed to process word '{word_data['word']}' after {retry_count} retries: {e}")
                 return None
 
-def process_text_file(input_filepath, limit=None, output_dir=None):
+def process_text_file(input_filepath, limit=None, output_dir=None, max_lines=None):
     """
     Process a text file to generate a JSON database of linguistic analysis.
     
@@ -126,6 +139,7 @@ def process_text_file(input_filepath, limit=None, output_dir=None):
         input_filepath: Path to the input text file
         limit: Optional limit on number of words to process
         output_dir: Optional custom output directory
+        max_lines: Optional maximum number of lines to process
     
     Returns:
         Path to the output JSON file
@@ -157,8 +171,8 @@ def process_text_file(input_filepath, limit=None, output_dir=None):
     with open(output_text_path, 'w', encoding='utf-8') as file:
         file.write(text)
     
-    # Create word list CSV
-    word_list = create_word_list_from_text(text)
+    # Create word list CSV with max_lines parameter
+    word_list = create_word_list_from_text(text, max_lines)
     
     # Save word list to CSV (for reference)
     csv_path = output_path / f"{input_filename}_word_list.csv"
@@ -200,12 +214,36 @@ def process_text_file(input_filepath, limit=None, output_dir=None):
             time.sleep(1.5)  # Slightly longer delay to be safer with rate limits
     
     # Save final JSON database
-    output_json_path = output_path / f"{input_filename}_wordDatabase.json"
-    with open(output_json_path, 'w', encoding='utf-8') as f:
-        json.dump(output_entries, f, ensure_ascii=False, indent=2)
+    output_js_path = save_as_js_database(output_entries, output_path / f"{input_filename}_wordDatabase")
+    print(f"Final JavaScript database saved to: {output_js_path}")
+    return output_js_path
+
+def save_as_js_database(entries, output_path):
+    """Convert the entries to a JavaScript module format."""
+    js_content = "// Generated word database\nconst wordDatabase = {\n"
     
-    print(f"Final JSON database saved to: {output_json_path}")
-    return output_json_path
+    # Sort entries by word order for consistency
+    sorted_entries = sorted(entries, key=lambda x: int(next(iter(x.values()))['wordOrder']))
+    
+    for entry in sorted_entries:
+        word, data = next(iter(entry.items()))
+        js_content += f"    '{word}': {{\n"
+        for key, value in data.items():
+            if isinstance(value, list):
+                value_str = f"[{', '.join(f"'{v}'" for v in value)}]"
+            else:
+                value_str = f"'{value}'"
+            js_content += f"        {key}: {value_str},\n"
+        js_content += "    },\n"
+    
+    js_content += "};\n\nexport default wordDatabase;\n"
+    
+    # Save as .js file
+    output_js_path = output_path.with_suffix('.js')
+    with open(output_js_path, 'w', encoding='utf-8') as f:
+        f.write(js_content)
+    
+    return output_js_path
 
 def main():
     parser = argparse.ArgumentParser(description="Process Ancient Greek text to create linguistic database.")
@@ -213,11 +251,13 @@ def main():
                         help="Path to the input text file")
     parser.add_argument("--limit", "-l", type=int, default=None,
                         help="Number of words to process (default: all)")
+    parser.add_argument("--max-lines", "-m", type=int, default=None,
+                        help="Maximum number of lines to process (default: all)")
     parser.add_argument("--output", "-o", type=str, default=None,
                         help="Custom output directory (default: data/output_filename)")
     args = parser.parse_args()
     
-    process_text_file(args.input, args.limit, args.output)
+    process_text_file(args.input, args.limit, args.output, args.max_lines)
 
 if __name__ == "__main__":
     main()
