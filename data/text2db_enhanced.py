@@ -62,6 +62,20 @@ def log_progress(message):
     timestamp = datetime.now().strftime("%H:%M:%S")
     print(f"[{timestamp}] {message}")
 
+def is_greek_text(text, threshold=0.3):
+    """Detect if text is Ancient Greek based on character frequency."""
+    # Greek Unicode ranges
+    greek_pattern = re.compile(r'[\u0370-\u03FF\u1F00-\u1FFF]')
+    
+    # Count Greek characters
+    greek_chars = len(re.findall(greek_pattern, text))
+    total_chars = len(text.strip())
+    
+    # Check if proportion of Greek characters exceeds threshold
+    if total_chars > 0 and greek_chars / total_chars > threshold:
+        return True
+    return False
+
 def create_word_list_from_text(text, max_lines=None):
     """
     Creates a list of words with their line numbers and word order from input text.
@@ -73,33 +87,73 @@ def create_word_list_from_text(text, max_lines=None):
     Returns:
         List of dictionaries with keys: "Line Number", "Word Order", "Word"
     """
+    log_progress("Creating word list from text...")
+    
+    # Check if text is Greek
+    if not is_greek_text(text):
+        log_progress("Warning: Text does not appear to be Ancient Greek")
+    
     lines = text.strip().split('\n')
     
     # Limit to max_lines if specified
     if max_lines is not None:
         lines = lines[:max_lines]
+        log_progress(f"Limited to first {max_lines} lines")
         
     word_list = []
+    line_number = 0
     word_order = 1
     
-    for line_num, line in enumerate(lines, 1):
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+            
+        line_number += 1
+        
         # Remove line numbers like "1. " at the beginning of the line
         line = re.sub(r"^\s*\d+\.\s*", "", line)
         
-        # Tokenize, keeping apostrophes but removing other punctuation
-        words = re.findall(r"[\w''\-]+|[,;]", line)
+        # Remove punctuation and split into words
+        # Keep Greek punctuation like · (ano teleia) but remove others
+        clean_line = re.sub(r'[,.;:"\[\]\(\)!?—]', ' ', line)
+        words_in_line = re.findall(r'\b[\u0370-\u03FF\u1F00-\u1FFF]+\b', clean_line)
         
-        for word in words:
-            # Remove punctuation marks that we don't need separately
-            if word not in [",", "·", "..."]:
+        # Add words with metadata
+        for word in words_in_line:
+            word = word.lower()  # Normalize to lowercase
+            if word:  # Skip empty strings
                 word_list.append({
-                    "Line Number": str(line_num),
+                    "Line Number": str(line_number),
                     "Word Order": str(word_order),
                     "Word": word
                 })
                 word_order += 1
-                
+    
+    log_progress(f"Created word list with {len(word_list)} words from {line_number} lines")
     return word_list
+
+def count_word_occurrences(word_list):
+    """Count occurrences of each unique word in the word list."""
+    log_progress("Counting word occurrences...")
+    
+    word_counts = {}
+    for word_info in word_list:
+        word = word_info["Word"]
+        if word in word_counts:
+            word_counts[word]["count"] += 1
+        else:
+            word_counts[word] = {
+                "count": 1,
+                "lineNumber": word_info["Line Number"],
+                "wordOrder": word_info["Word Order"]
+            }
+    
+    # Sort words by frequency (most common first)
+    sorted_words = sorted(word_counts.items(), key=lambda x: x[1]["count"], reverse=True)
+    
+    log_progress(f"Found {len(word_counts)} unique words")
+    return sorted_words
 
 def translate_full_text(text, retry_count=2, retry_delay=5):
     """Generate a literary translation of the entire text."""
@@ -305,22 +359,8 @@ def process_text_file_enhanced(input_filepath, limit=None, output_dir=None, max_
         file.write(text)
     
     try:
-        # Generate literary translation
-        translation = translate_full_text(text)
-        
-        # Save the translation
-        translation_path = output_path / f"{input_filename}_translation.txt"
-        with open(translation_path, 'w', encoding='utf-8') as file:
-            file.write(translation)
-        
-        log_progress(f"Literary translation saved to: {translation_path}")
-        
-        # Get word translations
-        word_translations = get_word_translations(text, translation)
-        
-        # Create word list
+        # STEP 1: Create word list (no API needed)
         word_list = create_word_list_from_text(text, max_lines)
-        log_progress(f"Created word list with {len(word_list)} words")
         
         # Apply limit if specified
         if limit:
@@ -331,21 +371,31 @@ def process_text_file_enhanced(input_filepath, limit=None, output_dir=None, max_
         csv_path = output_path / f"{input_filename}_word_list.csv"
         with open(csv_path, 'w', newline='', encoding='utf-8') as csvfile:
             csv_writer = csv.writer(csvfile)
-            csv_writer.writerow(["Line Number", "Word Order", "Word", "Suggested Translation"])
+            csv_writer.writerow(["Line Number", "Word Order", "Word"])
             
             for word_data in word_list:
-                key = (word_data["Line Number"], word_data["Word Order"])
-                translation = word_translations.get(key, "")
                 csv_writer.writerow([
                     word_data["Line Number"],
                     word_data["Word Order"],
-                    word_data["Word"],
-                    translation
+                    word_data["Word"]
                 ])
         
         log_progress(f"Word list CSV saved to: {csv_path}")
         
-        # Process words with the LLM
+        # STEP 2: Generate literary translation (API needed)
+        translation = translate_full_text(text)
+        
+        # Save the translation
+        translation_path = output_path / f"{input_filename}_translation.txt"
+        with open(translation_path, 'w', encoding='utf-8') as file:
+            file.write(translation)
+        
+        log_progress(f"Literary translation saved to: {translation_path}")
+        
+        # STEP 3: Get word translations from the full translation
+        word_translations = get_word_translations(text, translation)
+        
+        # STEP 4: Process words with the LLM
         output_entries = []
         total_words = len(word_list)
         
