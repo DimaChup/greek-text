@@ -1,0 +1,236 @@
+# Greek Text Analyzer Project Documentation
+
+## Project Overview
+
+The Greek Text Analyzer is a web application designed to help users analyze Ancient Greek texts. It provides word-by-word analysis, highlighting different parts of speech, and displaying detailed linguistic information for each word. The system uses AI-powered processing to generate comprehensive databases for any Greek text.
+
+## Project Goals
+
+### Primary Goal
+Create an interactive web application that allows users to:
+1. Upload and analyze any Ancient Greek text
+2. Highlight different parts of speech (nouns, verbs, adjectives, etc.)
+3. View detailed linguistic analysis for each word
+4. See beautiful, contextually accurate translations
+
+### Secondary Goals
+1. Generate comprehensive word databases for Greek texts
+2. Provide literary-quality translations of the texts
+3. Support multiple texts with easy switching between them
+4. Make the system accessible to students and scholars of Ancient Greek
+
+## System Architecture
+
+### Frontend (React)
+- **GreekTextAnalyzer.js**: Main component for text display and interaction
+- **wordDatabase.js**: Default database of Greek words with linguistic analysis
+- **databases/**: Directory containing multiple text databases
+- **services/databaseManager.js**: Service to manage and switch between databases
+
+### Backend (Python + Express)
+- **text2db.py**: Basic script to generate word databases from Greek texts
+- **text2db_enhanced.py**: Advanced script that generates literary translations and improved databases
+- **text2db_literary.py**: Comprehensive script with robust error handling and detailed progress reporting
+- **server.js**: Express server for file uploads and API endpoints
+
+### Data Flow
+1. User uploads Greek text through web interface
+2. Backend processes text using OpenAI API
+3. System generates word database and literary translation
+4. Frontend loads the database and displays the text
+5. User interacts with the text through highlighting and analysis features
+
+## Implementation Details
+
+### Database Generation Process
+
+#### Basic Approach (`text2db.py`)
+- Processes each word individually
+- Uses OpenAI API to analyze morphology, part of speech, etc.
+- Generates a JavaScript database file
+
+#### Enhanced Approach (`text2db_enhanced.py`)
+- First generates a literary translation of the entire text
+- Extracts word-by-word translations from the literary translation
+- Uses these translations to guide the detailed analysis
+- Produces more contextually accurate translations
+
+#### Literary Approach (`text2db_literary.py`)
+- Most robust implementation with extensive error handling
+- Processes text in chunks for better reliability
+- Provides detailed progress reporting
+- Handles JSON parsing errors and alignment issues
+
+### Database Structure
+Each word entry contains:
+```javascript
+'ἵπποι': {
+    lineNumber: '1',
+    wordOrder: '1',
+    partOfSpeech: 'Noun',
+    morphology: 'Nominative Plural Masculine',
+    meanings: ['horses', 'steeds', 'mares'],
+    bestTranslation: 'horses',
+    lemma: 'ἵππος',
+    bestLemmaTranslation: 'horse'
+}
+```
+
+### Frontend Components
+
+#### Text Display
+- Shows the original Greek text
+- Highlights words based on part of speech
+- Provides hover tooltips with basic information
+
+#### Word Analysis
+- Displays detailed analysis for selected word types
+- Groups words by part of speech
+- Shows meanings, translations, and morphological details
+
+#### Database Selector
+- Allows switching between different text databases
+- Dynamically loads the appropriate database
+
+## Development Workflow
+
+### Setting Up the Project
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install  # Frontend dependencies
+   pip install openai==0.28.0  # Python dependencies
+   ```
+3. Set up environment variables:
+   ```bash
+   export OPENAI_API_KEY="your-api-key-here"
+   ```
+
+### Processing a New Text
+1. Place the Greek text file in `data/input/`
+2. Generate the database:
+   ```bash
+   # Basic approach
+   python data/text2db.py --input data/input/your_text.txt
+   
+   # Enhanced approach with literary translation
+   python data/text2db_enhanced.py --input data/input/your_text.txt
+   
+   # Most robust approach
+   python data/text2db_literary.py --input data/input/your_text.txt
+   ```
+3. Copy the generated database to the frontend:
+   ```bash
+   cp data/output_your_text_enhanced/your_text_wordDatabase.js src/databases/
+   ```
+
+### Running the Application
+1. Start the backend server:
+   ```bash
+   node server/server.js
+   ```
+2. Start the frontend development server:
+   ```bash
+   npm start
+   ```
+3. Access the application at `http://localhost:3000`
+
+## Key Files and Their Purposes
+
+### Python Scripts
+- **data/text2db.py**: Basic word-by-word analysis
+- **data/text2db_enhanced.py**: Enhanced analysis with literary translation
+- **data/text2db_literary.py**: Robust implementation with error handling
+
+### JavaScript Files
+- **src/GreekTextAnalyzer.js**: Main React component
+- **src/wordDatabase.js**: Default word database
+- **src/services/databaseManager.js**: Service to manage multiple databases
+
+### Server Files
+- **server/server.js**: Express server
+- **server/routes/api.js**: API endpoints
+
+## Directory Structure
+greek-text-analyzer/
+├── data/
+│ ├── input/ # Store uploaded text files
+│ │ └── on_nature_short.txt # Example text
+│ ├── output_/ # Generated databases (one per text)
+│ │ └── _wordDatabase.js # Generated database files
+│ ├── text2db.py # Basic script
+│ ├── text2db_enhanced.py # Enhanced script
+│ └── text2db_literary.py # Robust script
+├── public/ # Static assets for React
+├── scripts/
+│ └── copy_database.sh # Script to copy databases
+├── server/
+│ ├── routes/
+│ │ └── api.js # API endpoints
+│ └── server.js # Express server
+├── src/
+│ ├── components/ # React components
+│ │ └── GreekTextAnalyzer.js # Main analyzer component
+│ ├── databases/ # Multiple word databases
+│ │ ├── on_nature_short_wordDatabase.js
+│ │ └── illiad_wordDatabase.js
+│ ├── services/
+│ │ └── databaseManager.js # Database management service
+│ ├── App.js # Main React app
+│ ├── index.js # React entry point
+│ └── wordDatabase.js # Default database
+└── package.json # Dependencies
+Apply to overview.txt
+
+
+
+
+
+
+
+
+
+## Future Enhancements
+
+### Short-term Improvements
+1. Add user authentication for saving personal texts
+2. Implement caching to reduce API calls
+3. Add export functionality for analysis results
+4. Improve error handling in the frontend
+
+### Long-term Vision
+1. Create a collaborative platform for scholars
+2. Add support for other ancient languages
+3. Implement machine learning for improved analysis
+4. Develop a mobile application
+
+## Troubleshooting
+
+### Common Issues
+1. **OpenAI API errors**: Check your API key and ensure you're using the correct version
+   ```bash
+   # For older scripts
+   pip install openai==0.28.0
+   ```
+
+2. **Database not loading**: Ensure the database file is in the correct location
+   ```bash
+   # Check if file exists
+   ls -la src/databases/your_text_wordDatabase.js
+   ```
+
+3. **Text processing fails**: Try processing with fewer words/lines
+   ```bash
+   python data/text2db_enhanced.py --input data/input/your_text.txt --limit 20
+   ```
+
+### Debugging Tips
+1. Check the console for JavaScript errors
+2. Look for Python error logs in the output directory
+3. Verify that the database format matches the expected structure
+
+## Conclusion
+
+The Greek Text Analyzer project provides a powerful tool for studying Ancient Greek texts. By combining modern web technologies with AI-powered language analysis, it offers unprecedented access to the linguistic details of these historical works. The system's modular design allows for continuous improvement and expansion to support additional texts and features.
+
+This documentation provides a comprehensive overview of the project's goals, architecture, and implementation details, serving as a guide for future development and maintenance.
