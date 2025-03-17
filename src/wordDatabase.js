@@ -1819,6 +1819,196 @@ const wordDatabase = {
     bestTranslation: 'watches',
     lemma: 'reloj',
     bestLemmaTranslation: 'watch'
+  },
+  'dudando': {
+    lineNumber: '53',
+    wordOrder: '313',
+    partOfSpeech: 'Verb',
+    morphology: 'Gerund',
+    meanings: ['doubting', 'hesitating', 'wavering'],
+    bestTranslation: 'doubting',
+    lemma: 'dudar',
+    bestLemmaTranslation: 'to doubt'
+  },
+  'abrirían': {
+    lineNumber: '56',
+    wordOrder: '329',
+    partOfSpeech: 'Verb',
+    morphology: 'Conditional Third Person Plural',
+    meanings: ['they would open', 'they would unlock'],
+    bestTranslation: 'they would open',
+    lemma: 'abrir',
+    bestLemmaTranslation: 'to open'
+  },
+  'revisar': {
+    lineNumber: '57',
+    wordOrder: '336',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive',
+    meanings: ['to check', 'to review', 'to revise'],
+    bestTranslation: 'to check',
+    lemma: 'revisar',
+    bestLemmaTranslation: 'to check'
+  },
+  'seríamos': {
+    lineNumber: '58',
+    wordOrder: '341',
+    partOfSpeech: 'Verb',
+    morphology: 'Conditional First Person Plural',
+    meanings: ['we would be'],
+    bestTranslation: 'we would be',
+    lemma: 'ser',
+    bestLemmaTranslation: 'to be'
+  },
+  'conducidos': {
+    lineNumber: '58',
+    wordOrder: '342',
+    partOfSpeech: 'Verb',
+    morphology: 'Past Participle Masculine Plural',
+    meanings: ['led', 'guided', 'conducted'],
+    bestTranslation: 'led',
+    lemma: 'conducir',
+    bestLemmaTranslation: 'to lead'
+  },
+  'regresaba': {
+    lineNumber: '60',
+    wordOrder: '352',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was returning', 'was going back'],
+    bestTranslation: 'was returning',
+    lemma: 'regresar',
+    bestLemmaTranslation: 'to return'
+  },
+  'puntualidad': {
+    lineNumber: '54',
+    wordOrder: '316',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['punctuality', 'timeliness', 'promptness'],
+    bestTranslation: 'punctuality',
+    lemma: 'puntualidad',
+    bestLemmaTranslation: 'punctuality'
+  },
+  'docenas': {
+    lineNumber: '54',
+    wordOrder: '319',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['dozens', 'sets of twelve'],
+    bestTranslation: 'dozens',
+    lemma: 'docena',
+    bestLemmaTranslation: 'dozen'
+  },
+  'aparatos': {
+    lineNumber: '55',
+    wordOrder: '321',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['devices', 'apparatus', 'equipment'],
+    bestTranslation: 'devices',
+    lemma: 'aparato',
+    bestLemmaTranslation: 'device'
+  },
+  'electrónicos': {
+    lineNumber: '55',
+    wordOrder: '322',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Plural',
+    meanings: ['electronic', 'digital'],
+    bestTranslation: 'electronic',
+    lemma: 'electrónico',
+    bestLemmaTranslation: 'electronic'
+  },
+  'momento': {
+    lineNumber: '56',
+    wordOrder: '326',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['moment', 'instant', 'time'],
+    bestTranslation: 'moment',
+    lemma: 'momento',
+    bestLemmaTranslation: 'moment'
+  },
+  'puertas': {
+    lineNumber: '56',
+    wordOrder: '331',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['doors', 'gates', 'entrances'],
+    bestTranslation: 'doors',
+    lemma: 'puerta',
+    bestLemmaTranslation: 'door'
+  },
+  'tras': {
+    lineNumber: '57',
+    wordOrder: '335',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['after', 'behind', 'following'],
+    bestTranslation: 'after',
+    lemma: 'tras',
+    bestLemmaTranslation: 'after'
+  },
+  'tarjetas': {
+    lineNumber: '57',
+    wordOrder: '338',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['cards', 'tickets', 'passes'],
+    bestTranslation: 'cards',
+    lemma: 'tarjeta',
+    bestLemmaTranslation: 'card'
+  },
+  'bus': {
+    lineNumber: '59',
+    wordOrder: '345',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['bus', 'coach'],
+    bestTranslation: 'bus',
+    lemma: 'bus',
+    bestLemmaTranslation: 'bus'
+  },
+  'avión': {
+    lineNumber: '59',
+    wordOrder: '348',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['airplane', 'aircraft', 'plane'],
+    bestTranslation: 'airplane',
+    lemma: 'avión',
+    bestLemmaTranslation: 'airplane'
+  },
+  'yo': {
+    lineNumber: '59',
+    wordOrder: '349',
+    partOfSpeech: 'Pronoun',
+    morphology: 'Personal First Person Singular',
+    meanings: ['I', 'me'],
+    bestTranslation: 'I',
+    lemma: 'yo',
+    bestLemmaTranslation: 'I'
+  },
+  'veinticuatro': {
+    lineNumber: '61',
+    wordOrder: '361',
+    partOfSpeech: 'Numeral',
+    morphology: 'Cardinal',
+    meanings: ['twenty-four'],
+    bestTranslation: 'twenty-four',
+    lemma: 'veinticuatro',
+    bestLemmaTranslation: 'twenty-four'
+  },
+  'ausencia': {
+    lineNumber: '61',
+    wordOrder: '364',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['absence', 'lack', 'nonattendance'],
+    bestTranslation: 'absence',
+    lemma: 'ausencia',
+    bestLemmaTranslation: 'absence'
   }
 };
 

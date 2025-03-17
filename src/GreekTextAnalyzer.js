@@ -30,14 +30,21 @@ const GreekTextAnalyzer = () => {
     'ADVERB': 'bg-yellow-200'
   };
 
-  // Helper to clean the word string
+  // Helper to clean the word string - improved version to handle complex punctuation
   const cleanWord = (word) => {
     return word
-      .replace(/[,.;']$/g, '')
-      .replace(/^['']/, '')
+      // First, handle ellipsis and other combined punctuation
+      .replace(/…/g, '')
+      // Remove all quotes (including Spanish, Greek, and standard)
+      .replace(/[«»""''"`]/g, '') 
+      // Remove all punctuation globally, not just at beginning or end
+      .replace(/[,.;:!?()¡¿\[\]{}*#@%&^+_=|~<>\/\\-]/g, '')
+      // Remove specific Greek punctuation
       .replace(/[᾽]/g, '')
-      .replace(/·/g, '')
-      .trim();
+      // Remove middle dot and other special characters
+      .replace(/[·•‣◦‧⁃⁌⁍⦁⦾⦿]/g, '')
+      .trim()
+      .toLowerCase(); // Convert to lowercase for case-insensitive matching
   };
 
   const createTextMatrix = (text) => {
@@ -47,12 +54,10 @@ const GreekTextAnalyzer = () => {
     );
   };
 
-  // Custom function to check if a word's info matches any active type
-  const isWordTypeActiveCustom = (info, types) => {
-    const part = info.partOfSpeech.toUpperCase();
-    if (types.includes(part)) return true;
-    if (types.includes('RED') && redGroup.includes(part)) return true;
-    return false;
+  // Change the redGroup definition to become a function that checks if a part of speech is NOT in the main categories
+  const isRedGroup = (part) => {
+    const mainCategories = ['NOUN', 'VERB', 'ADJECTIVE', 'ADVERB'];
+    return !mainCategories.includes(part);
   };
 
   // Update word analysis based on current text and provided active types
@@ -96,6 +101,14 @@ const GreekTextAnalyzer = () => {
     setActiveTypes(newActiveTypes);
   };
 
+  // Update the isWordTypeActiveCustom function
+  const isWordTypeActiveCustom = (info, types) => {
+    const part = info.partOfSpeech.toUpperCase();
+    if (types.includes(part)) return true;
+    if (types.includes('RED') && isRedGroup(part)) return true;
+    return false;
+  };
+
   // Returns the appropriate highlight class for a given word
   const getHighlightClass = (word) => {
     const cleaned = cleanWord(word);
@@ -105,8 +118,8 @@ const GreekTextAnalyzer = () => {
       if (part === 'VERB' && activeTypes.includes('VERB')) return 'bg-pink-200';
       if (part === 'ADJECTIVE' && activeTypes.includes('ADJECTIVE')) return 'bg-green-200';
       if (part === 'NOUN' && activeTypes.includes('NOUN')) return 'bg-blue-200';
-      if (activeTypes.includes('RED') && redGroup.includes(part)) return 'bg-red-200';
       if (part === 'ADVERB' && activeTypes.includes('ADVERB')) return 'bg-yellow-200';
+      if (activeTypes.includes('RED') && isRedGroup(part)) return 'bg-red-200';
     }
     return 'bg-white border';
   };
@@ -125,7 +138,7 @@ const GreekTextAnalyzer = () => {
     let filtered;
     if (type === 'RED') {
       filtered = wordAnalysis.filter(word =>
-        redGroup.includes(word.partOfSpeech.toUpperCase())
+        isRedGroup(word.partOfSpeech.toUpperCase())
       );
     } else {
       filtered = wordAnalysis.filter(word =>
@@ -173,7 +186,7 @@ const GreekTextAnalyzer = () => {
             onClick={() => handleTypeClick('RED')}
             className={`px-3 py-1 rounded ${activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200 text-sm'}`}
           >
-            Highlight Articles/Pronouns/Particles/Prepositions/Conjunctions/Demonstrative Pronouns
+            Highlight Other Parts of Speech
           </button>
           <button 
             onClick={() => handleTypeClick('ADVERB')}
