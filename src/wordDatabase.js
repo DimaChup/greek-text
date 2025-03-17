@@ -1,2323 +1,1825 @@
-// src/wordDatabase.js
+// Generated word database
 const wordDatabase = {
-    'ἵπποι': {
-      lineNumber: '1',
-      wordOrder: '1',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Masculine',
-      meanings: ['horses', 'steeds', 'mares'],
-      bestTranslation: 'horses',
-      lemma: 'ἵππος',
-      bestLemmaTranslation: 'horse'
-  },
-  'ταὶ': {
-      lineNumber: '1',
-      wordOrder: '2',
-      partOfSpeech: 'Article',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['the', 'these (referring to horses)'],
-      bestTranslation: 'the [Referring back to ἵπποι]',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'με': {
-      lineNumber: '1',
-      wordOrder: '3',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Accusative Singular',
-      meanings: ['me'],
-      bestTranslation: 'me',
-      lemma: 'ἐγώ',
-      bestLemmaTranslation: 'I'
-  },
-  'φέρουσιν': {
-      lineNumber: '1',
-      wordOrder: '4',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Indicative 3rd Plural',
-      meanings: ['they carry', 'they bear', 'they bring'],
-      bestTranslation: 'they carry',
-      lemma: 'φέρω',
-      bestLemmaTranslation: 'to carry'
-  },
-  'ὅσον': {
-      lineNumber: '1',
-      wordOrder: '5',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['as much as', 'as far as', 'to the extent that'],
-      bestTranslation: 'as far as',
-      lemma: 'ὅσος',
-      bestLemmaTranslation: 'as much as'
-  },
-  'τ’': {
-      lineNumber: '1',
-      wordOrder: '6',
-      partOfSpeech: 'Particle',
-      morphology: 'Enclitic - shortened form of τε',
-      meanings: ['and', 'both...and'],
-      bestTranslation: 'and',
-      lemma: 'τε',
-      bestLemmaTranslation: 'and'
-  },
-  'ἐπὶ': {
-      lineNumber: '1',
-      wordOrder: '7',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['upon', 'on', 'to', 'towards', 'in addition to'],
-      bestTranslation: 'to [Directional; going *to* the spirit]',
-      lemma: 'ἐπί',
-      bestLemmaTranslation: 'upon'
-  },
-  'θυμὸς': {
-      lineNumber: '1',
-      wordOrder: '8',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Singular Masculine',
-      meanings: ['spirit', 'heart', 'mind', 'soul', 'courage'],
-      bestTranslation: 'spirit',
-      lemma: 'θυμός',
-      bestLemmaTranslation: 'spirit'
-  },
-  'ἱκάνοι': {
-      lineNumber: '1',
-      wordOrder: '9',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Optative 3rd Singular',
-      meanings: ['may reach', 'might arrive', 'may come'],
-      bestTranslation: 'might reach [Optative mood expresses potential]',
-      lemma: 'ἱκνέομαι',
-      bestLemmaTranslation: 'to arrive'
-  },
-  'πέμπον': {
-      lineNumber: '2',
-      wordOrder: '10',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Active Indicative 3rd Plural',
-      meanings: ['they were sending', 'they escorted'],
-      bestTranslation: 'they escorted [Continuous action in the past]',
-      lemma: 'πέμπω',
-      bestLemmaTranslation: 'to send'
-  },
-  'ἐπεί': {
-      lineNumber: '2',
-      wordOrder: '11',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['since', 'because', 'when', 'after'],
-      bestTranslation: 'since [Causal conjunction best fits context]',
-      lemma: 'ἐπεί',
-      bestLemmaTranslation: 'since'
-  },
-  'μ’': {
-      lineNumber: '2',
-      wordOrder: '12',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Accusative Singular',
-      meanings: ['me (shortened form)'],
-      bestTranslation: 'me',
-      lemma: 'ἐγώ',
-      bestLemmaTranslation: 'I'
-  },
-  'ἐς': {
-      lineNumber: '2',
-      wordOrder: '13',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['into', 'to', 'toward', 'until'],
-      bestTranslation: 'to',
-      lemma: 'εἰς',
-      bestLemmaTranslation: 'into'
-  },
-  'ὁδὸν': {
-      lineNumber: '2',
-      wordOrder: '14',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['road', 'way', 'path', 'journey'],
-      bestTranslation: 'road',
-      lemma: 'ὁδός',
-      bestLemmaTranslation: 'road'
-  },
-  'βῆσαν': {
-      lineNumber: '2',
-      wordOrder: '15',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Indicative 3rd Plural',
-      meanings: ['they set', 'they caused to go', 'they placed'],
-      bestTranslation: 'they set [Causative sense; they made me go]',
-      lemma: 'βαίνω',
-      bestLemmaTranslation: 'to go'
-  },
-  'πολύφημον': {
-      lineNumber: '2',
-      wordOrder: '16',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['famous', 'renowned', 'much-spoken-of'],
-      bestTranslation: 'renowned',
-      lemma: 'πολύφημος',
-      bestLemmaTranslation: 'renowned'
-  },
-  'ἄγουσαι': {
-      lineNumber: '2',
-      wordOrder: '17',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Nominative Plural Feminine',
-      meanings: ['leading', 'bringing', 'guiding'],
-      bestTranslation: 'leading',
-      lemma: 'ἄγω',
-      bestLemmaTranslation: 'to lead'
-  },
-  'δαίμονός': {
-      lineNumber: '3',
-      wordOrder: '18',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Singular Feminine',
-      meanings: ['of a goddess', 'of a divine power'],
-      bestTranslation: 'of a goddess',
-      lemma: 'δαίμων',
-      bestLemmaTranslation: 'divine being'
-  },
-  'ἐς': {
-      lineNumber: '3',
-      wordOrder: '19',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['into', 'to', 'toward', 'until'],
-      bestTranslation: 'toward',
-      lemma: 'εἰς',
-      bestLemmaTranslation: 'into'
-  },
-  'φωτῶν': {
-      lineNumber: '3',
-      wordOrder: '20',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural',
-      meanings: ['of mortals', 'of men'],
-      bestTranslation: 'of mortals',
-      lemma: 'φώς',
-      bestLemmaTranslation: 'mortal'
-  },
-  'ἐπὶ': {
-      lineNumber: '3',
-      wordOrder: '21',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['upon', 'on', 'to', 'towards', 'in addition to'],
-      bestTranslation: 'upon',
-      lemma: 'ἐπί',
-      bestLemmaTranslation: 'upon'
-  },
-  'ταύτῃ': {
-      lineNumber: '3',
-      wordOrder: '22',
-      partOfSpeech: 'Demonstrative Pronoun',
-      morphology: 'Dative Singular Feminine',
-      meanings: ['on this', 'by this'],
-      bestTranslation: 'on this',
-      lemma: 'οὗτος',
-      bestLemmaTranslation: 'this'
-  },
-  'γὰρ': {
-      lineNumber: '3',
-      wordOrder: '23',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['for', 'because', 'indeed'],
-      bestTranslation: 'for',
-      lemma: 'γάρ',
-      bestLemmaTranslation: 'for'
-  },
-  'φέρεται': {
-      lineNumber: '3',
-      wordOrder: '24',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Middle/Passive Indicative 3rd Singular',
-      meanings: ['is carried', 'moves', 'bears itself'],
-      bestTranslation: 'is carried [Passive voice best fits the context]',
-      lemma: 'φέρω',
-      bestLemmaTranslation: 'to carry'
-  },
-  'ἄνδρη': {
-      lineNumber: '3',
-      wordOrder: '25',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative/Vocative Singular',
-      meanings: ['O Man'],
-      bestTranslation: 'O Man',
-      lemma: 'ἀνήρ',
-      bestLemmaTranslation: 'man'
-   },
-   'σοφίης': {
-      lineNumber: '4',
-      wordOrder: '26',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Singular Feminine',
-      meanings: ['of wisdom', 'of skill', 'of knowledge'],
-      bestTranslation: 'of wisdom',
-      lemma: 'σοφία',
-      bestLemmaTranslation: 'wisdom'
-  },
-  'παντοίης': {
-      lineNumber: '4',
-      wordOrder: '27',
-      partOfSpeech: 'Adjective',
-      morphology: 'Genitive Singular Feminine',
-      meanings: ['of all kinds', 'of every sort'],
-      bestTranslation: 'of all kinds',
-      lemma: 'παντοῖος',
-      bestLemmaTranslation: 'of all kinds'
-  },
-  'φέρεν': {
-      lineNumber: '4',
-      wordOrder: '28',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Active Indicative 3rd Plural',
-      meanings: ['they were carrying', 'they carried'],
-      bestTranslation: 'they carried [Continuous action in the past]',
-      lemma: 'φέρω',
-      bestLemmaTranslation: 'to carry'
-  },
-  'δέ': {
-      lineNumber: '4',
-      wordOrder: '29',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'με': {
-      lineNumber: '4',
-      wordOrder: '30',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Accusative Singular',
-      meanings: ['me'],
-      bestTranslation: 'me',
-      lemma: 'ἐγώ',
-      bestLemmaTranslation: 'I'
-  },
-   'τ’': {
-      lineNumber: '4',
-      wordOrder: '31',
-      partOfSpeech: 'Particle',
-      morphology: 'Enclitic - shortened form of τε',
-      meanings: ['and', 'both...and'],
-      bestTranslation: 'and',
-      lemma: 'τε',
-      bestLemmaTranslation: 'and'
-  },
-  'ἵπποι': {
-      lineNumber: '4',
-      wordOrder: '32',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Masculine',
-      meanings: ['horses', 'steeds', 'mares'],
-      bestTranslation: 'horses',
-      lemma: 'ἵππος',
-      bestLemmaTranslation: 'horse'
-  },
-  'ταὶ': {
-      lineNumber: '4',
-      wordOrder: '33',
-      partOfSpeech: 'Article',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['the', 'these (referring to horses)'],
-      bestTranslation: 'the [Referring back to ἵπποι]',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'ταχῖαι': {
-      lineNumber: '4',
-      wordOrder: '34',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['swift', 'fast', 'quick'],
-      bestTranslation: 'swift',
-      lemma: 'ταχύς',
-      bestLemmaTranslation: 'swift'
-  },
-  'ἅρμα': {
-      lineNumber: '5',
-      wordOrder: '35',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['chariot', 'car'],
-      bestTranslation: 'chariot',
-      lemma: 'ἅρμα',
-      bestLemmaTranslation: 'chariot'
-  },
-  'τιταίνουσαι': {
-      lineNumber: '5',
-      wordOrder: '36',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Nominative Plural Feminine',
-      meanings: ['stretching', 'straining', 'drawing'],
-      bestTranslation: 'drawing [the chariot]',
-      lemma: 'τιταίνω',
-      bestLemmaTranslation: 'to stretch'
-  },
-  'κόραι': {
-      lineNumber: '5',
-      wordOrder: '37',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['maidens', 'girls', 'daughters'],
-      bestTranslation: 'maidens',
-      lemma: 'κόρη',
-      bestLemmaTranslation: 'maiden'
-  },
-  'δ’': {
-      lineNumber: '5',
-      wordOrder: '38',
-      partOfSpeech: 'Particle',
-      morphology: 'Shortened form of δέ',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'ὁδὸν': {
-      lineNumber: '5',
-      wordOrder: '39',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['road', 'way', 'path', 'journey'],
-      bestTranslation: 'way',
-      lemma: 'ὁδός',
-      bestLemmaTranslation: 'road'
-  },
-  'ἡγεμόνευον': {
-      lineNumber: '5',
-      wordOrder: '40',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Active Indicative 3rd Plural',
-      meanings: ['they were leading', 'they guided', 'they commanded'],
-      bestTranslation: 'they guided [the way]',
-      lemma: 'ἡγεμονεύω',
-      bestLemmaTranslation: 'to lead'
-  },
-  'Ἄξιον': {
-      lineNumber: '6',
-      wordOrder: '41',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['Worthy', 'fitting', 'deserving'],
-      bestTranslation: 'Worthy',
-      lemma: 'ἄξιος',
-      bestLemmaTranslation: 'Worthy'
-  },
-  'ἐς': {
-      lineNumber: '6',
-      wordOrder: '42',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['into', 'to', 'toward', 'until'],
-      bestTranslation: 'into',
-      lemma: 'εἰς',
-      bestLemmaTranslation: 'into'
-  },
-  
-  
-  'φάος': {
-      lineNumber: '6',
-      wordOrder: '43',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['light', 'daylight', 'radiance'],
-      bestTranslation: 'light',
-      lemma: 'φάος',
-      bestLemmaTranslation: 'light'
-  },
-  
-  
-  'ἦλθον': {
-      lineNumber: '6',
-      wordOrder: '44',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Indicative 1st Singular',
-      meanings: ['I came', 'I went'],
-      bestTranslation: 'I came',
-      lemma: 'ἔρχομαι',
-      bestLemmaTranslation: 'to come'
-  },
-  'ἀφ’': {
-      lineNumber: '6',
-      wordOrder: '45',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['from', 'away from', 'after'],
-      bestTranslation: 'from',
-      lemma: 'ἀπό',
-      bestLemmaTranslation: 'from'
-  },
-  'Ἡλίου': {
-      lineNumber: '6',
-      wordOrder: '46',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Singular Masculine',
-      meanings: ['of the Sun', 'of Helios'],
-      bestTranslation: 'of the Sun',
-      lemma: 'Ἥλιος',
-      bestLemmaTranslation: 'Sun'
-  },
-  'δ’': {
-      lineNumber: '6',
-      wordOrder: '47',
-      partOfSpeech: 'Particle',
-      morphology: 'Shortened form of δέ',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'ἀπέτηκτο': {
-      lineNumber: '6',
-      wordOrder: '48',
-      partOfSpeech: 'Verb',
-      morphology: 'Pluperfect Middle/Passive Indicative 3rd Singular',
-      meanings: ['had melted away', 'was distant', 'was far from'],
-      bestTranslation: 'was distant [Emphasizing a state resulting from a past action]',
-      lemma: 'ἀποτήκω',
-      bestLemmaTranslation: 'melt away'
-  },
-  'κράντο': {
-      lineNumber: '7',
-      wordOrder: '49',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Middle Indicative 3rd Plural',
-      meanings: ['they accomplished', 'they fulfilled', 'they brought to pass'],
-      bestTranslation: 'they accomplished',
-      lemma: 'κραίνω',
-      bestLemmaTranslation: 'to accomplish'
-  },
-  'μέγ’': {
-      lineNumber: '7',
-      wordOrder: '50',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['great', 'big', 'greatly (as adverb)'],
-      bestTranslation: 'greatly',
-      lemma: 'μέγας',
-      bestLemmaTranslation: 'great'
-  },
-  'ἀμφὶ': {
-      lineNumber: '7',
-      wordOrder: '51',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['around', 'about', 'on both sides', 'concerning'],
-      bestTranslation: 'around',
-      lemma: 'ἀμφί',
-      bestLemmaTranslation: 'around'
-  },
-  'δὲ': {
-      lineNumber: '7',
-      wordOrder: '52',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'κόραι': {
-      lineNumber: '7',
-      wordOrder: '53',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['maidens', 'girls', 'daughters'],
-      bestTranslation: 'maidens',
-      lemma: 'κόρη',
-      bestLemmaTranslation: 'maiden'
-  },
-  'ποτὶ': {
-      lineNumber: '7',
-      wordOrder: '54',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['to', 'towards', 'in addition to'],
-      bestTranslation: 'towards',
-      lemma: 'πρός',
-      bestLemmaTranslation: 'towards'
-  },
-  'κῶας': {
-      lineNumber: '7',
-      wordOrder: '55',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['fleece', 'skin', 'covering'],
-      bestTranslation: 'fleece',
-      lemma: 'κῶας',
-      bestLemmaTranslation: 'fleece'
-  },
-  'χερσὶν': {
-      lineNumber: '7',
-      wordOrder: '56',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Feminine',
-      meanings: ['with hands', 'by hands'],
-      bestTranslation: 'with hands',
-      lemma: 'χείρ',
-      bestLemmaTranslation: 'hand'
-  },
-  'ἔχουσαι': {
-      lineNumber: '7',
-      wordOrder: '57',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Nominative Plural Feminine',
-      meanings: ['having', 'holding', 'keeping'],
-      bestTranslation: 'holding',
-      lemma: 'ἔχω',
-      bestLemmaTranslation: 'to have'
-  },
-  'ἕλκον': {
-      lineNumber: '8',
-      wordOrder: '58',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Active Indicative 3rd Plural',
-      meanings: ['they were dragging', 'they were pulling', 'they drew'],
-      bestTranslation: 'they drew',
-      lemma: 'ἕλκω',
-      bestLemmaTranslation: 'to drag'
-  },
-  'ἀπὸ': {
-      lineNumber: '8',
-      wordOrder: '59',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['from', 'away from', 'after'],
-      bestTranslation: 'from',
-      lemma: 'ἀπό',
-      bestLemmaTranslation: 'from'
-  },
-  'κεφαλᾶς': {
-      lineNumber: '8',
-      wordOrder: '60',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Singular Feminine',
-      meanings: ['of the head', 'from the head'],
-      bestTranslation: 'from the head',
-      lemma: 'κεφαλή',
-      bestLemmaTranslation: 'head'
-  },
-   'δὲ': {
-      lineNumber: '8',
-      wordOrder: '61',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'καλύμματα': {
-      lineNumber: '8',
-      wordOrder: '62',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['coverings', 'veils', 'shrouds'],
-      bestTranslation: 'veils',
-      lemma: 'κάλυμμα',
-      bestLemmaTranslation: 'covering'
-  },
-  'χερσὶν': {
-      lineNumber: '8',
-      wordOrder: '63',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Feminine',
-      meanings: ['with hands', 'by hands'],
-      bestTranslation: 'with hands',
-      lemma: 'χείρ',
-      bestLemmaTranslation: 'hand'
-  },
-  'ἔτ’': {
-      lineNumber: '8',
-      wordOrder: '64',
-      partOfSpeech: 'Adverb',
-      morphology: 'Shortened form of ἔτι',
-      meanings: ['still', 'yet', 'further', 'besides'],
-      bestTranslation: 'still',
-      lemma: 'ἔτι',
-      bestLemmaTranslation: 'still'
-  },
-  'ἔαχον': {
-      lineNumber: '8',
-      wordOrder: '65',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Active Indicative 3rd Plural',
-      meanings: ['they were shouting', 'crying out', 'shrieking'],
-      bestTranslation: 'they cried [Imperfect tense suggests continuous or repeated action]',
-      lemma: 'ἰάχω',
-      bestLemmaTranslation: 'cry out'
-  },
-  'οὕτω': {
-      lineNumber: '9',
-      wordOrder: '66',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['thus', 'so', 'in this way'],
-      bestTranslation: 'thus',
-      lemma: 'οὕτω',
-      bestLemmaTranslation: 'thus'
-  },
-  'νιν': {
-      lineNumber: '9',
-      wordOrder: '67',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Accusative/Nominative/Dative Singular',
-      meanings: ['him', 'her', 'it', 'this one'],
-      bestTranslation: 'him [Referring to a singular entity; likely the "way" or "road"]',
-      lemma: 'μιν',
-      bestLemmaTranslation: 'him/her/it'
-  },
-  'πεῖσαν': {
-      lineNumber: '9',
-      wordOrder: '68',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Indicative 3rd Plural',
-      meanings: ['they persuaded', 'they convinced'],
-      bestTranslation: 'they persuaded',
-      lemma: 'πείθω',
-      bestLemmaTranslation: 'to persuade'
-  },
-  'κούραι': {
-      lineNumber: '9',
-      wordOrder: '69',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['maidens', 'girls', 'daughters'],
-      bestTranslation: 'maidens',
-      lemma: 'κούρη',
-      bestLemmaTranslation: 'maiden'
-  },
-  'μαλακοῖς': {
-      lineNumber: '9',
-      wordOrder: '70',
-      partOfSpeech: 'Adjective',
-      morphology: 'Dative Plural Masculine',
-      meanings: ['soft', 'gentle', 'mild'],
-      bestTranslation: 'gentle',
-      lemma: 'μαλακός',
-      bestLemmaTranslation: 'soft'
-  },
-  'ἐπέεσσι': {
-      lineNumber: '9',
-      wordOrder: '71',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Neuter',
-      meanings: ['with words', 'by words', 'in words'],
-      bestTranslation: 'with words',
-      lemma: 'ἔπος',
-      bestLemmaTranslation: 'word'
-  },
-  'σοὶ': {
-      lineNumber: '10',
-      wordOrder: '72',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Dative Singular',
-      meanings: ['to you', 'for you'],
-      bestTranslation: 'you',
-      lemma: 'σύ',
-      bestLemmaTranslation: 'you'
-  },
-  'φράζειν': {
-      lineNumber: '10',
-      wordOrder: '73',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Infinitive',
-      meanings: ['to tell', 'to declare', 'to show', 'to explain'],
-      bestTranslation: 'to tell',
-      lemma: 'φράζω',
-      bestLemmaTranslation: 'to tell'
-  },
-  'ὡς': {
-      lineNumber: '10',
-      wordOrder: '74',
-      partOfSpeech: 'Conjunction/Adverb',
-      morphology: '',
-      meanings: ['as', 'how', 'that', 'so that'],
-      bestTranslation: 'how [Introducing an indirect question]',
-      lemma: 'ὡς',
-      bestLemmaTranslation: 'as'
-  },
-  'τὰ': {
-      lineNumber: '10',
-      wordOrder: '75',
-      partOfSpeech: 'Article',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['the', 'those'],
-      bestTranslation: 'the',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'φαεσφόρα': {
-      lineNumber: '10',
-      wordOrder: '76',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['light-bringing', 'radiant'],
-      bestTranslation: 'radiant',
-      lemma: 'φαεσφόρος',
-      bestLemmaTranslation: 'light-bringing'
-  },
-  'κάλυπτρα': {
-      lineNumber: '10',
-      wordOrder: '77',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['coverings', 'veils'],
-      bestTranslation: 'veils',
-      lemma: 'κάλυπτρον',
-      bestLemmaTranslation: 'veil'
-  },
-  'διέδηξεν': {
-      lineNumber: '10',
-      wordOrder: '78',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Indicative 3rd Singular',
-      meanings: ['bit through', 'gnawed through', 'pierced'],
-      bestTranslation: 'pierced [Aorist tense for completed action]',
-      lemma: 'διαδάκνω',
-      bestLemmaTranslation: 'bite through'
-  },
-  'ἐν': {
-      lineNumber: '11',
-      wordOrder: '79',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['in', 'on', 'among', 'at'],
-      bestTranslation: 'in',
-      lemma: 'ἐν',
-      bestLemmaTranslation: 'in'
-  },
-  'δὲ': {
-      lineNumber: '11',
-      wordOrder: '80',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-    'θύραι': {
-      lineNumber: '11',
-      wordOrder: '81',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['doors', 'gates'],
-      bestTranslation: 'doors',
-      lemma: 'θύρα',
-      bestLemmaTranslation: 'door'
-  },
-  'ἐπέροντο': {
-      lineNumber: '11',
-      wordOrder: '82',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Middle/Passive Indicative 3rd Plural',
-      meanings: ['were fastened', 'were pierced', 'were fixed'],
-      bestTranslation: 'were fastened [Describing the state of the doors]',
-      lemma: 'περονάω',
-      bestLemmaTranslation: 'fasten'
-  },
-  'πύλαι': {
-      lineNumber: '11',
-      wordOrder: '83',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['gates', 'double-doors', 'portals'],
-      bestTranslation: 'gates',
-      lemma: 'πύλη',
-      bestLemmaTranslation: 'gate'
-  },
-  'τ’': {
-      lineNumber: '11',
-      wordOrder: '84',
-      partOfSpeech: 'Particle',
-      morphology: 'Enclitic - shortened form of τε',
-      meanings: ['and', 'both...and'],
-      bestTranslation: 'and',
-      lemma: 'τε',
-      bestLemmaTranslation: 'and'
-  },
-  'ἐν': {
-      lineNumber: '11',
-      wordOrder: '85',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['in', 'on', 'among', 'at'],
-      bestTranslation: 'in',
-      lemma: 'ἐν',
-      bestLemmaTranslation: 'in'
-  },
-  'ἀέθλοισιν': {
-      lineNumber: '11',
-      wordOrder: '86',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Masculine',
-      meanings: ['in contests', 'in struggles', 'in labors'],
-      bestTranslation: 'in contests',
-      lemma: 'ἄεθλος',
-      bestLemmaTranslation: 'contest'
-  
-  
-  },
-  
-  
-  'ἀχρεῖον': {
-      lineNumber: '11',
-      wordOrder: '87',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['useless', 'unprofitable', 'idle'],
-      bestTranslation: 'useless [Modifying something neuter; likely referring back to the context]',
-      lemma: 'ἀχρεῖος',
-      bestLemmaTranslation: 'useless'
-  },
-  
-  
-  'ἀμφί': {
-      lineNumber: '12',
-      wordOrder: '88',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['around', 'about', 'on both sides', 'concerning'],
-      bestTranslation: 'around',
-      lemma: 'ἀμφί',
-      bestLemmaTranslation: 'around'
-  },
-  'περώῳ': {
-      lineNumber: '12',
-      wordOrder: '89',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Singular Masculine',
-      meanings: ['with a pin', 'with a brooch'],
-      bestTranslation: 'with a pin',
-      lemma: 'περόνη',
-      bestLemmaTranslation: 'pin'
-  },
-  'ἰσχῠρά': {
-      lineNumber: '12',
-      wordOrder: '90',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative/Accusative Plural Neuter',
-      meanings: ['strong', 'mighty', 'powerful'],
-      bestTranslation: 'strong',
-      lemma: 'ἰσχῠρός',
-      bestLemmaTranslation: 'strong'
-  },
-  'τὰς': {
-      lineNumber: '12',
-      wordOrder: '91',
-      partOfSpeech: 'Article',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['the', 'those', 'whom'],
-      bestTranslation: 'the [Referring to the gates/doors]',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'ἐπέμαξαν': {
-      lineNumber: '12',
-      wordOrder: '92',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Indicative 3rd Plural',
-      meanings: ['they wiped', 'they smeared', 'they pressed upon'],
-      bestTranslation: 'they pressed upon [Context suggests a forceful action on the gates]',
-      lemma: 'ἐπιμάσσω',
-      bestLemmaTranslation: 'wipe on'
-  },
-  'ἄνωγεν': {
-      lineNumber: '12',
-      wordOrder: '93',
-      partOfSpeech: 'Verb',
-      morphology: 'Perfect Active Indicative 3rd Singular',
-      meanings: ['commands', 'urges (pres. sense)'],
-      bestTranslation: 'commands',
-      lemma: 'ἄνωγα',
-      bestLemmaTranslation: 'command'
-  },
-  'κόραι': {
-      lineNumber: '13',
-      wordOrder: '94',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['maidens', 'girls', 'daughters'],
-      bestTranslation: 'maidens',
-      lemma: 'κόρη',
-      bestLemmaTranslation: 'maiden'
-  },
-  'πυγμαίῃσι': {
-      lineNumber: '13',
-      wordOrder: '95',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Feminine',
-      meanings: ['with fists', 'with blows of the fist'],
-      bestTranslation: 'with fists',
-      lemma: 'πυγμή',
-      bestLemmaTranslation: 'fist'
-  },
-  'λαβοῖσαι': {
-      lineNumber: '13',
-      wordOrder: '96',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Participle Nominative Plural Feminine',
-      meanings: ['having taken', 'having grasped', 'having seized'],
-      bestTranslation: 'having grasped',
-      lemma: 'λαμβάνω',
-      bestLemmaTranslation: 'to take'
-  },
-  'κλώνων': {
-      lineNumber: '13',
-      wordOrder: '97',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Masculine',
-      meanings: ['of branches', 'of twigs', 'of shoots'],
-      bestTranslation: 'of branches [Possibly referring to parts of the door mechanism]',
-      lemma: 'κλών',
-      bestLemmaTranslation: 'branch'
-  },
-  'παλάμας': {
-      lineNumber: '13',
-      wordOrder: '98',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['palms', 'hands'],
-      bestTranslation: 'hands',
-      lemma: 'παλάμη',
-      bestLemmaTranslation: 'palm'
-  },
-  'κλῆιδ’': {
-      lineNumber: '14',
-      wordOrder: '99',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['key', 'bar', 'bolt'],
-      bestTranslation: 'key',
-      lemma: 'κλείς',
-      bestLemmaTranslation: 'key'
-  },
-  'ἀμοιβόμεναι': {
-      lineNumber: '14',
-      wordOrder: '100',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Middle/Passive Participle Nominative Plural Feminine',
-      meanings: ['exchanging', 'alternating', 'replying'],
-      bestTranslation: 'alternating [Describing the action with the key]',
-      lemma: 'ἀμείβομαι',
-      bestLemmaTranslation: 'to exchange'
-  },
-  'ταῖς': {
-      lineNumber: '14',
-      wordOrder: '101',
-      partOfSpeech: 'Article',
-      morphology: 'Dative Plural Feminine',
-      meanings: ['to/for/by/with the (fem. pl.)'],
-      bestTranslation: 'to them [Referring to the maidens]',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'δ’': {
-      lineNumber: '14',
-      wordOrder: '102',
-      partOfSpeech: 'Particle',
-      morphology: 'Shortened form of δέ',
-      meanings: ['and', 'but'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'αὐτομάτως': {
-      lineNumber: '14',
-      wordOrder: '103',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['spontaneously', 'of itself', 'by itself'],
-      bestTranslation: 'spontaneously',
-      lemma: 'αὐτόματος',
-      bestLemmaTranslation: 'spontaneous'
-  },
-  'ἀπυρήχθη': {
-      lineNumber: '14',
-      wordOrder: '104',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Passive Indicative 3rd Singular',
-      meanings: ['was opened', 'was unbarred', 'rang out'],
-      bestTranslation: 'rang out [The passive voice and context suggest the sound of the gates opening]',
-      lemma: 'ἀπο-ηχέω',
-      bestLemmaTranslation: 'ring out (compound)'
-  },
-  'ἄξων': {
-      lineNumber: '15',
-      wordOrder: '105',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Singular Masculine',
-      meanings: ['axle', 'axis'],
-      bestTranslation: 'axle',
-      lemma: 'ἄξων',
-      bestLemmaTranslation: 'axle'
-  },
-  'χαλκεότυπος': {
-      lineNumber: '15',
-      wordOrder: '106',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative Singular Masculine',
-      meanings: ['bronze-forged', 'bronze-wrought'],
-      bestTranslation: 'bronze-forged',
-      lemma: 'χαλκεότυπος',
-      bestLemmaTranslation: 'bronze-forged'
-  },
-   'ὑπὸ': {
-      lineNumber: '15',
-      wordOrder: '107',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['under', 'beneath', 'by', 'because of'],
-      bestTranslation: 'by [Indicating agency]',
-      lemma: 'ὑπό',
-      bestLemmaTranslation: 'under'
-  },
-  'δ’': {
-      lineNumber: '15',
-      wordOrder: '108',
-      partOfSpeech: 'Particle',
-      morphology: 'Shortened form of δέ',
-      meanings: ['and', 'but'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'οἱ': {
-      lineNumber: '15',
-      wordOrder: '109',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Dative Singular Masculine/Feminine/Neuter',
-      meanings: ['to him', 'to her', 'to it'],
-      bestTranslation: 'to it [Dative of reference; referring to the axle]',
-      lemma: 'οὗ',
-      bestLemmaTranslation: 'of him/her/it'
-  },
-  'στροφάδες': {
-      lineNumber: '15',
-      wordOrder: '110',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['hinges', 'pivots'],
-      bestTranslation: 'hinges',
-      lemma: 'στροφάς',
-      bestLemmaTranslation: 'hinge'
-  },
-  'ἑκάστῃ': {
-      lineNumber: '16',
-      wordOrder: '111',
-      partOfSpeech: 'Adjective',
-      morphology: 'Dative Singular Feminine',
-      meanings: ['to/for/by/with each (fem. sing.)'],
-      bestTranslation: 'each',
-      lemma: 'ἕκαστος',
-      bestLemmaTranslation: 'each'
-  },
-  'ἑλισσόμεναι': {
-      lineNumber: '16',
-      wordOrder: '112',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Middle/Passive Participle Nominative Plural Feminine',
-      meanings: ['turning', 'twisting', 'whirling'],
-      bestTranslation: 'turning',
-      lemma: 'ἑλίσσω',
-      bestLemmaTranslation: 'to turn'
-  },
-  'ἑκάστῃ': {
-      lineNumber: '16',
-      wordOrder: '113',
-      partOfSpeech: 'Adjective',
-      morphology: 'Dative Singular Feminine',
-      meanings: ['to/for/by/with each (fem. sing.)'],
-      bestTranslation: 'each',
-      lemma: 'ἕκαστος',
-      bestLemmaTranslation: 'each'
-  },
-  'ἐπέβριζον': {
-      lineNumber: '16',
-      wordOrder: '114',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Active Indicative 3rd Plural',
-      meanings: ['they creaked', 'they groaned', 'they weighed heavily'],
-      bestTranslation: 'they creaked [Describing the sound of the hinges]',
-      lemma: 'ἐπιβρίζω',
-      bestLemmaTranslation: 'creak'
-  },
-  'ἴαχοις': {
-      lineNumber: '16',
-      wordOrder: '115',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Masculine/Feminine',
-      meanings: ['with shouts', 'with cries', 'with sounds'],
-      bestTranslation: 'with cries',
-      lemma: 'ἰαχή',
-      bestLemmaTranslation: 'cry'
-  },
-  'αἱ': {
-      lineNumber: '17',
-      wordOrder: '116',
-      partOfSpeech: 'Article',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['the', 'these (fem. pl.)'],
-      bestTranslation: 'the [Referring to the maidens]',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'δ’': {
-      lineNumber: '17',
-      wordOrder: '117',
-      partOfSpeech: 'Particle',
-      morphology: 'Shortened form of δέ',
-      meanings: ['and', 'but'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'εὐθὺς': {
-      lineNumber: '17',
-      wordOrder: '118',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['immediately', 'straightaway', 'directly'],
-      bestTranslation: 'immediately',
-      lemma: 'εὐθύς',
-      bestLemmaTranslation: 'straightaway'
-  },
-  'διὰ': {
-      lineNumber: '17',
-      wordOrder: '119',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['through', 'by', 'because of'],
-      bestTranslation: 'through',
-      lemma: 'διά',
-      bestLemmaTranslation: 'through'
-  },
-  'θυρῶν': {
-      lineNumber: '17',
-      wordOrder: '120',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Feminine',
-      meanings: ['of doors', 'of gates'],
-      bestTranslation: 'of doors',
-      lemma: 'θύρα',
-      bestLemmaTranslation: 'door'
-  },
-  'ἴκοντο': {
-      lineNumber: '17',
-      wordOrder: '121',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Middle Indicative 3rd Plural',
-      meanings: ['they came', 'they arrived', 'they reached'],
-      bestTranslation: 'they came',
-      lemma: 'ἱκνέομαι',
-      bestLemmaTranslation: 'to arrive'
-  },
-  'πλατεῖς': {
-      lineNumber: '18',
-      wordOrder: '122',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['broad', 'wide', 'flat'],
-      bestTranslation: 'broad [describing road]',
-      lemma: 'πλατύς',
-      bestLemmaTranslation: 'broad'
-  },
-  'ἐπὶ': {
-      lineNumber: '18',
-      wordOrder: '123',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['upon', 'on', 'to', 'towards', 'in addition to'],
-      bestTranslation: 'on',
-      lemma: 'ἐπί',
-      bestLemmaTranslation: 'upon'
-  },
-  'μαρτύροισιν': {
-      lineNumber: '18',
-      wordOrder: '124',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Masculine',
-      meanings: ['to witnesses', 'with witnesses', 'among witnesses'],
-      bestTranslation: 'witnesses',
-      lemma: 'μάρτυρος',
-      bestLemmaTranslation: 'witness'
-  },
-  'ἁρμάτων': {
-      lineNumber: '18',
-      wordOrder: '125',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Neuter',
-      meanings: ['of chariots', 'of cars'],
-      bestTranslation: 'of chariots',
-      lemma: 'ἅρμα',
-      bestLemmaTranslation: 'chariot'
-  },
-  'ἐλαύνουσαι': {
-      lineNumber: '18',
-      wordOrder: '126',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Nominative Plural Feminine',
-      meanings: ['driving', 'urging on', 'riding'],
-      bestTranslation: 'driving',
-      lemma: 'ἐλαύνω',
-      bestLemmaTranslation: 'to drive'
-  },
-  'καὶ': {
-      lineNumber: '18',
-      wordOrder: '127',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'also', 'even', 'too'],
-      bestTranslation: 'and',
-      lemma: 'καί',
-      bestLemmaTranslation: 'and'
-  },
-  
-  
-  'ἡ': {
-      lineNumber: '18',
-      wordOrder: '128',
-      partOfSpeech: 'Article',
-      morphology: 'Nominative Singular Feminine',
-      meanings: ['the', 'this (fem. sing.)'],
-      bestTranslation: 'the',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'θεὸς': {
-      lineNumber: '18',
-      wordOrder: '129',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Singular Feminine',
-      meanings: ['goddess', 'divine being'],
-      bestTranslation: 'goddess',
-      lemma: 'θεός',
-      bestLemmaTranslation: 'god/goddess'
-  },
-  'ἢπτατο': {
-      lineNumber: '18',
-      wordOrder: '130',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Middle Indicative 3rd Singular',
-      meanings: ['touched', 'grasped', 'fastened on', 'addressed'],
-      bestTranslation: 'addressed [Context suggests speaking to someone]',
-      lemma: 'ἅπτω',
-      bestLemmaTranslation: 'to touch'
-  },
-  'κούρῃ': {
-      lineNumber: '18',
-      wordOrder: '131',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Singular Feminine',
-      meanings: ['to/for a maiden', 'maiden'],
-      bestTranslation: 'maiden',
-      lemma: 'κούρη',
-      bestLemmaTranslation: 'maiden'
-   },
-   'αἵματά':{
-      lineNumber: '19',
-      wordOrder: '132',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative plural Neuter',
-      meanings: ['blood', 'bloodshed','kin'],
-      bestTranslation:  'kin [in this context; referring to lineage/descent]' ,
-      lemma: 'αἷμα',
-      bestLemmaTranslation: 'blood'
-   },
-  'μοι': {
-      lineNumber: '19',
-      wordOrder: '133',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Dative Singular',
-      meanings: ['to me', 'for me'],
-      bestTranslation: 'me',
-      lemma: 'ἐγώ',
-      bestLemmaTranslation: 'I'
-  },
-  'φάτο': {
-      lineNumber: '19',
-      wordOrder: '134',
-      partOfSpeech: 'Verb',
-      morphology: 'Imperfect Middle Indicative 3rd Singular',
-      meanings: ['spoke', 'said'],
-      bestTranslation: 'said',
-      lemma: 'φημί',
-      bestLemmaTranslation: 'to say'
-  },
-  'κοῦραι': {
-      lineNumber: '19',
-      wordOrder: '135',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Plural Feminine',
-      meanings: ['maidens', 'girls', 'daughters'],
-      bestTranslation: 'maidens',
-      lemma: 'κούρη',
-      bestLemmaTranslation: 'maiden'
-  },
-  'μέλλοντι': {
-      lineNumber: '19',
-      wordOrder: '136',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Dative Singular Masculine',
-      meanings: ['to one about to', 'to one intending to'],
-      bestTranslation: 'to one about to',
-      lemma: 'μέλλω',
-      bestLemmaTranslation: 'to be about to'
-  },
-  'νεέσθαι': {
-      lineNumber: '19',
-      wordOrder: '137',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Middle Infinitive',
-      meanings: ['to return', 'to go back', 'to come'],
-      bestTranslation: 'to return',
-      lemma: 'νέομαι',
-      bestLemmaTranslation: 'to return'
-  },
-  'αὐτέων': {
-      lineNumber: '20',
-      wordOrder: '138',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Genitive Plural Feminine',
-      meanings: ['of themselves', 'of them'],
-      bestTranslation: 'themselves',
-      lemma: 'αὐτός',
-      bestLemmaTranslation: 'self'
-  },
-  'ἀνάγκης': {
-      lineNumber: '20',
-      wordOrder: '139',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Singular Feminine',
-      meanings: ['of necessity', 'of force', 'of constraint'],
-      bestTranslation: 'of necessity',
-      lemma: 'ἀνάγκη',
-      bestLemmaTranslation: 'necessity'
-  },
-  'ὁδὸν': {
-      lineNumber: '20',
-      wordOrder: '140',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['road', 'way', 'path', 'journey'],
-      bestTranslation: 'way',
-      lemma: 'ὁδός',
-      bestLemmaTranslation: 'road'
-  },
-  'ἐς': {
-      lineNumber: '20',
-      wordOrder: '141',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['into', 'to', 'toward', 'until'],
-      bestTranslation: 'to',
-      lemma: 'εἰς',
-      bestLemmaTranslation: 'into'
-  },
-  'ταύτην': {
-      lineNumber: '20',
-      wordOrder: '142',
-      partOfSpeech: 'Demonstrative Pronoun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['this', 'this one (fem. sing.)'],
-      bestTranslation: 'this',
-      lemma: 'οὗτος',
-      bestLemmaTranslation: 'this'
-  },
-  'περιτελῆ': {
-      lineNumber: '20',
-      wordOrder: '143',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['all-encompassing', 'complete'],
-      bestTranslation: 'all-encompassing',
-      lemma: 'περιτελής',
-      bestLemmaTranslation: 'all-encompassing'
-  },
-  'ἐμβήμεν': {
-      lineNumber: '21',
-      wordOrder: '144',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Infinitive',
-      meanings: ['to step in', 'to embark', 'to enter'],
-      bestTranslation: 'to enter',
-      lemma: 'ἐμβαίνω',
-      bestLemmaTranslation: 'to step in'
-  },
-  'διὰ': {
-      lineNumber: '21',
-      wordOrder: '145',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['through', 'by', 'because of'],
-      bestTranslation: 'through',
-      lemma: 'διά',
-      bestLemmaTranslation: 'through'
-  },
-  'γὰρ': {
-      lineNumber: '21',
-      wordOrder: '146',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['for', 'because', 'indeed'],
-      bestTranslation: 'for',
-      lemma: 'γάρ',
-      bestLemmaTranslation: 'for'
-  },
-  'πάντ’': {
-      lineNumber: '21',
-      wordOrder: '147',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['all things', 'everything'],
-      bestTranslation: 'all things',
-      lemma: 'πᾶς',
-      bestLemmaTranslation: 'all'
-  },
-  'ἔχρυσεν': {
-      lineNumber: '21',
-      wordOrder: '148',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Indicative 3rd Singular',
-      meanings: ['gilded', 'made golden', 'covered with gold'],
-      bestTranslation: 'gilded [Figurative; making something resplendent]',
-      lemma: 'χρῡσόω',
-      bestLemmaTranslation: 'to gild'
-  },
-  'ἐπὶ': {
-      lineNumber: '21',
-      wordOrder: '149',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['upon', 'on', 'to', 'towards', 'in addition to'],
-      bestTranslation: 'upon',
-      lemma: 'ἐπί',
-      bestLemmaTranslation: 'upon'
-  },
-  'πλευρὰ': {
-      lineNumber: '21',
-      wordOrder: '150',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['sides', 'ribs', 'flanks'],
-      bestTranslation: 'sides',
-      lemma: 'πλευρόν',
-      bestLemmaTranslation: 'side'
-  },
-  'χαλκείας': {
-      lineNumber: '21',
-      wordOrder: '151',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['brazen', 'of bronze', 'made of bronze'],
-      bestTranslation: 'brazen',
-      lemma: 'χάλκεος',
-      bestLemmaTranslation: 'brazen'
-  },
-  'ἐμβολάς': {
-      lineNumber: '22',
-      wordOrder: '152',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['attacks', 'incursions', 'entrances', 'bolts'],
-      bestTranslation: 'bolts [referring to door bolts]',
-      lemma: 'ἐμβολή',
-      bestLemmaTranslation: 'attack'
-  },
-  'ὁδὸν': {
-      lineNumber: '22',
-      wordOrder: '153',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['road', 'way', 'path', 'journey'],
-      bestTranslation: 'path',
-      lemma: 'ὁδός',
-      bestLemmaTranslation: 'road'
-  },
-  'ὑποφαίνουσα': {
-      lineNumber: '22',
-      wordOrder: '154',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Nominative Singular Feminine',
-      meanings: ['showing', 'revealing', 'displaying'],
-      bestTranslation: 'revealing',
-      lemma: 'ὑποφαίνω',
-      bestLemmaTranslation: 'to show'
-  },
-  'διὰ': {
-      lineNumber: '22',
-      wordOrder: '155',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['through', 'by', 'because of'],
-      bestTranslation: 'through',
-      lemma: 'διά',
-      bestLemmaTranslation: 'through'
-  },
-  'πάντων': {
-      lineNumber: '22',
-      wordOrder: '156',
-      partOfSpeech: 'Adjective',
-      morphology: 'Genitive Plural Masculine/Neuter',
-      meanings: ['of all', 'of everything'],
-      bestTranslation: 'of all',
-      lemma: 'πᾶς',
-      bestLemmaTranslation: 'all'
-  },
-  'ὁδοῖο': {
-      lineNumber: '22',
-      wordOrder: '157',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Singular',
-      meanings: ['of way', 'archaic/poetic form'],
-      bestTranslation: 'of the way',
-      lemma: 'ὁδός',
-      bestLemmaTranslation: 'road'
-  },
-  'μακρὰ': {
-      lineNumber: '23',
-      wordOrder: '158',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['long', 'far', 'distant (as adverb: far)'],
-      bestTranslation: 'far',
-      lemma: 'μακρός',
-      bestLemmaTranslation: 'long'
-  },
-  'δὲ': {
-      lineNumber: '23',
-      wordOrder: '159',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'δὴ': {
-      lineNumber: '23',
-      wordOrder: '160',
-      partOfSpeech: 'Particle',
-      morphology: '',
-      meanings: ['indeed', 'truly', 'certainly', 'now'],
-      bestTranslation: 'indeed',
-      lemma: 'δή',
-      bestLemmaTranslation: 'indeed'
-  },
-  'χρὴ': {
-      lineNumber: '23',
-      wordOrder: '161',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Infinitive',
-      meanings: ['it is necessary', 'one must', 'it ought'],
-      bestTranslation: 'it is necessary',
-      lemma: 'χρή',
-      bestLemmaTranslation: 'it is necessary'
-  },
-  'φάος': {
-      lineNumber: '23',
-      wordOrder: '162',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['light', 'daylight', 'radiance'],
-      bestTranslation: 'light',
-      lemma: 'φάος',
-      bestLemmaTranslation: 'light'
-  },
-  'οἴσετε': {
-      lineNumber: '23',
-      wordOrder: '163',
-      partOfSpeech: 'Verb',
-      morphology: 'Future Active Indicative 2nd Plural',
-      meanings: ['you (pl) will carry', 'you will bear', 'you will bring'],
-      bestTranslation: 'you will bear',
-      lemma: 'φέρω',
-      bestLemmaTranslation: 'to carry'
-  },
-  'τοῦτο': {
-      lineNumber: '23',
-      wordOrder: '164',
-      partOfSpeech: 'Demonstrative Pronoun',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['this', 'this thing'],
-      bestTranslation: 'this',
-      lemma: 'οὗτος',
-      bestLemmaTranslation: 'this'
-  },
-  'ἵν’': {
-      lineNumber: '23',
-      wordOrder: '165',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['where', 'in order that', 'so that'],
-      bestTranslation: 'so that',
-      lemma: 'ἵνα',
-      bestLemmaTranslation: 'in order that'
-  },
-  'οὐκ': {
-      lineNumber: '23',
-      wordOrder: '166',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['not', 'no'],
-      bestTranslation: 'not',
-      lemma: 'οὐ',
-      bestLemmaTranslation: 'not'
-  },
-   'ἐπὶ': {
-      lineNumber: '23',
-      wordOrder: '167',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['upon', 'on', 'to', 'towards', 'in addition to'],
-      bestTranslation: 'on',
-      lemma: 'ἐπί',
-      bestLemmaTranslation: 'upon'
-  },
-  'λόγων': {
-      lineNumber: '23',
-      wordOrder: '168',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Masculine',
-      meanings: ['of words', 'of speeches', 'of accounts'],
-      bestTranslation: 'of words',
-      lemma: 'λόγος',
-      bestLemmaTranslation: 'word'
-  },
-  'ἄλλων': {
-      lineNumber: '23',
-      wordOrder: '169',
-      partOfSpeech: 'Adjective',
-      morphology: 'Genitive Plural Masculine/Feminine/Neuter',
-      meanings: ['of other', 'of others'],
-      bestTranslation: 'of others',
-      lemma: 'ἄλλος',
-      bestLemmaTranslation: 'other'
-  },
-  
-  
-  'ὑπ’': {
-      lineNumber: '24',
-      wordOrder: '170',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['under', 'by', 'because of'],
-      bestTranslation: 'by',
-      lemma: 'ὑπό',
-      bestLemmaTranslation: 'under'
-  },
-  'ἀπάτησθε': {
-      lineNumber: '24',
-      wordOrder: '171',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Passive Subjunctive 2nd Plural',
-      meanings: ['you (pl) may be deceived', 'you may be misled'],
-      bestTranslation: 'you may be deceived',
-      lemma: 'ἀπατάω',
-      bestLemmaTranslation: 'to deceive'
-  },
-  'ἀπείρητος': {
-      lineNumber: '24',
-      wordOrder: '172',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative Singular Masculine',
-      meanings: ['untried', 'inexperienced', 'boundless'],
-      bestTranslation: 'boundless [Describing the sea]',
-      lemma: 'ἀπείρητος',
-      bestLemmaTranslation: 'untried'
-  },
-  'γὰρ': {
-      lineNumber: '24',
-      wordOrder: '173',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['for', 'because', 'indeed'],
-      bestTranslation: 'for',
-      lemma: 'γάρ',
-      bestLemmaTranslation: 'for'
-  },
-  'ἐκεῖνος': {
-      lineNumber: '24',
-      wordOrder: '174',
-      partOfSpeech: 'Demonstrative Pronoun',
-      morphology: 'Nominative Singular Masculine',
-      meanings: ['that', 'that one', 'he'],
-      bestTranslation: 'that',
-      lemma: 'ἐκεῖνος',
-      bestLemmaTranslation: 'that'
-  },
-  'πόντος': {
-      lineNumber: '24',
-      wordOrder: '175',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative Singular Masculine',
-      meanings: ['sea', 'the deep'],
-      bestTranslation: 'sea',
-      lemma: 'πόντος',
-      bestLemmaTranslation: 'sea'
-  },
-  'ἐν': {
-      lineNumber: '25',
-      wordOrder: '176',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['in', 'on', 'among', 'at'],
-      bestTranslation: 'in',
-      lemma: 'ἐν',
-      bestLemmaTranslation: 'in'
-  },
-  'ᾧ': {
-      lineNumber: '25',
-      wordOrder: '177',
-      partOfSpeech: 'Relative Pronoun',
-      morphology: 'Dative Singular Masculine/Neuter',
-      meanings: ['in which', 'by which', 'to whom'],
-      bestTranslation: 'in which',
-      lemma: 'ὅς',
-      bestLemmaTranslation: 'who; which'
-  },
-  'πλάνηισιν': {
-      lineNumber: '25',
-      wordOrder: '178',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Feminine',
-      meanings: ['with wanderings', 'with strayings', 'with errors'],
-      bestTranslation: 'with wanderings',
-      lemma: 'πλάνη',
-      bestLemmaTranslation: 'wandering'
-  },
-  'ἀφάκεα': {
-      lineNumber: '25',
-      wordOrder: '179',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative/Accusative Plural Neuter',
-      meanings: ['Uncertain Meaning'],
-      bestTranslation: 'Uncertain Meaning [This word is very rare and its meaning is debated]',
-      lemma: 'ἀφάκεα',
-      bestLemmaTranslation: 'Unknown'
-  },
-  'φῦλα': {
-      lineNumber: '25',
-      wordOrder: '180',
-      partOfSpeech: 'Noun',
-      morphology: 'Nominative/Accusative Plural Neuter',
-      meanings: ['tribes', 'races', 'peoples'],
-      bestTranslation: 'races',
-      lemma: 'φῦλον',
-      bestLemmaTranslation: 'tribe'
-  },
-  'βροτεῖα': {
-      lineNumber: '25',
-      wordOrder: '181',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative/Accusative Plural Neuter',
-      meanings: ['mortal', 'human'],
-      bestTranslation: 'mortal',
-      lemma: 'βρότειος',
-      bestLemmaTranslation: 'mortal'
-  },
-  'ἀλλὰ': {
-      lineNumber: '26',
-      wordOrder: '182',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['but', 'yet', 'however'],
-      bestTranslation: 'but',
-      lemma: 'ἀλλά',
-      bestLemmaTranslation: 'but'
-  },
-  'σὺ': {
-      lineNumber: '26',
-      wordOrder: '183',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Nominative Singular',
-      meanings: ['you'],
-      bestTranslation: 'you',
-      lemma: 'σύ',
-      bestLemmaTranslation: 'you'
-  },
-  'καὶ': {
-      lineNumber: '26',
-      wordOrder: '184',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'also', 'even', 'too'],
-      bestTranslation: 'and',
-      lemma: 'καί',
-      bestLemmaTranslation: 'and'
-  },
-  'γνώσῃ': {
-      lineNumber: '26',
-      wordOrder: '185',
-      partOfSpeech: 'Verb',
-      morphology: 'Future Middle Indicative 2nd Singular',
-      meanings: ['you will know', 'you will learn'],
-      bestTranslation: 'you will know',
-      lemma: 'γιγνώσκω',
-      bestLemmaTranslation: 'to know'
-  },
-  'πολύπειρον': {
-      lineNumber: '26',
-      wordOrder: '186',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Masculine',
-      meanings: ['much-experienced', 'well-versed', 'crafty'],
-      bestTranslation: 'much-experienced',
-      lemma: 'πολύπειρος',
-      bestLemmaTranslation: 'much-experienced'
-  },
-  'δ’': {
-      lineNumber: '26',
-      wordOrder: '187',
-      partOfSpeech: 'Particle',
-      morphology: 'Shortened form of δέ',
-      meanings: ['and', 'but'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'ἔμμορε': {
-      lineNumber: '26',
-      wordOrder: '188',
-      partOfSpeech: 'Verb',
-      morphology: 'Perfect Active Indicative 3rd Singular',
-      meanings: ['has obtained as a portion', 'has obtained'],
-      bestTranslation: 'has obtained',
-      lemma: 'μείρομαι',
-      bestLemmaTranslation: 'obtain as portion'
-  },
-  'θυμὸν': {
-      lineNumber: '27',
-      wordOrder: '189',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Masculine',
-      meanings: ['spirit', 'heart', 'mind', 'soul', 'courage'],
-      bestTranslation: 'mind',
-      lemma: 'θυμός',
-      bestLemmaTranslation: 'spirit'
-  },
-  'ἀλήθειαν': {
-      lineNumber: '27',
-      wordOrder: '190',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['truth', 'reality', 'unconcealment'],
-      bestTranslation: 'truth',
-      lemma: 'ἀλήθεια',
-      bestLemmaTranslation: 'truth'
-  },
-  'εὐπειθῆ': {
-      lineNumber: '27',
-      wordOrder: '191',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Feminine',
-      meanings: ['easily persuaded', 'obedient', 'compliant'],
-      bestTranslation: 'obedient',
-      lemma: 'εὐπειθής',
-      bestLemmaTranslation: 'obedient'
-  },
-  'σὺν': {
-      lineNumber: '27',
-      wordOrder: '192',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['with', 'together with', 'along with'],
-      bestTranslation: 'with',
-      lemma: 'σύν',
-      bestLemmaTranslation: 'with'
-  },
-  'θυμῷ': {
-      lineNumber: '27',
-      wordOrder: '193',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Singular Masculine',
-      meanings: ['with spirit', 'with heart', 'with mind'],
-      bestTranslation: 'with spirit',
-      lemma: 'θυμός',
-      bestLemmaTranslation: 'spirit'
-  },
-  'παρστάξῃς': {
-      lineNumber: '27',
-      wordOrder: '194',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Subjunctive 2nd Singular',
-      meanings: ['you may set beside', 'you may place near', 'you might deposit'],
-      bestTranslation: 'you might deposit [Context of placing truth in the mind]',
-      lemma: 'παρ-ίστημι',
-      bestLemmaTranslation: 'to place beside'
-  },
-  'ἀλλ’': {
-      lineNumber: '28',
-      wordOrder: '195',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['but', 'yet', 'however'],
-      bestTranslation: 'but',
-      lemma: 'ἀλλά',
-      bestLemmaTranslation: 'but'
-  },
-  'ἅμα': {
-      lineNumber: '28',
-      wordOrder: '196',
-      partOfSpeech: 'Adverb/Preposition',
-      morphology: '',
-      meanings: ['at the same time', 'together', 'along with'],
-      bestTranslation: 'at the same time',
-      lemma: 'ἅμα',
-      bestLemmaTranslation: 'at the same time'
-  },
-  'καὶ': {
-      lineNumber: '28',
-      wordOrder: '197',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'also', 'even', 'too'],
-      bestTranslation: 'and',
-      lemma: 'καί',
-      bestLemmaTranslation: 'and'
-  },
-  'δόξας': {
-      lineNumber: '28',
-      wordOrder: '198',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['opinions', 'beliefs', 'expectations'],
-      bestTranslation: 'opinions',
-      lemma: 'δόξα',
-      bestLemmaTranslation: 'opinion'
-  },
-  'βροτείας': {
-      lineNumber: '28',
-      wordOrder: '199',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['mortal', 'human', 'of mortals'],
-      bestTranslation: 'mortal',
-      lemma: 'βρότειος',
-      bestLemmaTranslation: 'mortal'
-  },
-  'ἀπατηλὰς': {
-      lineNumber: '28',
-      wordOrder: '200',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Feminine',
-      meanings: ['deceitful', 'deceptive', 'misleading'],
-      bestTranslation: 'deceptive',
-      lemma: 'ἀπατηλός',
-      bestLemmaTranslation: 'deceitful'
-  },
-  'ἀκούσῃς': {
-      lineNumber: '28',
-      wordOrder: '201',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Active Subjunctive 2nd Singular',
-      meanings: ['you may hear', 'you might hear'],
-      bestTranslation: 'you may hear',
-      lemma: 'ἀκούω',
-      bestLemmaTranslation: 'to hear'
-  },
-  'κόσμον': {
-      lineNumber: '29',
-      wordOrder: '202',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Masculine',
-      meanings: ['order', 'arrangement', 'adornment', 'world-order', 'universe'],
-      bestTranslation: 'order',
-      lemma: 'κόσμος',
-      bestLemmaTranslation: 'order'
-  },
-  'ἐμῶν': {
-      lineNumber: '29',
-      wordOrder: '203',
-      partOfSpeech: 'Adjective',
-      morphology: 'Genitive Plural Masculine',
-      meanings: ['my', 'of mine'],
-      bestTranslation: 'my',
-      lemma: 'ἐμός',
-      bestLemmaTranslation: 'my'
-  },
-  'ἐπέων': {
-      lineNumber: '29',
-      wordOrder: '204',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Neuter',
-      meanings: ['of words', 'of sayings', 'of verses'],
-      bestTranslation: 'of words',
-      lemma: 'ἔπος',
-      bestLemmaTranslation: 'word'
-  },
-  'πυθέμενος': {
-      lineNumber: '29',
-      wordOrder: '205',
-      partOfSpeech: 'Verb',
-      morphology: 'Aorist Middle Participle Nominative Singular Masculine',
-      meanings: ['having learned', 'having inquired', 'having heard'],
-      bestTranslation: 'having learned',
-      lemma: 'πυνθάνομαι',
-      bestLemmaTranslation: 'to learn'
-  },
-  'οἵ': {
-      lineNumber: '29',
-      wordOrder: '206',
-      partOfSpeech: 'Relative Pronoun',
-      morphology: 'Nominative Plural Masculine/Feminine',
-      meanings: ['who', 'which', 'that'],
-      bestTranslation: 'who',
-      lemma: 'ὅς',
-      bestLemmaTranslation: 'who, which'
-  },
-  'πώς': {
-      lineNumber: '29',
-      wordOrder: '207',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['how', 'in what way', 'in what manner'],
-      bestTranslation: 'how',
-      lemma: 'πώς',
-      bestLemmaTranslation: 'how'
-  },
-  'κεν': {
-      lineNumber: '29',
-      wordOrder: '208',
-      partOfSpeech: 'Particle',
-      morphology: 'Modal Particle',
-      meanings: ['would', 'might', 'may (adds contingency)'],
-      bestTranslation: 'might',
-      lemma: 'ἄν',
-      bestLemmaTranslation: 'modal particle'
-  },
-  
-  
-  
-  'ἕκαστα': {
-      lineNumber: '30',
-      wordOrder: '209',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative/Accusative Plural Neuter',
-      meanings: ['each', 'every', 'each thing'],
-      bestTranslation: 'each',
-      lemma: 'ἕκαστος',
-      bestLemmaTranslation: 'each'
-  },
-  'φαινόμενα': {
-      lineNumber: '30',
-      wordOrder: '210',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Middle/Passive Participle Nominative/Accusative Plural Neuter',
-      meanings: ['appearing', 'seeming', 'being revealed'],
-      bestTranslation: 'appearing',
-      lemma: 'φαίνω',
-      bestLemmaTranslation: 'to appear'
-  },
-  'διαπλήσσουσι': {
-      lineNumber: '30',
-      wordOrder: '211',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Indicative 3rd Plural',
-      meanings: ['they strike through', 'shatter', 'astound', 'amaze'],
-      bestTranslation: 'astound',
-      lemma: 'διαπλήσσω',
-      bestLemmaTranslation: 'to astound'
-  },
-  'δοκήσιμον': {
-      lineNumber: '30',
-      wordOrder: '212',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['seeming', 'appearing', 'specious'],
-      bestTranslation: 'seeming',
-      lemma: 'δοκήσιμος',
-      bestLemmaTranslation: 'seeming'
-  },
-  'ὄμμα': {
-      lineNumber: '30',
-      wordOrder: '213',
-      partOfSpeech: 'Noun',
-      morphology: 'Accusative Singular Neuter',
-      meanings: ['eye', 'sight', 'glance'],
-      bestTranslation: 'eye',
-      lemma: 'ὄμμα',
-      bestLemmaTranslation: 'eye'
-  },
-  'βροτῶν': {
-      lineNumber: '30',
-      wordOrder: '214',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Masculine',
-      meanings: ['of mortals', 'of men', 'of humans'],
-      bestTranslation: 'of mortals',
-      lemma: 'βροτός',
-      bestLemmaTranslation: 'mortal'
-  },
-   'διδάξω': {
-      lineNumber: '31',
-      wordOrder: '215',
-      partOfSpeech: 'Verb',
-      morphology: 'Future Active Indicative 1st Singular',
-      meanings: ['I will teach', 'I shall teach'],
-      bestTranslation: 'I will teach',
-      lemma: 'διδάσκω',
-      bestLemmaTranslation: 'to teach'
-  },
-  'δέ': {
-      lineNumber: '31',
-      wordOrder: '216',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'but', 'now', 'then'],
-      bestTranslation: 'and',
-      lemma: 'δέ',
-      bestLemmaTranslation: 'and'
-  },
-  'σε': {
-      lineNumber: '31',
-      wordOrder: '217',
-      partOfSpeech: 'Pronoun',
-      morphology: 'Accusative Singular',
-      meanings: ['you'],
-      bestTranslation: 'you',
-      lemma: 'σύ',
-      bestLemmaTranslation: 'you'
-  },
-  'καὶ': {
-      lineNumber: '31',
-      wordOrder: '218',
-      partOfSpeech: 'Conjunction',
-      morphology: '',
-      meanings: ['and', 'also', 'even', 'too'],
-      bestTranslation: 'and',
-      lemma: 'καί',
-      bestLemmaTranslation: 'and'
-  },
-  'μύθων': {
-      lineNumber: '31',
-      wordOrder: '219',
-      partOfSpeech: 'Noun',
-      morphology: 'Genitive Plural Masculine',
-      meanings: ['of words', 'of stories', 'of tales', 'of myths'],
-      bestTranslation: 'of myths',
-      lemma: 'μῦθος',
-      bestLemmaTranslation: 'myth'
-  },
-  'ἐν': {
-      lineNumber: '31',
-      wordOrder: '220',
-      partOfSpeech: 'Preposition',
-      morphology: '',
-      meanings: ['in', 'on', 'among', 'at'],
-      bestTranslation: 'in',
-      lemma: 'ἐν',
-      bestLemmaTranslation: 'in'
-  },
-  'πείρασι': {
-      lineNumber: '31',
-      wordOrder: '221',
-      partOfSpeech: 'Noun',
-      morphology: 'Dative Plural Feminine',
-      meanings: ['in trials', 'in tests', 'in attempts', 'in experiments'],
-      bestTranslation: 'in trials',
-      lemma: 'πεῖρα',
-      bestLemmaTranslation: 'trial'
-  },
-  'πάντα': {
-      lineNumber: '31',
-      wordOrder: '222',
-      partOfSpeech: 'Adjective',
-      morphology: 'Accusative Plural Neuter',
-      meanings: ['all things', 'everything', 'all'],
-      bestTranslation: 'all',
-      lemma: 'πᾶς',
-      bestLemmaTranslation: 'all'
-  },
-  'ὡς': {
-      lineNumber: '32',
-      wordOrder: '223',
-      partOfSpeech: 'Conjunction/Adverb',
-      morphology: '',
-      meanings: ['as', 'how', 'that', 'so that'],
-      bestTranslation: 'that',
-      lemma: 'ὡς',
-      bestLemmaTranslation: 'as'
-  },
-  'οὐδὲν': {
-      lineNumber: '32',
-      wordOrder: '224',
-      partOfSpeech: 'Adjective',
-      morphology: 'Nominative/Accusative Singular Neuter',
-      meanings: ['nothing', 'not at all', 'no one'],
-      bestTranslation: 'nothing',
-      lemma: 'οὐδείς',
-      bestLemmaTranslation: 'no one'
-  },
-  'χρεών': {
-      lineNumber: '32',
-      wordOrder: '225',
-      partOfSpeech: 'Noun/Adjective',
-      morphology: 'Predicate Accusative Singular Neuter',
-      meanings: ['it is necessary', 'must', 'ought'],
-      bestTranslation: 'it is necessary [Impersonal verb; takes infinitive]',
-      lemma: 'χρεών',
-      bestLemmaTranslation: 'necessity'
-  },
-  'ἐστι': {
-      lineNumber: '32',
-      wordOrder: '226',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Indicative 3rd Singular',
-      meanings: ['is', 'it is', 'there is'],
-      bestTranslation: 'is',
-      lemma: 'εἰμί',
-      bestLemmaTranslation: 'to be'
-  },
-  'τὰ': {
-      lineNumber: '32',
-      wordOrder: '227',
-      partOfSpeech: 'Article',
-      morphology: 'Nominative/Accusative Plural Neuter',
-      meanings: ['the', 'those'],
-      bestTranslation: 'the',
-      lemma: 'ὁ',
-      bestLemmaTranslation: 'the'
-  },
-  'μὴ': {
-      lineNumber: '32',
-      wordOrder: '228',
-      partOfSpeech: 'Adverb',
-      morphology: '',
-      meanings: ['not', 'lest'],
-      bestTranslation: 'not',
-      lemma: 'μή',
-      bestLemmaTranslation: 'not'
-  },
-  'ἐὸν': {
-      lineNumber: '32',
-      wordOrder: '229',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Participle Nominative/Accusative Singular Neuter',
-      meanings: ['being', 'existing', 'real'],
-      bestTranslation: 'being',
-      lemma: 'εἰμί',
-      bestLemmaTranslation: 'to be'
-  },
-  'εἶναι': {
-      lineNumber: '32',
-      wordOrder: '230',
-      partOfSpeech: 'Verb',
-      morphology: 'Present Active Infinitive',
-      meanings: ['to be', 'to exist'],
-      bestTranslation: 'to be',
-      lemma: 'εἰμί',
-      bestLemmaTranslation: 'to be'
+  'de': {
+    lineNumber: '1',
+    wordOrder: '1',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['of', 'from', 'about'],
+    bestTranslation: 'of',
+    lemma: 'de',
+    bestLemmaTranslation: 'of'
+  },
+  'en': {
+    lineNumber: '1',
+    wordOrder: '2',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['in', 'on', 'at'],
+    bestTranslation: 'in',
+    lemma: 'en',
+    bestLemmaTranslation: 'in'
+  },
+  'y': {
+    lineNumber: '1',
+    wordOrder: '3',
+    partOfSpeech: 'Conjunction',
+    morphology: '',
+    meanings: ['and'],
+    bestTranslation: 'and',
+    lemma: 'y',
+    bestLemmaTranslation: 'and'
+  },
+  'el': {
+    lineNumber: '1',
+    wordOrder: '4',
+    partOfSpeech: 'Article',
+    morphology: 'Masculine Singular',
+    meanings: ['the'],
+    bestTranslation: 'the',
+    lemma: 'el',
+    bestLemmaTranslation: 'the'
+  },
+  'la': {
+    lineNumber: '1',
+    wordOrder: '5',
+    partOfSpeech: 'Article',
+    morphology: 'Feminine Singular',
+    meanings: ['the'],
+    bestTranslation: 'the',
+    lemma: 'la',
+    bestLemmaTranslation: 'the'
+  },
+  'que': {
+    lineNumber: '1',
+    wordOrder: '6',
+    partOfSpeech: 'Conjunction/Pronoun',
+    morphology: '',
+    meanings: ['that', 'which', 'who'],
+    bestTranslation: 'that',
+    lemma: 'que',
+    bestLemmaTranslation: 'that'
+  },
+  'los': {
+    lineNumber: '1',
+    wordOrder: '7',
+    partOfSpeech: 'Article',
+    morphology: 'Masculine Plural',
+    meanings: ['the'],
+    bestTranslation: 'the',
+    lemma: 'el',
+    bestLemmaTranslation: 'the'
+  },
+  'del': {
+    lineNumber: '1',
+    wordOrder: '8',
+    partOfSpeech: 'Preposition + Article',
+    morphology: 'Contraction of de + el',
+    meanings: ['of the', 'from the'],
+    bestTranslation: 'of the',
+    lemma: 'del',
+    bestLemmaTranslation: 'of the'
+  },
+  'una': {
+    lineNumber: '1',
+    wordOrder: '9',
+    partOfSpeech: 'Article',
+    morphology: 'Feminine Singular',
+    meanings: ['a', 'one'],
+    bestTranslation: 'a',
+    lemma: 'un',
+    bestLemmaTranslation: 'a'
+  },
+  'se': {
+    lineNumber: '1',
+    wordOrder: '10',
+    partOfSpeech: 'Pronoun',
+    morphology: 'Reflexive',
+    meanings: ['oneself', 'himself', 'herself', 'itself', 'themselves'],
+    bestTranslation: 'oneself',
+    lemma: 'se',
+    bestLemmaTranslation: 'oneself'
+  },
+  'a': {
+    lineNumber: '1',
+    wordOrder: '11',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['to', 'at'],
+    bestTranslation: 'to',
+    lemma: 'a',
+    bestLemmaTranslation: 'to'
+  },
+  'mundo': {
+    lineNumber: '1', 
+    wordOrder: '12',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['world', 'earth', 'globe'],
+    bestTranslation: 'world',
+    lemma: 'mundo',
+    bestLemmaTranslation: 'world'
+  },
+  'vez': {
+    lineNumber: '1',
+    wordOrder: '13',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['time', 'occasion', 'instance'],
+    bestTranslation: 'time',
+    lemma: 'vez',
+    bestLemmaTranslation: 'time'
+  },
+  'me': {
+    lineNumber: '1',
+    wordOrder: '14',
+    partOfSpeech: 'Pronoun',
+    morphology: 'Personal Object',
+    meanings: ['me', 'to me', 'myself'],
+    bestTranslation: 'me',
+    lemma: 'me',
+    bestLemmaTranslation: 'me'
+  },
+  'por': {
+    lineNumber: '1',
+    wordOrder: '15',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['for', 'by', 'through'],
+    bestTranslation: 'for',
+    lemma: 'por',
+    bestLemmaTranslation: 'for'
+  },
+  'un': {
+    lineNumber: '1',
+    wordOrder: '16',
+    partOfSpeech: 'Article',
+    morphology: 'Masculine Singular',
+    meanings: ['a', 'one'],
+    bestTranslation: 'a',
+    lemma: 'un',
+    bestLemmaTranslation: 'a'
+  },
+  'pero': {
+    lineNumber: '1',
+    wordOrder: '17',
+    partOfSpeech: 'Conjunction',
+    morphology: '',
+    meanings: ['but', 'yet', 'however'],
+    bestTranslation: 'but',
+    lemma: 'pero',
+    bestLemmaTranslation: 'but'
+  },
+  'al': {
+    lineNumber: '1',
+    wordOrder: '18',
+    partOfSpeech: 'Preposition + Article',
+    morphology: 'Contraction of a + el',
+    meanings: ['to the', 'at the'],
+    bestTranslation: 'to the',
+    lemma: 'al',
+    bestLemmaTranslation: 'to the'
+  },
+  'libro': {
+    lineNumber: '1',
+    wordOrder: '19',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['book', 'volume'],
+    bestTranslation: 'book',
+    lemma: 'libro',
+    bestLemmaTranslation: 'book'
+  },
+  'chatwin': {
+    lineNumber: '1',
+    wordOrder: '20',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Chatwin (author surname)'],
+    bestTranslation: 'Chatwin',
+    lemma: 'Chatwin',
+    bestLemmaTranslation: 'Chatwin'
+  },
+  'luego': {
+    lineNumber: '1',
+    wordOrder: '21',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['then', 'later', 'afterwards'],
+    bestTranslation: 'then',
+    lemma: 'luego',
+    bestLemmaTranslation: 'then'
+  },
+  'más': {
+    lineNumber: '1',
+    wordOrder: '22',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['more', 'most', 'plus'],
+    bestTranslation: 'more',
+    lemma: 'más',
+    bestLemmaTranslation: 'more'
+  },
+  'años': {
+    lineNumber: '1',
+    wordOrder: '23',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['years'],
+    bestTranslation: 'years',
+    lemma: 'año',
+    bestLemmaTranslation: 'year'
+  },
+  'las': {
+    lineNumber: '1',
+    wordOrder: '24',
+    partOfSpeech: 'Article',
+    morphology: 'Feminine Plural',
+    meanings: ['the'],
+    bestTranslation: 'the',
+    lemma: 'la',
+    bestLemmaTranslation: 'the'
+  },
+  'llamadme': {
+    lineNumber: '2',
+    wordOrder: '25',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperative Second Person Plural with direct object pronoun me',
+    meanings: ['call me'],
+    bestTranslation: 'call me',
+    lemma: 'llamar',
+    bestLemmaTranslation: 'to call'
+  },
+  'ismael': {
+    lineNumber: '2',
+    wordOrder: '26',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Ishmael', 'Ismael (name)'],
+    bestTranslation: 'Ishmael',
+    lemma: 'Ismael',
+    bestLemmaTranslation: 'Ishmael'
+  },
+  'veces': {
+    lineNumber: '2',
+    wordOrder: '27',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['times', 'occasions'],
+    bestTranslation: 'times',
+    lemma: 'vez',
+    bestLemmaTranslation: 'time'
+  },
+  'aeropuerto': {
+    lineNumber: '2',
+    wordOrder: '28',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['airport'],
+    bestTranslation: 'airport',
+    lemma: 'aeropuerto',
+    bestLemmaTranslation: 'airport'
+  },
+  'hamburgo': {
+    lineNumber: '2',
+    wordOrder: '29',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Hamburg'],
+    bestTranslation: 'Hamburg',
+    lemma: 'Hamburgo',
+    bestLemmaTranslation: 'Hamburg'
+  },
+  'cada': {
+    lineNumber: '2',
+    wordOrder: '30',
+    partOfSpeech: 'Adjective/Determiner',
+    morphology: '',
+    meanings: ['each', 'every'],
+    bestTranslation: 'each',
+    lemma: 'cada',
+    bestLemmaTranslation: 'each'
+  },
+  'peso': {
+    lineNumber: '2',
+    wordOrder: '31',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['weight', 'burden', 'currency'],
+    bestTranslation: 'weight',
+    lemma: 'peso',
+    bestLemmaTranslation: 'weight'
+  },
+  'acercaba': {
+    lineNumber: '2',
+    wordOrder: '32',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Singular',
+    meanings: ['was approaching', 'was coming near'],
+    bestTranslation: 'was approaching',
+    lemma: 'acercar',
+    bestLemmaTranslation: 'to approach'
+  },
+  'hora': {
+    lineNumber: '2',
+    wordOrder: '33',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['hour', 'time', 'o\'clock'],
+    bestTranslation: 'hour',
+    lemma: 'hora',
+    bestLemmaTranslation: 'hour'
+  },
+  'salida': {
+    lineNumber: '2',
+    wordOrder: '34',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['exit', 'departure', 'way out'],
+    bestTranslation: 'departure',
+    lemma: 'salida',
+    bestLemmaTranslation: 'exit'
+  },
+  'embarque': {
+    lineNumber: '2',
+    wordOrder: '35',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['boarding', 'embarkation'],
+    bestTranslation: 'boarding',
+    lemma: 'embarque',
+    bestLemmaTranslation: 'boarding'
+  },
+  'llevaba': {
+    lineNumber: '2',
+    wordOrder: '36',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was carrying', 'was wearing', 'had been'],
+    bestTranslation: 'was carrying',
+    lemma: 'llevar',
+    bestLemmaTranslation: 'to carry'
+  },
+  'patagonia': {
+    lineNumber: '2',
+    wordOrder: '37',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Patagonia'],
+    bestTranslation: 'Patagonia',
+    lemma: 'Patagonia',
+    bestLemmaTranslation: 'Patagonia'
+  },
+  'siempre': {
+    lineNumber: '2',
+    wordOrder: '38',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['always', 'forever', 'ever'],
+    bestTranslation: 'always',
+    lemma: 'siempre',
+    bestLemmaTranslation: 'always'
+  },
+  'o': {
+    lineNumber: '2',
+    wordOrder: '39',
+    partOfSpeech: 'Conjunction',
+    morphology: '',
+    meanings: ['or', 'either'],
+    bestTranslation: 'or',
+    lemma: 'o',
+    bestLemmaTranslation: 'or'
+  },
+  'estaba': {
+    lineNumber: '2',
+    wordOrder: '40',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was', 'was being', 'was located'],
+    bestTranslation: 'was',
+    lemma: 'estar',
+    bestLemmaTranslation: 'to be'
+  },
+  'pensaba': {
+    lineNumber: '2',
+    wordOrder: '41',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was thinking', 'was considering'],
+    bestTranslation: 'was thinking',
+    lemma: 'pensar',
+    bestLemmaTranslation: 'to think'
+  },
+  'hasta': {
+    lineNumber: '2',
+    wordOrder: '42',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['until', 'up to', 'even'],
+    bestTranslation: 'until',
+    lemma: 'hasta',
+    bestLemmaTranslation: 'until'
+  },
+  'chile': {
+    lineNumber: '2',
+    wordOrder: '43',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Chile'],
+    bestTranslation: 'Chile',
+    lemma: 'Chile',
+    bestLemmaTranslation: 'Chile'
+  },
+  'deseos': {
+    lineNumber: '2',
+    wordOrder: '44',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['desires', 'wishes', 'longings'],
+    bestTranslation: 'desires',
+    lemma: 'deseo',
+    bestLemmaTranslation: 'desire'
+  },
+  'allá': {
+    lineNumber: '2',
+    wordOrder: '45',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['there', 'over there', 'yonder'],
+    bestTranslation: 'there',
+    lemma: 'allá',
+    bestLemmaTranslation: 'there'
+  },
+  'repetida': {
+    lineNumber: '2',
+    wordOrder: '46',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Singular',
+    meanings: ['repeated', 'reiterated'],
+    bestTranslation: 'repeated',
+    lemma: 'repetido',
+    bestLemmaTranslation: 'repeated'
+  },
+  'creí': {
+    lineNumber: '2',
+    wordOrder: '47',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative First Person Singular',
+    meanings: ['I believed', 'I thought'],
+    bestTranslation: 'I believed',
+    lemma: 'creer',
+    bestLemmaTranslation: 'to believe'
+  },
+  'fin': {
+    lineNumber: '2',
+    wordOrder: '48',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['end', 'conclusion', 'purpose'],
+    bestTranslation: 'end',
+    lemma: 'fin',
+    bestLemmaTranslation: 'end'
+  },
+  'como': {
+    lineNumber: '2',
+    wordOrder: '49',
+    partOfSpeech: 'Conjunction/Adverb',
+    morphology: '',
+    meanings: ['as', 'like', 'how'],
+    bestTranslation: 'as',
+    lemma: 'como',
+    bestLemmaTranslation: 'as'
+  },
+  '1': {
+    lineNumber: '1',
+    wordOrder: '50',
+    partOfSpeech: 'Numeral',
+    morphology: 'Cardinal',
+    meanings: ['one', 'first'],
+    bestTranslation: 'one',
+    lemma: '1',
+    bestLemmaTranslation: 'one'
+  },
+  'repetí': {
+    lineNumber: '3',
+    wordOrder: '51',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative First Person Singular',
+    meanings: ['I repeated', 'I reiterated'],
+    bestTranslation: 'I repeated',
+    lemma: 'repetir',
+    bestLemmaTranslation: 'to repeat'
+  },
+  'varias': {
+    lineNumber: '3',
+    wordOrder: '52',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Plural',
+    meanings: ['several', 'various', 'different'],
+    bestTranslation: 'several',
+    lemma: 'vario',
+    bestLemmaTranslation: 'various'
+  },
+  'mientras': {
+    lineNumber: '3',
+    wordOrder: '53',
+    partOfSpeech: 'Conjunction',
+    morphology: '',
+    meanings: ['while', 'whereas', 'as long as'],
+    bestTranslation: 'while',
+    lemma: 'mientras',
+    bestLemmaTranslation: 'while'
+  },
+  'esperaba': {
+    lineNumber: '3',
+    wordOrder: '54',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was waiting', 'was hoping', 'was expecting'],
+    bestTranslation: 'was waiting',
+    lemma: 'esperar',
+    bestLemmaTranslation: 'to wait'
+  },
+  'sentía': {
+    lineNumber: '3',
+    wordOrder: '55',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was feeling', 'was sensing'],
+    bestTranslation: 'was feeling',
+    lemma: 'sentir',
+    bestLemmaTranslation: 'to feel'
+  },
+  'fuerza': {
+    lineNumber: '3',
+    wordOrder: '56',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['force', 'strength', 'power'],
+    bestTranslation: 'force',
+    lemma: 'fuerza',
+    bestLemmaTranslation: 'force'
+  },
+  'extraña': {
+    lineNumber: '3',
+    wordOrder: '57',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Singular',
+    meanings: ['strange', 'odd', 'weird'],
+    bestTranslation: 'strange',
+    lemma: 'extraño',
+    bestLemmaTranslation: 'strange'
+  },
+  'otorgaba': {
+    lineNumber: '3',
+    wordOrder: '58',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Singular',
+    meanings: ['was granting', 'was giving', 'was awarding'],
+    bestTranslation: 'was granting',
+    lemma: 'otorgar',
+    bestLemmaTranslation: 'to grant'
+  },
+  'mayor': {
+    lineNumber: '3',
+    wordOrder: '59',
+    partOfSpeech: 'Adjective',
+    morphology: 'Comparative',
+    meanings: ['greater', 'larger', 'older'],
+    bestTranslation: 'greater',
+    lemma: 'grande',
+    bestLemmaTranslation: 'big'
+  },
+  'delgado': {
+    lineNumber: '3',
+    wordOrder: '60',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular',
+    meanings: ['thin', 'slim', 'slender'],
+    bestTranslation: 'thin',
+    lemma: 'delgado',
+    bestLemmaTranslation: 'thin'
+  },
+  'cuadernillo': {
+    lineNumber: '3',
+    wordOrder: '61',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['booklet', 'notebook', 'pamphlet'],
+    bestTranslation: 'booklet',
+    lemma: 'cuadernillo',
+    bestLemmaTranslation: 'booklet'
+  },
+  'pasaje': {
+    lineNumber: '3',
+    wordOrder: '62',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['passage', 'ticket', 'fare'],
+    bestTranslation: 'ticket',
+    lemma: 'pasaje',
+    bestLemmaTranslation: 'passage'
+  },
+  'aumentaba': {
+    lineNumber: '3',
+    wordOrder: '63',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Singular',
+    meanings: ['was increasing', 'was growing', 'was augmenting'],
+    bestTranslation: 'was increasing',
+    lemma: 'aumentar',
+    bestLemmaTranslation: 'to increase'
+  },
+  'conforme': {
+    lineNumber: '3',
+    wordOrder: '64',
+    partOfSpeech: 'Adjective/Adverb/Conjunction',
+    morphology: '',
+    meanings: ['according to', 'as', 'satisfied'],
+    bestTranslation: 'as',
+    lemma: 'conforme',
+    bestLemmaTranslation: 'according to'
+  },
+  'había': {
+    lineNumber: '3',
+    wordOrder: '65',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Singular',
+    meanings: ['there was', 'had'],
+    bestTranslation: 'there was',
+    lemma: 'haber',
+    bestLemmaTranslation: 'to have'
+  },
+  'atravesado': {
+    lineNumber: '3',
+    wordOrder: '66',
+    partOfSpeech: 'Verb',
+    morphology: 'Past Participle',
+    meanings: ['crossed', 'traversed', 'passed through'],
+    bestTranslation: 'crossed',
+    lemma: 'atravesar',
+    bestLemmaTranslation: 'to cross'
+  },
+  'primer': {
+    lineNumber: '3',
+    wordOrder: '67',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular Ordinal',
+    meanings: ['first', 'primary', 'initial'],
+    bestTranslation: 'first',
+    lemma: 'primero',
+    bestLemmaTranslation: 'first'
+  },
+  'control': {
+    lineNumber: '3',
+    wordOrder: '68',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['control', 'check', 'checkpoint'],
+    bestTranslation: 'control',
+    lemma: 'control',
+    bestLemmaTranslation: 'control'
+  },
+  'paseaba': {
+    lineNumber: '3',
+    wordOrder: '69',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was walking', 'was strolling'],
+    bestTranslation: 'was walking',
+    lemma: 'pasear',
+    bestLemmaTranslation: 'to walk'
+  },
+  'sala': {
+    lineNumber: '3',
+    wordOrder: '70',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['room', 'hall', 'lounge'],
+    bestTranslation: 'room',
+    lemma: 'sala',
+    bestLemmaTranslation: 'room'
+  },
+  'aferrado': {
+    lineNumber: '3',
+    wordOrder: '71',
+    partOfSpeech: 'Adjective/Verb',
+    morphology: 'Past Participle',
+    meanings: ['clutched', 'clinging to', 'holding on'],
+    bestTranslation: 'clutching',
+    lemma: 'aferrar',
+    bestLemmaTranslation: 'to clutch'
+  },
+  'bolso': {
+    lineNumber: '3',
+    wordOrder: '72',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['bag', 'handbag', 'purse'],
+    bestTranslation: 'bag',
+    lemma: 'bolso',
+    bestLemmaTranslation: 'bag'
+  },
+  'mano': {
+    lineNumber: '3',
+    wordOrder: '73',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['hand'],
+    bestTranslation: 'hand',
+    lemma: 'mano',
+    bestLemmaTranslation: 'hand'
+  },
+  'no': {
+    lineNumber: '3',
+    wordOrder: '74',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['no', 'not'],
+    bestTranslation: 'no',
+    lemma: 'no',
+    bestLemmaTranslation: 'no'
+  },
+  'demasiadas': {
+    lineNumber: '3',
+    wordOrder: '75',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Plural',
+    meanings: ['too many', 'excessive'],
+    bestTranslation: 'too many',
+    lemma: 'demasiado',
+    bestLemmaTranslation: 'too much'
+  },
+  'cosas': {
+    lineNumber: '3',
+    wordOrder: '76',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['things', 'objects', 'matters'],
+    bestTranslation: 'things',
+    lemma: 'cosa',
+    bestLemmaTranslation: 'thing'
+  },
+  'él': {
+    lineNumber: '3',
+    wordOrder: '77',
+    partOfSpeech: 'Pronoun',
+    morphology: 'Personal Third Person Masculine Singular',
+    meanings: ['he', 'him', 'it'],
+    bestTranslation: 'he',
+    lemma: 'él',
+    bestLemmaTranslation: 'he'
+  },
+  'cámara': {
+    lineNumber: '3',
+    wordOrder: '78',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['camera', 'chamber'],
+    bestTranslation: 'camera',
+    lemma: 'cámara',
+    bestLemmaTranslation: 'camera'
+  },
+  'fotográfica': {
+    lineNumber: '3',
+    wordOrder: '79',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Singular',
+    meanings: ['photographic'],
+    bestTranslation: 'photographic',
+    lemma: 'fotográfico',
+    bestLemmaTranslation: 'photographic'
+  },
+  'libreta': {
+    lineNumber: '3',
+    wordOrder: '80',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['notebook', 'notepad'],
+    bestTranslation: 'notebook',
+    lemma: 'libreta',
+    bestLemmaTranslation: 'notebook'
+  },
+  'apuntes': {
+    lineNumber: '3',
+    wordOrder: '81',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['notes', 'annotations'],
+    bestTranslation: 'notes',
+    lemma: 'apunte',
+    bestLemmaTranslation: 'note'
+  },
+  'bruce': {
+    lineNumber: '3',
+    wordOrder: '82',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Bruce'],
+    bestTranslation: 'Bruce',
+    lemma: 'Bruce',
+    bestLemmaTranslation: 'Bruce'
+  },
+  'he': {
+    lineNumber: '3',
+    wordOrder: '83',
+    partOfSpeech: 'Verb',
+    morphology: 'Present Perfect Auxiliary First Person Singular',
+    meanings: ['I have'],
+    bestTranslation: 'I have',
+    lemma: 'haber',
+    bestLemmaTranslation: 'to have'
+  },
+  'aborrecido': {
+    lineNumber: '3',
+    wordOrder: '84',
+    partOfSpeech: 'Verb',
+    morphology: 'Past Participle',
+    meanings: ['hated', 'detested', 'abhorred'],
+    bestTranslation: 'hated',
+    lemma: 'aborrecer',
+    bestLemmaTranslation: 'to hate'
+  },
+  'hacen': {
+    lineNumber: '3',
+    wordOrder: '85',
+    partOfSpeech: 'Verb',
+    morphology: 'Present Indicative Third Person Plural',
+    meanings: ['they do', 'they make'],
+    bestTranslation: 'they make',
+    lemma: 'hacer',
+    bestLemmaTranslation: 'to do'
+  },
+  'rayas': {
+    lineNumber: '3',
+    wordOrder: '86',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['lines', 'stripes', 'streaks'],
+    bestTranslation: 'lines',
+    lemma: 'raya',
+    bestLemmaTranslation: 'line'
+  },
+  'anotaciones': {
+    lineNumber: '3',
+    wordOrder: '87',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['notes', 'annotations', 'notations'],
+    bestTranslation: 'annotations',
+    lemma: 'anotación',
+    bestLemmaTranslation: 'annotation'
+  },
+  'libros': {
+    lineNumber: '4',
+    wordOrder: '88',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['books', 'volumes'],
+    bestTranslation: 'books',
+    lemma: 'libro',
+    bestLemmaTranslation: 'book'
+  },
+  'aquél': {
+    lineNumber: '4',
+    wordOrder: '89',
+    partOfSpeech: 'Demonstrative Pronoun',
+    morphology: 'Masculine Singular',
+    meanings: ['that one', 'that'],
+    bestTranslation: 'that one',
+    lemma: 'aquel',
+    bestLemmaTranslation: 'that'
+  },
+  'lleno': {
+    lineNumber: '4',
+    wordOrder: '90',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular',
+    meanings: ['full', 'filled', 'complete'],
+    bestTranslation: 'full',
+    lemma: 'lleno',
+    bestLemmaTranslation: 'full'
+  },
+  'subrayados': {
+    lineNumber: '4',
+    wordOrder: '91',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['underlinings', 'underlines', 'highlights'],
+    bestTranslation: 'underlines',
+    lemma: 'subrayado',
+    bestLemmaTranslation: 'underlining'
+  },
+  'signos': {
+    lineNumber: '4',
+    wordOrder: '92',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['signs', 'symbols', 'marks'],
+    bestTranslation: 'signs',
+    lemma: 'signo',
+    bestLemmaTranslation: 'sign'
+  },
+  'exclamación': {
+    lineNumber: '4',
+    wordOrder: '93',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['exclamation'],
+    bestTranslation: 'exclamation',
+    lemma: 'exclamación',
+    bestLemmaTranslation: 'exclamation'
+  },
+  'fueron': {
+    lineNumber: '4',
+    wordOrder: '94',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative Third Person Plural',
+    meanings: ['they were', 'they went'],
+    bestTranslation: 'they were',
+    lemma: 'ser/ir',
+    bestLemmaTranslation: 'to be/to go'
+  },
+  'aumento': {
+    lineNumber: '4',
+    wordOrder: '95',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['increase', 'growth', 'rise'],
+    bestTranslation: 'increase',
+    lemma: 'aumento',
+    bestLemmaTranslation: 'increase'
+  },
+  'tres': {
+    lineNumber: '4',
+    wordOrder: '96',
+    partOfSpeech: 'Numeral',
+    morphology: 'Cardinal',
+    meanings: ['three'],
+    bestTranslation: 'three',
+    lemma: 'tres',
+    bestLemmaTranslation: 'three'
+  },
+  'lecturas': {
+    lineNumber: '4',
+    wordOrder: '97',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['readings', 'lectures', 'interpretations'],
+    bestTranslation: 'readings',
+    lemma: 'lectura',
+    bestLemmaTranslation: 'reading'
+  },
+  'leerlo': {
+    lineNumber: '4',
+    wordOrder: '98',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive with Direct Object Pronoun',
+    meanings: ['to read it'],
+    bestTranslation: 'to read it',
+    lemma: 'leer',
+    bestLemmaTranslation: 'to read'
+  },
+  'cuarta': {
+    lineNumber: '4',
+    wordOrder: '99',
+    partOfSpeech: 'Adjective/Numeral',
+    morphology: 'Feminine Singular Ordinal',
+    meanings: ['fourth'],
+    bestTranslation: 'fourth',
+    lemma: 'cuarto',
+    bestLemmaTranslation: 'fourth'
+  },
+  'durante': {
+    lineNumber: '4',
+    wordOrder: '100',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['during', 'throughout', 'for'],
+    bestTranslation: 'during',
+    lemma: 'durante',
+    bestLemmaTranslation: 'during'
+  },
+  'vuelo': {
+    lineNumber: '4',
+    wordOrder: '101',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['flight', 'flying'],
+    bestTranslation: 'flight',
+    lemma: 'vuelo',
+    bestLemmaTranslation: 'flight'
+  },
+  'santiago': {
+    lineNumber: '4',
+    wordOrder: '102',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Santiago'],
+    bestTranslation: 'Santiago',
+    lemma: 'Santiago',
+    bestLemmaTranslation: 'Santiago'
+  },
+  'quise': {
+    lineNumber: '4',
+    wordOrder: '103',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative First Person Singular',
+    meanings: ['I wanted', 'I wished', 'I tried to'],
+    bestTranslation: 'I wanted',
+    lemma: 'querer',
+    bestLemmaTranslation: 'to want'
+  },
+  'regresar': {
+    lineNumber: '4',
+    wordOrder: '104',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive',
+    meanings: ['to return', 'to go back', 'to come back'],
+    bestTranslation: 'to return',
+    lemma: 'regresar',
+    bestLemmaTranslation: 'to return'
+  },
+  'tuve': {
+    lineNumber: '4',
+    wordOrder: '105',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative First Person Singular',
+    meanings: ['I had', 'I experienced', 'I got'],
+    bestTranslation: 'I had',
+    lemma: 'tener',
+    bestLemmaTranslation: 'to have'
+  },
+  'ganas': {
+    lineNumber: '4',
+    wordOrder: '106',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['desires', 'wishes', 'urges'],
+    bestTranslation: 'desires',
+    lemma: 'gana',
+    bestLemmaTranslation: 'desire'
+  },
+  'determinación': {
+    lineNumber: '4',
+    wordOrder: '107',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['determination', 'decision', 'resolve'],
+    bestTranslation: 'determination',
+    lemma: 'determinación',
+    bestLemmaTranslation: 'determination'
+  },
+  'pesó': {
+    lineNumber: '4',
+    wordOrder: '108',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative Third Person Singular',
+    meanings: ['weighed', 'outweighed', 'mattered'],
+    bestTranslation: 'weighed',
+    lemma: 'pesar',
+    bestLemmaTranslation: 'to weigh'
+  },
+  'miedo': {
+    lineNumber: '4',
+    wordOrder: '109',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['fear', 'dread', 'fright'],
+    bestTranslation: 'fear',
+    lemma: 'miedo',
+    bestLemmaTranslation: 'fear'
+  },
+  'reencontrarme': {
+    lineNumber: '4',
+    wordOrder: '110',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive Reflexive',
+    meanings: ['to meet again', 'to reunite with', 'to find myself again'],
+    bestTranslation: 'to meet again',
+    lemma: 'reencontrar',
+    bestLemmaTranslation: 'to meet again'
+  },
+  'con': {
+    lineNumber: '4',
+    wordOrder: '111',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['with', 'along with'],
+    bestTranslation: 'with',
+    lemma: 'con',
+    bestLemmaTranslation: 'with'
+  },
+  'mi': {
+    lineNumber: '4',
+    wordOrder: '112',
+    partOfSpeech: 'Adjective',
+    morphology: 'Possessive First Person Singular',
+    meanings: ['my', 'mine'],
+    bestTranslation: 'my',
+    lemma: 'mi',
+    bestLemmaTranslation: 'my'
+  },
+  'hermano': {
+    lineNumber: '4',
+    wordOrder: '113',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['brother', 'sibling'],
+    bestTranslation: 'brother',
+    lemma: 'hermano',
+    bestLemmaTranslation: 'brother'
+  },
+  'amigos': {
+    lineNumber: '4',
+    wordOrder: '114',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['friends', 'pals'],
+    bestTranslation: 'friends',
+    lemma: 'amigo',
+    bestLemmaTranslation: 'friend'
+  },
+  'tengo': {
+    lineNumber: '4',
+    wordOrder: '115',
+    partOfSpeech: 'Verb',
+    morphology: 'Present Indicative First Person Singular',
+    meanings: ['I have', 'I own', 'I possess'],
+    bestTranslation: 'I have',
+    lemma: 'tener',
+    bestLemmaTranslation: 'to have'
+  },
+  'transformaron': {
+    lineNumber: '4',
+    wordOrder: '116',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative Third Person Plural',
+    meanings: ['transformed', 'changed', 'converted'],
+    bestTranslation: 'transformed',
+    lemma: 'transformar',
+    bestLemmaTranslation: 'to transform'
+  },
+  'promesa': {
+    lineNumber: '4',
+    wordOrder: '117',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['promise', 'pledge', 'vow'],
+    bestTranslation: 'promise',
+    lemma: 'promesa',
+    bestLemmaTranslation: 'promise'
+  },
+  'tan': {
+    lineNumber: '4',
+    wordOrder: '118',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['so', 'such', 'as'],
+    bestTranslation: 'so',
+    lemma: 'tan',
+    bestLemmaTranslation: 'so'
+  },
+  'menos': {
+    lineNumber: '4',
+    wordOrder: '119',
+    partOfSpeech: 'Adverb',
+    morphology: '',
+    meanings: ['less', 'minus', 'fewer'],
+    bestTranslation: 'less',
+    lemma: 'menos',
+    bestLemmaTranslation: 'less'
+  },
+  'demasiados': {
+    lineNumber: '5',
+    wordOrder: '120',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Plural',
+    meanings: ['too many', 'excessive'],
+    bestTranslation: 'too many',
+    lemma: 'demasiado',
+    bestLemmaTranslation: 'too much'
+  },
+  'vagando': {
+    lineNumber: '5',
+    wordOrder: '121',
+    partOfSpeech: 'Verb',
+    morphology: 'Gerund',
+    meanings: ['wandering', 'roaming', 'drifting'],
+    bestTranslation: 'wandering',
+    lemma: 'vagar',
+    bestLemmaTranslation: 'to wander'
+  },
+  'sin': {
+    lineNumber: '5',
+    wordOrder: '122',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['without', 'lacking'],
+    bestTranslation: 'without',
+    lemma: 'sin',
+    bestLemmaTranslation: 'without'
+  },
+  'rumbo': {
+    lineNumber: '5',
+    wordOrder: '123',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['course', 'direction', 'heading'],
+    bestTranslation: 'direction',
+    lemma: 'rumbo',
+    bestLemmaTranslation: 'direction'
+  },
+  'fijo': {
+    lineNumber: '5',
+    wordOrder: '124',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular',
+    meanings: ['fixed', 'steady', 'firm'],
+    bestTranslation: 'fixed',
+    lemma: 'fijo',
+    bestLemmaTranslation: 'fixed'
+  },
+  'detenerme': {
+    lineNumber: '5',
+    wordOrder: '125',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive Reflexive',
+    meanings: ['to stop myself', 'to halt', 'to pause'],
+    bestTranslation: 'to stop myself',
+    lemma: 'detener',
+    bestLemmaTranslation: 'to stop'
+  },
+  'aconsejaban': {
+    lineNumber: '5',
+    wordOrder: '126',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Plural',
+    meanings: ['they advised', 'they recommended', 'they counseled'],
+    bestTranslation: 'they advised',
+    lemma: 'aconsejar',
+    bestLemmaTranslation: 'to advise'
+  },
+  'pequeño': {
+    lineNumber: '5',
+    wordOrder: '127',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular',
+    meanings: ['small', 'little', 'tiny'],
+    bestTranslation: 'small',
+    lemma: 'pequeño',
+    bestLemmaTranslation: 'small'
+  },
+  'pueblo': {
+    lineNumber: '5',
+    wordOrder: '128',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['town', 'village', 'people'],
+    bestTranslation: 'town',
+    lemma: 'pueblo',
+    bestLemmaTranslation: 'town'
+  },
+  'pescadores': {
+    lineNumber: '5',
+    wordOrder: '129',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['fishermen', 'anglers'],
+    bestTranslation: 'fishermen',
+    lemma: 'pescador',
+    bestLemmaTranslation: 'fisherman'
+  },
+  'creta': {
+    lineNumber: '5',
+    wordOrder: '130',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Crete'],
+    bestTranslation: 'Crete',
+    lemma: 'Creta',
+    bestLemmaTranslation: 'Crete'
+  },
+  'ierápetras': {
+    lineNumber: '5',
+    wordOrder: '131',
+    partOfSpeech: 'Noun',
+    morphology: 'Proper Noun',
+    meanings: ['Ierapetra'],
+    bestTranslation: 'Ierapetra',
+    lemma: 'Ierápetras',
+    bestLemmaTranslation: 'Ierapetra'
+  },
+  'apacible': {
+    lineNumber: '5',
+    wordOrder: '132',
+    partOfSpeech: 'Adjective',
+    morphology: 'Singular',
+    meanings: ['peaceful', 'calm', 'serene'],
+    bestTranslation: 'peaceful',
+    lemma: 'apacible',
+    bestLemmaTranslation: 'peaceful'
+  },
+  'ciudad': {
+    lineNumber: '5',
+    wordOrder: '133',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['city', 'town'],
+    bestTranslation: 'city',
+    lemma: 'ciudad',
+    bestLemmaTranslation: 'city'
+  },
+  'asturiana': {
+    lineNumber: '5',
+    wordOrder: '134',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Singular',
+    meanings: ['Asturian', 'from Asturias'],
+    bestTranslation: 'Asturian',
+    lemma: 'asturiano',
+    bestLemmaTranslation: 'Asturian'
+  },
+  'villa': {
+    lineNumber: '5',
+    wordOrder: '135',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['villa', 'town'],
+    bestTranslation: 'villa',
+    lemma: 'villa',
+    bestLemmaTranslation: 'villa'
+  },
+  'viciosa': {
+    lineNumber: '5',
+    wordOrder: '136',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Singular',
+    meanings: ['vicious', 'luxuriant'],
+    bestTranslation: 'Viciosa',
+    lemma: 'vicioso',
+    bestLemmaTranslation: 'vicious'
+  },
+  'algún': {
+    lineNumber: '5',
+    wordOrder: '137',
+    partOfSpeech: 'Adjective/Determiner',
+    morphology: 'Masculine Singular',
+    meanings: ['some', 'any'],
+    bestTranslation: 'some',
+    lemma: 'alguno',
+    bestLemmaTranslation: 'some'
+  },
+  'día': {
+    lineNumber: '5',
+    wordOrder: '138',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['day'],
+    bestTranslation: 'day',
+    lemma: 'día',
+    bestLemmaTranslation: 'day'
+  },
+  'cayo': {
+    lineNumber: '5',
+    wordOrder: '139',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative Third Person Singular',
+    meanings: ['fell', 'dropped', 'fell down'],
+    bestTranslation: 'fell',
+    lemma: 'caer',
+    bestLemmaTranslation: 'to fall'
+  },
+  'mis': {
+    lineNumber: '5',
+    wordOrder: '140',
+    partOfSpeech: 'Adjective',
+    morphology: 'Possessive First Person Plural',
+    meanings: ['my'],
+    bestTranslation: 'my',
+    lemma: 'mi',
+    bestLemmaTranslation: 'my'
+  },
+  'manos': {
+    lineNumber: '5',
+    wordOrder: '141',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['hands'],
+    bestTranslation: 'hands',
+    lemma: 'mano',
+    bestLemmaTranslation: 'hand'
+  },
+  'para': {
+    lineNumber: '5',
+    wordOrder: '142',
+    partOfSpeech: 'Preposition',
+    morphology: '',
+    meanings: ['for', 'in order to', 'to'],
+    bestTranslation: 'for',
+    lemma: 'para',
+    bestLemmaTranslation: 'for'
+  },
+  'devolverme': {
+    lineNumber: '5',
+    wordOrder: '143',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive Reflexive',
+    meanings: ['to return me', 'to bring me back', 'to restore me'],
+    bestTranslation: 'to return me',
+    lemma: 'devolver',
+    bestLemmaTranslation: 'to return'
+  },
+  'olvidado': {
+    lineNumber: '5',
+    wordOrder: '144',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular',
+    meanings: ['forgotten', 'overlooked', 'neglected'],
+    bestTranslation: 'forgotten',
+    lemma: 'olvidado',
+    bestLemmaTranslation: 'forgotten'
+  },
+  'esperando': {
+    lineNumber: '5',
+    wordOrder: '145',
+    partOfSpeech: 'Verb',
+    morphology: 'Gerund',
+    meanings: ['waiting', 'expecting', 'hoping'],
+    bestTranslation: 'waiting',
+    lemma: 'esperar',
+    bestLemmaTranslation: 'to wait'
+  },
+  'leer': {
+    lineNumber: '5',
+    wordOrder: '146',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive',
+    meanings: ['to read'],
+    bestTranslation: 'to read',
+    lemma: 'leer',
+    bestLemmaTranslation: 'to read'
+  },
+  'primera': {
+    lineNumber: '5',
+    wordOrder: '147',
+    partOfSpeech: 'Adjective',
+    morphology: 'Feminine Singular Ordinal',
+    meanings: ['first', 'primary'],
+    bestTranslation: 'first',
+    lemma: 'primero',
+    bestLemmaTranslation: 'first'
+  },
+  'entró': {
+    lineNumber: '5',
+    wordOrder: '148',
+    partOfSpeech: 'Verb',
+    morphology: 'Preterite Indicative Third Person Singular',
+    meanings: ['entered', 'came in', 'went in'],
+    bestTranslation: 'entered',
+    lemma: 'entrar',
+    bestLemmaTranslation: 'to enter'
+  },
+  'desesperación': {
+    lineNumber: '5',
+    wordOrder: '149',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['desperation', 'despair', 'hopelessness'],
+    bestTranslation: 'desperation',
+    lemma: 'desesperación',
+    bestLemmaTranslation: 'desperation'
+  },
+  'volver': {
+    lineNumber: '5',
+    wordOrder: '150',
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive',
+    meanings: ['to return', 'to come back', 'to turn'],
+    bestTranslation: 'to return',
+    lemma: 'volver',
+    bestLemmaTranslation: 'to return'
+  },
+  'está': {
+    lineNumber: '5',
+    wordOrder: '151',
+    partOfSpeech: 'Verb',
+    morphology: 'Present Indicative Third Person Singular',
+    meanings: ['is', 'is located'],
+    bestTranslation: 'is',
+    lemma: 'estar',
+    bestLemmaTranslation: 'to be'
+  },
+  'simples': {
+    lineNumber: '5',
+    wordOrder: '152',
+    partOfSpeech: 'Adjective',
+    morphology: 'Plural',
+    meanings: ['simple', 'plain', 'uncomplicated'],
+    bestTranslation: 'simple',
+    lemma: 'simple',
+    bestLemmaTranslation: 'simple'
+  },
+  'intenciones': {
+    lineNumber: '5',
+    wordOrder: '153',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['intentions', 'purposes', 'aims'],
+    bestTranslation: 'intentions',
+    lemma: 'intención',
+    bestLemmaTranslation: 'intention'
+  },
+  'viajero': {
+    lineNumber: '5',
+    wordOrder: '154',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['traveler', 'passenger', 'voyager'],
+    bestTranslation: 'traveler',
+    lemma: 'viajero',
+    bestLemmaTranslation: 'traveler'
+  },
+  'distancia': {
+    lineNumber: '5',
+    wordOrder: '155',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['distance', 'span', 'gap'],
+    bestTranslation: 'distance',
+    lemma: 'distancia',
+    bestLemmaTranslation: 'distance'
+  },
+  'nos': {
+    lineNumber: '5',
+    wordOrder: '156',
+    partOfSpeech: 'Pronoun',
+    morphology: 'Personal Object First Person Plural',
+    meanings: ['us', 'to us', 'ourselves'],
+    bestTranslation: 'us',
+    lemma: 'nos',
+    bestLemmaTranslation: 'us'
+  },
+  'muestra': {
+    lineNumber: '5',
+    wordOrder: '157',
+    partOfSpeech: 'Verb',
+    morphology: 'Present Indicative Third Person Singular',
+    meanings: ['shows', 'displays', 'exhibits'],
+    bestTranslation: 'shows',
+    lemma: 'mostrar',
+    bestLemmaTranslation: 'to show'
+  },
+  'su': {
+    lineNumber: '5',
+    wordOrder: '158',
+    partOfSpeech: 'Adjective',
+    morphology: 'Possessive Third Person Singular',
+    meanings: ['his', 'her', 'its', 'their'],
+    bestTranslation: 'its',
+    lemma: 'su',
+    bestLemmaTranslation: 'his/her/its'
+  },
+  'real': {
+    lineNumber: '5',
+    wordOrder: '159',
+    partOfSpeech: 'Adjective',
+    morphology: 'Singular',
+    meanings: ['real', 'actual', 'genuine'],
+    bestTranslation: 'real',
+    lemma: 'real',
+    bestLemmaTranslation: 'real'
+  },
+  'envergadura': {
+    lineNumber: '5',
+    wordOrder: '160',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['wingspan', 'magnitude', 'scale'],
+    bestTranslation: 'magnitude',
+    lemma: 'envergadura',
+    bestLemmaTranslation: 'magnitude'
+  },
+  'cuando': {
+    lineNumber: '5',
+    wordOrder: '161',
+    partOfSpeech: 'Conjunction/Adverb',
+    morphology: '',
+    meanings: ['when', 'whenever'],
+    bestTranslation: 'when',
+    lemma: 'cuando',
+    bestLemmaTranslation: 'when'
+  },
+  'recuerdos': {
+    lineNumber: '6',
+    wordOrder: '162',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['memories', 'souvenirs', 'remembrances'],
+    bestTranslation: 'memories',
+    lemma: 'recuerdo',
+    bestLemmaTranslation: 'memory'
+  },
+  'emergen': {
+    lineNumber: '6',
+    wordOrder: '163',
+    partOfSpeech: 'Verb',
+    morphology: 'Present Indicative Third Person Plural',
+    meanings: ['emerge', 'surface', 'arise'],
+    bestTranslation: 'emerge',
+    lemma: 'emerger',
+    bestLemmaTranslation: 'to emerge'
+  },
+  'boyas': {
+    lineNumber: '6',
+    wordOrder: '164',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Plural',
+    meanings: ['buoys', 'floats', 'markers'],
+    bestTranslation: 'buoys',
+    lemma: 'boya',
+    bestLemmaTranslation: 'buoy'
+  },
+  'agitado': {
+    lineNumber: '6',
+    wordOrder: '165',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Singular',
+    meanings: ['agitated', 'turbulent', 'rough'],
+    bestTranslation: 'agitated',
+    lemma: 'agitado',
+    bestLemmaTranslation: 'agitated'
+  },
+  'mar': {
+    lineNumber: '6',
+    wordOrder: '166',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine/Feminine Singular',
+    meanings: ['sea', 'ocean'],
+    bestTranslation: 'sea',
+    lemma: 'mar',
+    bestLemmaTranslation: 'sea'
+  },
+  'intensos': {
+    lineNumber: '6',
+    wordOrder: '167',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Plural',
+    meanings: ['intense', 'strong', 'powerful'],
+    bestTranslation: 'intense',
+    lemma: 'intenso',
+    bestLemmaTranslation: 'intense'
+  },
+  'demás': {
+    lineNumber: '6',
+    wordOrder: '168',
+    partOfSpeech: 'Adjective/Pronoun',
+    morphology: 'Plural',
+    meanings: ['other', 'rest', 'others'],
+    bestTranslation: 'other',
+    lemma: 'demás',
+    bestLemmaTranslation: 'other'
+  },
+  'viajeros': {
+    lineNumber: '6',
+    wordOrder: '169',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['travelers', 'passengers', 'voyagers'],
+    bestTranslation: 'travelers',
+    lemma: 'viajero',
+    bestLemmaTranslation: 'traveler'
+  },
+  'entraban': {
+    lineNumber: '6',
+    wordOrder: '170',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Plural',
+    meanings: ['were entering', 'were coming in'],
+    bestTranslation: 'were entering',
+    lemma: 'entrar',
+    bestLemmaTranslation: 'to enter'
+  },
+  'salían': {
+    lineNumber: '6',
+    wordOrder: '171',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Plural',
+    meanings: ['were leaving', 'were going out'],
+    bestTranslation: 'were leaving',
+    lemma: 'salir',
+    bestLemmaTranslation: 'to leave'
+  },
+  'tienda': {
+    lineNumber: '6',
+    wordOrder: '172',
+    partOfSpeech: 'Noun',
+    morphology: 'Feminine Singular',
+    meanings: ['store', 'shop', 'tent'],
+    bestTranslation: 'store',
+    lemma: 'tienda',
+    bestLemmaTranslation: 'store'
+  },
+  'libre': {
+    lineNumber: '6',
+    wordOrder: '173',
+    partOfSpeech: 'Adjective',
+    morphology: 'Singular',
+    meanings: ['free', 'available', 'vacant'],
+    bestTranslation: 'free',
+    lemma: 'libre',
+    bestLemmaTranslation: 'free'
+  },
+  'impuestos': {
+    lineNumber: '6',
+    wordOrder: '174',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['taxes', 'duties', 'levies'],
+    bestTranslation: 'taxes',
+    lemma: 'impuesto',
+    bestLemmaTranslation: 'tax'
+  },
+  'ocupaban': {
+    lineNumber: '6',
+    wordOrder: '175',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Plural',
+    meanings: ['were occupying', 'were taking up'],
+    bestTranslation: 'were occupying',
+    lemma: 'ocupar',
+    bestLemmaTranslation: 'to occupy'
+  },
+  'bar': {
+    lineNumber: '6',
+    wordOrder: '176',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Singular',
+    meanings: ['bar', 'pub'],
+    bestTranslation: 'bar',
+    lemma: 'bar',
+    bestLemmaTranslation: 'bar'
+  },
+  'algunos': {
+    lineNumber: '6',
+    wordOrder: '177',
+    partOfSpeech: 'Determiner/Pronoun',
+    morphology: 'Masculine Plural',
+    meanings: ['some', 'a few'],
+    bestTranslation: 'some',
+    lemma: 'alguno',
+    bestLemmaTranslation: 'some'
+  },
+  'mostraban': {
+    lineNumber: '6',
+    wordOrder: '178',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Plural',
+    meanings: ['were showing', 'were displaying'],
+    bestTranslation: 'were showing',
+    lemma: 'mostrar',
+    bestLemmaTranslation: 'to show'
+  },
+  'nerviosos': {
+    lineNumber: '6',
+    wordOrder: '179',
+    partOfSpeech: 'Adjective',
+    morphology: 'Masculine Plural',
+    meanings: ['nervous', 'anxious', 'edgy'],
+    bestTranslation: 'nervous',
+    lemma: 'nervioso',
+    bestLemmaTranslation: 'nervous'
+  },
+  'consultaban': {
+    lineNumber: '6',
+    wordOrder: '180',
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative Third Person Plural',
+    meanings: ['were consulting', 'were checking'],
+    bestTranslation: 'were consulting',
+    lemma: 'consultar',
+    bestLemmaTranslation: 'to consult'
+  },
+  'sus': {
+    lineNumber: '6',
+    wordOrder: '181',
+    partOfSpeech: 'Adjective',
+    morphology: 'Possessive Third Person Plural',
+    meanings: ['their', 'his', 'her'],
+    bestTranslation: 'their',
+    lemma: 'su',
+    bestLemmaTranslation: 'his/her/their'
+  },
+  'relojes': {
+    lineNumber: '6',
+    wordOrder: '182',
+    partOfSpeech: 'Noun',
+    morphology: 'Masculine Plural',
+    meanings: ['watches', 'clocks', 'timepieces'],
+    bestTranslation: 'watches',
+    lemma: 'reloj',
+    bestLemmaTranslation: 'watch'
   }
-  };
-  
-  export default wordDatabase;
-  
+};
+
+export default wordDatabase;

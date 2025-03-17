@@ -183,6 +183,24 @@ def process_text_file(input_filepath, limit=None, output_dir=None, max_lines=Non
     
     print(f"Created word list CSV: {csv_path}")
     
+    # Create frequency list of unique words
+    word_freq = {}
+    for row in word_list:
+        word = row["Word"].lower()  # Convert to lowercase for case-insensitive counting
+        word_freq[word] = word_freq.get(word, 0) + 1
+    
+    # Sort by frequency (descending)
+    sorted_word_freq = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
+    
+    # Save frequency list to CSV
+    freq_csv_path = output_path / f"{input_filename}_word_frequency.csv"
+    with open(freq_csv_path, 'w', newline='', encoding='utf-8') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(["Word", "Frequency"])
+        csv_writer.writerows(sorted_word_freq)
+    
+    print(f"Created word frequency CSV: {freq_csv_path}")
+    
     # Process words with the LLM
     output_entries = []
     
