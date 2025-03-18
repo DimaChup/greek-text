@@ -99,16 +99,79 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None):
     # Sort by frequency (descending)
     sorted_word_freq = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
     
-    # Save frequency list to CSV
+    # Save frequency list to CSV with a word number column
     freq_csv_path = output_path / f"{input_filename}_word_frequency.csv"
     with open(freq_csv_path, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(["Word", "Frequency"])
-        csv_writer.writerows(sorted_word_freq)
+        # Add WordNumber to the header
+        csv_writer.writerow(["WordNumber", "Word", "Frequency"])
+        # Add wordNumber to each row
+        for i, (word, freq) in enumerate(sorted_word_freq, 1):
+            csv_writer.writerow([i, word, freq])
     
     print(f"Created word frequency CSV: {freq_csv_path}")
+    print(f"Total unique words: {len(sorted_word_freq)}")
     
-    return csv_path, freq_csv_path
+    # Generate JavaScript database skeleton
+    js_db_path = output_path / f"{input_filename}_db.js"
+    generate_js_database_skeleton(freq_csv_path, js_db_path)
+    print(f"Created JavaScript database scaffold: {js_db_path}")
+    
+    return csv_path, freq_csv_path, js_db_path
+
+def generate_js_database_skeleton(frequency_csv_path, output_path):
+    """
+    Creates a skeleton JavaScript database file with basic word properties.
+    
+    Args:
+        frequency_csv_path: Path to the word frequency CSV file
+        output_path: Path where the JS file should be saved
+    """
+    # Read the frequency CSV
+    word_data = []
+    with open(frequency_csv_path, 'r', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)  # Skip header row
+        for row in reader:
+            if len(row) >= 3:  # Ensure we have WordNumber, Word, and Frequency
+                word_data.append({
+                    'word': row[1],
+                    'wordNumber': int(row[0]),
+                    'frequency': int(row[2])
+                })
+    
+    # Generate JavaScript code
+    js_code = "// Generated word frequency database with word numbers for " + output_path.stem.split('_')[0] + "\n"
+    js_code += "const " + output_path.stem.split('_')[0] + "Database = {\n"
+    
+    # Add each word with its properties
+    for item in word_data:
+        word = item['word']
+        js_code += f"    '{word}': {{\n"
+        js_code += f"      wordNumber: {item['wordNumber']},\n"
+        js_code += f"      frequency: {item['frequency']},\n"
+        js_code += f"      partOfSpeech: '',\n"
+        js_code += f"      morphology: '',\n"
+        js_code += f"      meanings: [],\n"
+        js_code += f"      bestTranslation: '',\n"
+        js_code += f"      lemma: '',\n"
+        js_code += f"      LemmaMeanings: []\n"
+        
+        # Add comma for all items except the last one
+        if item != word_data[-1]:
+            js_code += "    },\n"
+        else:
+            js_code += "    }\n"
+    
+    js_code += "  };\n"
+    js_code += "  \n"
+    js_code += "  export default " + output_path.stem.split('_')[0] + "Database;"
+    
+    # Write the file
+    with open(output_path, 'w', encoding='utf-8') as file:
+        file.write(js_code)
+    
+    print(f"Created JavaScript database skeleton: {output_path}")
 
 def main():
     parser = argparse.ArgumentParser(description="Process text file to create word lists and frequency CSV files.")

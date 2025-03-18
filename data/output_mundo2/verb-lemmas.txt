@@ -1,0 +1,209 @@
+llamar * to call
+
+llamadme: call me
+;
+
+acercar * to approach
+
+acercaba: was approaching
+;
+
+llevar * to carry
+
+llevaba: was carrying
+;
+
+estar * to be
+
+estaba: was
+está: is
+;
+
+pensar * to think
+
+pensaba: was thinking
+;
+
+creer * to believe
+
+creí: I believed
+;
+
+repetir * to repeat
+
+repetí: I repeated
+;
+
+esperar * to wait
+
+esperaba: was waiting
+esperando: waiting
+;
+
+sentir * to feel
+
+sentía: was feeling
+;
+
+otorgar * to grant
+
+otorgaba: was granting
+;
+
+aumentar * to increase
+
+aumentaba: was increasing
+;
+
+haber * to have
+
+había: there was
+he: I have
+;
+
+atravesar * to cross
+
+atravesado: crossed
+;
+
+pasear * to walk
+
+paseaba: was walking
+;
+
+aborrecer * to hate
+
+aborrecido: hated
+;
+
+hacer * to do
+
+hacen: they make
+;
+
+ser/ir * to be/to go
+
+fueron: they were
+;
+
+leer * to read
+
+leerlo: to read it
+;
+
+querer * to want
+
+quise: I wanted
+;
+
+regresar * to return
+
+regresaba: was returning
+;
+
+tener * to have
+
+tuve: I had
+tengo: I have
+;
+
+pesar * to weigh
+
+pesó: weighed
+;
+
+reencontrar * to meet again
+
+reencontrarme: to meet again
+;
+
+transformar * to transform
+
+transformaron: transformed
+;
+
+vagar * to wander
+
+vagando: wandering
+;
+
+detener * to stop
+
+detenerme: to stop myself
+;
+
+aconsejar * to advise
+
+aconsejaban: they advised
+;
+
+caer * to fall
+
+cayo: fell
+;
+
+devolver * to return
+
+devolverme: to return me
+;
+
+entrar * to enter
+
+entró: entered
+entraban: were entering
+;
+
+volver * to return
+
+;
+
+mostrar * to show
+
+muestra: shows
+mostraban: were showing
+;
+
+emerger * to emerge
+
+emergen: emerge
+;
+
+salir * to leave
+
+salían: were leaving
+;
+
+ocupar * to occupy
+
+ocupaban: were occupying
+;
+
+consultar * to consult
+
+consultaban: were consulting
+;
+
+dudar * to doubt
+
+dudando: doubting
+;
+
+abrir * to open
+
+abrirían: they would open
+;
+
+revisar * to check
+
+;
+
+ser * to be
+
+seríamos: we would be
+;
+
+conducir * to lead
+
+conducidos: led
+;
+
