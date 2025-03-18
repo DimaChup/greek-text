@@ -154,10 +154,10 @@ const GreekTextAnalyzer = () => {
   return (
     <div className="p-4 relative">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4">
-        <h1 className="text-lg font-bold mb-4">Greek Text Analyzer</h1>
+        <h1 className="text-lg font-bold mb-4">Spanish Text Analyzer</h1>
         
         <textarea 
-          placeholder="Enter Greek text here (try: ἵπποι ἱκάνοι ...)"
+          placeholder="Enter Spanish text here (try: de en y el la ...)"
           value={text}
           onChange={handleTextChange}
           className="w-full h-24 p-2 border rounded mb-3 font-serif text-sm"
@@ -226,7 +226,7 @@ const GreekTextAnalyzer = () => {
           </div>
         </div>
 
-        {/* Display grouped analysis side by side */}
+        {/* Display grouped analysis side by side - Updated to show LemmaMeanings and frequency */}
         {Object.keys(groupedAnalysis).length > 0 && (
           <div className="mt-4">
             <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
@@ -240,34 +240,40 @@ const GreekTextAnalyzer = () => {
                         key={index} 
                         className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs`}
                       >
-                        {/* Top Section: Flex container for Word and Best Translation with Possible Meanings */}
+                        {/* Top Section: Flex container for Word and Meanings */}
                         <div className="flex">
                           <div className="w-1/2">
                             <div className="font-semibold">Word</div>
                             <div className="font-serif">{analysis.word}</div>
-                          </div>
-                          <div className="w-1/2">
-                            <div className="font-semibold">Best Translation</div>
-                            <div>{analysis.bestTranslation}</div>
+                            
+                            {/* Added frequency display */}
                             <div className="mt-1">
-                              <div className="font-semibold">Possible Meanings</div>
-                              <ul className="list-disc pl-3">
-                                {analysis.meanings.map((meaning, i) => (
-                                  <li key={i}>{meaning}</li>
-                                ))}
-                              </ul>
+                              <div className="font-semibold">Frequency</div>
+                              <div>{analysis.frequency || 'N/A'}</div>
                             </div>
                           </div>
+                          <div className="w-1/2">
+                            <div className="font-semibold">Meanings</div>
+                            <ul className="list-disc pl-3">
+                              {analysis.meanings.map((meaning, i) => (
+                                <li key={i}>{meaning}</li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
-                        {/* Second Section: Two-column layout for Lemma and Lemma Translation */}
+                        {/* Second Section: Two-column layout for Lemma and Lemma Meanings */}
                         <div className="grid grid-cols-2 gap-2 mt-1">
                           <div>
                             <div className="font-semibold">Lemma</div>
                             <div className="font-serif">{analysis.lemma}</div>
                           </div>
                           <div>
-                            <div className="font-semibold">Lemma Translation</div>
-                            <div>{analysis.bestLemmaTranslation}</div>
+                            <div className="font-semibold">Lemma Meanings</div>
+                            <div>
+                              {Array.isArray(analysis.LemmaMeanings) 
+                                ? analysis.LemmaMeanings.join(', ') 
+                                : analysis.LemmaMeanings || analysis.bestLemmaTranslation || 'N/A'}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -280,7 +286,7 @@ const GreekTextAnalyzer = () => {
         )}
       </div>
 
-      {/* Tooltip for hovered word analysis */}
+      {/* Tooltip for hovered word analysis - Updated for LemmaMeanings */}
       {hoveredAnalysis && (
         <div
           className={`p-1 text-xs shadow-lg ${getAnalysisBgClass(hoveredAnalysis.data)} text-black border`}
@@ -295,7 +301,14 @@ const GreekTextAnalyzer = () => {
           <div><strong>Best Translation:</strong> {hoveredAnalysis.data.bestTranslation}</div>
           <div><strong>Possible Meanings:</strong> {hoveredAnalysis.data.meanings.join(', ')}</div>
           <div><strong>Lemma:</strong> {hoveredAnalysis.data.lemma}</div>
-          <div><strong>Lemma Translation:</strong> {hoveredAnalysis.data.bestLemmaTranslation}</div>
+          <div><strong>Lemma Meanings:</strong> {
+            Array.isArray(hoveredAnalysis.data.LemmaMeanings) 
+              ? hoveredAnalysis.data.LemmaMeanings.join(', ') 
+              : hoveredAnalysis.data.LemmaMeanings || hoveredAnalysis.data.bestLemmaTranslation || 'N/A'
+          }</div>
+          {hoveredAnalysis.data.frequency && 
+            <div><strong>Frequency:</strong> {hoveredAnalysis.data.frequency}</div>
+          }
         </div>
       )}
     </div>
