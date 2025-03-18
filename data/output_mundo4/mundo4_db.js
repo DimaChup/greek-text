@@ -2,7 +2,7 @@
 const mundo4Database = {
     'de': {
       wordNumber: 1,
-      frequency: 29,
+      frequency: 24,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -10,9 +10,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'en': {
+    'los': {
       wordNumber: 2,
-      frequency: 14,
+      frequency: 12,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -20,7 +20,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'y': {
+    'del': {
       wordNumber: 3,
       frequency: 12,
       partOfSpeech: '',
@@ -30,9 +30,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'el': {
+    'y': {
       wordNumber: 4,
-      frequency: 11,
+      frequency: 10,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -40,9 +40,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'la': {
+    'a': {
       wordNumber: 5,
-      frequency: 11,
+      frequency: 10,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -52,7 +52,7 @@ const mundo4Database = {
     },
     'que': {
       wordNumber: 6,
-      frequency: 10,
+      frequency: 9,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -60,7 +60,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'los': {
+    'la': {
       wordNumber: 7,
       frequency: 8,
       partOfSpeech: '',
@@ -70,8 +70,28 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'del': {
+    'las': {
       wordNumber: 8,
+      frequency: 7,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'el': {
+      wordNumber: 9,
+      frequency: 7,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'en': {
+      wordNumber: 10,
       frequency: 6,
       partOfSpeech: '',
       morphology: '',
@@ -80,29 +100,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'una': {
-      wordNumber: 9,
-      frequency: 5,
-      partOfSpeech: '',
-      morphology: '',
-      meanings: [],
-      bestTranslation: '',
-      lemma: '',
-      LemmaMeanings: []
-    },
-    'se': {
-      wordNumber: 10,
-      frequency: 5,
-      partOfSpeech: '',
-      morphology: '',
-      meanings: [],
-      bestTranslation: '',
-      lemma: '',
-      LemmaMeanings: []
-    },
-    'a': {
+    'mi': {
       wordNumber: 11,
-      frequency: 5,
+      frequency: 6,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -110,7 +110,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mundo': {
+    'tío': {
       wordNumber: 12,
       frequency: 5,
       partOfSpeech: '',
@@ -120,9 +120,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'vez': {
+    'más': {
       wordNumber: 13,
-      frequency: 4,
+      frequency: 5,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -130,7 +130,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'me': {
+    'pepe': {
       wordNumber: 14,
       frequency: 4,
       partOfSpeech: '',
@@ -140,7 +140,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'por': {
+    'se': {
       wordNumber: 15,
       frequency: 4,
       partOfSpeech: '',
@@ -150,9 +150,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'un': {
+    'era': {
       wordNumber: 16,
-      frequency: 4,
+      frequency: 3,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -160,9 +160,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pero': {
+    'con': {
       wordNumber: 17,
-      frequency: 4,
+      frequency: 3,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -170,7 +170,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'al': {
+    'me': {
       wordNumber: 18,
       frequency: 3,
       partOfSpeech: '',
@@ -180,7 +180,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'libro': {
+    'una': {
       wordNumber: 19,
       frequency: 3,
       partOfSpeech: '',
@@ -190,7 +190,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'chatwin': {
+    'no': {
       wordNumber: 20,
       frequency: 3,
       partOfSpeech: '',
@@ -200,7 +200,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'luego': {
+    'hasta': {
       wordNumber: 21,
       frequency: 3,
       partOfSpeech: '',
@@ -210,9 +210,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'más': {
+    'por': {
       wordNumber: 22,
-      frequency: 3,
+      frequency: 2,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -220,9 +220,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'años': {
+    'un': {
       wordNumber: 23,
-      frequency: 3,
+      frequency: 2,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -230,9 +230,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'las': {
+    'vida': {
       wordNumber: 24,
-      frequency: 3,
+      frequency: 2,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -240,7 +240,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'llamadme': {
+    'mis': {
       wordNumber: 25,
       frequency: 2,
       partOfSpeech: '',
@@ -250,7 +250,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'ismael': {
+    'tenía': {
       wordNumber: 26,
       frequency: 2,
       partOfSpeech: '',
@@ -260,7 +260,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'veces': {
+    'necesidad': {
       wordNumber: 27,
       frequency: 2,
       partOfSpeech: '',
@@ -270,7 +270,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aeropuerto': {
+    'él': {
       wordNumber: 28,
       frequency: 2,
       partOfSpeech: '',
@@ -280,7 +280,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'hamburgo': {
+    'recibí': {
       wordNumber: 29,
       frequency: 2,
       partOfSpeech: '',
@@ -290,7 +290,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cada': {
+    'primeros': {
       wordNumber: 30,
       frequency: 2,
       partOfSpeech: '',
@@ -300,7 +300,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'peso': {
+    'cuando': {
       wordNumber: 31,
       frequency: 2,
       partOfSpeech: '',
@@ -310,7 +310,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'acercaba': {
+    'sur': {
       wordNumber: 32,
       frequency: 2,
       partOfSpeech: '',
@@ -320,7 +320,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'hora': {
+    'mediados': {
       wordNumber: 33,
       frequency: 2,
       partOfSpeech: '',
@@ -330,7 +330,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'salida': {
+    'puerto': {
       wordNumber: 34,
       frequency: 2,
       partOfSpeech: '',
@@ -340,7 +340,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'embarque': {
+    'montt': {
       wordNumber: 35,
       frequency: 2,
       partOfSpeech: '',
@@ -350,7 +350,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'llevaba': {
+    'mundo': {
       wordNumber: 36,
       frequency: 2,
       partOfSpeech: '',
@@ -360,7 +360,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'patagonia': {
+    'mar': {
       wordNumber: 37,
       frequency: 2,
       partOfSpeech: '',
@@ -370,7 +370,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'siempre': {
+    'vías': {
       wordNumber: 38,
       frequency: 2,
       partOfSpeech: '',
@@ -380,9 +380,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'o': {
+    'muy': {
       wordNumber: 39,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -390,9 +390,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'estaba': {
+    'joven': {
       wordNumber: 40,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -400,9 +400,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pensaba': {
+    'entonces': {
       wordNumber: 41,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -410,9 +410,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'hasta': {
+    'casi': {
       wordNumber: 42,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -420,9 +420,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'chile': {
+    'niño': {
       wordNumber: 43,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -430,9 +430,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'deseos': {
+    'soñaba': {
       wordNumber: 44,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -440,9 +440,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'allá': {
+    'aventuras': {
       wordNumber: 45,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -450,9 +450,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'repetida': {
+    'entregarían': {
       wordNumber: 46,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -460,9 +460,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'creí': {
+    'fundamentos': {
       wordNumber: 47,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -470,9 +470,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'fin': {
+    'alejada': {
       wordNumber: 48,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -480,9 +480,9 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'como': {
+    'tedio': {
       wordNumber: 49,
-      frequency: 2,
+      frequency: 1,
       partOfSpeech: '',
       morphology: '',
       meanings: [],
@@ -490,7 +490,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    '1': {
+    'aburrimiento': {
       wordNumber: 50,
       frequency: 1,
       partOfSpeech: '',
@@ -500,7 +500,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'repetí': {
+    'estaba': {
       wordNumber: 51,
       frequency: 1,
       partOfSpeech: '',
@@ -510,7 +510,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'varias': {
+    'solo': {
       wordNumber: 52,
       frequency: 1,
       partOfSpeech: '',
@@ -520,7 +520,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mientras': {
+    'sueños': {
       wordNumber: 53,
       frequency: 1,
       partOfSpeech: '',
@@ -530,7 +530,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'esperaba': {
+    'así': {
       wordNumber: 54,
       frequency: 1,
       partOfSpeech: '',
@@ -540,7 +540,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'sentía': {
+    'mayúsculas': {
       wordNumber: 55,
       frequency: 1,
       partOfSpeech: '',
@@ -550,7 +550,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'fuerza': {
+    'heredero': {
       wordNumber: 56,
       frequency: 1,
       partOfSpeech: '',
@@ -560,7 +560,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'extraña': {
+    'carácter': {
       wordNumber: 57,
       frequency: 1,
       partOfSpeech: '',
@@ -570,7 +570,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'otorgaba': {
+    'indómito': {
       wordNumber: 58,
       frequency: 1,
       partOfSpeech: '',
@@ -580,7 +580,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mayor': {
+    'abuela': {
       wordNumber: 59,
       frequency: 1,
       partOfSpeech: '',
@@ -590,7 +590,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'delgado': {
+    'vasca': {
       wordNumber: 60,
       frequency: 1,
       partOfSpeech: '',
@@ -600,7 +600,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cuadernillo': {
+    'pesimismo': {
       wordNumber: 61,
       frequency: 1,
       partOfSpeech: '',
@@ -610,7 +610,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pasaje': {
+    'abuelo': {
       wordNumber: 62,
       frequency: 1,
       partOfSpeech: '',
@@ -620,7 +620,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aumentaba': {
+    'andaluz': {
       wordNumber: 63,
       frequency: 1,
       partOfSpeech: '',
@@ -630,7 +630,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'conforme': {
+    'voluntario': {
       wordNumber: 64,
       frequency: 1,
       partOfSpeech: '',
@@ -640,7 +640,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'había': {
+    'brigadas': {
       wordNumber: 65,
       frequency: 1,
       partOfSpeech: '',
@@ -650,7 +650,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'atravesado': {
+    'internacionales': {
       wordNumber: 66,
       frequency: 1,
       partOfSpeech: '',
@@ -660,7 +660,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'primer': {
+    'durante': {
       wordNumber: 67,
       frequency: 1,
       partOfSpeech: '',
@@ -670,7 +670,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'control': {
+    'guerra': {
       wordNumber: 68,
       frequency: 1,
       partOfSpeech: '',
@@ -680,7 +680,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'paseaba': {
+    'civil': {
       wordNumber: 69,
       frequency: 1,
       partOfSpeech: '',
@@ -690,7 +690,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'sala': {
+    'española': {
       wordNumber: 70,
       frequency: 1,
       partOfSpeech: '',
@@ -700,7 +700,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aferrado': {
+    'fotografía': {
       wordNumber: 71,
       frequency: 1,
       partOfSpeech: '',
@@ -710,7 +710,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'bolso': {
+    'junto': {
       wordNumber: 72,
       frequency: 1,
       partOfSpeech: '',
@@ -720,7 +720,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mano': {
+    'ernest': {
       wordNumber: 73,
       frequency: 1,
       partOfSpeech: '',
@@ -730,7 +730,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'no': {
+    'hemingway': {
       wordNumber: 74,
       frequency: 1,
       partOfSpeech: '',
@@ -740,7 +740,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'demasiadas': {
+    'único': {
       wordNumber: 75,
       frequency: 1,
       partOfSpeech: '',
@@ -750,7 +750,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cosas': {
+    'patrimonio': {
       wordNumber: 76,
       frequency: 1,
       partOfSpeech: '',
@@ -760,7 +760,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'él': {
+    'sentía': {
       wordNumber: 77,
       frequency: 1,
       partOfSpeech: '',
@@ -770,7 +770,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cámara': {
+    'orgulloso': {
       wordNumber: 78,
       frequency: 1,
       partOfSpeech: '',
@@ -780,7 +780,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'fotográfica': {
+    'cesaba': {
       wordNumber: 79,
       frequency: 1,
       partOfSpeech: '',
@@ -790,7 +790,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'libreta': {
+    'repetirme': {
       wordNumber: 80,
       frequency: 1,
       partOfSpeech: '',
@@ -800,7 +800,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'apuntes': {
+    'descubrir': {
       wordNumber: 81,
       frequency: 1,
       partOfSpeech: '',
@@ -810,7 +810,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'bruce': {
+    'camino': {
       wordNumber: 82,
       frequency: 1,
       partOfSpeech: '',
@@ -820,7 +820,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'he': {
+    'echarse': {
       wordNumber: 83,
       frequency: 1,
       partOfSpeech: '',
@@ -830,7 +830,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aborrecido': {
+    'andar': {
       wordNumber: 84,
       frequency: 1,
       partOfSpeech: '',
@@ -840,7 +840,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'hacen': {
+    'está': {
       wordNumber: 85,
       frequency: 1,
       partOfSpeech: '',
@@ -850,7 +850,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'rayas': {
+    'indicar': {
       wordNumber: 86,
       frequency: 1,
       partOfSpeech: '',
@@ -860,7 +860,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'anotaciones': {
+    'oveja': {
       wordNumber: 87,
       frequency: 1,
       partOfSpeech: '',
@@ -870,7 +870,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'libros': {
+    'negrísima': {
       wordNumber: 88,
       frequency: 1,
       partOfSpeech: '',
@@ -880,7 +880,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aquél': {
+    'familia': {
       wordNumber: 89,
       frequency: 1,
       partOfSpeech: '',
@@ -890,7 +890,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'lleno': {
+    'cuanto': {
       wordNumber: 90,
       frequency: 1,
       partOfSpeech: '',
@@ -900,7 +900,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'subrayados': {
+    'crecía': {
       wordNumber: 91,
       frequency: 1,
       partOfSpeech: '',
@@ -910,7 +910,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'signos': {
+    'yo': {
       wordNumber: 92,
       frequency: 1,
       partOfSpeech: '',
@@ -920,7 +920,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'exclamación': {
+    'nuestros': {
       wordNumber: 93,
       frequency: 1,
       partOfSpeech: '',
@@ -930,7 +930,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'fueron': {
+    'encuentros': {
       wordNumber: 94,
       frequency: 1,
       partOfSpeech: '',
@@ -940,7 +940,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aumento': {
+    'volvían': {
       wordNumber: 95,
       frequency: 1,
       partOfSpeech: '',
@@ -950,7 +950,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tres': {
+    'cada': {
       wordNumber: 96,
       frequency: 1,
       partOfSpeech: '',
@@ -960,7 +960,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'lecturas': {
+    'vez': {
       wordNumber: 97,
       frequency: 1,
       partOfSpeech: '',
@@ -970,7 +970,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'leerlo': {
+    'clandestinos': {
       wordNumber: 98,
       frequency: 1,
       partOfSpeech: '',
@@ -980,7 +980,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cuarta': {
+    'libros': {
       wordNumber: 99,
       frequency: 1,
       partOfSpeech: '',
@@ -990,7 +990,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'durante': {
+    'acercaron': {
       wordNumber: 100,
       frequency: 1,
       partOfSpeech: '',
@@ -1000,7 +1000,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'vuelo': {
+    'escritores': {
       wordNumber: 101,
       frequency: 1,
       partOfSpeech: '',
@@ -1010,7 +1010,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'santiago': {
+    'quienes': {
       wordNumber: 102,
       frequency: 1,
       partOfSpeech: '',
@@ -1020,7 +1020,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'quise': {
+    'jamás': {
       wordNumber: 103,
       frequency: 1,
       partOfSpeech: '',
@@ -1030,7 +1030,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'regresar': {
+    'he': {
       wordNumber: 104,
       frequency: 1,
       partOfSpeech: '',
@@ -1040,7 +1040,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tuve': {
+    'olvidar': {
       wordNumber: 105,
       frequency: 1,
       partOfSpeech: '',
@@ -1050,7 +1050,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'ganas': {
+    'julio': {
       wordNumber: 106,
       frequency: 1,
       partOfSpeech: '',
@@ -1060,7 +1060,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'determinación': {
+    'verne': {
       wordNumber: 107,
       frequency: 1,
       partOfSpeech: '',
@@ -1070,7 +1070,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pesó': {
+    'emilio': {
       wordNumber: 108,
       frequency: 1,
       partOfSpeech: '',
@@ -1080,7 +1080,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'miedo': {
+    'salgari': {
       wordNumber: 109,
       frequency: 1,
       partOfSpeech: '',
@@ -1090,7 +1090,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'reencontrarme': {
+    'jack': {
       wordNumber: 110,
       frequency: 1,
       partOfSpeech: '',
@@ -1100,7 +1100,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'con': {
+    'london': {
       wordNumber: 111,
       frequency: 1,
       partOfSpeech: '',
@@ -1110,7 +1110,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mi': {
+    'también': {
       wordNumber: 112,
       frequency: 1,
       partOfSpeech: '',
@@ -1120,7 +1120,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'hermano': {
+    'historia': {
       wordNumber: 113,
       frequency: 1,
       partOfSpeech: '',
@@ -1130,7 +1130,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'amigos': {
+    'marcó': {
       wordNumber: 114,
       frequency: 1,
       partOfSpeech: '',
@@ -1140,7 +1140,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tengo': {
+    'moby': {
       wordNumber: 115,
       frequency: 1,
       partOfSpeech: '',
@@ -1150,7 +1150,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'transformaron': {
+    'dick': {
       wordNumber: 116,
       frequency: 1,
       partOfSpeech: '',
@@ -1160,7 +1160,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'promesa': {
+    'herman': {
       wordNumber: 117,
       frequency: 1,
       partOfSpeech: '',
@@ -1170,7 +1170,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tan': {
+    'melville': {
       wordNumber: 118,
       frequency: 1,
       partOfSpeech: '',
@@ -1180,7 +1180,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'menos': {
+    'catorce': {
       wordNumber: 119,
       frequency: 1,
       partOfSpeech: '',
@@ -1190,7 +1190,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'demasiados': {
+    'años': {
       wordNumber: 120,
       frequency: 1,
       partOfSpeech: '',
@@ -1200,7 +1200,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'vagando': {
+    'leí': {
       wordNumber: 121,
       frequency: 1,
       partOfSpeech: '',
@@ -1210,7 +1210,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'sin': {
+    'aquel': {
       wordNumber: 122,
       frequency: 1,
       partOfSpeech: '',
@@ -1220,7 +1220,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'rumbo': {
+    'libro': {
       wordNumber: 123,
       frequency: 1,
       partOfSpeech: '',
@@ -1230,7 +1230,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'fijo': {
+    'dieciséis': {
       wordNumber: 124,
       frequency: 1,
       partOfSpeech: '',
@@ -1240,7 +1240,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'detenerme': {
+    'pude': {
       wordNumber: 125,
       frequency: 1,
       partOfSpeech: '',
@@ -1250,7 +1250,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aconsejaban': {
+    'resistirme': {
       wordNumber: 126,
       frequency: 1,
       partOfSpeech: '',
@@ -1260,7 +1260,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pequeño': {
+    'llamada': {
       wordNumber: 127,
       frequency: 1,
       partOfSpeech: '',
@@ -1270,7 +1270,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pueblo': {
+    'chile': {
       wordNumber: 128,
       frequency: 1,
       partOfSpeech: '',
@@ -1280,7 +1280,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'pescadores': {
+    'vacaciones': {
       wordNumber: 129,
       frequency: 1,
       partOfSpeech: '',
@@ -1290,7 +1290,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'creta': {
+    'verano': {
       wordNumber: 130,
       frequency: 1,
       partOfSpeech: '',
@@ -1300,7 +1300,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'ierápetras': {
+    'duran': {
       wordNumber: 131,
       frequency: 1,
       partOfSpeech: '',
@@ -1310,7 +1310,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'apacible': {
+    'diciembre': {
       wordNumber: 132,
       frequency: 1,
       partOfSpeech: '',
@@ -1320,7 +1320,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'ciudad': {
+    'marzo': {
       wordNumber: 133,
       frequency: 1,
       partOfSpeech: '',
@@ -1330,7 +1330,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'asturiana': {
+    'otras': {
       wordNumber: 134,
       frequency: 1,
       partOfSpeech: '',
@@ -1340,7 +1340,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'villa': {
+    'lecturas': {
       wordNumber: 135,
       frequency: 1,
       partOfSpeech: '',
@@ -1350,7 +1350,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'viciosa': {
+    'supe': {
       wordNumber: 136,
       frequency: 1,
       partOfSpeech: '',
@@ -1360,7 +1360,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'algún': {
+    'confines': {
       wordNumber: 137,
       frequency: 1,
       partOfSpeech: '',
@@ -1370,7 +1370,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'día': {
+    'continentales': {
       wordNumber: 138,
       frequency: 1,
       partOfSpeech: '',
@@ -1380,7 +1380,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cayo': {
+    'preantárticos': {
       wordNumber: 139,
       frequency: 1,
       partOfSpeech: '',
@@ -1390,7 +1390,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mis': {
+    'fondeaban': {
       wordNumber: 140,
       frequency: 1,
       partOfSpeech: '',
@@ -1400,7 +1400,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'manos': {
+    'varias': {
       wordNumber: 141,
       frequency: 1,
       partOfSpeech: '',
@@ -1410,7 +1410,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'para': {
+    'pequeñas': {
       wordNumber: 142,
       frequency: 1,
       partOfSpeech: '',
@@ -1420,7 +1420,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'devolverme': {
+    'flotas': {
       wordNumber: 143,
       frequency: 1,
       partOfSpeech: '',
@@ -1430,7 +1430,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'olvidado': {
+    'barcos': {
       wordNumber: 144,
       frequency: 1,
       partOfSpeech: '',
@@ -1440,7 +1440,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'esperando': {
+    'balleneros': {
       wordNumber: 145,
       frequency: 1,
       partOfSpeech: '',
@@ -1450,7 +1450,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'leer': {
+    'ansiaba': {
       wordNumber: 146,
       frequency: 1,
       partOfSpeech: '',
@@ -1460,7 +1460,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'primera': {
+    'conocer': {
       wordNumber: 147,
       frequency: 1,
       partOfSpeech: '',
@@ -1470,7 +1470,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'entró': {
+    'aquellos': {
       wordNumber: 148,
       frequency: 1,
       partOfSpeech: '',
@@ -1480,7 +1480,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'desesperación': {
+    'hombres': {
       wordNumber: 149,
       frequency: 1,
       partOfSpeech: '',
@@ -1490,7 +1490,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'volver': {
+    'imaginaba': {
       wordNumber: 150,
       frequency: 1,
       partOfSpeech: '',
@@ -1500,7 +1500,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'está': {
+    'herederos': {
       wordNumber: 151,
       frequency: 1,
       partOfSpeech: '',
@@ -1510,7 +1510,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'simples': {
+    'capitán': {
       wordNumber: 152,
       frequency: 1,
       partOfSpeech: '',
@@ -1520,7 +1520,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'intenciones': {
+    'ahab': {
       wordNumber: 153,
       frequency: 1,
       partOfSpeech: '',
@@ -1530,7 +1530,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'viajero': {
+    'convencer': {
       wordNumber: 154,
       frequency: 1,
       partOfSpeech: '',
@@ -1540,7 +1540,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'distancia': {
+    'padres': {
       wordNumber: 155,
       frequency: 1,
       partOfSpeech: '',
@@ -1550,7 +1550,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'nos': {
+    'ese': {
       wordNumber: 156,
       frequency: 1,
       partOfSpeech: '',
@@ -1560,7 +1560,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'muestra': {
+    'viaje': {
       wordNumber: 157,
       frequency: 1,
       partOfSpeech: '',
@@ -1570,7 +1570,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'su': {
+    'sólo': {
       wordNumber: 158,
       frequency: 1,
       partOfSpeech: '',
@@ -1580,7 +1580,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'real': {
+    'fue': {
       wordNumber: 159,
       frequency: 1,
       partOfSpeech: '',
@@ -1590,7 +1590,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'envergadura': {
+    'posible': {
       wordNumber: 160,
       frequency: 1,
       partOfSpeech: '',
@@ -1600,7 +1600,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'cuando': {
+    'gracias': {
       wordNumber: 161,
       frequency: 1,
       partOfSpeech: '',
@@ -1610,7 +1610,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'recuerdos': {
+    'ayuda': {
       wordNumber: 162,
       frequency: 1,
       partOfSpeech: '',
@@ -1620,7 +1620,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'emergen': {
+    'quien': {
       wordNumber: 163,
       frequency: 1,
       partOfSpeech: '',
@@ -1630,7 +1630,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'boyas': {
+    'además': {
       wordNumber: 164,
       frequency: 1,
       partOfSpeech: '',
@@ -1640,7 +1640,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'agitado': {
+    'financió': {
       wordNumber: 165,
       frequency: 1,
       partOfSpeech: '',
@@ -1650,7 +1650,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mar': {
+    'pasaje': {
       wordNumber: 166,
       frequency: 1,
       partOfSpeech: '',
@@ -1660,7 +1660,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'intensos': {
+    'mil': {
       wordNumber: 167,
       frequency: 1,
       partOfSpeech: '',
@@ -1670,7 +1670,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'demás': {
+    'tantos': {
       wordNumber: 168,
       frequency: 1,
       partOfSpeech: '',
@@ -1680,7 +1680,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'viajeros': {
+    'kilómetros': {
       wordNumber: 169,
       frequency: 1,
       partOfSpeech: '',
@@ -1690,7 +1690,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'entraban': {
+    'encuentro': {
       wordNumber: 170,
       frequency: 1,
       partOfSpeech: '',
@@ -1700,7 +1700,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'salían': {
+    'fin': {
       wordNumber: 171,
       frequency: 1,
       partOfSpeech: '',
@@ -1710,7 +1710,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tienda': {
+    'hice': {
       wordNumber: 172,
       frequency: 1,
       partOfSpeech: '',
@@ -1720,7 +1720,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'libre': {
+    'tren': {
       wordNumber: 173,
       frequency: 1,
       partOfSpeech: '',
@@ -1730,7 +1730,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'impuestos': {
+    'allí': {
       wordNumber: 174,
       frequency: 1,
       partOfSpeech: '',
@@ -1740,7 +1740,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'ocupaban': {
+    'frente': {
       wordNumber: 175,
       frequency: 1,
       partOfSpeech: '',
@@ -1750,7 +1750,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'bar': {
+    'al': {
       wordNumber: 176,
       frequency: 1,
       partOfSpeech: '',
@@ -1760,7 +1760,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'algunos': {
+    'terminan': {
       wordNumber: 177,
       frequency: 1,
       partOfSpeech: '',
@@ -1770,7 +1770,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'mostraban': {
+    'bruscamente': {
       wordNumber: 178,
       frequency: 1,
       partOfSpeech: '',
@@ -1780,7 +1780,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'nerviosos': {
+    'ferrocarril': {
       wordNumber: 179,
       frequency: 1,
       partOfSpeech: '',
@@ -1790,7 +1790,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'consultaban': {
+    'después': {
       wordNumber: 180,
       frequency: 1,
       partOfSpeech: '',
@@ -1800,7 +1800,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'sus': {
+    'país': {
       wordNumber: 181,
       frequency: 1,
       partOfSpeech: '',
@@ -1810,7 +1810,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'relojes': {
+    'divide': {
       wordNumber: 182,
       frequency: 1,
       partOfSpeech: '',
@@ -1820,7 +1820,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'dudando': {
+    'miles': {
       wordNumber: 183,
       frequency: 1,
       partOfSpeech: '',
@@ -1830,7 +1830,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'puntualidad': {
+    'islas': {
       wordNumber: 184,
       frequency: 1,
       partOfSpeech: '',
@@ -1840,7 +1840,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'docenas': {
+    'islotes': {
       wordNumber: 185,
       frequency: 1,
       partOfSpeech: '',
@@ -1850,7 +1850,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'aparatos': {
+    'canales': {
       wordNumber: 186,
       frequency: 1,
       partOfSpeech: '',
@@ -1860,7 +1860,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'electrónicos': {
+    'pasos': {
       wordNumber: 187,
       frequency: 1,
       partOfSpeech: '',
@@ -1870,7 +1870,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'momento': {
+    'cercanías': {
       wordNumber: 188,
       frequency: 1,
       partOfSpeech: '',
@@ -1880,7 +1880,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'abrirían': {
+    'polo': {
       wordNumber: 189,
       frequency: 1,
       partOfSpeech: '',
@@ -1890,7 +1890,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'puertas': {
+    'parte': {
       wordNumber: 190,
       frequency: 1,
       partOfSpeech: '',
@@ -1900,7 +1900,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tras': {
+    'continental': {
       wordNumber: 191,
       frequency: 1,
       partOfSpeech: '',
@@ -1910,7 +1910,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'revisar': {
+    'cordilleras': {
       wordNumber: 192,
       frequency: 1,
       partOfSpeech: '',
@@ -1920,7 +1920,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'tarjetas': {
+    'ventisqueros': {
       wordNumber: 193,
       frequency: 1,
       partOfSpeech: '',
@@ -1930,7 +1930,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'seríamos': {
+    'bosques': {
       wordNumber: 194,
       frequency: 1,
       partOfSpeech: '',
@@ -1940,7 +1940,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'conducidos': {
+    'impenetrables': {
       wordNumber: 195,
       frequency: 1,
       partOfSpeech: '',
@@ -1950,7 +1950,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'bus': {
+    'hielos': {
       wordNumber: 196,
       frequency: 1,
       partOfSpeech: '',
@@ -1960,7 +1960,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'avión': {
+    'eternos': {
       wordNumber: 197,
       frequency: 1,
       partOfSpeech: '',
@@ -1970,7 +1970,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'yo': {
+    'lagunas': {
       wordNumber: 198,
       frequency: 1,
       partOfSpeech: '',
@@ -1980,7 +1980,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'regresaba': {
+    'fiordos': {
       wordNumber: 199,
       frequency: 1,
       partOfSpeech: '',
@@ -1990,7 +1990,7 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'veinticuatro': {
+    'ríos': {
       wordNumber: 200,
       frequency: 1,
       partOfSpeech: '',
@@ -2000,8 +2000,58 @@ const mundo4Database = {
       lemma: '',
       LemmaMeanings: []
     },
-    'ausencia': {
+    'caprichosos': {
       wordNumber: 201,
+      frequency: 1,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'impiden': {
+      wordNumber: 202,
+      frequency: 1,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'trazo': {
+      wordNumber: 203,
+      frequency: 1,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'caminos': {
+      wordNumber: 204,
+      frequency: 1,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'o': {
+      wordNumber: 205,
+      frequency: 1,
+      partOfSpeech: '',
+      morphology: '',
+      meanings: [],
+      bestTranslation: '',
+      lemma: '',
+      LemmaMeanings: []
+    },
+    'ferroviarias': {
+      wordNumber: 206,
       frequency: 1,
       partOfSpeech: '',
       morphology: '',

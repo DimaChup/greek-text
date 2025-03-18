@@ -1,0 +1,322 @@
+mundo * world, earth, globe, universe, mankind
+
+;
+
+vez * time, occasion, instance, turn, opportunity
+
+veces: times, occasions
+;
+
+libro * book, volume, text, work, publication, tome
+
+libros: books, volumes
+;
+
+Chatwin * Chatwin, Bruce Chatwin, the author Chatwin, the writer Chatwin
+
+chatwin: Chatwin (author surname)
+;
+
+año * year, annual period, twelve months, calendar year
+
+años: years
+;
+
+Ismael * Ishmael, Ismael, biblical figure Ishmael, male name
+
+ismael: Ishmael, Ismael (name)
+;
+
+aeropuerto * airport, air terminal, airfield, aviation hub
+
+;
+
+Hamburgo * Hamburg, city in Germany, German port city, Hanseatic city
+
+hamburgo: Hamburg
+;
+
+peso * weight, burden, heaviness, gravity, importance
+
+;
+
+hora * hour, time, o'clock, moment, period
+
+;
+
+salida * exit, departure, way out, outlet, solution
+
+;
+
+embarque * boarding, embarkation, shipment, loading, departure
+
+;
+
+Patagonia * Patagonia, Patagonian region, southern South America, Argentina/Chile region
+
+patagonia: Patagonia
+;
+
+Chile * Chile, Republic of Chile, South American country, Chilean nation
+
+chile: Chile
+;
+
+deseo * desire, wish, longing, craving, yearning
+
+deseos: desires, wishes, longings
+;
+
+fin * end, conclusion, purpose, goal, finish
+
+;
+
+fuerza * force, strength, power, might, vigor
+
+;
+
+cuadernillo * booklet, notebook, pamphlet, brochure, small copybook
+
+;
+
+pasaje * passage, ticket, fare, excerpt, corridor
+
+;
+
+control * control, check, checkpoint, supervision, command
+
+;
+
+sala * room, hall, lounge, living room, chamber
+
+;
+
+bolso * bag, handbag, purse, tote, satchel
+
+;
+
+mano * hand, handwriting, side, worker, help, palm, manual skill
+
+manos: hands
+;
+
+cosa * thing, object, matter, affair, issue
+
+cosas: things, objects, matters
+;
+
+cámara * camera, chamber, room, department, parliament
+
+;
+
+libreta * notebook, notepad, small book, pad, binder
+
+;
+
+apunte * note, annotation, sketch, jotting, memorandum
+
+apuntes: notes, annotations
+;
+
+Bruce * Bruce, male name, first name, English name, Bruce Chatwin
+
+bruce: Bruce
+;
+
+raya * line, stripe, streak, dash, underline
+
+rayas: lines, stripes, streaks
+;
+
+anotación * annotation, note, notation, comment, remark
+
+anotaciones: notes, annotations, notations
+;
+
+subrayado * underlining, underline, highlight, emphasis, stress
+
+subrayados: underlinings, underlines, highlights
+;
+
+signo * sign, symbol, mark, signal, token
+
+signos: signs, symbols, marks
+;
+
+exclamación * exclamation, outcry, outburst, ejaculation, interjection
+
+;
+
+aumento * increase, growth, rise, increment, augmentation
+
+;
+
+lectura * reading, lecture, interpretation, perusal, literacy
+
+lecturas: readings, lectures, interpretations
+;
+
+vuelo * flight, flying, air travel, soaring, aviation
+
+;
+
+Santiago * Santiago, Saint James, capital of Chile, Chilean city, Saint Iago
+
+santiago: Santiago
+;
+
+gana * desire, wish, urge, inclination, appetite
+
+ganas: desires, wishes, urges
+;
+
+determinación * determination, decision, resolve, resolution, willpower
+
+;
+
+miedo * fear, dread, fright, terror, alarm
+
+;
+
+hermano * brother, sibling, male sibling, brotherhood, fraternity
+
+;
+
+amigo * friend, pal, buddy, companion, ally
+
+amigos: friends, pals
+;
+
+promesa * promise, pledge, vow, commitment, undertaking
+
+;
+
+rumbo * direction, course, heading, bearing, route
+
+;
+
+pueblo * town, village, people, nation, populace
+
+;
+
+pescador * fisherman, angler, fisher, fishing person, one who fishes
+
+pescadores: fishermen, anglers
+;
+
+Creta * Crete, Greek island, Mediterranean island, Cretan island, Kriti
+
+creta: Crete
+;
+
+Ierápetras * Ierapetra, city in Crete, Cretan town, coastal town, Greek municipality
+
+ierápetras: Ierapetra
+;
+
+ciudad * city, town, metropolis, urban area, municipality
+
+;
+
+villa * villa, town, resort, mansion, country house
+
+;
+
+día * day, daytime, daylight, date, daily period
+
+;
+
+desesperación * desperation, despair, hopelessness, anguish, distress
+
+;
+
+intención * intention, purpose, aim, goal, objective
+
+intenciones: intentions, purposes, aims
+;
+
+viajero * traveler, voyager, tourist, passenger, wanderer, wayfarer
+
+viajeros: travelers, voyagers, passengers
+;
+
+distancia * distance, span, space, interval, remoteness
+
+;
+
+envergadura * magnitude, scope, wingspan, dimension, importance
+
+;
+
+recuerdo * memory, recollection, souvenir, keepsake, reminder
+
+recuerdos: memories, recollections, souvenirs
+;
+
+boya * buoy, float, marker, beacon, life buoy
+
+boyas: buoys, floats, markers
+;
+
+mar * sea, ocean, maritime, waters, tide
+
+;
+
+tienda * shop, store, tent, boutique, retail outlet
+
+;
+
+impuesto * tax, duty, levy, impost, tariff
+
+impuestos: taxes, duties, levies
+;
+
+bar * bar, pub, café, lounge, tavern
+
+;
+
+reloj * watch, clock, timepiece, timekeeper, chronometer
+
+relojes: watches, clocks, timepieces
+;
+
+puntualidad * punctuality, timeliness, promptness, precision, exactness
+
+;
+
+docena * dozen, twelve, group of twelve, numerous, many
+
+docenas: dozens, lots, many
+;
+
+aparato * device, apparatus, gadget, appliance, instrument
+
+aparatos: devices, apparatus, gadgets
+;
+
+momento * moment, instant, time, while, occasion
+
+;
+
+puerta * door, gate, entrance, doorway, access
+
+puertas: doors, gates, entrances
+;
+
+tarjeta * card, ticket, pass, badge, board
+
+tarjetas: cards, boarding passes, tickets
+;
+
+bus * bus, coach, shuttle, motorcoach, autobus
+
+;
+
+avión * airplane, aircraft, plane, jet, airliner
+
+;
+
+ausencia * absence, lack, nonattendance, nonexistence, separation
+
+;
+
