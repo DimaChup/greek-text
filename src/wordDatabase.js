@@ -1,2015 +1,2015 @@
-// Generated word database
-const wordDatabase = {
+// Generated word frequency database with word numbers for mundo3
+const mundo3Database = {
   'de': {
-    lineNumber: '1',
-    wordOrder: '1',
+    wordNumber: 1,
+    frequency: 29,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['of', 'from', 'about'],
     bestTranslation: 'of',
     lemma: 'de',
-    bestLemmaTranslation: 'of'
+    LemmaMeanings: ['of', 'from', 'about', 'concerning']
   },
   'en': {
-    lineNumber: '1',
-    wordOrder: '2',
+    wordNumber: 2,
+    frequency: 14,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['in', 'on', 'at'],
     bestTranslation: 'in',
     lemma: 'en',
-    bestLemmaTranslation: 'in'
+    LemmaMeanings: ['in', 'on', 'at', 'within', 'during']
   },
   'y': {
-    lineNumber: '1',
-    wordOrder: '3',
+    wordNumber: 3,
+    frequency: 12,
     partOfSpeech: 'Conjunction',
     morphology: '',
     meanings: ['and'],
     bestTranslation: 'and',
     lemma: 'y',
-    bestLemmaTranslation: 'and'
+    LemmaMeanings: ['and', 'plus', 'as well as', 'also']
   },
   'el': {
-    lineNumber: '1',
-    wordOrder: '4',
+    wordNumber: 4,
+    frequency: 11,
     partOfSpeech: 'Article',
     morphology: 'Masculine Singular',
     meanings: ['the'],
     bestTranslation: 'the',
     lemma: 'el',
-    bestLemmaTranslation: 'the'
+    LemmaMeanings: ['the', 'him', 'it', 'that one']
   },
   'la': {
-    lineNumber: '1',
-    wordOrder: '5',
+    wordNumber: 5,
+    frequency: 11,
     partOfSpeech: 'Article',
     morphology: 'Feminine Singular',
     meanings: ['the'],
     bestTranslation: 'the',
     lemma: 'la',
-    bestLemmaTranslation: 'the'
+    LemmaMeanings: ['the', 'her', 'it', 'that one']
   },
   'que': {
-    lineNumber: '1',
-    wordOrder: '6',
+    wordNumber: 6,
+    frequency: 10,
     partOfSpeech: 'Conjunction/Pronoun',
     morphology: '',
     meanings: ['that', 'which', 'who'],
     bestTranslation: 'that',
     lemma: 'que',
-    bestLemmaTranslation: 'that'
+    LemmaMeanings: ['that', 'which', 'who', 'what', 'than']
   },
   'los': {
-    lineNumber: '1',
-    wordOrder: '7',
+    wordNumber: 7,
+    frequency: 8,
     partOfSpeech: 'Article',
     morphology: 'Masculine Plural',
     meanings: ['the'],
     bestTranslation: 'the',
     lemma: 'el',
-    bestLemmaTranslation: 'the'
+    LemmaMeanings: ['the', 'them', 'those', 'ones']
   },
   'del': {
-    lineNumber: '1',
-    wordOrder: '8',
+    wordNumber: 8,
+    frequency: 6,
     partOfSpeech: 'Preposition + Article',
     morphology: 'Contraction of de + el',
     meanings: ['of the', 'from the'],
     bestTranslation: 'of the',
     lemma: 'del',
-    bestLemmaTranslation: 'of the'
+    LemmaMeanings: ['of the', 'from the', 'about the', 'belonging to the']
   },
   'una': {
-    lineNumber: '1',
-    wordOrder: '9',
+    wordNumber: 9,
+    frequency: 5,
     partOfSpeech: 'Article',
     morphology: 'Feminine Singular',
     meanings: ['a', 'one'],
     bestTranslation: 'a',
     lemma: 'un',
-    bestLemmaTranslation: 'a'
+    LemmaMeanings: ['a', 'one', 'any', 'approximately']
   },
   'se': {
-    lineNumber: '1',
-    wordOrder: '10',
+    wordNumber: 10,
+    frequency: 5,
     partOfSpeech: 'Pronoun',
     morphology: 'Reflexive',
     meanings: ['oneself', 'himself', 'herself', 'itself', 'themselves'],
     bestTranslation: 'oneself',
     lemma: 'se',
-    bestLemmaTranslation: 'oneself'
+    LemmaMeanings: ['oneself', 'himself', 'herself', 'themselves', 'each other']
   },
   'a': {
-    lineNumber: '1',
-    wordOrder: '11',
+    wordNumber: 11,
+    frequency: 5,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['to', 'at'],
     bestTranslation: 'to',
     lemma: 'a',
-    bestLemmaTranslation: 'to'
+    LemmaMeanings: ['to', 'at', 'by', 'for', 'towards']
   },
   'mundo': {
-    lineNumber: '1', 
-    wordOrder: '12',
+    wordNumber: 12,
+    frequency: 5,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['world', 'earth', 'globe'],
     bestTranslation: 'world',
     lemma: 'mundo',
-    bestLemmaTranslation: 'world'
+    LemmaMeanings: ['world', 'earth', 'globe', 'universe', 'mankind']
   },
   'vez': {
-    lineNumber: '1',
-    wordOrder: '13',
+    wordNumber: 13,
+    frequency: 4,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['time', 'occasion', 'instance'],
     bestTranslation: 'time',
     lemma: 'vez',
-    bestLemmaTranslation: 'time'
+    LemmaMeanings: ['time', 'occasion', 'instance', 'turn', 'opportunity']
   },
   'me': {
-    lineNumber: '1',
-    wordOrder: '14',
+    wordNumber: 14,
+    frequency: 4,
     partOfSpeech: 'Pronoun',
     morphology: 'Personal Object',
     meanings: ['me', 'to me', 'myself'],
     bestTranslation: 'me',
     lemma: 'me',
-    bestLemmaTranslation: 'me'
+    LemmaMeanings: ['me', 'to me', 'myself', 'for me', 'with me']
   },
   'por': {
-    lineNumber: '1',
-    wordOrder: '15',
+    wordNumber: 15,
+    frequency: 4,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['for', 'by', 'through'],
     bestTranslation: 'for',
     lemma: 'por',
-    bestLemmaTranslation: 'for'
+    LemmaMeanings: ['for', 'by', 'through', 'because of', 'along']
   },
   'un': {
-    lineNumber: '1',
-    wordOrder: '16',
+    wordNumber: 16,
+    frequency: 4,
     partOfSpeech: 'Article',
     morphology: 'Masculine Singular',
     meanings: ['a', 'one'],
     bestTranslation: 'a',
     lemma: 'un',
-    bestLemmaTranslation: 'a'
+    LemmaMeanings: ['a', 'one', 'any', 'some', 'approximately']
   },
   'pero': {
-    lineNumber: '1',
-    wordOrder: '17',
+    wordNumber: 17,
+    frequency: 4,
     partOfSpeech: 'Conjunction',
     morphology: '',
     meanings: ['but', 'yet', 'however'],
     bestTranslation: 'but',
     lemma: 'pero',
-    bestLemmaTranslation: 'but'
+    LemmaMeanings: ['but', 'yet', 'however', 'nevertheless', 'though']
   },
   'al': {
-    lineNumber: '1',
-    wordOrder: '18',
+    wordNumber: 18,
+    frequency: 3,
     partOfSpeech: 'Preposition + Article',
     morphology: 'Contraction of a + el',
     meanings: ['to the', 'at the'],
     bestTranslation: 'to the',
     lemma: 'al',
-    bestLemmaTranslation: 'to the'
+    LemmaMeanings: ['to the', 'at the', 'upon the', 'by the', 'when']
   },
   'libro': {
-    lineNumber: '1',
-    wordOrder: '19',
+    wordNumber: 19,
+    frequency: 3,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['book', 'volume'],
     bestTranslation: 'book',
     lemma: 'libro',
-    bestLemmaTranslation: 'book'
+    LemmaMeanings: ['book', 'volume', 'text', 'work', 'publication']
   },
   'chatwin': {
-    lineNumber: '1',
-    wordOrder: '20',
+    wordNumber: 20,
+    frequency: 3,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Chatwin (author surname)'],
     bestTranslation: 'Chatwin',
     lemma: 'Chatwin',
-    bestLemmaTranslation: 'Chatwin'
+    LemmaMeanings: ['Chatwin', 'Bruce Chatwin', 'the author Chatwin', 'the writer Chatwin']
   },
   'luego': {
-    lineNumber: '1',
-    wordOrder: '21',
+    wordNumber: 21,
+    frequency: 3,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['then', 'later', 'afterwards'],
     bestTranslation: 'then',
     lemma: 'luego',
-    bestLemmaTranslation: 'then'
+    LemmaMeanings: ['then', 'later', 'afterwards', 'subsequently', 'next']
   },
   'más': {
-    lineNumber: '1',
-    wordOrder: '22',
+    wordNumber: 22,
+    frequency: 3,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['more', 'most', 'plus'],
     bestTranslation: 'more',
     lemma: 'más',
-    bestLemmaTranslation: 'more'
+    LemmaMeanings: ['more', 'most', 'plus', 'further', 'additionally']
   },
   'años': {
-    lineNumber: '1',
-    wordOrder: '23',
+    wordNumber: 23,
+    frequency: 3,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['years'],
     bestTranslation: 'years',
     lemma: 'año',
-    bestLemmaTranslation: 'year'
+    LemmaMeanings: ['year', 'annual period', 'twelve months', 'calendar year']
   },
   'las': {
-    lineNumber: '1',
-    wordOrder: '24',
+    wordNumber: 24,
+    frequency: 3,
     partOfSpeech: 'Article',
     morphology: 'Feminine Plural',
     meanings: ['the'],
     bestTranslation: 'the',
     lemma: 'la',
-    bestLemmaTranslation: 'the'
+    LemmaMeanings: ['the', 'them', 'those', 'ones']
   },
   'llamadme': {
-    lineNumber: '2',
-    wordOrder: '25',
+    wordNumber: 25,
+    frequency: 2,
     partOfSpeech: 'Verb',
     morphology: 'Imperative Second Person Plural with direct object pronoun me',
     meanings: ['call me'],
     bestTranslation: 'call me',
     lemma: 'llamar',
-    bestLemmaTranslation: 'to call'
+    LemmaMeanings: ['to call', 'to name', 'to telephone', 'to beckon', 'to summon']
   },
   'ismael': {
-    lineNumber: '2',
-    wordOrder: '26',
+    wordNumber: 26,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Ishmael', 'Ismael (name)'],
     bestTranslation: 'Ishmael',
     lemma: 'Ismael',
-    bestLemmaTranslation: 'Ishmael'
+    LemmaMeanings: ['Ishmael', 'Ismael', 'biblical figure Ishmael', 'male name']
   },
   'veces': {
-    lineNumber: '2',
-    wordOrder: '27',
+    wordNumber: 27,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['times', 'occasions'],
     bestTranslation: 'times',
     lemma: 'vez',
-    bestLemmaTranslation: 'time'
+    LemmaMeanings: ['time', 'occasion', 'instance', 'turn', 'opportunity']
   },
   'aeropuerto': {
-    lineNumber: '2',
-    wordOrder: '28',
+    wordNumber: 28,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['airport'],
     bestTranslation: 'airport',
     lemma: 'aeropuerto',
-    bestLemmaTranslation: 'airport'
+    LemmaMeanings: ['airport', 'air terminal', 'airfield', 'aviation hub']
   },
   'hamburgo': {
-    lineNumber: '2',
-    wordOrder: '29',
+    wordNumber: 29,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Hamburg'],
     bestTranslation: 'Hamburg',
     lemma: 'Hamburgo',
-    bestLemmaTranslation: 'Hamburg'
+    LemmaMeanings: ['Hamburg', 'city in Germany', 'German port city', 'Hanseatic city']
   },
   'cada': {
-    lineNumber: '2',
-    wordOrder: '30',
+    wordNumber: 30,
+    frequency: 2,
     partOfSpeech: 'Adjective/Determiner',
     morphology: '',
     meanings: ['each', 'every'],
     bestTranslation: 'each',
     lemma: 'cada',
-    bestLemmaTranslation: 'each'
+    LemmaMeanings: ['each', 'every', 'apiece', 'per', 'individual']
   },
   'peso': {
-    lineNumber: '2',
-    wordOrder: '31',
+    wordNumber: 31,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['weight', 'burden', 'currency'],
     bestTranslation: 'weight',
     lemma: 'peso',
-    bestLemmaTranslation: 'weight'
+    LemmaMeanings: ['weight', 'burden', 'heaviness', 'gravity', 'importance']
   },
   'acercaba': {
-    lineNumber: '2',
-    wordOrder: '32',
+    wordNumber: 32,
+    frequency: 2,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Singular',
     meanings: ['was approaching', 'was coming near'],
     bestTranslation: 'was approaching',
     lemma: 'acercar',
-    bestLemmaTranslation: 'to approach'
+    LemmaMeanings: ['to approach', 'to bring near', 'to draw closer', 'to move towards', 'to get closer']
   },
   'hora': {
-    lineNumber: '2',
-    wordOrder: '33',
+    wordNumber: 33,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['hour', 'time', 'o\'clock'],
     bestTranslation: 'hour',
     lemma: 'hora',
-    bestLemmaTranslation: 'hour'
+    LemmaMeanings: ['hour', 'time', 'o\'clock', 'moment', 'period']
   },
   'salida': {
-    lineNumber: '2',
-    wordOrder: '34',
+    wordNumber: 34,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['exit', 'departure', 'way out'],
     bestTranslation: 'departure',
     lemma: 'salida',
-    bestLemmaTranslation: 'exit'
+    LemmaMeanings: ['exit', 'departure', 'way out', 'outlet', 'solution']
   },
   'embarque': {
-    lineNumber: '2',
-    wordOrder: '35',
+    wordNumber: 35,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['boarding', 'embarkation'],
     bestTranslation: 'boarding',
     lemma: 'embarque',
-    bestLemmaTranslation: 'boarding'
+    LemmaMeanings: ['boarding', 'embarkation', 'shipment', 'loading', 'departure']
   },
   'llevaba': {
-    lineNumber: '2',
-    wordOrder: '36',
+    wordNumber: 36,
+    frequency: 2,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative First/Third Person Singular',
     meanings: ['was carrying', 'was wearing', 'had been'],
     bestTranslation: 'was carrying',
     lemma: 'llevar',
-    bestLemmaTranslation: 'to carry'
+    LemmaMeanings: ['to carry', 'to take', 'to wear', 'to bear', 'to lead']
   },
   'patagonia': {
-    lineNumber: '2',
-    wordOrder: '37',
+    wordNumber: 37,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Patagonia'],
     bestTranslation: 'Patagonia',
     lemma: 'Patagonia',
-    bestLemmaTranslation: 'Patagonia'
+    LemmaMeanings: ['Patagonia', 'Patagonian region', 'southern South America', 'Argentina/Chile region']
   },
   'siempre': {
-    lineNumber: '2',
-    wordOrder: '38',
+    wordNumber: 38,
+    frequency: 2,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['always', 'forever', 'ever'],
     bestTranslation: 'always',
     lemma: 'siempre',
-    bestLemmaTranslation: 'always'
+    LemmaMeanings: ['always', 'forever', 'ever', 'constantly', 'perpetually']
   },
   'o': {
-    lineNumber: '2',
-    wordOrder: '39',
+    wordNumber: 39,
+    frequency: 2,
     partOfSpeech: 'Conjunction',
     morphology: '',
     meanings: ['or', 'either'],
     bestTranslation: 'or',
     lemma: 'o',
-    bestLemmaTranslation: 'or'
+    LemmaMeanings: ['or', 'either', 'otherwise', 'alternatively', 'else']
   },
   'estaba': {
-    lineNumber: '2',
-    wordOrder: '40',
+    wordNumber: 40,
+    frequency: 2,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative First/Third Person Singular',
     meanings: ['was', 'was being', 'was located'],
     bestTranslation: 'was',
     lemma: 'estar',
-    bestLemmaTranslation: 'to be'
+    LemmaMeanings: ['to be', 'to stay', 'to remain', 'to exist', 'to be located']
   },
   'pensaba': {
-    lineNumber: '2',
-    wordOrder: '41',
+    wordNumber: 41,
+    frequency: 2,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative First/Third Person Singular',
     meanings: ['was thinking', 'was considering'],
     bestTranslation: 'was thinking',
     lemma: 'pensar',
-    bestLemmaTranslation: 'to think'
+    LemmaMeanings: ['to think', 'to believe', 'to consider', 'to plan', 'to reflect']
   },
   'hasta': {
-    lineNumber: '2',
-    wordOrder: '42',
+    wordNumber: 42,
+    frequency: 2,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['until', 'up to', 'even'],
     bestTranslation: 'until',
     lemma: 'hasta',
-    bestLemmaTranslation: 'until'
+    LemmaMeanings: ['until', 'up to', 'even', 'as far as', 'to the point of']
   },
   'chile': {
-    lineNumber: '2',
-    wordOrder: '43',
+    wordNumber: 43,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Chile'],
     bestTranslation: 'Chile',
     lemma: 'Chile',
-    bestLemmaTranslation: 'Chile'
+    LemmaMeanings: ['Chile', 'Republic of Chile', 'South American country', 'Chilean nation']
   },
   'deseos': {
-    lineNumber: '2',
-    wordOrder: '44',
+    wordNumber: 44,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['desires', 'wishes', 'longings'],
     bestTranslation: 'desires',
     lemma: 'deseo',
-    bestLemmaTranslation: 'desire'
+    LemmaMeanings: ['desire', 'wish', 'longing', 'craving', 'yearning']
   },
   'allá': {
-    lineNumber: '2',
-    wordOrder: '45',
+    wordNumber: 45,
+    frequency: 2,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['there', 'over there', 'yonder'],
     bestTranslation: 'there',
     lemma: 'allá',
-    bestLemmaTranslation: 'there'
+    LemmaMeanings: ['there', 'over there', 'yonder', 'in that place', 'far away']
   },
   'repetida': {
-    lineNumber: '2',
-    wordOrder: '46',
+    wordNumber: 46,
+    frequency: 2,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Singular',
     meanings: ['repeated', 'reiterated'],
     bestTranslation: 'repeated',
     lemma: 'repetido',
-    bestLemmaTranslation: 'repeated'
+    LemmaMeanings: ['repeated', 'reiterated', 'recurrent', 'frequent', 'habitual']
   },
   'creí': {
-    lineNumber: '2',
-    wordOrder: '47',
+    wordNumber: 47,
+    frequency: 2,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative First Person Singular',
     meanings: ['I believed', 'I thought'],
     bestTranslation: 'I believed',
     lemma: 'creer',
-    bestLemmaTranslation: 'to believe'
+    LemmaMeanings: ['to believe', 'to think', 'to trust', 'to have faith', 'to suppose']
   },
   'fin': {
-    lineNumber: '2',
-    wordOrder: '48',
+    wordNumber: 48,
+    frequency: 2,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['end', 'conclusion', 'purpose'],
     bestTranslation: 'end',
     lemma: 'fin',
-    bestLemmaTranslation: 'end'
+    LemmaMeanings: ['end', 'conclusion', 'purpose', 'goal', 'finish']
   },
   'como': {
-    lineNumber: '2',
-    wordOrder: '49',
+    wordNumber: 49,
+    frequency: 2,
     partOfSpeech: 'Conjunction/Adverb',
     morphology: '',
     meanings: ['as', 'like', 'how'],
     bestTranslation: 'as',
     lemma: 'como',
-    bestLemmaTranslation: 'as'
+    LemmaMeanings: ['as', 'like', 'how', 'such as', 'in the way that']
   },
   '1': {
-    lineNumber: '1',
-    wordOrder: '50',
+    wordNumber: 50,
+    frequency: 1,
     partOfSpeech: 'Numeral',
     morphology: 'Cardinal',
     meanings: ['one', 'first'],
     bestTranslation: 'one',
     lemma: '1',
-    bestLemmaTranslation: 'one'
+    LemmaMeanings: ['one', 'first', 'single', 'primary', 'initial']
   },
   'repetí': {
-    lineNumber: '3',
-    wordOrder: '51',
+    wordNumber: 51,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative First Person Singular',
     meanings: ['I repeated', 'I reiterated'],
     bestTranslation: 'I repeated',
     lemma: 'repetir',
-    bestLemmaTranslation: 'to repeat'
+    LemmaMeanings: ['to repeat', 'to reiterate', 'to recite', 'to reproduce', 'to do again']
   },
   'varias': {
-    lineNumber: '3',
-    wordOrder: '52',
+    wordNumber: 52,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Plural',
     meanings: ['several', 'various', 'different'],
     bestTranslation: 'several',
     lemma: 'vario',
-    bestLemmaTranslation: 'various'
+    LemmaMeanings: ['various', 'several', 'different', 'diverse', 'changeable']
   },
   'mientras': {
-    lineNumber: '3',
-    wordOrder: '53',
+    wordNumber: 53,
+    frequency: 1,
     partOfSpeech: 'Conjunction',
     morphology: '',
     meanings: ['while', 'whereas', 'as long as'],
     bestTranslation: 'while',
     lemma: 'mientras',
-    bestLemmaTranslation: 'while'
+    LemmaMeanings: ['while', 'whereas', 'as long as', 'during the time that', 'meanwhile']
   },
   'esperaba': {
-    lineNumber: '3',
-    wordOrder: '54',
+    wordNumber: 54,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative First/Third Person Singular',
     meanings: ['was waiting', 'was hoping', 'was expecting'],
     bestTranslation: 'was waiting',
     lemma: 'esperar',
-    bestLemmaTranslation: 'to wait'
+    LemmaMeanings: ['to wait', 'to hope', 'to expect', 'to anticipate', 'to look forward to']
   },
   'sentía': {
-    lineNumber: '3',
-    wordOrder: '55',
+    wordNumber: 55,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative First/Third Person Singular',
     meanings: ['was feeling', 'was sensing'],
     bestTranslation: 'was feeling',
     lemma: 'sentir',
-    bestLemmaTranslation: 'to feel'
+    LemmaMeanings: ['to feel', 'to sense', 'to regret', 'to perceive', 'to experience']
   },
   'fuerza': {
-    lineNumber: '3',
-    wordOrder: '56',
+    wordNumber: 56,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['force', 'strength', 'power'],
     bestTranslation: 'force',
     lemma: 'fuerza',
-    bestLemmaTranslation: 'force'
+    LemmaMeanings: ['force', 'strength', 'power', 'might', 'vigor']
   },
   'extraña': {
-    lineNumber: '3',
-    wordOrder: '57',
+    wordNumber: 57,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Singular',
     meanings: ['strange', 'odd', 'weird'],
     bestTranslation: 'strange',
     lemma: 'extraño',
-    bestLemmaTranslation: 'strange'
+    LemmaMeanings: ['strange', 'odd', 'weird', 'unusual', 'foreign']
   },
   'otorgaba': {
-    lineNumber: '3',
-    wordOrder: '58',
+    wordNumber: 58,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Singular',
     meanings: ['was granting', 'was giving', 'was awarding'],
     bestTranslation: 'was granting',
     lemma: 'otorgar',
-    bestLemmaTranslation: 'to grant'
+    LemmaMeanings: ['to grant', 'to give', 'to award', 'to bestow', 'to confer']
   },
   'mayor': {
-    lineNumber: '3',
-    wordOrder: '59',
+    wordNumber: 59,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Comparative',
     meanings: ['greater', 'larger', 'older'],
     bestTranslation: 'greater',
     lemma: 'grande',
-    bestLemmaTranslation: 'big'
+    LemmaMeanings: ['big', 'large', 'great', 'grand', 'important']
   },
   'delgado': {
-    lineNumber: '3',
-    wordOrder: '60',
+    wordNumber: 60,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Singular',
     meanings: ['thin', 'slim', 'slender'],
     bestTranslation: 'thin',
     lemma: 'delgado',
-    bestLemmaTranslation: 'thin'
+    LemmaMeanings: ['thin', 'slim', 'slender', 'lean', 'skinny']
   },
   'cuadernillo': {
-    lineNumber: '3',
-    wordOrder: '61',
+    wordNumber: 61,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['booklet', 'notebook', 'pamphlet'],
     bestTranslation: 'booklet',
     lemma: 'cuadernillo',
-    bestLemmaTranslation: 'booklet'
+    LemmaMeanings: ['booklet', 'notebook', 'pamphlet', 'brochure', 'small copybook']
   },
   'pasaje': {
-    lineNumber: '3',
-    wordOrder: '62',
+    wordNumber: 62,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['passage', 'ticket', 'fare'],
     bestTranslation: 'ticket',
     lemma: 'pasaje',
-    bestLemmaTranslation: 'passage'
+    LemmaMeanings: ['passage', 'ticket', 'fare', 'excerpt', 'corridor']
   },
   'aumentaba': {
-    lineNumber: '3',
-    wordOrder: '63',
+    wordNumber: 63,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Singular',
     meanings: ['was increasing', 'was growing', 'was augmenting'],
     bestTranslation: 'was increasing',
     lemma: 'aumentar',
-    bestLemmaTranslation: 'to increase'
+    LemmaMeanings: ['to increase', 'to augment', 'to grow', 'to raise', 'to enlarge']
   },
   'conforme': {
-    lineNumber: '3',
-    wordOrder: '64',
+    wordNumber: 64,
+    frequency: 1,
     partOfSpeech: 'Adjective/Adverb/Conjunction',
     morphology: '',
     meanings: ['according to', 'as', 'satisfied'],
     bestTranslation: 'as',
     lemma: 'conforme',
-    bestLemmaTranslation: 'according to'
+    LemmaMeanings: ['according to', 'as', 'satisfied', 'in agreement', 'conforming']
   },
   'había': {
-    lineNumber: '3',
-    wordOrder: '65',
+    wordNumber: 65,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Singular',
     meanings: ['there was', 'had'],
     bestTranslation: 'there was',
     lemma: 'haber',
-    bestLemmaTranslation: 'to have'
+    LemmaMeanings: ['to have', 'to exist', 'to be', 'to occur', 'auxiliary verb']
   },
   'atravesado': {
-    lineNumber: '3',
-    wordOrder: '66',
+    wordNumber: 66,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Past Participle',
     meanings: ['crossed', 'traversed', 'passed through'],
     bestTranslation: 'crossed',
     lemma: 'atravesar',
-    bestLemmaTranslation: 'to cross'
+    LemmaMeanings: ['to cross', 'to traverse', 'to pass through', 'to pierce', 'to go through']
   },
   'primer': {
-    lineNumber: '3',
-    wordOrder: '67',
+    wordNumber: 67,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Singular Ordinal',
     meanings: ['first', 'primary', 'initial'],
     bestTranslation: 'first',
     lemma: 'primero',
-    bestLemmaTranslation: 'first'
+    LemmaMeanings: ['first', 'primary', 'initial', 'earliest', 'foremost']
   },
   'control': {
-    lineNumber: '3',
-    wordOrder: '68',
+    wordNumber: 68,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['control', 'check', 'checkpoint'],
     bestTranslation: 'control',
     lemma: 'control',
-    bestLemmaTranslation: 'control'
+    LemmaMeanings: ['control', 'check', 'checkpoint', 'supervision', 'command']
   },
   'paseaba': {
-    lineNumber: '3',
-    wordOrder: '69',
+    wordNumber: 69,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative First/Third Person Singular',
     meanings: ['was walking', 'was strolling'],
     bestTranslation: 'was walking',
     lemma: 'pasear',
-    bestLemmaTranslation: 'to walk'
+    LemmaMeanings: ['to walk', 'to stroll', 'to promenade', 'to wander', 'to take a walk']
   },
   'sala': {
-    lineNumber: '3',
-    wordOrder: '70',
+    wordNumber: 70,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['room', 'hall', 'lounge'],
     bestTranslation: 'room',
     lemma: 'sala',
-    bestLemmaTranslation: 'room'
+    LemmaMeanings: ['room', 'hall', 'lounge', 'living room', 'chamber']
   },
   'aferrado': {
-    lineNumber: '3',
-    wordOrder: '71',
+    wordNumber: 71,
+    frequency: 1,
     partOfSpeech: 'Adjective/Verb',
     morphology: 'Past Participle',
     meanings: ['clutched', 'clinging to', 'holding on'],
     bestTranslation: 'clutching',
     lemma: 'aferrar',
-    bestLemmaTranslation: 'to clutch'
+    LemmaMeanings: ['to clutch', 'to cling to', 'to grasp', 'to hold on', 'to grip']
   },
   'bolso': {
-    lineNumber: '3',
-    wordOrder: '72',
+    wordNumber: 72,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['bag', 'handbag', 'purse'],
     bestTranslation: 'bag',
     lemma: 'bolso',
-    bestLemmaTranslation: 'bag'
+    LemmaMeanings: ['bag', 'handbag', 'purse', 'tote', 'satchel']
   },
   'mano': {
-    lineNumber: '3',
-    wordOrder: '73',
+    wordNumber: 73,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['hand'],
     bestTranslation: 'hand',
     lemma: 'mano',
-    bestLemmaTranslation: 'hand'
+    LemmaMeanings: ['hand', 'handwriting', 'side', 'worker', 'help']
   },
   'no': {
-    lineNumber: '3',
-    wordOrder: '74',
+    wordNumber: 74,
+    frequency: 1,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['no', 'not'],
     bestTranslation: 'no',
     lemma: 'no',
-    bestLemmaTranslation: 'no'
+    LemmaMeanings: ['no', 'not', 'non-', 'negative', 'refusal']
   },
   'demasiadas': {
-    lineNumber: '3',
-    wordOrder: '75',
+    wordNumber: 75,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Plural',
     meanings: ['too many', 'excessive'],
     bestTranslation: 'too many',
     lemma: 'demasiado',
-    bestLemmaTranslation: 'too much'
+    LemmaMeanings: ['too much', 'too many', 'excessive', 'overly', 'excessively']
   },
   'cosas': {
-    lineNumber: '3',
-    wordOrder: '76',
+    wordNumber: 76,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['things', 'objects', 'matters'],
     bestTranslation: 'things',
     lemma: 'cosa',
-    bestLemmaTranslation: 'thing'
+    LemmaMeanings: ['thing', 'object', 'matter', 'affair', 'issue']
   },
   'él': {
-    lineNumber: '3',
-    wordOrder: '77',
+    wordNumber: 77,
+    frequency: 1,
     partOfSpeech: 'Pronoun',
     morphology: 'Personal Third Person Masculine Singular',
     meanings: ['he', 'him', 'it'],
     bestTranslation: 'he',
     lemma: 'él',
-    bestLemmaTranslation: 'he'
+    LemmaMeanings: ['he', 'him', 'it', 'himself', 'that one']
   },
   'cámara': {
-    lineNumber: '3',
-    wordOrder: '78',
+    wordNumber: 78,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['camera', 'chamber'],
     bestTranslation: 'camera',
     lemma: 'cámara',
-    bestLemmaTranslation: 'camera'
+    LemmaMeanings: ['camera', 'chamber', 'room', 'department', 'parliament']
   },
   'fotográfica': {
-    lineNumber: '3',
-    wordOrder: '79',
+    wordNumber: 79,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Singular',
     meanings: ['photographic'],
     bestTranslation: 'photographic',
     lemma: 'fotográfico',
-    bestLemmaTranslation: 'photographic'
+    LemmaMeanings: ['photographic', 'pictorial', 'camera-related', 'photography', 'picture']
   },
   'libreta': {
-    lineNumber: '3',
-    wordOrder: '80',
+    wordNumber: 80,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['notebook', 'notepad'],
     bestTranslation: 'notebook',
     lemma: 'libreta',
-    bestLemmaTranslation: 'notebook'
+    LemmaMeanings: ['notebook', 'notepad', 'small book', 'pad', 'binder']
   },
   'apuntes': {
-    lineNumber: '3',
-    wordOrder: '81',
+    wordNumber: 81,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['notes', 'annotations'],
     bestTranslation: 'notes',
     lemma: 'apunte',
-    bestLemmaTranslation: 'note'
+    LemmaMeanings: ['note', 'annotation', 'sketch', 'jotting', 'memorandum']
   },
   'bruce': {
-    lineNumber: '3',
-    wordOrder: '82',
+    wordNumber: 82,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Bruce'],
     bestTranslation: 'Bruce',
     lemma: 'Bruce',
-    bestLemmaTranslation: 'Bruce'
+    LemmaMeanings: ['Bruce', 'male name', 'first name', 'English name', 'Bruce Chatwin']
   },
   'he': {
-    lineNumber: '3',
-    wordOrder: '83',
+    wordNumber: 83,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Present Perfect Auxiliary First Person Singular',
     meanings: ['I have'],
     bestTranslation: 'I have',
     lemma: 'haber',
-    bestLemmaTranslation: 'to have'
+    LemmaMeanings: ['to have', 'to exist', 'to be', 'to occur', 'auxiliary verb']
   },
   'aborrecido': {
-    lineNumber: '3',
-    wordOrder: '84',
+    wordNumber: 84,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Past Participle',
     meanings: ['hated', 'detested', 'abhorred'],
     bestTranslation: 'hated',
     lemma: 'aborrecer',
-    bestLemmaTranslation: 'to hate'
+    LemmaMeanings: ['to hate', 'to detest', 'to abhor', 'to loathe', 'to despise']
   },
   'hacen': {
-    lineNumber: '3',
-    wordOrder: '85',
+    wordNumber: 85,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Present Indicative Third Person Plural',
     meanings: ['they do', 'they make'],
     bestTranslation: 'they make',
     lemma: 'hacer',
-    bestLemmaTranslation: 'to do'
+    LemmaMeanings: ['to do', 'to make', 'to create', 'to cause', 'to perform']
   },
   'rayas': {
-    lineNumber: '3',
-    wordOrder: '86',
+    wordNumber: 86,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['lines', 'stripes', 'streaks'],
     bestTranslation: 'lines',
     lemma: 'raya',
-    bestLemmaTranslation: 'line'
+    LemmaMeanings: ['line', 'stripe', 'streak', 'dash', 'underline']
   },
   'anotaciones': {
-    lineNumber: '3',
-    wordOrder: '87',
+    wordNumber: 87,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['notes', 'annotations', 'notations'],
     bestTranslation: 'annotations',
     lemma: 'anotación',
-    bestLemmaTranslation: 'annotation'
+    LemmaMeanings: ['annotation', 'note', 'notation', 'comment', 'remark']
   },
   'libros': {
-    lineNumber: '4',
-    wordOrder: '88',
+    wordNumber: 88,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['books', 'volumes'],
     bestTranslation: 'books',
     lemma: 'libro',
-    bestLemmaTranslation: 'book'
+    LemmaMeanings: ['book', 'volume', 'work', 'tome', 'publication']
   },
   'aquél': {
-    lineNumber: '4',
-    wordOrder: '89',
+    wordNumber: 89,
+    frequency: 1,
     partOfSpeech: 'Demonstrative Pronoun',
     morphology: 'Masculine Singular',
     meanings: ['that one', 'that'],
     bestTranslation: 'that one',
     lemma: 'aquel',
-    bestLemmaTranslation: 'that'
+    LemmaMeanings: ['that', 'that one', 'the former', 'those', 'that person']
   },
   'lleno': {
-    lineNumber: '4',
-    wordOrder: '90',
+    wordNumber: 90,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Singular',
     meanings: ['full', 'filled', 'complete'],
     bestTranslation: 'full',
     lemma: 'lleno',
-    bestLemmaTranslation: 'full'
+    LemmaMeanings: ['full', 'filled', 'complete', 'crowded', 'packed']
   },
   'subrayados': {
-    lineNumber: '4',
-    wordOrder: '91',
+    wordNumber: 91,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['underlinings', 'underlines', 'highlights'],
     bestTranslation: 'underlines',
     lemma: 'subrayado',
-    bestLemmaTranslation: 'underlining'
+    LemmaMeanings: ['underlining', 'underline', 'highlight', 'emphasis', 'stress']
   },
   'signos': {
-    lineNumber: '4',
-    wordOrder: '92',
+    wordNumber: 92,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['signs', 'symbols', 'marks'],
     bestTranslation: 'signs',
     lemma: 'signo',
-    bestLemmaTranslation: 'sign'
+    LemmaMeanings: ['sign', 'symbol', 'mark', 'signal', 'token']
   },
   'exclamación': {
-    lineNumber: '4',
-    wordOrder: '93',
+    wordNumber: 93,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['exclamation'],
     bestTranslation: 'exclamation',
     lemma: 'exclamación',
-    bestLemmaTranslation: 'exclamation'
+    LemmaMeanings: ['exclamation', 'outcry', 'outburst', 'ejaculation', 'interjection']
   },
   'fueron': {
-    lineNumber: '4',
-    wordOrder: '94',
+    wordNumber: 94,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative Third Person Plural',
     meanings: ['they were', 'they went'],
     bestTranslation: 'they were',
     lemma: 'ser/ir',
-    bestLemmaTranslation: 'to be/to go'
+    LemmaMeanings: ['to be/to go', 'to exist', 'to move', 'to travel', 'to proceed']
   },
   'aumento': {
-    lineNumber: '4',
-    wordOrder: '95',
+    wordNumber: 95,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['increase', 'growth', 'rise'],
     bestTranslation: 'increase',
     lemma: 'aumento',
-    bestLemmaTranslation: 'increase'
+    LemmaMeanings: ['increase', 'growth', 'rise', 'increment', 'augmentation']
   },
   'tres': {
-    lineNumber: '4',
-    wordOrder: '96',
+    wordNumber: 96,
+    frequency: 1,
     partOfSpeech: 'Numeral',
     morphology: 'Cardinal',
     meanings: ['three'],
     bestTranslation: 'three',
     lemma: 'tres',
-    bestLemmaTranslation: 'three'
+    LemmaMeanings: ['three', 'trio', 'triple', 'triad', 'third']
   },
   'lecturas': {
-    lineNumber: '4',
-    wordOrder: '97',
+    wordNumber: 97,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['readings', 'lectures', 'interpretations'],
     bestTranslation: 'readings',
     lemma: 'lectura',
-    bestLemmaTranslation: 'reading'
+    LemmaMeanings: ['reading', 'lecture', 'interpretation', 'perusal', 'literacy']
   },
   'leerlo': {
-    lineNumber: '4',
-    wordOrder: '98',
+    wordNumber: 98,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive with Direct Object Pronoun',
     meanings: ['to read it'],
     bestTranslation: 'to read it',
     lemma: 'leer',
-    bestLemmaTranslation: 'to read'
+    LemmaMeanings: ['to read', 'to peruse', 'to interpret', 'to decipher', 'to study']
   },
   'cuarta': {
-    lineNumber: '4',
-    wordOrder: '99',
+    wordNumber: 99,
+    frequency: 1,
     partOfSpeech: 'Adjective/Numeral',
     morphology: 'Feminine Singular Ordinal',
     meanings: ['fourth'],
     bestTranslation: 'fourth',
     lemma: 'cuarto',
-    bestLemmaTranslation: 'fourth'
+    LemmaMeanings: ['fourth', 'quarter', 'room', 'chamber', 'quart']
   },
   'durante': {
-    lineNumber: '4',
-    wordOrder: '100',
+    wordNumber: 100,
+    frequency: 1,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['during', 'throughout', 'for'],
     bestTranslation: 'during',
     lemma: 'durante',
-    bestLemmaTranslation: 'during'
+    LemmaMeanings: ['during', 'throughout', 'for', 'while', 'in the course of']
   },
   'vuelo': {
-    lineNumber: '4',
-    wordOrder: '101',
+    wordNumber: 101,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['flight', 'flying'],
     bestTranslation: 'flight',
     lemma: 'vuelo',
-    bestLemmaTranslation: 'flight'
+    LemmaMeanings: ['flight', 'flying', 'air travel', 'soaring', 'aviation']
   },
   'santiago': {
-    lineNumber: '4',
-    wordOrder: '102',
+    wordNumber: 102,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Santiago'],
     bestTranslation: 'Santiago',
     lemma: 'Santiago',
-    bestLemmaTranslation: 'Santiago'
+    LemmaMeanings: ['Santiago', 'Saint James', 'capital of Chile', 'Chilean city', 'Saint Iago']
   },
   'quise': {
-    lineNumber: '4',
-    wordOrder: '103',
+    wordNumber: 103,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative First Person Singular',
     meanings: ['I wanted', 'I wished', 'I tried to'],
     bestTranslation: 'I wanted',
     lemma: 'querer',
-    bestLemmaTranslation: 'to want'
+    LemmaMeanings: ['to want', 'to wish', 'to love', 'to desire', 'to try to']
   },
   'regresar': {
-    lineNumber: '4',
-    wordOrder: '104',
+    wordNumber: 104,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive',
     meanings: ['to return', 'to go back', 'to come back'],
     bestTranslation: 'to return',
     lemma: 'regresar',
-    bestLemmaTranslation: 'to return'
+    LemmaMeanings: ['to return', 'to go back', 'to come back', 'to turn back', 'to retreat']
   },
   'tuve': {
-    lineNumber: '4',
-    wordOrder: '105',
+    wordNumber: 105,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative First Person Singular',
     meanings: ['I had', 'I experienced', 'I got'],
     bestTranslation: 'I had',
     lemma: 'tener',
-    bestLemmaTranslation: 'to have'
+    LemmaMeanings: ['to have', 'to possess', 'to hold', 'to keep', 'to own']
   },
   'ganas': {
-    lineNumber: '4',
-    wordOrder: '106',
+    wordNumber: 106,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['desires', 'wishes', 'urges'],
     bestTranslation: 'desires',
     lemma: 'gana',
-    bestLemmaTranslation: 'desire'
+    LemmaMeanings: ['desire', 'wish', 'urge', 'inclination', 'appetite']
   },
   'determinación': {
-    lineNumber: '4',
-    wordOrder: '107',
+    wordNumber: 107,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['determination', 'decision', 'resolve'],
     bestTranslation: 'determination',
     lemma: 'determinación',
-    bestLemmaTranslation: 'determination'
+    LemmaMeanings: ['determination', 'decision', 'resolve', 'resolution', 'willpower']
   },
   'pesó': {
-    lineNumber: '4',
-    wordOrder: '108',
+    wordNumber: 108,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative Third Person Singular',
     meanings: ['weighed', 'outweighed', 'mattered'],
     bestTranslation: 'weighed',
     lemma: 'pesar',
-    bestLemmaTranslation: 'to weigh'
+    LemmaMeanings: ['to weigh', 'to matter', 'to be heavy', 'to regret', 'to be important']
   },
   'miedo': {
-    lineNumber: '4',
-    wordOrder: '109',
+    wordNumber: 109,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['fear', 'dread', 'fright'],
     bestTranslation: 'fear',
     lemma: 'miedo',
-    bestLemmaTranslation: 'fear'
+    LemmaMeanings: ['fear', 'dread', 'fright', 'terror', 'alarm']
   },
   'reencontrarme': {
-    lineNumber: '4',
-    wordOrder: '110',
+    wordNumber: 110,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive Reflexive',
     meanings: ['to meet again', 'to reunite with', 'to find myself again'],
     bestTranslation: 'to meet again',
     lemma: 'reencontrar',
-    bestLemmaTranslation: 'to meet again'
+    LemmaMeanings: ['to meet again', 'to reunite', 'to rediscover', 'to find again', 'to reconnect']
   },
   'con': {
-    lineNumber: '4',
-    wordOrder: '111',
+    wordNumber: 111,
+    frequency: 1,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['with', 'along with'],
     bestTranslation: 'with',
     lemma: 'con',
-    bestLemmaTranslation: 'with'
+    LemmaMeanings: ['with', 'along with', 'by means of', 'together with', 'using']
   },
   'mi': {
-    lineNumber: '4',
-    wordOrder: '112',
+    wordNumber: 112,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Possessive First Person Singular',
     meanings: ['my', 'mine'],
     bestTranslation: 'my',
     lemma: 'mi',
-    bestLemmaTranslation: 'my'
+    LemmaMeanings: ['my', 'mine', 'my own', 'of mine', 'belonging to me']
   },
   'hermano': {
-    lineNumber: '4',
-    wordOrder: '113',
+    wordNumber: 113,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['brother', 'sibling'],
     bestTranslation: 'brother',
     lemma: 'hermano',
-    bestLemmaTranslation: 'brother'
+    LemmaMeanings: ['brother', 'sibling', 'male sibling', 'brotherhood', 'fraternity']
   },
   'amigos': {
-    lineNumber: '4',
-    wordOrder: '114',
+    wordNumber: 114,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['friends', 'pals'],
     bestTranslation: 'friends',
     lemma: 'amigo',
-    bestLemmaTranslation: 'friend'
+    LemmaMeanings: ['friend', 'pal', 'buddy', 'companion', 'ally']
   },
   'tengo': {
-    lineNumber: '4',
-    wordOrder: '115',
+    wordNumber: 115,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Present Indicative First Person Singular',
     meanings: ['I have', 'I own', 'I possess'],
     bestTranslation: 'I have',
     lemma: 'tener',
-    bestLemmaTranslation: 'to have'
+    LemmaMeanings: ['to have', 'to possess', 'to hold', 'to keep', 'to own']
   },
   'transformaron': {
-    lineNumber: '4',
-    wordOrder: '116',
+    wordNumber: 116,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative Third Person Plural',
     meanings: ['transformed', 'changed', 'converted'],
     bestTranslation: 'transformed',
     lemma: 'transformar',
-    bestLemmaTranslation: 'to transform'
+    LemmaMeanings: ['to transform', 'to change', 'to convert', 'to turn into', 'to modify']
   },
   'promesa': {
-    lineNumber: '4',
-    wordOrder: '117',
+    wordNumber: 117,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['promise', 'pledge', 'vow'],
     bestTranslation: 'promise',
     lemma: 'promesa',
-    bestLemmaTranslation: 'promise'
+    LemmaMeanings: ['promise', 'pledge', 'vow', 'commitment', 'undertaking']
   },
   'tan': {
-    lineNumber: '4',
-    wordOrder: '118',
+    wordNumber: 118,
+    frequency: 1,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['so', 'such', 'as'],
     bestTranslation: 'so',
     lemma: 'tan',
-    bestLemmaTranslation: 'so'
+    LemmaMeanings: ['so', 'such', 'as', 'that much', 'to that extent']
   },
   'menos': {
-    lineNumber: '4',
-    wordOrder: '119',
+    wordNumber: 119,
+    frequency: 1,
     partOfSpeech: 'Adverb',
     morphology: '',
     meanings: ['less', 'minus', 'fewer'],
     bestTranslation: 'less',
     lemma: 'menos',
-    bestLemmaTranslation: 'less'
+    LemmaMeanings: ['less', 'minus', 'fewer', 'not as much', 'least']
   },
   'demasiados': {
-    lineNumber: '5',
-    wordOrder: '120',
+    wordNumber: 120,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Plural',
     meanings: ['too many', 'excessive'],
     bestTranslation: 'too many',
     lemma: 'demasiado',
-    bestLemmaTranslation: 'too much'
+    LemmaMeanings: ['too much', 'excessive', 'too many', 'overly', 'undue']
   },
   'vagando': {
-    lineNumber: '5',
-    wordOrder: '121',
+    wordNumber: 121,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Gerund',
     meanings: ['wandering', 'roaming', 'drifting'],
     bestTranslation: 'wandering',
     lemma: 'vagar',
-    bestLemmaTranslation: 'to wander'
+    LemmaMeanings: ['to wander', 'to roam', 'to drift', 'to rove', 'to ramble']
   },
   'sin': {
-    lineNumber: '5',
-    wordOrder: '122',
+    wordNumber: 122,
+    frequency: 1,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['without', 'lacking'],
     bestTranslation: 'without',
     lemma: 'sin',
-    bestLemmaTranslation: 'without'
+    LemmaMeanings: ['without', 'lacking', 'devoid of', 'minus', 'absent']
   },
   'rumbo': {
-    lineNumber: '5',
-    wordOrder: '123',
+    wordNumber: 123,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['course', 'direction', 'heading'],
     bestTranslation: 'direction',
     lemma: 'rumbo',
-    bestLemmaTranslation: 'direction'
+    LemmaMeanings: ['direction', 'course', 'heading', 'bearing', 'route']
   },
   'fijo': {
-    lineNumber: '5',
-    wordOrder: '124',
+    wordNumber: 124,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Singular',
     meanings: ['fixed', 'steady', 'firm'],
     bestTranslation: 'fixed',
     lemma: 'fijo',
-    bestLemmaTranslation: 'fixed'
+    LemmaMeanings: ['fixed', 'steady', 'firm', 'stable', 'permanent']
   },
   'detenerme': {
-    lineNumber: '5',
-    wordOrder: '125',
+    wordNumber: 125,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive Reflexive',
     meanings: ['to stop myself', 'to halt', 'to pause'],
     bestTranslation: 'to stop myself',
     lemma: 'detener',
-    bestLemmaTranslation: 'to stop'
+    LemmaMeanings: ['to stop', 'to halt', 'to arrest', 'to detain', 'to pause']
   },
   'aconsejaban': {
-    lineNumber: '5',
-    wordOrder: '126',
+    wordNumber: 126,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Plural',
     meanings: ['they advised', 'they recommended', 'they counseled'],
     bestTranslation: 'they advised',
     lemma: 'aconsejar',
-    bestLemmaTranslation: 'to advise'
+    LemmaMeanings: ['to advise', 'to counsel', 'to recommend', 'to suggest', 'to guide']
   },
   'pequeño': {
-    lineNumber: '5',
-    wordOrder: '127',
+    wordNumber: 127,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Singular',
     meanings: ['small', 'little', 'tiny'],
     bestTranslation: 'small',
     lemma: 'pequeño',
-    bestLemmaTranslation: 'small'
+    LemmaMeanings: ['small', 'little', 'tiny', 'minor', 'slight']
   },
   'pueblo': {
-    lineNumber: '5',
-    wordOrder: '128',
+    wordNumber: 128,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['town', 'village', 'people'],
     bestTranslation: 'town',
     lemma: 'pueblo',
-    bestLemmaTranslation: 'town'
+    LemmaMeanings: ['town', 'village', 'people', 'nation', 'populace']
   },
   'pescadores': {
-    lineNumber: '5',
-    wordOrder: '129',
+    wordNumber: 129,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['fishermen', 'anglers'],
     bestTranslation: 'fishermen',
     lemma: 'pescador',
-    bestLemmaTranslation: 'fisherman'
+    LemmaMeanings: ['fisherman', 'angler', 'fisher', 'fishing person', 'one who fishes']
   },
   'creta': {
-    lineNumber: '5',
-    wordOrder: '130',
+    wordNumber: 130,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Crete'],
     bestTranslation: 'Crete',
     lemma: 'Creta',
-    bestLemmaTranslation: 'Crete'
+    LemmaMeanings: ['Crete', 'Greek island', 'Mediterranean island', 'Cretan island', 'Kriti']
   },
   'ierápetras': {
-    lineNumber: '5',
-    wordOrder: '131',
+    wordNumber: 131,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Proper Noun',
     meanings: ['Ierapetra'],
     bestTranslation: 'Ierapetra',
     lemma: 'Ierápetras',
-    bestLemmaTranslation: 'Ierapetra'
+    LemmaMeanings: ['Ierapetra', 'city in Crete', 'Cretan town', 'coastal town', 'Greek municipality']
   },
   'apacible': {
-    lineNumber: '5',
-    wordOrder: '132',
+    wordNumber: 132,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Singular',
     meanings: ['peaceful', 'calm', 'serene'],
     bestTranslation: 'peaceful',
     lemma: 'apacible',
-    bestLemmaTranslation: 'peaceful'
+    LemmaMeanings: ['peaceful', 'calm', 'serene', 'quiet', 'gentle']
   },
   'ciudad': {
-    lineNumber: '5',
-    wordOrder: '133',
+    wordNumber: 133,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['city', 'town'],
     bestTranslation: 'city',
     lemma: 'ciudad',
-    bestLemmaTranslation: 'city'
+    LemmaMeanings: ['city', 'town', 'metropolis', 'urban area', 'municipality']
   },
   'asturiana': {
-    lineNumber: '5',
-    wordOrder: '134',
+    wordNumber: 134,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Singular',
     meanings: ['Asturian', 'from Asturias'],
     bestTranslation: 'Asturian',
     lemma: 'asturiano',
-    bestLemmaTranslation: 'Asturian'
+    LemmaMeanings: ['Asturian', 'from Asturias', 'of Asturias', 'pertaining to Asturias', 'native of Asturias']
   },
   'villa': {
-    lineNumber: '5',
-    wordOrder: '135',
+    wordNumber: 135,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['villa', 'town'],
     bestTranslation: 'villa',
     lemma: 'villa',
-    bestLemmaTranslation: 'villa'
+    LemmaMeanings: ['villa', 'town', 'resort', 'mansion', 'country house']
   },
   'viciosa': {
-    lineNumber: '5',
-    wordOrder: '136',
+    wordNumber: 136,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Singular',
     meanings: ['vicious', 'luxuriant'],
     bestTranslation: 'Viciosa',
     lemma: 'vicioso',
-    bestLemmaTranslation: 'vicious'
+    LemmaMeanings: ['vicious', 'luxuriant', 'lush', 'corrupt', 'addictive']
   },
   'algún': {
-    lineNumber: '5',
-    wordOrder: '137',
+    wordNumber: 137,
+    frequency: 1,
     partOfSpeech: 'Adjective/Determiner',
     morphology: 'Masculine Singular',
     meanings: ['some', 'any'],
     bestTranslation: 'some',
     lemma: 'alguno',
-    bestLemmaTranslation: 'some'
+    LemmaMeanings: ['some', 'any', 'a certain', 'someone', 'somewhat']
   },
   'día': {
-    lineNumber: '5',
-    wordOrder: '138',
+    wordNumber: 138,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['day'],
     bestTranslation: 'day',
     lemma: 'día',
-    bestLemmaTranslation: 'day'
+    LemmaMeanings: ['day', 'daytime', 'daylight', 'date', 'daily period']
   },
   'cayo': {
-    lineNumber: '5',
-    wordOrder: '139',
+    wordNumber: 139,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative Third Person Singular',
     meanings: ['fell', 'dropped', 'fell down'],
     bestTranslation: 'fell',
     lemma: 'caer',
-    bestLemmaTranslation: 'to fall'
+    LemmaMeanings: ['to fall', 'to drop', 'to descend', 'to tumble', 'to collapse']
   },
   'mis': {
-    lineNumber: '5',
-    wordOrder: '140',
+    wordNumber: 140,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Possessive First Person Plural',
     meanings: ['my'],
     bestTranslation: 'my',
     lemma: 'mi',
-    bestLemmaTranslation: 'my'
+    LemmaMeanings: ['my', 'mine', 'my own', 'of mine', 'belonging to me']
   },
   'manos': {
-    lineNumber: '5',
-    wordOrder: '141',
+    wordNumber: 141,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['hands'],
     bestTranslation: 'hands',
     lemma: 'mano',
-    bestLemmaTranslation: 'hand'
+    LemmaMeanings: ['hand', 'palm', 'handwriting', 'worker', 'manual skill']
   },
   'para': {
-    lineNumber: '5',
-    wordOrder: '142',
+    wordNumber: 142,
+    frequency: 1,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['for', 'in order to', 'to'],
     bestTranslation: 'for',
     lemma: 'para',
-    bestLemmaTranslation: 'for'
+    LemmaMeanings: ['for', 'in order to', 'to', 'towards', 'by']
   },
   'devolverme': {
-    lineNumber: '5',
-    wordOrder: '143',
+    wordNumber: 143,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive Reflexive',
     meanings: ['to return me', 'to bring me back', 'to restore me'],
     bestTranslation: 'to return me',
     lemma: 'devolver',
-    bestLemmaTranslation: 'to return'
+    LemmaMeanings: ['to return', 'to give back', 'to restore', 'to repay', 'to refund']
   },
   'olvidado': {
-    lineNumber: '5',
-    wordOrder: '144',
+    wordNumber: 144,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Singular',
     meanings: ['forgotten', 'overlooked', 'neglected'],
     bestTranslation: 'forgotten',
     lemma: 'olvidado',
-    bestLemmaTranslation: 'forgotten'
+    LemmaMeanings: ['forgotten', 'overlooked', 'neglected', 'unremembered', 'disregarded']
   },
   'esperando': {
-    lineNumber: '5',
-    wordOrder: '145',
+    wordNumber: 145,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Gerund',
     meanings: ['waiting', 'expecting', 'hoping'],
     bestTranslation: 'waiting',
     lemma: 'esperar',
-    bestLemmaTranslation: 'to wait'
+    LemmaMeanings: ['to wait', 'to expect', 'to hope', 'to anticipate', 'to look forward to']
   },
   'leer': {
-    lineNumber: '5',
-    wordOrder: '146',
+    wordNumber: 146,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive',
     meanings: ['to read'],
     bestTranslation: 'to read',
     lemma: 'leer',
-    bestLemmaTranslation: 'to read'
+    LemmaMeanings: ['to read', 'to peruse', 'to interpret', 'to decipher', 'to study']
   },
   'primera': {
-    lineNumber: '5',
-    wordOrder: '147',
+    wordNumber: 147,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Feminine Singular Ordinal',
     meanings: ['first', 'primary'],
     bestTranslation: 'first',
     lemma: 'primero',
-    bestLemmaTranslation: 'first'
+    LemmaMeanings: ['first', 'primary', 'initial', 'principal', 'leading']
   },
   'entró': {
-    lineNumber: '5',
-    wordOrder: '148',
+    wordNumber: 148,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Preterite Indicative Third Person Singular',
     meanings: ['entered', 'came in', 'went in'],
     bestTranslation: 'entered',
     lemma: 'entrar',
-    bestLemmaTranslation: 'to enter'
+    LemmaMeanings: ['to enter', 'to come in', 'to go in', 'to get in', 'to access']
   },
   'desesperación': {
-    lineNumber: '5',
-    wordOrder: '149',
+    wordNumber: 149,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['desperation', 'despair', 'hopelessness'],
     bestTranslation: 'desperation',
     lemma: 'desesperación',
-    bestLemmaTranslation: 'desperation'
+    LemmaMeanings: ['desperation', 'despair', 'hopelessness', 'anguish', 'distress']
   },
   'volver': {
-    lineNumber: '5',
-    wordOrder: '150',
+    wordNumber: 150,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Infinitive',
     meanings: ['to return', 'to come back', 'to turn'],
     bestTranslation: 'to return',
     lemma: 'volver',
-    bestLemmaTranslation: 'to return'
+    LemmaMeanings: ['to return', 'to come back', 'to go back', 'to turn', 'to revert']
   },
   'está': {
-    lineNumber: '5',
-    wordOrder: '151',
+    wordNumber: 151,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Present Indicative Third Person Singular',
-    meanings: ['is', 'is located'],
+    meanings: ['is', 'is located', 'is situated'],
     bestTranslation: 'is',
     lemma: 'estar',
-    bestLemmaTranslation: 'to be'
+    LemmaMeanings: ['to be', 'to exist', 'to stay', 'to remain', 'to be located']
   },
   'simples': {
-    lineNumber: '5',
-    wordOrder: '152',
+    wordNumber: 152,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Plural',
-    meanings: ['simple', 'plain', 'uncomplicated'],
+    meanings: ['simple', 'plain', 'straightforward'],
     bestTranslation: 'simple',
     lemma: 'simple',
-    bestLemmaTranslation: 'simple'
+    LemmaMeanings: ['simple', 'plain', 'straightforward', 'mere', 'uncomplicated']
   },
   'intenciones': {
-    lineNumber: '5',
-    wordOrder: '153',
+    wordNumber: 153,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['intentions', 'purposes', 'aims'],
     bestTranslation: 'intentions',
     lemma: 'intención',
-    bestLemmaTranslation: 'intention'
+    LemmaMeanings: ['intention', 'purpose', 'aim', 'goal', 'objective']
   },
   'viajero': {
-    lineNumber: '5',
-    wordOrder: '154',
-    partOfSpeech: 'Noun',
+    wordNumber: 154,
+    frequency: 1,
+    partOfSpeech: 'Noun/Adjective',
     morphology: 'Masculine Singular',
-    meanings: ['traveler', 'passenger', 'voyager'],
+    meanings: ['traveler', 'voyager', 'tourist'],
     bestTranslation: 'traveler',
     lemma: 'viajero',
-    bestLemmaTranslation: 'traveler'
+    LemmaMeanings: ['traveler', 'voyager', 'tourist', 'passenger', 'wanderer']
   },
   'distancia': {
-    lineNumber: '5',
-    wordOrder: '155',
+    wordNumber: 155,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
-    meanings: ['distance', 'span', 'gap'],
+    meanings: ['distance', 'span', 'space'],
     bestTranslation: 'distance',
     lemma: 'distancia',
-    bestLemmaTranslation: 'distance'
+    LemmaMeanings: ['distance', 'span', 'space', 'interval', 'remoteness']
   },
   'nos': {
-    lineNumber: '5',
-    wordOrder: '156',
+    wordNumber: 156,
+    frequency: 1,
     partOfSpeech: 'Pronoun',
     morphology: 'Personal Object First Person Plural',
     meanings: ['us', 'to us', 'ourselves'],
     bestTranslation: 'us',
     lemma: 'nos',
-    bestLemmaTranslation: 'us'
+    LemmaMeanings: ['us', 'to us', 'ourselves', 'each other', 'one another']
   },
   'muestra': {
-    lineNumber: '5',
-    wordOrder: '157',
-    partOfSpeech: 'Verb',
-    morphology: 'Present Indicative Third Person Singular',
-    meanings: ['shows', 'displays', 'exhibits'],
+    wordNumber: 157,
+    frequency: 1,
+    partOfSpeech: 'Verb/Noun',
+    morphology: 'Present Indicative Third Person Singular/Feminine Singular',
+    meanings: ['shows', 'displays', 'sample', 'specimen'],
     bestTranslation: 'shows',
-    lemma: 'mostrar',
-    bestLemmaTranslation: 'to show'
+    lemma: 'mostrar/muestra',
+    LemmaMeanings: ['to show', 'to display', 'sample', 'specimen', 'evidence']
   },
   'su': {
-    lineNumber: '5',
-    wordOrder: '158',
+    wordNumber: 158,
+    frequency: 1,
     partOfSpeech: 'Adjective',
-    morphology: 'Possessive Third Person Singular',
+    morphology: 'Possessive Third Person Singular/Plural',
     meanings: ['his', 'her', 'its', 'their'],
     bestTranslation: 'its',
     lemma: 'su',
-    bestLemmaTranslation: 'his/her/its'
+    LemmaMeanings: ['his', 'her', 'its', 'their', 'your (formal)']
   },
   'real': {
-    lineNumber: '5',
-    wordOrder: '159',
+    wordNumber: 159,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Singular',
     meanings: ['real', 'actual', 'genuine'],
     bestTranslation: 'real',
     lemma: 'real',
-    bestLemmaTranslation: 'real'
+    LemmaMeanings: ['real', 'actual', 'genuine', 'royal', 'authentic']
   },
   'envergadura': {
-    lineNumber: '5',
-    wordOrder: '160',
+    wordNumber: 160,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
-    meanings: ['wingspan', 'magnitude', 'scale'],
+    meanings: ['magnitude', 'scope', 'wingspan'],
     bestTranslation: 'magnitude',
     lemma: 'envergadura',
-    bestLemmaTranslation: 'magnitude'
+    LemmaMeanings: ['magnitude', 'scope', 'wingspan', 'dimension', 'importance']
   },
   'cuando': {
-    lineNumber: '5',
-    wordOrder: '161',
+    wordNumber: 161,
+    frequency: 1,
     partOfSpeech: 'Conjunction/Adverb',
     morphology: '',
-    meanings: ['when', 'whenever'],
+    meanings: ['when', 'whenever', 'at the time that'],
     bestTranslation: 'when',
     lemma: 'cuando',
-    bestLemmaTranslation: 'when'
+    LemmaMeanings: ['when', 'whenever', 'at the time that', 'as', 'while']
   },
   'recuerdos': {
-    lineNumber: '6',
-    wordOrder: '162',
+    wordNumber: 162,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
-    meanings: ['memories', 'souvenirs', 'remembrances'],
+    meanings: ['memories', 'recollections', 'souvenirs'],
     bestTranslation: 'memories',
     lemma: 'recuerdo',
-    bestLemmaTranslation: 'memory'
+    LemmaMeanings: ['memory', 'recollection', 'souvenir', 'keepsake', 'reminder']
   },
   'emergen': {
-    lineNumber: '6',
-    wordOrder: '163',
+    wordNumber: 163,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Present Indicative Third Person Plural',
     meanings: ['emerge', 'surface', 'arise'],
     bestTranslation: 'emerge',
     lemma: 'emerger',
-    bestLemmaTranslation: 'to emerge'
+    LemmaMeanings: ['to emerge', 'to surface', 'to arise', 'to come out', 'to appear']
   },
   'boyas': {
-    lineNumber: '6',
-    wordOrder: '164',
+    wordNumber: 164,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['buoys', 'floats', 'markers'],
     bestTranslation: 'buoys',
     lemma: 'boya',
-    bestLemmaTranslation: 'buoy'
+    LemmaMeanings: ['buoy', 'float', 'marker', 'beacon', 'life buoy']
   },
   'agitado': {
-    lineNumber: '6',
-    wordOrder: '165',
-    partOfSpeech: 'Adjective',
-    morphology: 'Masculine Singular',
-    meanings: ['agitated', 'turbulent', 'rough'],
+    wordNumber: 165,
+    frequency: 1,
+    partOfSpeech: 'Adjective/Verb',
+    morphology: 'Past Participle Masculine Singular',
+    meanings: ['agitated', 'troubled', 'rough'],
     bestTranslation: 'agitated',
-    lemma: 'agitado',
-    bestLemmaTranslation: 'agitated'
+    lemma: 'agitar',
+    LemmaMeanings: ['to agitate', 'to shake', 'to stir', 'to disturb', 'to excite']
   },
   'mar': {
-    lineNumber: '6',
-    wordOrder: '166',
+    wordNumber: 166,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine/Feminine Singular',
     meanings: ['sea', 'ocean'],
     bestTranslation: 'sea',
     lemma: 'mar',
-    bestLemmaTranslation: 'sea'
+    LemmaMeanings: ['sea', 'ocean', 'maritime', 'waters', 'tide']
   },
   'intensos': {
-    lineNumber: '6',
-    wordOrder: '167',
+    wordNumber: 167,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Plural',
-    meanings: ['intense', 'strong', 'powerful'],
+    meanings: ['intense', 'strong', 'deep'],
     bestTranslation: 'intense',
     lemma: 'intenso',
-    bestLemmaTranslation: 'intense'
+    LemmaMeanings: ['intense', 'strong', 'deep', 'powerful', 'severe']
   },
   'demás': {
-    lineNumber: '6',
-    wordOrder: '168',
+    wordNumber: 168,
+    frequency: 1,
     partOfSpeech: 'Adjective/Pronoun',
-    morphology: 'Plural',
-    meanings: ['other', 'rest', 'others'],
+    morphology: '',
+    meanings: ['other', 'rest', 'remaining'],
     bestTranslation: 'other',
     lemma: 'demás',
-    bestLemmaTranslation: 'other'
+    LemmaMeanings: ['other', 'rest', 'remaining', 'additional', 'further']
   },
   'viajeros': {
-    lineNumber: '6',
-    wordOrder: '169',
+    wordNumber: 169,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
-    meanings: ['travelers', 'passengers', 'voyagers'],
+    meanings: ['travelers', 'voyagers', 'passengers'],
     bestTranslation: 'travelers',
     lemma: 'viajero',
-    bestLemmaTranslation: 'traveler'
+    LemmaMeanings: ['traveler', 'voyager', 'passenger', 'tourist', 'wayfarer']
   },
   'entraban': {
-    lineNumber: '6',
-    wordOrder: '170',
+    wordNumber: 170,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Plural',
-    meanings: ['were entering', 'were coming in'],
+    meanings: ['were entering', 'were going in', 'were coming in'],
     bestTranslation: 'were entering',
     lemma: 'entrar',
-    bestLemmaTranslation: 'to enter'
+    LemmaMeanings: ['to enter', 'to go in', 'to come in', 'to get in', 'to join']
   },
   'salían': {
-    lineNumber: '6',
-    wordOrder: '171',
+    wordNumber: 171,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Plural',
-    meanings: ['were leaving', 'were going out'],
+    meanings: ['were leaving', 'were going out', 'were exiting'],
     bestTranslation: 'were leaving',
     lemma: 'salir',
-    bestLemmaTranslation: 'to leave'
+    LemmaMeanings: ['to leave', 'to go out', 'to exit', 'to depart', 'to come out']
   },
   'tienda': {
-    lineNumber: '6',
-    wordOrder: '172',
+    wordNumber: 172,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
-    meanings: ['store', 'shop', 'tent'],
-    bestTranslation: 'store',
+    meanings: ['shop', 'store', 'tent'],
+    bestTranslation: 'shop',
     lemma: 'tienda',
-    bestLemmaTranslation: 'store'
+    LemmaMeanings: ['shop', 'store', 'tent', 'boutique', 'retail outlet']
   },
   'libre': {
-    lineNumber: '6',
-    wordOrder: '173',
+    wordNumber: 173,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Singular',
-    meanings: ['free', 'available', 'vacant'],
+    meanings: ['free', 'available', 'unoccupied'],
     bestTranslation: 'free',
     lemma: 'libre',
-    bestLemmaTranslation: 'free'
+    LemmaMeanings: ['free', 'available', 'unoccupied', 'independent', 'liberated']
   },
   'impuestos': {
-    lineNumber: '6',
-    wordOrder: '174',
+    wordNumber: 174,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['taxes', 'duties', 'levies'],
     bestTranslation: 'taxes',
     lemma: 'impuesto',
-    bestLemmaTranslation: 'tax'
+    LemmaMeanings: ['tax', 'duty', 'levy', 'impost', 'tariff']
   },
   'ocupaban': {
-    lineNumber: '6',
-    wordOrder: '175',
+    wordNumber: 175,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Plural',
-    meanings: ['were occupying', 'were taking up'],
+    meanings: ['were occupying', 'were taking up', 'were filling'],
     bestTranslation: 'were occupying',
     lemma: 'ocupar',
-    bestLemmaTranslation: 'to occupy'
+    LemmaMeanings: ['to occupy', 'to take up', 'to fill', 'to hold', 'to busy']
   },
   'bar': {
-    lineNumber: '6',
-    wordOrder: '176',
+    wordNumber: 176,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
-    meanings: ['bar', 'pub'],
+    meanings: ['bar', 'pub', 'café'],
     bestTranslation: 'bar',
     lemma: 'bar',
-    bestLemmaTranslation: 'bar'
+    LemmaMeanings: ['bar', 'pub', 'café', 'lounge', 'tavern']
   },
   'algunos': {
-    lineNumber: '6',
-    wordOrder: '177',
-    partOfSpeech: 'Determiner/Pronoun',
+    wordNumber: 177,
+    frequency: 1,
+    partOfSpeech: 'Adjective/Pronoun',
     morphology: 'Masculine Plural',
-    meanings: ['some', 'a few'],
+    meanings: ['some', 'several', 'a few'],
     bestTranslation: 'some',
     lemma: 'alguno',
-    bestLemmaTranslation: 'some'
+    LemmaMeanings: ['some', 'any', 'several', 'a few', 'certain ones']
   },
   'mostraban': {
-    lineNumber: '6',
-    wordOrder: '178',
+    wordNumber: 178,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Plural',
-    meanings: ['were showing', 'were displaying'],
+    meanings: ['were showing', 'were displaying', 'were exhibiting'],
     bestTranslation: 'were showing',
     lemma: 'mostrar',
-    bestLemmaTranslation: 'to show'
+    LemmaMeanings: ['to show', 'to display', 'to exhibit', 'to demonstrate', 'to reveal']
   },
   'nerviosos': {
-    lineNumber: '6',
-    wordOrder: '179',
+    wordNumber: 179,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Plural',
-    meanings: ['nervous', 'anxious', 'edgy'],
+    meanings: ['nervous', 'anxious', 'tense'],
     bestTranslation: 'nervous',
     lemma: 'nervioso',
-    bestLemmaTranslation: 'nervous'
+    LemmaMeanings: ['nervous', 'anxious', 'tense', 'edgy', 'jittery']
   },
   'consultaban': {
-    lineNumber: '6',
-    wordOrder: '180',
+    wordNumber: 180,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Imperfect Indicative Third Person Plural',
-    meanings: ['were consulting', 'were checking'],
-    bestTranslation: 'were consulting',
+    meanings: ['were consulting', 'were checking', 'were looking at'],
+    bestTranslation: 'were checking',
     lemma: 'consultar',
-    bestLemmaTranslation: 'to consult'
+    LemmaMeanings: ['to consult', 'to check', 'to look at', 'to refer to', 'to seek advice from']
   },
   'sus': {
-    lineNumber: '6',
-    wordOrder: '181',
+    wordNumber: 181,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Possessive Third Person Plural',
-    meanings: ['their', 'his', 'her'],
+    meanings: ['their', 'his', 'her', 'your (formal)'],
     bestTranslation: 'their',
     lemma: 'su',
-    bestLemmaTranslation: 'his/her/their'
+    LemmaMeanings: ['his', 'her', 'its', 'their', 'your (formal)']
   },
   'relojes': {
-    lineNumber: '6',
-    wordOrder: '182',
+    wordNumber: 182,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
     meanings: ['watches', 'clocks', 'timepieces'],
     bestTranslation: 'watches',
     lemma: 'reloj',
-    bestLemmaTranslation: 'watch'
+    LemmaMeanings: ['watch', 'clock', 'timepiece', 'timekeeper', 'chronometer']
   },
   'dudando': {
-    lineNumber: '53',
-    wordOrder: '313',
+    wordNumber: 183,
+    frequency: 1,
     partOfSpeech: 'Verb',
     morphology: 'Gerund',
     meanings: ['doubting', 'hesitating', 'wavering'],
     bestTranslation: 'doubting',
     lemma: 'dudar',
-    bestLemmaTranslation: 'to doubt'
-  },
-  'abrirían': {
-    lineNumber: '56',
-    wordOrder: '329',
-    partOfSpeech: 'Verb',
-    morphology: 'Conditional Third Person Plural',
-    meanings: ['they would open', 'they would unlock'],
-    bestTranslation: 'they would open',
-    lemma: 'abrir',
-    bestLemmaTranslation: 'to open'
-  },
-  'revisar': {
-    lineNumber: '57',
-    wordOrder: '336',
-    partOfSpeech: 'Verb',
-    morphology: 'Infinitive',
-    meanings: ['to check', 'to review', 'to revise'],
-    bestTranslation: 'to check',
-    lemma: 'revisar',
-    bestLemmaTranslation: 'to check'
-  },
-  'seríamos': {
-    lineNumber: '58',
-    wordOrder: '341',
-    partOfSpeech: 'Verb',
-    morphology: 'Conditional First Person Plural',
-    meanings: ['we would be'],
-    bestTranslation: 'we would be',
-    lemma: 'ser',
-    bestLemmaTranslation: 'to be'
-  },
-  'conducidos': {
-    lineNumber: '58',
-    wordOrder: '342',
-    partOfSpeech: 'Verb',
-    morphology: 'Past Participle Masculine Plural',
-    meanings: ['led', 'guided', 'conducted'],
-    bestTranslation: 'led',
-    lemma: 'conducir',
-    bestLemmaTranslation: 'to lead'
-  },
-  'regresaba': {
-    lineNumber: '60',
-    wordOrder: '352',
-    partOfSpeech: 'Verb',
-    morphology: 'Imperfect Indicative First/Third Person Singular',
-    meanings: ['was returning', 'was going back'],
-    bestTranslation: 'was returning',
-    lemma: 'regresar',
-    bestLemmaTranslation: 'to return'
+    LemmaMeanings: ['to doubt', 'to hesitate', 'to waver', 'to question', 'to be uncertain']
   },
   'puntualidad': {
-    lineNumber: '54',
-    wordOrder: '316',
+    wordNumber: 184,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['punctuality', 'timeliness', 'promptness'],
     bestTranslation: 'punctuality',
     lemma: 'puntualidad',
-    bestLemmaTranslation: 'punctuality'
+    LemmaMeanings: ['punctuality', 'timeliness', 'promptness', 'precision', 'exactness']
   },
   'docenas': {
-    lineNumber: '54',
-    wordOrder: '319',
+    wordNumber: 185,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
-    meanings: ['dozens', 'sets of twelve'],
+    meanings: ['dozens', 'lots', 'many'],
     bestTranslation: 'dozens',
     lemma: 'docena',
-    bestLemmaTranslation: 'dozen'
+    LemmaMeanings: ['dozen', 'twelve', 'group of twelve', 'numerous', 'many']
   },
   'aparatos': {
-    lineNumber: '55',
-    wordOrder: '321',
+    wordNumber: 186,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Plural',
-    meanings: ['devices', 'apparatus', 'equipment'],
+    meanings: ['devices', 'apparatus', 'gadgets'],
     bestTranslation: 'devices',
     lemma: 'aparato',
-    bestLemmaTranslation: 'device'
+    LemmaMeanings: ['device', 'apparatus', 'gadget', 'appliance', 'instrument']
   },
   'electrónicos': {
-    lineNumber: '55',
-    wordOrder: '322',
+    wordNumber: 187,
+    frequency: 1,
     partOfSpeech: 'Adjective',
     morphology: 'Masculine Plural',
     meanings: ['electronic', 'digital'],
     bestTranslation: 'electronic',
     lemma: 'electrónico',
-    bestLemmaTranslation: 'electronic'
+    LemmaMeanings: ['electronic', 'digital', 'computerized', 'automated', 'technology-based']
   },
   'momento': {
-    lineNumber: '56',
-    wordOrder: '326',
+    wordNumber: 188,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['moment', 'instant', 'time'],
     bestTranslation: 'moment',
     lemma: 'momento',
-    bestLemmaTranslation: 'moment'
+    LemmaMeanings: ['moment', 'instant', 'time', 'while', 'occasion']
+  },
+  'abrirían': {
+    wordNumber: 189,
+    frequency: 1,
+    partOfSpeech: 'Verb',
+    morphology: 'Conditional Indicative Third Person Plural',
+    meanings: ['would open', 'would unlock', 'would unfold'],
+    bestTranslation: 'would open',
+    lemma: 'abrir',
+    LemmaMeanings: ['to open', 'to unlock', 'to unfold', 'to start', 'to begin']
   },
   'puertas': {
-    lineNumber: '56',
-    wordOrder: '331',
+    wordNumber: 190,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
     meanings: ['doors', 'gates', 'entrances'],
     bestTranslation: 'doors',
     lemma: 'puerta',
-    bestLemmaTranslation: 'door'
+    LemmaMeanings: ['door', 'gate', 'entrance', 'doorway', 'access']
   },
   'tras': {
-    lineNumber: '57',
-    wordOrder: '335',
+    wordNumber: 191,
+    frequency: 1,
     partOfSpeech: 'Preposition',
     morphology: '',
     meanings: ['after', 'behind', 'following'],
     bestTranslation: 'after',
     lemma: 'tras',
-    bestLemmaTranslation: 'after'
+    LemmaMeanings: ['after', 'behind', 'following', 'in pursuit of', 'subsequent to']
+  },
+  'revisar': {
+    wordNumber: 192,
+    frequency: 1,
+    partOfSpeech: 'Verb',
+    morphology: 'Infinitive',
+    meanings: ['to check', 'to review', 'to revise'],
+    bestTranslation: 'to check',
+    lemma: 'revisar',
+    LemmaMeanings: ['to check', 'to review', 'to revise', 'to examine', 'to inspect']
   },
   'tarjetas': {
-    lineNumber: '57',
-    wordOrder: '338',
+    wordNumber: 193,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Plural',
-    meanings: ['cards', 'tickets', 'passes'],
+    meanings: ['cards', 'boarding passes', 'tickets'],
     bestTranslation: 'cards',
     lemma: 'tarjeta',
-    bestLemmaTranslation: 'card'
+    LemmaMeanings: ['card', 'ticket', 'pass', 'badge', 'board']
+  },
+  'seríamos': {
+    wordNumber: 194,
+    frequency: 1,
+    partOfSpeech: 'Verb',
+    morphology: 'Conditional Indicative First Person Plural',
+    meanings: ['we would be', 'we would become'],
+    bestTranslation: 'we would be',
+    lemma: 'ser',
+    LemmaMeanings: ['to be', 'to exist', 'to occur', 'to happen', 'to take place']
+  },
+  'conducidos': {
+    wordNumber: 195,
+    frequency: 1,
+    partOfSpeech: 'Verb',
+    morphology: 'Past Participle Masculine Plural',
+    meanings: ['led', 'driven', 'conducted', 'guided'],
+    bestTranslation: 'led',
+    lemma: 'conducir',
+    LemmaMeanings: ['to lead', 'to drive', 'to conduct', 'to guide', 'to direct']
   },
   'bus': {
-    lineNumber: '59',
-    wordOrder: '345',
+    wordNumber: 196,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
-    meanings: ['bus', 'coach'],
+    meanings: ['bus', 'coach', 'shuttle'],
     bestTranslation: 'bus',
     lemma: 'bus',
-    bestLemmaTranslation: 'bus'
+    LemmaMeanings: ['bus', 'coach', 'shuttle', 'motorcoach', 'autobus']
   },
   'avión': {
-    lineNumber: '59',
-    wordOrder: '348',
+    wordNumber: 197,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Masculine Singular',
     meanings: ['airplane', 'aircraft', 'plane'],
     bestTranslation: 'airplane',
     lemma: 'avión',
-    bestLemmaTranslation: 'airplane'
+    LemmaMeanings: ['airplane', 'aircraft', 'plane', 'jet', 'airliner']
   },
   'yo': {
-    lineNumber: '59',
-    wordOrder: '349',
+    wordNumber: 198,
+    frequency: 1,
     partOfSpeech: 'Pronoun',
     morphology: 'Personal First Person Singular',
-    meanings: ['I', 'me'],
+    meanings: ['I', 'me', 'myself'],
     bestTranslation: 'I',
     lemma: 'yo',
-    bestLemmaTranslation: 'I'
+    LemmaMeanings: ['I', 'me', 'myself', 'self', 'ego']
+  },
+  'regresaba': {
+    wordNumber: 199,
+    frequency: 1,
+    partOfSpeech: 'Verb',
+    morphology: 'Imperfect Indicative First/Third Person Singular',
+    meanings: ['was returning', 'was coming back', 'was going back'],
+    bestTranslation: 'was returning',
+    lemma: 'regresar',
+    LemmaMeanings: ['to return', 'to come back', 'to go back', 'to turn back', 'to revert']
   },
   'veinticuatro': {
-    lineNumber: '61',
-    wordOrder: '361',
+    wordNumber: 200,
+    frequency: 1,
     partOfSpeech: 'Numeral',
     morphology: 'Cardinal',
-    meanings: ['twenty-four'],
+    meanings: ['twenty-four', '24'],
     bestTranslation: 'twenty-four',
     lemma: 'veinticuatro',
-    bestLemmaTranslation: 'twenty-four'
+    LemmaMeanings: ['twenty-four', '24', 'four and twenty', 'two dozen', 'twenty-fourth']
   },
   'ausencia': {
-    lineNumber: '61',
-    wordOrder: '364',
+    wordNumber: 201,
+    frequency: 1,
     partOfSpeech: 'Noun',
     morphology: 'Feminine Singular',
     meanings: ['absence', 'lack', 'nonattendance'],
     bestTranslation: 'absence',
     lemma: 'ausencia',
-    bestLemmaTranslation: 'absence'
+    LemmaMeanings: ['absence', 'lack', 'nonattendance', 'nonexistence', 'separation']
   }
 };
 
-export default wordDatabase;
+export default mundo3Database;
