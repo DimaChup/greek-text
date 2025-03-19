@@ -1,9 +1,39 @@
 // GreekTextAnalyzer.js
 
-import React, { useEffect, useState } from 'react';
-import wordDatabase from './wordDatabase';
+import React, { useEffect, useState, useMemo } from 'react';
 
 const GreekTextAnalyzer = () => {
+  // Dynamically load all databases from the databases directory
+  const combinedDatabase = useMemo(() => {
+    let mergedDatabase = {};
+    
+    // Use require.context to dynamically import all .js files from the databases directory
+    try {
+      const dbContext = require.context('./databases', false, /\.js$/);
+      
+      // Log available databases for debugging
+      console.log('Available databases:', dbContext.keys());
+      
+      // Import and merge each database
+      dbContext.keys().forEach(filename => {
+        try {
+          const databaseModule = dbContext(filename);
+          const database = databaseModule.default || databaseModule;
+          console.log(`Loading database: ${filename}`);
+          mergedDatabase = { ...mergedDatabase, ...database };
+        } catch (error) {
+          console.warn(`Error loading database ${filename}:`, error);
+        }
+      });
+      
+      console.log(`Loaded ${Object.keys(mergedDatabase).length} words from databases`);
+    } catch (error) {
+      console.warn('Could not load databases directory:', error);
+    }
+    
+    return mergedDatabase;
+  }, []);
+
   // State
   const [text, setText] = useState('');
   const [matrix, setMatrix] = useState([]);
@@ -67,7 +97,7 @@ const GreekTextAnalyzer = () => {
     newMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
-        const info = wordDatabase[cleaned];
+        const info = combinedDatabase[cleaned];
         if (info && isWordTypeActiveCustom(info, types)) {
           analysis.push({
             word: cleaned,
@@ -112,7 +142,7 @@ const GreekTextAnalyzer = () => {
   // Returns the appropriate highlight class for a given word
   const getHighlightClass = (word) => {
     const cleaned = cleanWord(word);
-    const info = wordDatabase[cleaned];
+    const info = combinedDatabase[cleaned];
     if (info && isWordTypeActiveCustom(info, activeTypes)) {
       const part = info.partOfSpeech.toUpperCase();
       if (part === 'VERB' && activeTypes.includes('VERB')) return 'bg-pink-200';
@@ -155,6 +185,9 @@ const GreekTextAnalyzer = () => {
     <div className="p-4 relative">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4">
         <h1 className="text-lg font-bold mb-4">Spanish Text Analyzer</h1>
+        <div className="text-xs text-gray-500 mb-2">
+          Loaded {Object.keys(combinedDatabase).length} words from databases
+        </div>
         
         <textarea 
           placeholder="Enter Spanish text here (try: de en y el la ...)"
@@ -207,7 +240,7 @@ const GreekTextAnalyzer = () => {
                     className={`inline-block px-1 py-1 m-1 rounded font-serif ${getHighlightClass(word)}`}
                     onMouseEnter={(e) => {
                       const cleaned = cleanWord(word);
-                      const info = wordDatabase[cleaned];
+                      const info = combinedDatabase[cleaned];
                       if (info && isWordTypeActiveCustom(info, activeTypes)) {
                         setHoveredAnalysis({
                           data: { ...info, word: cleaned },
