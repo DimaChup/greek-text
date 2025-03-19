@@ -5,7 +5,7 @@ python text2db.py --input data/input/parmenides.txt --limit 10
 
 git reset --hard HEAD
 git clean -fd
-
+git branch -D v12
 
 
 python scripts/text2db.py -i data/input/natureA.txt --copy-to-db
