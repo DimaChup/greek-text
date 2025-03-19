@@ -30,6 +30,12 @@ const NEW_DB_FILTERED_PATH = path.resolve(
   path.basename(NEW_DB_PATH, '.js') + '_filtered.js'
 );
 
+// Add this after the existing NEW_DB_FILTERED_PATH declaration
+const DATABASES_COPY_PATH = path.resolve(
+  DATABASES_DIR,
+  path.basename(NEW_DB_PATH, '.js') + '_filtered.js'
+);
+
 // Verify the databases directory exists
 if (!fs.existsSync(DATABASES_DIR)) {
   console.error(`Error: Databases directory not found: ${DATABASES_DIR}`);
@@ -144,12 +150,16 @@ export default ${newDb.name}_filtered;
   // Write the filtered database file
   fs.writeFileSync(NEW_DB_FILTERED_PATH, filteredNewContent);
   
+  // Then add this single line after the existing fs.writeFileSync() call that creates the filtered database
+  fs.writeFileSync(DATABASES_COPY_PATH, filteredNewContent);
+  
   console.log(`\nDatabase comparison and update complete!`);
   console.log(`- Words in all existing databases: ${Object.keys(combinedExistingWords).length}`);
   console.log(`- Words in new database: ${Object.keys(newDb.data).length}`);
   console.log(`- Words already present in existing databases: ${stats.existingWords}`);
   console.log(`- New words found (not in any existing database): ${stats.newWords}`);
   console.log(`- Filtered new words saved to: ${NEW_DB_FILTERED_PATH}`);
+  console.log(`- Copy also saved to: ${DATABASES_COPY_PATH}`);
   
   // Show examples if there were new words
   if (stats.newWords > 0) {
