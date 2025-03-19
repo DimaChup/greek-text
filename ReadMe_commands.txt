@@ -10,7 +10,7 @@ git branch -D v12
 
 python scripts/text2db.py -i data/input/natureA.txt --copy-to-db
 Fill up db_A
-node scripts/generate-anki-from-db.js --input src/databases/natureB_db_filtered_copy.js --pos VERB,NOUN
+node scripts/generate-anki-from-db.js --input src/databases/natureA_db.js --pos VERB,NOUN
 
 
 python scripts/text2db.py -i data/input/natureB.txt
