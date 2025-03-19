@@ -10,15 +10,15 @@ git clean -fd
 
 python scripts/text2db.py -i data/input/natureA.txt --copy-to-db
 Fill up db_A
-Generate Anki for Noun and Verb
+node scripts/generate-anki-from-db.js --input src/databases/natureB_db_filtered_copy.js --pos VERB,NOUN
 
 
 python scripts/text2db.py -i data/input/natureB.txt
 node scripts/updateWordDatabase.js data/output_natureB/natureB_db.js
 Fill up db_B
-Generate Anki for Noun and Verb
+node scripts/generate-anki-from-db.js --input src/databases/natureB_db_filtered_copy.js --pos VERB,NOUN
 
 python scripts/text2db.py -i data/input/natureC.txt
 node scripts/updateWordDatabase.js data/output_natureB/natureC_db.js
 Fill up db_C
-Generate Anki for Noun and Verb
+node scripts/generate-anki-from-db.js --input src/databases/natureB_db_filtered_copy.js --pos VERB,NOUN
