@@ -3,6 +3,7 @@ import csv
 import re
 import argparse
 from pathlib import Path
+import shutil
 
 def create_word_list_from_text(text, max_lines=None):
     """
@@ -43,7 +44,7 @@ def create_word_list_from_text(text, max_lines=None):
                 
     return word_list
 
-def process_text_file(input_filepath, output_dir=None, max_lines=None):
+def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_db_dir=False, db_dir=None):
     """
     Process a text file to generate CSV files with word list and frequency.
     
@@ -51,6 +52,8 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None):
         input_filepath: Path to the input text file
         output_dir: Optional custom output directory
         max_lines: Optional maximum number of lines to process
+        copy_to_db_dir: Whether to copy the JS database to the databases directory
+        db_dir: Path to the databases directory (default is "src/databases")
     
     Returns:
         Tuple of paths to the output CSV files
@@ -117,6 +120,20 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None):
     generate_js_database_skeleton(freq_csv_path, js_db_path)
     print(f"Created JavaScript database scaffold: {js_db_path}")
     
+    # Copy JS database to the databases directory if requested
+    if copy_to_db_dir:
+        if db_dir is None:
+            db_dir = Path("src/databases")  # Default database directory
+        
+        # Create the databases directory if it doesn't exist
+        db_dir = Path(db_dir)
+        db_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Copy the file
+        db_copy_path = db_dir / f"{input_filename}_db.js"
+        shutil.copy2(js_db_path, db_copy_path)
+        print(f"Copied database to: {db_copy_path}")
+    
     return csv_path, freq_csv_path, js_db_path
 
 def generate_js_database_skeleton(frequency_csv_path, output_path):
@@ -181,9 +198,13 @@ def main():
                         help="Maximum number of lines to process (default: all)")
     parser.add_argument("--output", "-o", type=str, default=None,
                         help="Custom output directory (default: data/output_filename)")
+    parser.add_argument("--copy-to-db", "-c", action="store_true",
+                        help="Copy the generated JS database to the databases directory")
+    parser.add_argument("--db-dir", "-d", type=str, default="src/databases",
+                        help="Path to the databases directory (default: src/databases)")
     args = parser.parse_args()
     
-    process_text_file(args.input, args.output, args.max_lines)
+    process_text_file(args.input, args.output, args.max_lines, args.copy_to_db, args.db_dir)
 
 if __name__ == "__main__":
     main()
