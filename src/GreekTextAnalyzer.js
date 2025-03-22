@@ -41,7 +41,7 @@ const GreekTextAnalyzer = () => {
   const [wordAnalysis, setWordAnalysis] = useState([]);
   const [hoveredAnalysis, setHoveredAnalysis] = useState(null);
   const [excludedWords, setExcludedWords] = useState(new Set());
-  const [textPercentage, setTextPercentage] = useState(100);
+  const [textRange, setTextRange] = useState({ start: 0, end: 100 });
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -92,21 +92,47 @@ const GreekTextAnalyzer = () => {
     return !mainCategories.includes(part);
   };
 
-  // Update word analysis based on current text and provided active types
-  const updateWordAnalysis = (text, types) => {
-    const newMatrix = createTextMatrix(text);
+  // Update word analysis to exclude words that first appeared earlier in the text
+  const updateWordAnalysis = (fullText, range, types) => {
+    if (!fullText) {
+      setWordAnalysis([]);
+      return;
+    }
     
-    // Use a Map to track unique words
-    const uniqueWords = new Map();
+    // Step 1: Get the visible text based on the current range
+    const visibleText = getVisibleText(fullText, range);
     
-    newMatrix.forEach(row => {
+    // Step 2: Find all words that appear before our range
+    const beforeRangeText = fullText.substring(0, Math.floor(fullText.length * (range.start / 100)));
+    const beforeRangeMatrix = createTextMatrix(beforeRangeText);
+    const wordsSeenBefore = new Set();
+    
+    beforeRangeMatrix.forEach(row => {
+      row.forEach(word => {
+        wordsSeenBefore.add(cleanWord(word));
+      });
+    });
+    
+    // Step 3: Process the visible text and only include words not seen before
+    const visibleMatrix = createTextMatrix(visibleText);
+    const uniqueWordsInRange = new Map();
+    
+    visibleMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
         const info = combinedDatabase[cleaned];
         
-        // Only add if: 1) word is in database, 2) matches active types, and 3) not already added
-        if (info && isWordTypeActiveCustom(info, types) && !uniqueWords.has(cleaned)) {
-          uniqueWords.set(cleaned, {
+        // Only add if:
+        // 1. Word is in database
+        // 2. Matches active types
+        // 3. Not already added to our results
+        // 4. Most importantly: hasn't been seen before the current range
+        if (info && 
+            isWordTypeActiveCustom(info, types) && 
+            !uniqueWordsInRange.has(cleaned) && 
+            !wordsSeenBefore.has(cleaned)) {
+          
+          uniqueWordsInRange.set(cleaned, {
             word: cleaned,
             ...info
           });
@@ -114,14 +140,14 @@ const GreekTextAnalyzer = () => {
       });
     });
     
-    // Convert Map values to array
-    setWordAnalysis(Array.from(uniqueWords.values()));
+    // Set the word analysis with our filtered results
+    setWordAnalysis(Array.from(uniqueWordsInRange.values()));
   };
 
-  // Missing dependency: Add combinedDatabase to the dependency array
+  // Update the useEffect to call our function with the right parameters
   useEffect(() => {
-    updateWordAnalysis(text, activeTypes);
-  }, [text, activeTypes, combinedDatabase]); // Add combinedDatabase here
+    updateWordAnalysis(text, textRange, activeTypes);
+  }, [text, textRange, activeTypes, combinedDatabase]);
 
   // Debug output to help troubleshoot
   useEffect(() => {
@@ -134,18 +160,22 @@ const GreekTextAnalyzer = () => {
     );
   }, [combinedDatabase]);
 
-  // Function to get the visible portion of text based on slider percentage
-  const getVisibleText = (fullText, percentage) => {
+  // Function to get the visible portion of text based on range
+  const getVisibleText = (fullText, range) => {
     if (!fullText) return '';
-    if (percentage >= 100) return fullText;
     
     const totalChars = fullText.length;
-    const visibleChars = Math.floor(totalChars * (percentage / 100));
-    return fullText.substring(0, visibleChars);
+    const startChar = Math.floor(totalChars * (range.start / 100));
+    const endChar = Math.floor(totalChars * (range.end / 100));
+    
+    return fullText.substring(startChar, endChar);
   };
   
-  // Compute visible text based on current percentage
-  const visibleText = useMemo(() => getVisibleText(text, textPercentage), [text, textPercentage]);
+  // Compute visible text based on current range
+  const visibleText = useMemo(() => 
+    getVisibleText(text, textRange), 
+    [text, textRange]
+  );
   
   // Update the handleTextChange to only update the raw text
   const handleTextChange = (e) => {
@@ -153,15 +183,27 @@ const GreekTextAnalyzer = () => {
     setText(newText);
   };
   
-  // Handler for slider changes
-  const handleSliderChange = (e) => {
-    setTextPercentage(parseInt(e.target.value, 10));
+  // Handlers for range slider changes - improved for better reliability
+  const handleStartRangeChange = (e) => {
+    const newStart = parseInt(e.target.value, 10);
+    setTextRange(prev => ({
+      start: Math.min(newStart, prev.end - 5), // Ensure at least 5% gap
+      end: prev.end
+    }));
+  };
+  
+  const handleEndRangeChange = (e) => {
+    const newEnd = parseInt(e.target.value, 10);
+    setTextRange(prev => ({
+      start: prev.start,
+      end: Math.max(newEnd, prev.start + 5) // Ensure at least 5% gap
+    }));
   };
   
   // Update matrix and word analysis whenever visible text changes
   useEffect(() => {
     setMatrix(createTextMatrix(visibleText));
-    updateWordAnalysis(visibleText, activeTypes);
+    updateWordAnalysis(text, textRange, activeTypes);
   }, [visibleText, activeTypes, combinedDatabase]);
 
   // Event Handlers
@@ -238,37 +280,51 @@ const GreekTextAnalyzer = () => {
     });
   };
 
-  // Update the handleAnkiExport function to use visibleText instead of full text
+  // Update the handleAnkiExport function to exclude words from earlier sections
   const handleAnkiExport = (partOfSpeech) => {
-    // Get all unique words from the VISIBLE text (controlled by slider)
-    const newMatrix = createTextMatrix(visibleText);
-    const uniqueTextWords = new Set();
+    if (!text) {
+      alert("Please enter some text to analyze.");
+      return;
+    }
     
-    // Collect all unique words from the visible text
-    newMatrix.forEach(row => {
+    // Create a matrix for the entire text
+    const fullMatrix = createTextMatrix(text);
+    
+    // Map each unique word to its first position (percentage) in the text
+    const wordFirstPositions = new Map();
+    const totalLength = text.length;
+    
+    // Record the position of first appearance of each word
+    let currentPosition = 0;
+    fullMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
-        uniqueTextWords.add(cleaned);
+        if (!wordFirstPositions.has(cleaned)) {
+          const positionPercent = (currentPosition / totalLength) * 100;
+          wordFirstPositions.set(cleaned, positionPercent);
+        }
+        currentPosition += word.length + 1; // +1 for space
       });
     });
     
-    // Filter words that are both in the visible text, match the part of speech, and are not excluded
-    const filteredWords = Array.from(uniqueTextWords)
-      .map(word => {
+    // Filter words that first appear within our range and match the part of speech
+    const filteredWords = [];
+    
+    wordFirstPositions.forEach((position, word) => {
+      // Check if word's first appearance is within our range
+      if (position >= textRange.start && position <= textRange.end) {
         const info = combinedDatabase[word];
-        if (!info) return null;
+        if (!info) return;
         
-        // Check if the word matches the requested part of speech and is not excluded
         const pos = info.partOfSpeech?.toUpperCase().split('/')[0];
         if (pos === partOfSpeech && !excludedWords.has(word)) {
-          return [word, info];
+          filteredWords.push([word, info]);
         }
-        return null;
-      })
-      .filter(item => item !== null);
+      }
+    });
     
     if (filteredWords.length === 0) {
-      alert(`No ${partOfSpeech} words found in the current visible text.`);
+      alert(`No ${partOfSpeech.toLowerCase()} words found in the visible text.`);
       return;
     }
     
@@ -325,24 +381,62 @@ const GreekTextAnalyzer = () => {
           className="w-full h-24 p-2 border rounded mb-3 font-serif text-sm"
         />
 
-        {/* Horizontal slider section - moved to top */}
+        {/* Improved Range slider section */}
         <div className="mb-4 p-3 border rounded bg-gray-50">
           <div className="flex flex-col mb-1">
             <div className="flex justify-between mb-1">
-              <span className="text-sm font-medium">Text Portion to Analyze</span>
-              <span className="text-sm font-medium">{textPercentage}%</span>
+              <span className="text-sm font-medium">Text Range to Analyze</span>
+              <span className="text-sm font-medium">{textRange.start}% - {textRange.end}%</span>
             </div>
-            <input
-              type="range"
-              min="5"
-              max="100"
-              value={textPercentage}
-              onChange={handleSliderChange}
-              className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
-            />
-          </div>
-          <div className="text-xs text-gray-500">
-            Analyzing first {textPercentage}% of text ({visibleText.length} characters)
+            
+            {/* Simpler, more reliable dual slider implementation */}
+            <div className="mb-4">
+              <div className="text-xs text-gray-600 flex justify-between mb-1">
+                <span>Start: {textRange.start}%</span>
+                <span>End: {textRange.end}%</span>
+              </div>
+              
+              {/* Start slider */}
+              <div className="mb-3">
+                <label className="block text-xs text-gray-600 mb-1">Start Position:</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="95"
+                  value={textRange.start}
+                  onChange={handleStartRangeChange}
+                  className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+              </div>
+              
+              {/* End slider */}
+              <div>
+                <label className="block text-xs text-gray-600 mb-1">End Position:</label>
+                <input
+                  type="range"
+                  min="5"
+                  max="100"
+                  value={textRange.end}
+                  onChange={handleEndRangeChange}
+                  className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+              </div>
+            </div>
+            
+            {/* Visual representation of selected range */}
+            <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-blue-500" 
+                style={{ 
+                  marginLeft: `${textRange.start}%`, 
+                  width: `${textRange.end - textRange.start}%` 
+                }}
+              ></div>
+            </div>
+            
+            <div className="text-xs text-gray-500 mt-3">
+              Analyzing text from {textRange.start}% to {textRange.end}% ({visibleText.length} characters)
+            </div>
           </div>
         </div>
 

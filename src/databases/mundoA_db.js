@@ -703,7 +703,7 @@ const mundoADatabase = {
     'aferrado': {
       wordNumber: 71,
       frequency: 1,
-      partOfSpeech: 'VERB',
+      partOfSpeech: 'VERB/ADJECTIVE',
       morphology: 'past participle, masculine singular',
       meanings: ['clinging', 'holding on tightly', 'gripping', 'clutching'],
       bestTranslation: 'clinging',
