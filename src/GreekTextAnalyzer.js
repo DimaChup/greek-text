@@ -190,14 +190,14 @@ const GreekTextAnalyzer = () => {
 
   return (
     <div className="p-4 relative">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4">
-        <h1 className="text-lg font-bold mb-4">Spanish Text Analyzer</h1>
+      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-4">
+        <h1 className="text-lg font-bold mb-4">Greek Text Analyzer</h1>
         <div className="text-xs text-gray-500 mb-2">
           Loaded {Object.keys(combinedDatabase).length} words from databases
         </div>
         
         <textarea 
-          placeholder="Enter Spanish text here (try: de en y el la ...)"
+          placeholder="Enter Greek text here (try: δ' ἐς τ' ἐπὶ ὁδὸν κόραι ...)"
           value={text}
           onChange={handleTextChange}
           className="w-full h-24 p-2 border rounded mb-3 font-serif text-sm"
@@ -236,121 +236,125 @@ const GreekTextAnalyzer = () => {
           </button>
         </div>
 
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
-          <div className="border rounded p-2 text-sm">
-            {matrix.map((row, rowIndex) => (
-              <div key={rowIndex} className="mb-2">
-                {row.map((word, colIndex) => (
-                  <span 
-                    key={`${rowIndex}-${colIndex}`}
-                    className={`inline-block px-1 py-1 m-1 rounded font-serif ${getHighlightClass(word)}`}
-                    onMouseEnter={(e) => {
-                      const cleaned = cleanWord(word);
-                      const info = combinedDatabase[cleaned];
-                      if (info && isWordTypeActiveCustom(info, activeTypes)) {
-                        setHoveredAnalysis({
-                          data: { ...info, word: cleaned },
-                          x: e.clientX + 10,
-                          y: e.clientY + 10
-                        });
-                      }
-                    }}
-                    onMouseLeave={() => setHoveredAnalysis(null)}
-                  >
-                    {word}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Display grouped analysis side by side - Updated to show LemmaMeanings and frequency */}
-        {Object.keys(groupedAnalysis).length > 0 && (
-          <div className="mt-4">
-            <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
-            <div className="flex gap-2">
-              {Object.keys(groupedAnalysis).map(type => (
-                <div key={type} className="flex-1">
-                  <h3 className="text-base font-semibold mb-1">{type} Analysis:</h3>
-                  <div className="space-y-2">
-                    {groupedAnalysis[type].map((analysis, index) => (
-                      <div 
-                        key={index} 
-                        className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs`}
-                      >
-                        {/* Top Section: Flex container for Word and Meanings */}
-                        <div className="flex">
-                          <div className="w-1/2">
-                            <div className="font-semibold">Word</div>
-                            <div className="font-serif">{analysis.word}</div>
-                            
-                            {/* Added frequency display */}
-                            <div className="mt-1">
-                              <div className="font-semibold">Frequency</div>
-                              <div>{analysis.frequency || 'N/A'}</div>
-                            </div>
-                          </div>
-                          <div className="w-1/2">
-                            <div className="font-semibold">Meanings</div>
-                            <ul className="list-disc pl-3">
-                              {analysis.meanings.map((meaning, i) => (
-                                <li key={i}>{meaning}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                        {/* Second Section: Two-column layout for Lemma and Lemma Meanings */}
-                        <div className="grid grid-cols-2 gap-2 mt-1">
-                          <div>
-                            <div className="font-semibold">Lemma</div>
-                            <div className="font-serif">{analysis.lemma}</div>
-                          </div>
-                          <div>
-                            <div className="font-semibold">Lemma Meanings</div>
-                            <div>
-                              {Array.isArray(analysis.LemmaMeanings) 
-                                ? analysis.LemmaMeanings.join(', ') 
-                                : analysis.LemmaMeanings || analysis.bestLemmaTranslation || 'N/A'}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+        {/* New flex container for side-by-side layout */}
+        <div className="flex gap-4">
+          {/* Text analysis section - now with width constraint */}
+          <div className="w-1/2">
+            <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
+            <div className="border rounded p-2 text-sm">
+              {matrix.map((row, rowIndex) => (
+                <div key={rowIndex} className="mb-2">
+                  {row.map((word, colIndex) => (
+                    <span 
+                      key={`${rowIndex}-${colIndex}`}
+                      className={`inline-block px-1 py-1 m-1 rounded font-serif ${getHighlightClass(word)}`}
+                      onMouseEnter={(e) => {
+                        const cleaned = cleanWord(word);
+                        const info = combinedDatabase[cleaned];
+                        if (info && isWordTypeActiveCustom(info, activeTypes)) {
+                          setHoveredAnalysis({
+                            data: { ...info, word: cleaned },
+                            x: e.clientX + 10,
+                            y: e.clientY + 10
+                          });
+                        }
+                      }}
+                      onMouseLeave={() => setHoveredAnalysis(null)}
+                    >
+                      {word}
+                    </span>
+                  ))}
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Word analysis section - now side by side */}
+          {Object.keys(groupedAnalysis).length > 0 && (
+            <div className="w-1/2">
+              <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
+              <div className="flex gap-2">
+                {Object.keys(groupedAnalysis).map(type => (
+                  <div key={type} className="flex-1">
+                    <h3 className="text-base font-semibold mb-1">{type} Analysis:</h3>
+                    <div className="space-y-2">
+                      {groupedAnalysis[type].map((analysis, index) => (
+                        <div 
+                          key={index} 
+                          className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs`}
+                        >
+                          {/* Top Section: Flex container for Word and Meanings */}
+                          <div className="flex">
+                            <div className="w-1/2">
+                              <div className="font-semibold">Word</div>
+                              <div className="font-serif">{analysis.word}</div>
+                              
+                              {/* Added frequency display */}
+                              <div className="mt-1">
+                                <div className="font-semibold">Frequency</div>
+                                <div>{analysis.frequency || 'N/A'}</div>
+                              </div>
+                            </div>
+                            <div className="w-1/2">
+                              <div className="font-semibold">Meanings</div>
+                              <ul className="list-disc pl-3">
+                                {analysis.meanings.map((meaning, i) => (
+                                  <li key={i}>{meaning}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                          {/* Second Section: Two-column layout for Lemma and Lemma Meanings */}
+                          <div className="grid grid-cols-2 gap-2 mt-1">
+                            <div>
+                              <div className="font-semibold">Lemma</div>
+                              <div className="font-serif">{analysis.lemma}</div>
+                            </div>
+                            <div>
+                              <div className="font-semibold">Lemma Meanings</div>
+                              <div>
+                                {Array.isArray(analysis.LemmaMeanings) 
+                                  ? analysis.LemmaMeanings.join(', ') 
+                                  : analysis.LemmaMeanings || analysis.bestLemmaTranslation || 'N/A'}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Tooltip for hovered word analysis - unchanged */}
+        {hoveredAnalysis && (
+          <div
+            className={`p-1 text-xs shadow-lg ${getAnalysisBgClass(hoveredAnalysis.data)} text-black border`}
+            style={{
+              position: 'fixed',
+              top: hoveredAnalysis.y,
+              left: hoveredAnalysis.x,
+              zIndex: 1000
+            }}
+          >
+            <div><strong>Word:</strong> {hoveredAnalysis.data.word}</div>
+            <div><strong>Best Translation:</strong> {hoveredAnalysis.data.bestTranslation}</div>
+            <div><strong>Possible Meanings:</strong> {hoveredAnalysis.data.meanings.join(', ')}</div>
+            <div><strong>Lemma:</strong> {hoveredAnalysis.data.lemma}</div>
+            <div><strong>Lemma Meanings:</strong> {
+              Array.isArray(hoveredAnalysis.data.LemmaMeanings) 
+                ? hoveredAnalysis.data.LemmaMeanings.join(', ') 
+                : hoveredAnalysis.data.LemmaMeanings || hoveredAnalysis.data.bestLemmaTranslation || 'N/A'
+            }</div>
+            {hoveredAnalysis.data.frequency && 
+              <div><strong>Frequency:</strong> {hoveredAnalysis.data.frequency}</div>
+            }
+          </div>
         )}
       </div>
-
-      {/* Tooltip for hovered word analysis - Updated for LemmaMeanings */}
-      {hoveredAnalysis && (
-        <div
-          className={`p-1 text-xs shadow-lg ${getAnalysisBgClass(hoveredAnalysis.data)} text-black border`}
-          style={{
-            position: 'fixed',
-            top: hoveredAnalysis.y,
-            left: hoveredAnalysis.x,
-            zIndex: 1000
-          }}
-        >
-          <div><strong>Word:</strong> {hoveredAnalysis.data.word}</div>
-          <div><strong>Best Translation:</strong> {hoveredAnalysis.data.bestTranslation}</div>
-          <div><strong>Possible Meanings:</strong> {hoveredAnalysis.data.meanings.join(', ')}</div>
-          <div><strong>Lemma:</strong> {hoveredAnalysis.data.lemma}</div>
-          <div><strong>Lemma Meanings:</strong> {
-            Array.isArray(hoveredAnalysis.data.LemmaMeanings) 
-              ? hoveredAnalysis.data.LemmaMeanings.join(', ') 
-              : hoveredAnalysis.data.LemmaMeanings || hoveredAnalysis.data.bestLemmaTranslation || 'N/A'
-          }</div>
-          {hoveredAnalysis.data.frequency && 
-            <div><strong>Frequency:</strong> {hoveredAnalysis.data.frequency}</div>
-          }
-        </div>
-      )}
     </div>
   );
 };
