@@ -93,26 +93,33 @@ const GreekTextAnalyzer = () => {
   // Update word analysis based on current text and provided active types
   const updateWordAnalysis = (text, types) => {
     const newMatrix = createTextMatrix(text);
-    const analysis = [];
+    
+    // Use a Map to track unique words (preserving the original object references)
+    const uniqueWords = new Map();
+    
     newMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
         const info = combinedDatabase[cleaned];
-        if (info && isWordTypeActiveCustom(info, types)) {
-          analysis.push({
+        
+        // Only add if: 1) word is in database, 2) matches active types, and 3) not already added
+        if (info && isWordTypeActiveCustom(info, types) && !uniqueWords.has(cleaned)) {
+          uniqueWords.set(cleaned, {
             word: cleaned,
             ...info
           });
         }
       });
     });
-    setWordAnalysis(analysis);
+    
+    // Convert Map values to array
+    setWordAnalysis(Array.from(uniqueWords.values()));
   };
 
   // useEffect to update wordAnalysis whenever text or activeTypes changes
   useEffect(() => {
     updateWordAnalysis(text, activeTypes);
-  }, [text, activeTypes]);
+  }, [text, activeTypes, combinedDatabase]);
 
   // Event Handlers
   const handleTextChange = (e) => {

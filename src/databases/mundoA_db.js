@@ -13,7 +13,7 @@ const mundoADatabase = {
     'en': {
       wordNumber: 2,
       frequency: 14,
-      partOfSpeech: '',
+      partOfSpeech: 'Noun',
       morphology: '',
       meanings: [],
       bestTranslation: '',
