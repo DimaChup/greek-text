@@ -81,11 +81,18 @@ const GreekTextAnalyzer = () => {
       .toLowerCase(); // Convert to lowercase for case-insensitive matching
   };
 
+  // Update createTextMatrix to preserve exact line structure
   const createTextMatrix = (text) => {
     if (!text) return [];
-    return text.split('\n').map(line =>
-      line.trim().split(/\s+/).filter(word => word)
-    );
+    // Split by newlines and don't filter out empty lines
+    return text.split('\n').map(line => {
+      if (line.trim() === '') {
+        // Return a special marker for empty lines
+        return [''];
+      }
+      // Otherwise split by spaces but keep all words
+      return line.split(/\s+/).filter(word => word);
+    });
   };
 
   // Change the redGroup definition to become a function that checks if a part of speech is NOT in the main categories
@@ -94,21 +101,23 @@ const GreekTextAnalyzer = () => {
     return !mainCategories.includes(part);
   };
 
-  // Update getVisibleText to work by words instead of characters
+  // Replace the getVisibleText function with this much simpler approach
   const getVisibleText = (fullText, range) => {
     if (!fullText) return "";
     
-    // Split the text into words
-    const allWords = fullText.match(/\S+/g) || [];
-    const totalWords = allWords.length;
+    // Split text into lines while preserving empty lines
+    const lines = fullText.split('\n');
     
-    // Calculate word indices based on percentages
-    const startIndex = Math.floor(totalWords * (range.start / 100));
-    const endIndex = Math.ceil(totalWords * (range.end / 100));
+    // Calculate which lines to include based on percentage
+    const totalLines = lines.length;
+    const startLine = Math.floor(totalLines * (range.start / 100));
+    const endLine = Math.ceil(totalLines * (range.end / 100));
     
-    // Select words in range and join back together with spaces
-    const selectedWords = allWords.slice(startIndex, endIndex);
-    return selectedWords.join(" ");
+    // Get only the lines in our range
+    const selectedLines = lines.slice(startLine, endLine);
+    
+    // Join back with newlines preserved
+    return selectedLines.join('\n');
   };
 
   // Update word analysis to use word-based ranges
@@ -616,33 +625,52 @@ const GreekTextAnalyzer = () => {
           {/* Text analysis section */}
           <div className="w-1/2">
             <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
-            <div className="border rounded p-2 text-sm">
-              {matrix.map((row, rowIndex) => (
-                <div key={rowIndex} className="mb-2">
-                  {row.map((word, colIndex) => (
-                    <span 
-                      key={`${rowIndex}-${colIndex}`}
-                      className={getHighlightClass(word)}
-                      onMouseEnter={(e) => {
-                        const cleaned = cleanWord(word);
-                        const info = combinedDatabase[cleaned];
-                        if (info && isWordTypeActiveCustom(info, activeTypes)) {
-                          setHoveredAnalysis({
-                            data: { ...info, word: cleaned },
-                            x: e.clientX + 10,
-                            y: e.clientY + 10
-                          });
-                          setHoveredWord(cleaned);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        setHoveredAnalysis(null);
-                        setHoveredWord(null);
-                      }}
-                    >
-                      {word}
-                    </span>
-                  ))}
+            <div className="border rounded p-2 text-sm overflow-auto">
+              {/* We'll use a different approach that preserves exact layout */}
+              {visibleText.split('\n').map((line, lineIndex) => (
+                <div key={lineIndex} className="mb-2 whitespace-pre-wrap">
+                  {line === '' ? (
+                    // Empty line - render with height
+                    <div className="h-5"></div>
+                  ) : (
+                    // Split the line into individual words and spaces
+                    // This pattern ensures both words and spaces are captured
+                    line.split(/(\S+)/).map((part, partIndex) => {
+                      if (part.trim() === '') {
+                        // It's just whitespace - preserve it exactly
+                        return <span key={`${lineIndex}-space-${partIndex}`}>{part}</span>;
+                      }
+                      
+                      // It's a word - apply highlighting if needed
+                      const word = part;
+                      const cleaned = cleanWord(word);
+                      const info = combinedDatabase[cleaned];
+                      const isActive = info && isWordTypeActiveCustom(info, activeTypes);
+                      
+                      return (
+                        <span 
+                          key={`${lineIndex}-word-${partIndex}`}
+                          className={isActive ? getHighlightClass(word) : ""}
+                          onMouseEnter={(e) => {
+                            if (isActive) {
+                              setHoveredAnalysis({
+                                data: { ...info, word: cleaned },
+                                x: e.clientX + 10,
+                                y: e.clientY + 10
+                              });
+                              setHoveredWord(cleaned);
+                            }
+                          }}
+                          onMouseLeave={() => {
+                            setHoveredAnalysis(null);
+                            setHoveredWord(null);
+                          }}
+                        >
+                          {word}
+                        </span>
+                      );
+                    })
+                  )}
                 </div>
               ))}
             </div>
@@ -715,33 +743,33 @@ const GreekTextAnalyzer = () => {
             </div>
           )}
         </div>
-
-        {/* Tooltip for hovered word analysis - unchanged */}
-        {hoveredAnalysis && (
-          <div
-            className={`p-1 text-xs shadow-lg ${getAnalysisBgClass(hoveredAnalysis.data)} text-black border`}
-            style={{
-              position: 'fixed',
-              top: hoveredAnalysis.y,
-              left: hoveredAnalysis.x,
-              zIndex: 1000
-            }}
-          >
-            <div><strong>Word:</strong> {hoveredAnalysis.data.word}</div>
-            <div><strong>Best Translation:</strong> {hoveredAnalysis.data.bestTranslation}</div>
-            <div><strong>Possible Meanings:</strong> {hoveredAnalysis.data.meanings.join(', ')}</div>
-            <div><strong>Lemma:</strong> {hoveredAnalysis.data.lemma}</div>
-            <div><strong>Lemma Meanings:</strong> {
-              Array.isArray(hoveredAnalysis.data.LemmaMeanings) 
-                ? hoveredAnalysis.data.LemmaMeanings.join(', ') 
-                : hoveredAnalysis.data.LemmaMeanings || hoveredAnalysis.data.bestLemmaTranslation || 'N/A'
-            }</div>
-            {hoveredAnalysis.data.frequency && 
-              <div><strong>Frequency:</strong> {hoveredAnalysis.data.frequency}</div>
-            }
-          </div>
-        )}
       </div>
+
+      {/* Tooltip for hovered word analysis - unchanged */}
+      {hoveredAnalysis && (
+        <div
+          className={`p-1 text-xs shadow-lg ${getAnalysisBgClass(hoveredAnalysis.data)} text-black border`}
+          style={{
+            position: 'fixed',
+            top: hoveredAnalysis.y,
+            left: hoveredAnalysis.x,
+            zIndex: 1000
+          }}
+        >
+          <div><strong>Word:</strong> {hoveredAnalysis.data.word}</div>
+          <div><strong>Best Translation:</strong> {hoveredAnalysis.data.bestTranslation}</div>
+          <div><strong>Possible Meanings:</strong> {hoveredAnalysis.data.meanings.join(', ')}</div>
+          <div><strong>Lemma:</strong> {hoveredAnalysis.data.lemma}</div>
+          <div><strong>Lemma Meanings:</strong> {
+            Array.isArray(hoveredAnalysis.data.LemmaMeanings) 
+              ? hoveredAnalysis.data.LemmaMeanings.join(', ') 
+              : hoveredAnalysis.data.LemmaMeanings || hoveredAnalysis.data.bestLemmaTranslation || 'N/A'
+          }</div>
+          {hoveredAnalysis.data.frequency && 
+            <div><strong>Frequency:</strong> {hoveredAnalysis.data.frequency}</div>
+          }
+        </div>
+      )}
     </div>
   );
 };
