@@ -188,6 +188,59 @@ const GreekTextAnalyzer = () => {
     return acc;
   }, {});
 
+  // Add this new function to handle Anki export
+  const handleAnkiExport = (partOfSpeech) => {
+    // Filter the database by the selected part of speech
+    const filteredWords = Object.entries(combinedDatabase)
+      .filter(([_, info]) => {
+        if (!info.partOfSpeech) return false;
+        const pos = info.partOfSpeech.toUpperCase().split('/')[0];
+        return pos === partOfSpeech;
+      });
+    
+    if (filteredWords.length === 0) {
+      alert(`No ${partOfSpeech} words found in the database.`);
+      return;
+    }
+    
+    // Format the entries for Anki
+    let content = '';
+    filteredWords.forEach(([word, info]) => {
+      if (word === info.lemma) {
+        // Word is already a lemma
+        const meanings = info.LemmaMeanings && info.LemmaMeanings.length > 0 
+          ? info.LemmaMeanings.join(', ') 
+          : info.bestTranslation || 'No meaning available';
+        
+        content += `${word} * ${meanings};\n\n`;
+      } else {
+        // Word is a form, needs lemma info
+        const wordMeanings = info.meanings && info.meanings.length > 0 
+          ? info.meanings.join(', ') 
+          : info.bestTranslation || 'No meaning available';
+        
+        const lemmaMeanings = info.LemmaMeanings && info.LemmaMeanings.length > 0 
+          ? info.LemmaMeanings.join(', ') 
+          : 'No lemma meaning available';
+        
+        content += `${word} * ${wordMeanings}\n\n${info.lemma}: ${lemmaMeanings};\n\n`;
+      }
+    });
+    
+    // Create a downloadable file
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create a temporary link and trigger download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `anki-export-${partOfSpeech.toLowerCase()}.txt`;
+    link.click();
+    
+    // Clean up
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="p-4 relative">
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-4">
@@ -234,6 +287,37 @@ const GreekTextAnalyzer = () => {
           >
             Highlight Adverbs
           </button>
+        </div>
+
+        {/* Add Anki Export section */}
+        <div className="mb-4 mt-3 border-t pt-3">
+          <h3 className="text-base font-semibold mb-2">Export to Anki:</h3>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => handleAnkiExport('VERB')}
+              className="px-3 py-1 rounded bg-pink-500 text-white text-sm"
+            >
+              Export Verbs
+            </button>
+            <button 
+              onClick={() => handleAnkiExport('NOUN')}
+              className="px-3 py-1 rounded bg-blue-500 text-white text-sm"
+            >
+              Export Nouns
+            </button>
+            <button 
+              onClick={() => handleAnkiExport('ADJECTIVE')}
+              className="px-3 py-1 rounded bg-green-500 text-white text-sm"
+            >
+              Export Adjectives
+            </button>
+            <button 
+              onClick={() => handleAnkiExport('ADVERB')}
+              className="px-3 py-1 rounded bg-yellow-500 text-white text-sm"
+            >
+              Export Adverbs
+            </button>
+          </div>
         </div>
 
         {/* New flex container for side-by-side layout */}
