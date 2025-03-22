@@ -92,41 +92,57 @@ const GreekTextAnalyzer = () => {
     return !mainCategories.includes(part);
   };
 
-  // Update word analysis to exclude words that first appeared earlier in the text
+  // Update getVisibleText to work by words instead of characters
+  const getVisibleText = (fullText, range) => {
+    if (!fullText) return "";
+    
+    // Split the text into words
+    const allWords = fullText.match(/\S+/g) || [];
+    const totalWords = allWords.length;
+    
+    // Calculate word indices based on percentages
+    const startIndex = Math.floor(totalWords * (range.start / 100));
+    const endIndex = Math.ceil(totalWords * (range.end / 100));
+    
+    // Select words in range and join back together with spaces
+    const selectedWords = allWords.slice(startIndex, endIndex);
+    return selectedWords.join(" ");
+  };
+
+  // Update word analysis to use word-based ranges
   const updateWordAnalysis = (fullText, range, types) => {
     if (!fullText) {
       setWordAnalysis([]);
       return;
     }
     
-    // Step 1: Get the visible text based on the current range
-    const visibleText = getVisibleText(fullText, range);
+    // Split the text into words
+    const allWords = fullText.match(/\S+/g) || [];
+    const totalWords = allWords.length;
     
-    // Step 2: Find all words that appear before our range
-    const beforeRangeText = fullText.substring(0, Math.floor(fullText.length * (range.start / 100)));
-    const beforeRangeMatrix = createTextMatrix(beforeRangeText);
+    // Calculate the word index for the start of our range
+    const startIndex = Math.floor(totalWords * (range.start / 100));
+    
+    // Get all words before our range
+    const wordsBeforeRange = allWords.slice(0, startIndex);
     const wordsSeenBefore = new Set();
     
-    beforeRangeMatrix.forEach(row => {
-      row.forEach(word => {
-        wordsSeenBefore.add(cleanWord(word));
-      });
+    // Collect all unique words seen before our range
+    wordsBeforeRange.forEach(word => {
+      wordsSeenBefore.add(cleanWord(word));
     });
     
-    // Step 3: Process the visible text and only include words not seen before
+    // Get the visible text
+    const visibleText = getVisibleText(fullText, range);
     const visibleMatrix = createTextMatrix(visibleText);
     const uniqueWordsInRange = new Map();
     
+    // Process the visible text and exclude words seen before
     visibleMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
         const info = combinedDatabase[cleaned];
         
-        // Only add if:
-        // 1. Word is in database
-        // 2. Matches active types
-        // 3. Not already added to our results
-        // 4. Most importantly: hasn't been seen before the current range
         if (info && 
             isWordTypeActiveCustom(info, types) && 
             !uniqueWordsInRange.has(cleaned) && 
@@ -140,7 +156,6 @@ const GreekTextAnalyzer = () => {
       });
     });
     
-    // Set the word analysis with our filtered results
     setWordAnalysis(Array.from(uniqueWordsInRange.values()));
   };
 
@@ -160,17 +175,6 @@ const GreekTextAnalyzer = () => {
     );
   }, [combinedDatabase]);
 
-  // Function to get the visible portion of text based on range
-  const getVisibleText = (fullText, range) => {
-    if (!fullText) return '';
-    
-    const totalChars = fullText.length;
-    const startChar = Math.floor(totalChars * (range.start / 100));
-    const endChar = Math.floor(totalChars * (range.end / 100));
-    
-    return fullText.substring(startChar, endChar);
-  };
-  
   // Compute visible text based on current range
   const visibleText = useMemo(() => 
     getVisibleText(text, textRange), 
@@ -287,41 +291,49 @@ const GreekTextAnalyzer = () => {
       return;
     }
     
-    // Create a matrix for the entire text
-    const fullMatrix = createTextMatrix(text);
+    // Split the text into words
+    const allWords = text.match(/\S+/g) || [];
+    const totalWords = allWords.length;
     
-    // Map each unique word to its first position (percentage) in the text
-    const wordFirstPositions = new Map();
-    const totalLength = text.length;
+    // Calculate the word index for the start of our range
+    const startIndex = Math.floor(totalWords * (textRange.start / 100));
     
-    // Record the position of first appearance of each word
-    let currentPosition = 0;
-    fullMatrix.forEach(row => {
+    // Get all words before our range
+    const wordsBeforeRange = allWords.slice(0, startIndex);
+    const wordsSeenBefore = new Set();
+    
+    // Collect all unique words seen before our range
+    wordsBeforeRange.forEach(word => {
+      wordsSeenBefore.add(cleanWord(word));
+    });
+    
+    // Get the visible text and process it
+    const visibleText = getVisibleText(text, textRange);
+    const visibleMatrix = createTextMatrix(visibleText);
+    const uniqueWordsInRange = new Set();
+    
+    visibleMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
-        if (!wordFirstPositions.has(cleaned)) {
-          const positionPercent = (currentPosition / totalLength) * 100;
-          wordFirstPositions.set(cleaned, positionPercent);
+        if (!wordsSeenBefore.has(cleaned)) {
+          uniqueWordsInRange.add(cleaned);
         }
-        currentPosition += word.length + 1; // +1 for space
       });
     });
     
-    // Filter words that first appear within our range and match the part of speech
-    const filteredWords = [];
-    
-    wordFirstPositions.forEach((position, word) => {
-      // Check if word's first appearance is within our range
-      if (position >= textRange.start && position <= textRange.end) {
+    // Filter for words matching part of speech and not excluded
+    const filteredWords = Array.from(uniqueWordsInRange)
+      .map(word => {
         const info = combinedDatabase[word];
-        if (!info) return;
+        if (!info) return null;
         
         const pos = info.partOfSpeech?.toUpperCase().split('/')[0];
         if (pos === partOfSpeech && !excludedWords.has(word)) {
-          filteredWords.push([word, info]);
+          return [word, info];
         }
-      }
-    });
+        return null;
+      })
+      .filter(item => item !== null);
     
     if (filteredWords.length === 0) {
       alert(`No ${partOfSpeech.toLowerCase()} words found in the visible text.`);
