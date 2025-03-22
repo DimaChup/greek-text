@@ -457,8 +457,8 @@ const GreekTextAnalyzer = () => {
   };
 
   return (
-    <div className="p-4 relative">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4">
+    <div className="p-2 sm:p-4 relative">
+      <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-2 sm:p-4">
         <h1 className="text-lg font-bold mb-4">Greek Text Analyzer</h1>
         <div className="text-xs text-gray-500 mb-2">
           Loaded {Object.keys(combinedDatabase).length} words from databases
@@ -472,11 +472,11 @@ const GreekTextAnalyzer = () => {
         />
 
         {/* Improved Range slider section */}
-        <div className="mb-4 p-3 border rounded bg-gray-50">
+        <div className="mb-4 p-2 sm:p-3 border rounded bg-gray-50">
           <div className="flex flex-col mb-1">
             <div className="flex justify-between mb-1">
-              <span className="text-sm font-medium">Text Range to Analyze</span>
-              <span className="text-sm font-medium">{textRange.start}% - {textRange.end}%</span>
+              <span className="text-xs sm:text-sm font-medium">Text Range to Analyze</span>
+              <span className="text-xs sm:text-sm font-medium">{textRange.start}% - {textRange.end}%</span>
             </div>
             
             {/* Simpler, more reliable dual slider implementation */}
@@ -556,34 +556,34 @@ const GreekTextAnalyzer = () => {
           </div>
         </div>
 
-        <div className="flex gap-2 mb-3">
+        <div className="flex flex-wrap gap-1 sm:gap-2 mb-3">
           <button 
             onClick={() => handleTypeClick('NOUN')}
-            className={`px-3 py-1 rounded ${activeTypes.includes('NOUN') ? 'bg-blue-500 text-white' : 'bg-gray-200 text-sm'}`}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('NOUN') ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
           >
             Highlight Nouns
           </button>
           <button 
             onClick={() => handleTypeClick('VERB')}
-            className={`px-3 py-1 rounded ${activeTypes.includes('VERB') ? 'bg-pink-500 text-white' : 'bg-gray-200 text-sm'}`}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('VERB') ? 'bg-pink-500 text-white' : 'bg-gray-200'}`}
           >
             Highlight Verbs
           </button>
           <button 
             onClick={() => handleTypeClick('ADJECTIVE')}
-            className={`px-3 py-1 rounded ${activeTypes.includes('ADJECTIVE') ? 'bg-green-500 text-white' : 'bg-gray-200 text-sm'}`}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('ADJECTIVE') ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
           >
             Highlight Adjectives
           </button>
           <button 
             onClick={() => handleTypeClick('RED')}
-            className={`px-3 py-1 rounded ${activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200 text-sm'}`}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200'}`}
           >
             Highlight Other Parts of Speech
           </button>
           <button 
             onClick={() => handleTypeClick('ADVERB')}
-            className={`px-3 py-1 rounded ${activeTypes.includes('ADVERB') ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-sm'}`}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('ADVERB') ? 'bg-yellow-500 text-white' : 'bg-gray-200'}`}
           >
             Highlight Adverbs
           </button>
@@ -592,28 +592,28 @@ const GreekTextAnalyzer = () => {
         {/* Add Anki Export section */}
         <div className="mb-4 mt-3 border-t pt-3">
           <h3 className="text-base font-semibold mb-2">Export to Anki:</h3>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             <button 
               onClick={() => handleAnkiExport('VERB')}
-              className="px-3 py-1 rounded bg-pink-500 text-white text-sm"
+              className="px-2 py-1 sm:px-3 text-xs sm:text-sm rounded bg-pink-500 text-white"
             >
               Export Verbs
             </button>
             <button 
               onClick={() => handleAnkiExport('NOUN')}
-              className="px-3 py-1 rounded bg-blue-500 text-white text-sm"
+              className="px-2 py-1 sm:px-3 text-xs sm:text-sm rounded bg-blue-500 text-white"
             >
               Export Nouns
             </button>
             <button 
               onClick={() => handleAnkiExport('ADJECTIVE')}
-              className="px-3 py-1 rounded bg-green-500 text-white text-sm"
+              className="px-2 py-1 sm:px-3 text-xs sm:text-sm rounded bg-green-500 text-white"
             >
               Export Adjectives
             </button>
             <button 
               onClick={() => handleAnkiExport('ADVERB')}
-              className="px-3 py-1 rounded bg-yellow-500 text-white text-sm"
+              className="px-2 py-1 sm:px-3 text-xs sm:text-sm rounded bg-yellow-500 text-white"
             >
               Export Adverbs
             </button>
@@ -621,11 +621,11 @@ const GreekTextAnalyzer = () => {
         </div>
 
         {/* New flex container for side-by-side layout WITHOUT slider */}
-        <div className="flex gap-4">
-          {/* Text analysis section - increased from 1/2 to 3/5 width */}
-          <div className="w-3/5">
+        <div className="flex flex-col lg:flex-row gap-4">
+          {/* Text analysis section - full width on mobile, 3/5 on desktop */}
+          <div className="w-full lg:w-3/5">
             <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
-            <div className="border rounded p-2 text-sm overflow-auto">
+            <div className="border rounded p-2 text-sm overflow-auto max-h-[60vh] lg:max-h-[70vh]">
               {/* We'll use a different approach that preserves exact layout */}
               {visibleText.split('\n').map((line, lineIndex) => (
                 <div key={lineIndex} className="mb-2 whitespace-pre-wrap">
@@ -676,14 +676,14 @@ const GreekTextAnalyzer = () => {
             </div>
           </div>
 
-          {/* Word analysis section - decreased from 1/2 to 2/5 width */}
+          {/* Word analysis section - full width on mobile, 2/5 on desktop */}
           {Object.keys(groupedAnalysis).length > 0 && (
-            <div className="w-2/5">
+            <div className="w-full lg:w-2/5">
               <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
               <div className="text-xs text-gray-500 mb-2">
                 Click on words to exclude them from Anki export
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-col md:flex-row gap-2">
                 {Object.keys(groupedAnalysis).map(type => (
                   <div key={type} className="flex-1">
                     <h3 className="text-base font-semibold mb-1">
@@ -692,7 +692,7 @@ const GreekTextAnalyzer = () => {
                         ({groupedAnalysis[type].length} words)
                       </span>
                     </h3>
-                    <div className="space-y-2">
+                    <div className="space-y-2 max-h-[40vh] overflow-y-auto">
                       {groupedAnalysis[type].map((analysis, index) => (
                         <div 
                           key={index} 
