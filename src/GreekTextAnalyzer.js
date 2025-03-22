@@ -622,8 +622,8 @@ const GreekTextAnalyzer = () => {
 
         {/* New flex container for side-by-side layout WITHOUT slider */}
         <div className="flex gap-4">
-          {/* Text analysis section */}
-          <div className="w-1/2">
+          {/* Text analysis section - increased from 1/2 to 3/5 width */}
+          <div className="w-3/5">
             <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
             <div className="border rounded p-2 text-sm overflow-auto">
               {/* We'll use a different approach that preserves exact layout */}
@@ -676,9 +676,9 @@ const GreekTextAnalyzer = () => {
             </div>
           </div>
 
-          {/* Word analysis section */}
+          {/* Word analysis section - decreased from 1/2 to 2/5 width */}
           {Object.keys(groupedAnalysis).length > 0 && (
-            <div className="w-1/2">
+            <div className="w-2/5">
               <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
               <div className="text-xs text-gray-500 mb-2">
                 Click on words to exclude them from Anki export
@@ -686,14 +686,20 @@ const GreekTextAnalyzer = () => {
               <div className="flex gap-2">
                 {Object.keys(groupedAnalysis).map(type => (
                   <div key={type} className="flex-1">
-                    <h3 className="text-base font-semibold mb-1">{type} Analysis:</h3>
+                    <h3 className="text-base font-semibold mb-1">
+                      {type} Analysis: 
+                      <span className="ml-1 text-sm font-normal text-gray-600">
+                        ({groupedAnalysis[type].length} words)
+                      </span>
+                    </h3>
                     <div className="space-y-2">
                       {groupedAnalysis[type].map((analysis, index) => (
                         <div 
                           key={index} 
-                          className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer transition-opacity duration-200 ${
-                            excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'
-                          } ${hoveredWord === analysis.word ? 'ring-2 ring-offset-1 scale-105 shadow-lg' : ''}`}
+                          className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer 
+                            transition-all duration-200 transform hover:scale-110 hover:shadow-lg 
+                            ${excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'} 
+                            ${hoveredWord === analysis.word ? 'ring-2 ring-offset-1 scale-110 shadow-lg' : ''}`}
                           onClick={() => toggleWordExclusion(analysis.word)}
                           onMouseEnter={() => setHoveredWord(analysis.word)}
                           onMouseLeave={() => setHoveredWord(null)}
