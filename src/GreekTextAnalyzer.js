@@ -42,6 +42,8 @@ const GreekTextAnalyzer = () => {
   const [hoveredAnalysis, setHoveredAnalysis] = useState(null);
   const [excludedWords, setExcludedWords] = useState(new Set());
   const [textRange, setTextRange] = useState({ start: 0, end: 100 });
+  const [uniqueInFullText, setUniqueInFullText] = useState(true);
+  const [hoveredWord, setHoveredWord] = useState(null);
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -116,6 +118,36 @@ const GreekTextAnalyzer = () => {
       return;
     }
     
+    // Get the visible text based on range
+    const visibleText = getVisibleText(fullText, range);
+    const visibleMatrix = createTextMatrix(visibleText);
+    const uniqueWordsInRange = new Map();
+    
+    // If we're in Selection Mode (uniqueInFullText = false),
+    // just collect unique words from the visible text
+    if (!uniqueInFullText) {
+      visibleMatrix.forEach(row => {
+        row.forEach(word => {
+          const cleaned = cleanWord(word);
+          const info = combinedDatabase[cleaned];
+          
+          if (info && 
+              isWordTypeActiveCustom(info, types) && 
+              !uniqueWordsInRange.has(cleaned)) {
+            
+            uniqueWordsInRange.set(cleaned, {
+              word: cleaned,
+              ...info
+            });
+          }
+        });
+      });
+      
+      setWordAnalysis(Array.from(uniqueWordsInRange.values()));
+      return;
+    }
+    
+    // Otherwise, use the Progressive Mode logic
     // Split the text into words
     const allWords = fullText.match(/\S+/g) || [];
     const totalWords = allWords.length;
@@ -131,11 +163,6 @@ const GreekTextAnalyzer = () => {
     wordsBeforeRange.forEach(word => {
       wordsSeenBefore.add(cleanWord(word));
     });
-    
-    // Get the visible text
-    const visibleText = getVisibleText(fullText, range);
-    const visibleMatrix = createTextMatrix(visibleText);
-    const uniqueWordsInRange = new Map();
     
     // Process the visible text and exclude words seen before
     visibleMatrix.forEach(row => {
@@ -162,7 +189,7 @@ const GreekTextAnalyzer = () => {
   // Update the useEffect to call our function with the right parameters
   useEffect(() => {
     updateWordAnalysis(text, textRange, activeTypes);
-  }, [text, textRange, activeTypes, combinedDatabase]);
+  }, [text, textRange, activeTypes, combinedDatabase, uniqueInFullText]);
 
   // Debug output to help troubleshoot
   useEffect(() => {
@@ -233,15 +260,44 @@ const GreekTextAnalyzer = () => {
   const getHighlightClass = (word) => {
     const cleaned = cleanWord(word);
     const info = combinedDatabase[cleaned];
+    
+    // Base classes
+    let classes = 'inline-block px-1 py-1 m-1 rounded font-serif transition-all duration-200 ';
+    
+    // Check if this word is the currently hovered word
+    const isHovered = hoveredWord === cleaned;
+    
     if (info && isWordTypeActiveCustom(info, activeTypes)) {
       const part = info.partOfSpeech.toUpperCase();
-      if (part === 'VERB' && activeTypes.includes('VERB')) return 'bg-pink-200';
-      if (part === 'ADJECTIVE' && activeTypes.includes('ADJECTIVE')) return 'bg-green-200';
-      if (part === 'NOUN' && activeTypes.includes('NOUN')) return 'bg-blue-200';
-      if (part === 'ADVERB' && activeTypes.includes('ADVERB')) return 'bg-yellow-200';
-      if (activeTypes.includes('RED') && isRedGroup(part)) return 'bg-red-200';
+      
+      // Add the basic highlight color
+      if (part === 'VERB' && activeTypes.includes('VERB')) 
+        classes += 'bg-pink-200 ';
+      else if (part === 'ADJECTIVE' && activeTypes.includes('ADJECTIVE')) 
+        classes += 'bg-green-200 ';
+      else if (part === 'NOUN' && activeTypes.includes('NOUN')) 
+        classes += 'bg-blue-200 ';
+      else if (part === 'ADVERB' && activeTypes.includes('ADVERB')) 
+        classes += 'bg-yellow-200 ';
+      else if (activeTypes.includes('RED') && isRedGroup(part)) 
+        classes += 'bg-red-200 ';
+      
+      // If this word or any of its instances is being hovered, add the glow effect
+      if (isHovered) {
+        classes += 'ring-2 ring-offset-1 ring-opacity-80 scale-110 z-10 shadow-lg ';
+        
+        // Add color-specific ring
+        if (part === 'VERB') classes += 'ring-pink-500 ';
+        else if (part === 'ADJECTIVE') classes += 'ring-green-500 ';
+        else if (part === 'NOUN') classes += 'ring-blue-500 ';
+        else if (part === 'ADVERB') classes += 'ring-yellow-500 ';
+        else classes += 'ring-red-500 ';
+      }
+    } else {
+      classes += 'bg-white border ';
     }
-    return 'bg-white border';
+    
+    return classes;
   };
 
   // Helper to determine tooltip background class based on analysis data
@@ -284,42 +340,55 @@ const GreekTextAnalyzer = () => {
     });
   };
 
-  // Update the handleAnkiExport function to exclude words from earlier sections
+  // Update the handleAnkiExport function to use the toggle
   const handleAnkiExport = (partOfSpeech) => {
     if (!text) {
       alert("Please enter some text to analyze.");
       return;
     }
     
-    // Split the text into words
-    const allWords = text.match(/\S+/g) || [];
-    const totalWords = allWords.length;
-    
-    // Calculate the word index for the start of our range
-    const startIndex = Math.floor(totalWords * (textRange.start / 100));
-    
-    // Get all words before our range
-    const wordsBeforeRange = allWords.slice(0, startIndex);
-    const wordsSeenBefore = new Set();
-    
-    // Collect all unique words seen before our range
-    wordsBeforeRange.forEach(word => {
-      wordsSeenBefore.add(cleanWord(word));
-    });
-    
-    // Get the visible text and process it
+    // Get the visible text
     const visibleText = getVisibleText(text, textRange);
     const visibleMatrix = createTextMatrix(visibleText);
     const uniqueWordsInRange = new Set();
     
-    visibleMatrix.forEach(row => {
-      row.forEach(word => {
-        const cleaned = cleanWord(word);
-        if (!wordsSeenBefore.has(cleaned)) {
+    // Selection Mode: just get unique words from visible text
+    if (!uniqueInFullText) {
+      visibleMatrix.forEach(row => {
+        row.forEach(word => {
+          const cleaned = cleanWord(word);
           uniqueWordsInRange.add(cleaned);
-        }
+        });
       });
-    });
+    } 
+    // Progressive Mode: exclude words seen earlier in the text
+    else {
+      // Split the text into words
+      const allWords = text.match(/\S+/g) || [];
+      const totalWords = allWords.length;
+      
+      // Calculate the word index for the start of our range
+      const startIndex = Math.floor(totalWords * (textRange.start / 100));
+      
+      // Get all words before our range
+      const wordsBeforeRange = allWords.slice(0, startIndex);
+      const wordsSeenBefore = new Set();
+      
+      // Collect all unique words seen before our range
+      wordsBeforeRange.forEach(word => {
+        wordsSeenBefore.add(cleanWord(word));
+      });
+      
+      // Only add words not seen before
+      visibleMatrix.forEach(row => {
+        row.forEach(word => {
+          const cleaned = cleanWord(word);
+          if (!wordsSeenBefore.has(cleaned)) {
+            uniqueWordsInRange.add(cleaned);
+          }
+        });
+      });
+    }
     
     // Filter for words matching part of speech and not excluded
     const filteredWords = Array.from(uniqueWordsInRange)
@@ -390,7 +459,7 @@ const GreekTextAnalyzer = () => {
           placeholder="Enter Greek text here (try pasting some Ancient Greek text)"
           value={text}
           onChange={handleTextChange}
-          className="w-full h-24 p-2 border rounded mb-3 font-serif text-sm"
+          className="w-full h-72 p-2 border rounded mb-3 font-serif text-sm"
         />
 
         {/* Improved Range slider section */}
@@ -448,6 +517,32 @@ const GreekTextAnalyzer = () => {
             
             <div className="text-xs text-gray-500 mt-3">
               Analyzing text from {textRange.start}% to {textRange.end}% ({visibleText.length} characters)
+            </div>
+
+            {/* Add toggle for word analysis mode */}
+            <div className="mt-4 border-t pt-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">Word Analysis Mode:</span>
+                <label className="inline-flex items-center cursor-pointer">
+                  <span className="mr-2 text-xs text-gray-700">
+                    {uniqueInFullText ? 'Progressive Mode' : 'Selection Mode'}
+                  </span>
+                  <div className="relative">
+                    <input 
+                      type="checkbox" 
+                      className="sr-only peer"
+                      checked={uniqueInFullText}
+                      onChange={() => setUniqueInFullText(!uniqueInFullText)}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  </div>
+                </label>
+              </div>
+              <div className="text-xs text-gray-500 mt-1">
+                <strong>Progressive Mode:</strong> Words are shown only when they first appear in the text
+                <br />
+                <strong>Selection Mode:</strong> All unique words in the current selection are shown
+              </div>
             </div>
           </div>
         </div>
@@ -527,7 +622,7 @@ const GreekTextAnalyzer = () => {
                   {row.map((word, colIndex) => (
                     <span 
                       key={`${rowIndex}-${colIndex}`}
-                      className={`inline-block px-1 py-1 m-1 rounded font-serif ${getHighlightClass(word)}`}
+                      className={getHighlightClass(word)}
                       onMouseEnter={(e) => {
                         const cleaned = cleanWord(word);
                         const info = combinedDatabase[cleaned];
@@ -537,9 +632,13 @@ const GreekTextAnalyzer = () => {
                             x: e.clientX + 10,
                             y: e.clientY + 10
                           });
+                          setHoveredWord(cleaned);
                         }
                       }}
-                      onMouseLeave={() => setHoveredAnalysis(null)}
+                      onMouseLeave={() => {
+                        setHoveredAnalysis(null);
+                        setHoveredWord(null);
+                      }}
                     >
                       {word}
                     </span>
@@ -566,8 +665,10 @@ const GreekTextAnalyzer = () => {
                           key={index} 
                           className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer transition-opacity duration-200 ${
                             excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'
-                          }`}
+                          } ${hoveredWord === analysis.word ? 'ring-2 ring-offset-1 scale-105 shadow-lg' : ''}`}
                           onClick={() => toggleWordExclusion(analysis.word)}
+                          onMouseEnter={() => setHoveredWord(analysis.word)}
+                          onMouseLeave={() => setHoveredWord(null)}
                         >
                           {/* Top Section: Flex container for Word and Meanings */}
                           <div className="flex">
