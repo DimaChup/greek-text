@@ -41,6 +41,7 @@ const GreekTextAnalyzer = () => {
   const [wordAnalysis, setWordAnalysis] = useState([]);
   const [hoveredAnalysis, setHoveredAnalysis] = useState(null);
   const [excludedWords, setExcludedWords] = useState(new Set());
+  const [textPercentage, setTextPercentage] = useState(100);
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -94,41 +95,69 @@ const GreekTextAnalyzer = () => {
   // Update word analysis based on current text and provided active types
   const updateWordAnalysis = (text, types) => {
     const newMatrix = createTextMatrix(text);
-    
-    // Use a Map to track unique words (preserving the original object references)
-    const uniqueWords = new Map();
-    
+    const analysis = [];
     newMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
         const info = combinedDatabase[cleaned];
-        
-        // Only add if: 1) word is in database, 2) matches active types, and 3) not already added
-        if (info && isWordTypeActiveCustom(info, types) && !uniqueWords.has(cleaned)) {
-          uniqueWords.set(cleaned, {
+        if (info && isWordTypeActiveCustom(info, types)) {
+          analysis.push({
             word: cleaned,
             ...info
           });
         }
       });
     });
-    
-    // Convert Map values to array
-    setWordAnalysis(Array.from(uniqueWords.values()));
+    setWordAnalysis(analysis);
   };
 
-  // useEffect to update wordAnalysis whenever text or activeTypes changes
+  // Missing dependency: Add combinedDatabase to the dependency array
   useEffect(() => {
     updateWordAnalysis(text, activeTypes);
-  }, [text, activeTypes, combinedDatabase]);
+  }, [text, activeTypes, combinedDatabase]); // Add combinedDatabase here
 
-  // Event Handlers
+  // Debug output to help troubleshoot
+  useEffect(() => {
+    // Log details about database loading
+    console.log("Database loaded with keys:", Object.keys(combinedDatabase).slice(0, 10));
+    console.log("First database entry sample:", 
+      Object.keys(combinedDatabase).length > 0 
+        ? combinedDatabase[Object.keys(combinedDatabase)[0]] 
+        : "No entries"
+    );
+  }, [combinedDatabase]);
+
+  // Function to get the visible portion of text based on slider percentage
+  const getVisibleText = (fullText, percentage) => {
+    if (!fullText) return '';
+    if (percentage >= 100) return fullText;
+    
+    const totalChars = fullText.length;
+    const visibleChars = Math.floor(totalChars * (percentage / 100));
+    return fullText.substring(0, visibleChars);
+  };
+  
+  // Compute visible text based on current percentage
+  const visibleText = useMemo(() => getVisibleText(text, textPercentage), [text, textPercentage]);
+  
+  // Update the handleTextChange to only update the raw text
   const handleTextChange = (e) => {
     const newText = e.target.value;
     setText(newText);
-    setMatrix(createTextMatrix(newText));
   };
+  
+  // Handler for slider changes
+  const handleSliderChange = (e) => {
+    setTextPercentage(parseInt(e.target.value, 10));
+  };
+  
+  // Update matrix and word analysis whenever visible text changes
+  useEffect(() => {
+    setMatrix(createTextMatrix(visibleText));
+    updateWordAnalysis(visibleText, activeTypes);
+  }, [visibleText, activeTypes, combinedDatabase]);
 
+  // Event Handlers
   const handleTypeClick = (type) => {
     let newActiveTypes;
     if (activeTypes.includes(type)) {
@@ -202,13 +231,13 @@ const GreekTextAnalyzer = () => {
     });
   };
 
-  // Update the handleAnkiExport function to exclude faded words
+  // Update the handleAnkiExport function to use visibleText instead of full text
   const handleAnkiExport = (partOfSpeech) => {
-    // Get all unique words from the current text
-    const newMatrix = createTextMatrix(text);
+    // Get all unique words from the VISIBLE text (controlled by slider)
+    const newMatrix = createTextMatrix(visibleText);
     const uniqueTextWords = new Set();
     
-    // Collect all unique words from the text
+    // Collect all unique words from the visible text
     newMatrix.forEach(row => {
       row.forEach(word => {
         const cleaned = cleanWord(word);
@@ -216,7 +245,7 @@ const GreekTextAnalyzer = () => {
       });
     });
     
-    // Filter words that are both in the text, match the part of speech, and are not excluded
+    // Filter words that are both in the visible text, match the part of speech, and are not excluded
     const filteredWords = Array.from(uniqueTextWords)
       .map(word => {
         const info = combinedDatabase[word];
@@ -232,7 +261,7 @@ const GreekTextAnalyzer = () => {
       .filter(item => item !== null);
     
     if (filteredWords.length === 0) {
-      alert(`No ${partOfSpeech} words found in the current text.`);
+      alert(`No ${partOfSpeech} words found in the current visible text.`);
       return;
     }
     
@@ -276,18 +305,39 @@ const GreekTextAnalyzer = () => {
 
   return (
     <div className="p-4 relative">
-      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-4">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4">
         <h1 className="text-lg font-bold mb-4">Greek Text Analyzer</h1>
         <div className="text-xs text-gray-500 mb-2">
           Loaded {Object.keys(combinedDatabase).length} words from databases
         </div>
         
         <textarea 
-          placeholder="Enter Greek text here (try: δ' ἐς τ' ἐπὶ ὁδὸν κόραι ...)"
+          placeholder="Enter Greek text here (try pasting some Ancient Greek text)"
           value={text}
           onChange={handleTextChange}
           className="w-full h-24 p-2 border rounded mb-3 font-serif text-sm"
         />
+
+        {/* Horizontal slider section - moved to top */}
+        <div className="mb-4 p-3 border rounded bg-gray-50">
+          <div className="flex flex-col mb-1">
+            <div className="flex justify-between mb-1">
+              <span className="text-sm font-medium">Text Portion to Analyze</span>
+              <span className="text-sm font-medium">{textPercentage}%</span>
+            </div>
+            <input
+              type="range"
+              min="5"
+              max="100"
+              value={textPercentage}
+              onChange={handleSliderChange}
+              className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
+            />
+          </div>
+          <div className="text-xs text-gray-500">
+            Analyzing first {textPercentage}% of text ({visibleText.length} characters)
+          </div>
+        </div>
 
         <div className="flex gap-2 mb-3">
           <button 
@@ -353,9 +403,9 @@ const GreekTextAnalyzer = () => {
           </div>
         </div>
 
-        {/* New flex container for side-by-side layout */}
+        {/* New flex container for side-by-side layout WITHOUT slider */}
         <div className="flex gap-4">
-          {/* Text analysis section - now with width constraint */}
+          {/* Text analysis section */}
           <div className="w-1/2">
             <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
             <div className="border rounded p-2 text-sm">
@@ -386,7 +436,7 @@ const GreekTextAnalyzer = () => {
             </div>
           </div>
 
-          {/* Word analysis section - now side by side */}
+          {/* Word analysis section */}
           {Object.keys(groupedAnalysis).length > 0 && (
             <div className="w-1/2">
               <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
