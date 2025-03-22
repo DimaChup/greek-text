@@ -40,6 +40,7 @@ const GreekTextAnalyzer = () => {
   const [activeTypes, setActiveTypes] = useState([]); // Array for multiple types
   const [wordAnalysis, setWordAnalysis] = useState([]);
   const [hoveredAnalysis, setHoveredAnalysis] = useState(null);
+  const [excludedWords, setExcludedWords] = useState(new Set());
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -188,22 +189,54 @@ const GreekTextAnalyzer = () => {
     return acc;
   }, {});
 
-  // Add this new function to handle Anki export
+  // Add function to toggle word exclusion
+  const toggleWordExclusion = (word) => {
+    setExcludedWords(prevExcluded => {
+      const newExcluded = new Set(prevExcluded);
+      if (newExcluded.has(word)) {
+        newExcluded.delete(word);
+      } else {
+        newExcluded.add(word);
+      }
+      return newExcluded;
+    });
+  };
+
+  // Update the handleAnkiExport function to exclude faded words
   const handleAnkiExport = (partOfSpeech) => {
-    // Filter the database by the selected part of speech
-    const filteredWords = Object.entries(combinedDatabase)
-      .filter(([_, info]) => {
-        if (!info.partOfSpeech) return false;
-        const pos = info.partOfSpeech.toUpperCase().split('/')[0];
-        return pos === partOfSpeech;
+    // Get all unique words from the current text
+    const newMatrix = createTextMatrix(text);
+    const uniqueTextWords = new Set();
+    
+    // Collect all unique words from the text
+    newMatrix.forEach(row => {
+      row.forEach(word => {
+        const cleaned = cleanWord(word);
+        uniqueTextWords.add(cleaned);
       });
+    });
+    
+    // Filter words that are both in the text, match the part of speech, and are not excluded
+    const filteredWords = Array.from(uniqueTextWords)
+      .map(word => {
+        const info = combinedDatabase[word];
+        if (!info) return null;
+        
+        // Check if the word matches the requested part of speech and is not excluded
+        const pos = info.partOfSpeech?.toUpperCase().split('/')[0];
+        if (pos === partOfSpeech && !excludedWords.has(word)) {
+          return [word, info];
+        }
+        return null;
+      })
+      .filter(item => item !== null);
     
     if (filteredWords.length === 0) {
-      alert(`No ${partOfSpeech} words found in the database.`);
+      alert(`No ${partOfSpeech} words found in the current text.`);
       return;
     }
     
-    // Format the entries for Anki
+    // Format the entries for Anki - same as before
     let content = '';
     filteredWords.forEach(([word, info]) => {
       if (word === info.lemma) {
@@ -357,6 +390,9 @@ const GreekTextAnalyzer = () => {
           {Object.keys(groupedAnalysis).length > 0 && (
             <div className="w-1/2">
               <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
+              <div className="text-xs text-gray-500 mb-2">
+                Click on words to exclude them from Anki export
+              </div>
               <div className="flex gap-2">
                 {Object.keys(groupedAnalysis).map(type => (
                   <div key={type} className="flex-1">
@@ -365,7 +401,10 @@ const GreekTextAnalyzer = () => {
                       {groupedAnalysis[type].map((analysis, index) => (
                         <div 
                           key={index} 
-                          className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs`}
+                          className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer transition-opacity duration-200 ${
+                            excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'
+                          }`}
+                          onClick={() => toggleWordExclusion(analysis.word)}
                         >
                           {/* Top Section: Flex container for Word and Meanings */}
                           <div className="flex">

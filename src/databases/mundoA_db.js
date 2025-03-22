@@ -243,7 +243,6 @@ const mundoADatabase = {
     'llamadme': {
       wordNumber: 25,
       frequency: 2,
-      hahah: "sg",
       partOfSpeech: 'VERB',
       morphology: 'imperative + pronoun, second person plural',
       meanings: ['call me'],
@@ -704,7 +703,7 @@ const mundoADatabase = {
     'aferrado': {
       wordNumber: 71,
       frequency: 1,
-      partOfSpeech: 'VERB/ADJECTIVE',
+      partOfSpeech: 'VERB',
       morphology: 'past participle, masculine singular',
       meanings: ['clinging', 'holding on tightly', 'gripping', 'clutching'],
       bestTranslation: 'clinging',
