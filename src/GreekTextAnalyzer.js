@@ -44,6 +44,12 @@ const GreekTextAnalyzer = () => {
   const [textRange, setTextRange] = useState({ start: 0, end: 100 });
   const [uniqueInFullText, setUniqueInFullText] = useState(true);
   const [hoveredWord, setHoveredWord] = useState(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage for existing preference
+    const savedPreference = localStorage.getItem('darkMode');
+    // Return true if explicitly set to 'true', false otherwise
+    return savedPreference === 'true';
+  });
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -56,13 +62,13 @@ const GreekTextAnalyzer = () => {
   ];
 
   // Mapping for analysis card background colors per group
-  const bgMapping = {
-    'VERB': 'bg-pink-200',
-    'NOUN': 'bg-blue-200',
-    'ADJECTIVE': 'bg-green-200',
-    'RED': 'bg-red-200',
-    'ADVERB': 'bg-yellow-200'
-  };
+  const bgMapping = useMemo(() => ({
+    'VERB': darkMode ? 'bg-pink-900' : 'bg-pink-200',
+    'NOUN': darkMode ? 'bg-blue-900' : 'bg-blue-200',
+    'ADJECTIVE': darkMode ? 'bg-green-900' : 'bg-green-200',
+    'RED': darkMode ? 'bg-red-900' : 'bg-red-200',
+    'ADVERB': darkMode ? 'bg-yellow-900' : 'bg-yellow-200'
+  }), [darkMode]);
 
   // Helper to clean the word string - improved version to handle complex punctuation
   const cleanWord = (word) => {
@@ -279,17 +285,17 @@ const GreekTextAnalyzer = () => {
     if (info && isWordTypeActiveCustom(info, activeTypes)) {
       const part = info.partOfSpeech.toUpperCase();
       
-      // Add the basic highlight color
+      // Add the basic highlight color - darker shades for dark mode
       if (part === 'VERB' && activeTypes.includes('VERB')) 
-        classes += 'bg-pink-200 ';
+        classes += darkMode ? 'bg-pink-900 ' : 'bg-pink-200 ';
       else if (part === 'ADJECTIVE' && activeTypes.includes('ADJECTIVE')) 
-        classes += 'bg-green-200 ';
+        classes += darkMode ? 'bg-green-900 ' : 'bg-green-200 ';
       else if (part === 'NOUN' && activeTypes.includes('NOUN')) 
-        classes += 'bg-blue-200 ';
+        classes += darkMode ? 'bg-blue-900 ' : 'bg-blue-200 ';
       else if (part === 'ADVERB' && activeTypes.includes('ADVERB')) 
-        classes += 'bg-yellow-200 ';
+        classes += darkMode ? 'bg-yellow-900 ' : 'bg-yellow-200 ';
       else if (activeTypes.includes('RED') && isRedGroup(part)) 
-        classes += 'bg-red-200 ';
+        classes += darkMode ? 'bg-red-900 ' : 'bg-red-200 ';
       
       // If this word or any of its instances is being hovered, add the glow effect
       if (isHovered) {
@@ -303,7 +309,7 @@ const GreekTextAnalyzer = () => {
         else classes += 'ring-red-500 ';
       }
     } else {
-      classes += 'bg-white border ';
+      classes += darkMode ? 'bg-gray-700 border-gray-600 ' : 'bg-white border ';
     }
     
     return classes;
@@ -456,10 +462,48 @@ const GreekTextAnalyzer = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Add this effect to apply dark mode to the document
+  useEffect(() => {
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', darkMode);
+    
+    // Apply or remove the dark class on the document body
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+
   return (
-    <div className="p-2 sm:p-4 relative">
-      <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-2 sm:p-4">
-        <h1 className="text-lg font-bold mb-4">Greek Text Analyzer</h1>
+    <div className={`p-2 sm:p-4 relative ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <div className={`w-full max-w-4xl mx-auto rounded-lg shadow-lg p-2 sm:p-4 ${
+        darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'
+      }`}>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-lg font-bold">Greek Text Analyzer</h1>
+          
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className={`px-3 py-1 rounded flex items-center text-sm transition-colors ${
+              darkMode 
+                ? 'bg-gray-700 text-yellow-200' 
+                : 'bg-blue-100 text-gray-800'
+            }`}
+          >
+            {darkMode ? (
+              <>
+                <span className="mr-2">☀️</span>
+                <span>Light Mode</span>
+              </>
+            ) : (
+              <>
+                <span className="mr-2">🌙</span>
+                <span>Dark Mode</span>
+              </>
+            )}
+          </button>
+        </div>
         <div className="text-xs text-gray-500 mb-2">
           Loaded {Object.keys(combinedDatabase).length} words from databases
         </div>
@@ -684,67 +728,79 @@ const GreekTextAnalyzer = () => {
                 Click on words to exclude them from Anki export
               </div>
               <div className="flex flex-col md:flex-row gap-2">
-                {Object.keys(groupedAnalysis).map(type => (
-                  <div key={type} className="flex-1">
-                    <h3 className="text-base font-semibold mb-1">
-                      {type} Analysis: 
-                      <span className="ml-1 text-sm font-normal text-gray-600">
-                        ({groupedAnalysis[type].length} words)
-                      </span>
-                    </h3>
-                    <div className="space-y-2 max-h-[40vh] overflow-y-auto">
-                      {groupedAnalysis[type].map((analysis, index) => (
-                        <div 
-                          key={index} 
-                          className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer 
-                            transition-all duration-200 transform hover:scale-110 hover:shadow-lg 
-                            ${excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'} 
-                            ${hoveredWord === analysis.word ? 'ring-2 ring-offset-1 scale-110 shadow-lg' : ''}`}
-                          onClick={() => toggleWordExclusion(analysis.word)}
-                          onMouseEnter={() => setHoveredWord(analysis.word)}
-                          onMouseLeave={() => setHoveredWord(null)}
-                        >
-                          {/* Top Section: Flex container for Word and Meanings */}
-                          <div className="flex">
-                            <div className="w-1/2">
-                              <div className="font-semibold">Word</div>
-                              <div className="font-serif">{analysis.word}</div>
-                              
-                              {/* Added frequency display */}
-                              <div className="mt-1">
-                                <div className="font-semibold">Frequency</div>
-                                <div>{analysis.frequency || 'N/A'}</div>
+                {Object.keys(groupedAnalysis).map(type => {
+                  // Count only non-excluded words for display
+                  const activeWordCount = groupedAnalysis[type].filter(
+                    word => !excludedWords.has(word.word)
+                  ).length;
+                  
+                  // Calculate total words and excluded words
+                  const totalWords = groupedAnalysis[type].length;
+                  const excludedCount = totalWords - activeWordCount;
+                  
+                  return (
+                    <div key={type} className="flex-1 min-w-[280px]">
+                      <h3 className="text-base font-semibold mb-1">
+                        {type} Analysis: 
+                        <span className="ml-1 text-sm font-normal text-gray-600">
+                          ({activeWordCount} active
+                          {excludedCount > 0 && `, ${excludedCount} excluded`})
+                        </span>
+                      </h3>
+                      <div className="space-y-2 max-h-[40vh] overflow-y-auto">
+                        {groupedAnalysis[type].map((analysis, index) => (
+                          <div 
+                            key={index} 
+                            className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer 
+                              transition-all duration-200 transform hover:scale-110 hover:shadow-lg 
+                              ${excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'} 
+                              ${hoveredWord === analysis.word ? 'ring-2 ring-offset-1 scale-110 shadow-lg' : ''}`}
+                            onClick={() => toggleWordExclusion(analysis.word)}
+                            onMouseEnter={() => setHoveredWord(analysis.word)}
+                            onMouseLeave={() => setHoveredWord(null)}
+                          >
+                            {/* Top Section: Flex container for Word and Meanings */}
+                            <div className="flex">
+                              <div className="w-1/2">
+                                <div className="font-semibold">Word</div>
+                                <div className="font-serif">{analysis.word}</div>
+                                
+                                {/* Added frequency display */}
+                                <div className="mt-1">
+                                  <div className="font-semibold">Frequency</div>
+                                  <div>{analysis.frequency || 'N/A'}</div>
+                                </div>
+                              </div>
+                              <div className="w-1/2">
+                                <div className="font-semibold">Meanings</div>
+                                <ul className="list-disc pl-3">
+                                  {analysis.meanings.map((meaning, i) => (
+                                    <li key={i}>{meaning}</li>
+                                  ))}
+                                </ul>
                               </div>
                             </div>
-                            <div className="w-1/2">
-                              <div className="font-semibold">Meanings</div>
-                              <ul className="list-disc pl-3">
-                                {analysis.meanings.map((meaning, i) => (
-                                  <li key={i}>{meaning}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                          {/* Second Section: Two-column layout for Lemma and Lemma Meanings */}
-                          <div className="grid grid-cols-2 gap-2 mt-1">
-                            <div>
-                              <div className="font-semibold">Lemma</div>
-                              <div className="font-serif">{analysis.lemma}</div>
-                            </div>
-                            <div>
-                              <div className="font-semibold">Lemma Meanings</div>
+                            {/* Second Section: Two-column layout for Lemma and Lemma Meanings */}
+                            <div className="grid grid-cols-2 gap-2 mt-1">
                               <div>
-                                {Array.isArray(analysis.LemmaMeanings) 
-                                  ? analysis.LemmaMeanings.join(', ') 
-                                  : analysis.LemmaMeanings || analysis.bestLemmaTranslation || 'N/A'}
+                                <div className="font-semibold">Lemma</div>
+                                <div className="font-serif">{analysis.lemma}</div>
+                              </div>
+                              <div>
+                                <div className="font-semibold">Lemma Meanings</div>
+                                <div>
+                                  {Array.isArray(analysis.LemmaMeanings) 
+                                    ? analysis.LemmaMeanings.join(', ') 
+                                    : analysis.LemmaMeanings || analysis.bestLemmaTranslation || 'N/A'}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
