@@ -668,7 +668,7 @@ const GreekTextAnalyzer = () => {
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Text analysis section - full width on mobile, 3/5 on desktop */}
           <div className="w-full lg:w-3/5">
-            <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
+          <h2 className="text-lg font-semibold mb-2">Text Analysis:</h2>
             <div className="border rounded p-2 text-sm overflow-auto max-h-[60vh] lg:max-h-[70vh]">
               {/* We'll use a different approach that preserves exact layout */}
               {visibleText.split('\n').map((line, lineIndex) => (
@@ -697,33 +697,33 @@ const GreekTextAnalyzer = () => {
                           className={isActive ? getHighlightClass(word) : ""}
                           onMouseEnter={(e) => {
                             if (isActive) {
-                              setHoveredAnalysis({
-                                data: { ...info, word: cleaned },
-                                x: e.clientX + 10,
-                                y: e.clientY + 10
-                              });
+                        setHoveredAnalysis({
+                          data: { ...info, word: cleaned },
+                          x: e.clientX + 10,
+                          y: e.clientY + 10
+                        });
                               setHoveredWord(cleaned);
-                            }
-                          }}
+                      }
+                    }}
                           onMouseLeave={() => {
                             setHoveredAnalysis(null);
                             setHoveredWord(null);
                           }}
-                        >
-                          {word}
-                        </span>
+                  >
+                    {word}
+                  </span>
                       );
                     })
                   )}
-                </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
 
           {/* Word analysis section - full width on mobile, 2/5 on desktop */}
-          {Object.keys(groupedAnalysis).length > 0 && (
+        {Object.keys(groupedAnalysis).length > 0 && (
             <div className="w-full lg:w-2/5">
-              <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
+            <h2 className="text-lg font-semibold mb-2">Word Analysis:</h2>
               <div className="text-xs text-gray-500 mb-2">
                 Click on words to exclude them from Anki export
               </div>
@@ -748,9 +748,9 @@ const GreekTextAnalyzer = () => {
                         </span>
                       </h3>
                       <div className="space-y-2 max-h-[40vh] overflow-y-auto">
-                        {groupedAnalysis[type].map((analysis, index) => (
-                          <div 
-                            key={index} 
+                    {groupedAnalysis[type].map((analysis, index) => (
+                      <div 
+                        key={index} 
                             className={`border rounded p-2 ${bgMapping[type] || 'bg-white'} text-xs cursor-pointer 
                               transition-all duration-200 transform hover:scale-110 hover:shadow-lg 
                               ${excludedWords.has(analysis.word) ? 'opacity-40' : 'opacity-100'} 
@@ -760,51 +760,51 @@ const GreekTextAnalyzer = () => {
                             onMouseLeave={() => setHoveredWord(null)}
                           >
                             {/* Top Section: Flex container for Word and Meanings */}
-                            <div className="flex">
-                              <div className="w-1/2">
-                                <div className="font-semibold">Word</div>
-                                <div className="font-serif">{analysis.word}</div>
+                        <div className="flex">
+                          <div className="w-1/2">
+                            <div className="font-semibold">Word</div>
+                            <div className="font-serif">{analysis.word}</div>
                                 
                                 {/* Added frequency display */}
                                 <div className="mt-1">
                                   <div className="font-semibold">Frequency</div>
                                   <div>{analysis.frequency || 'N/A'}</div>
                                 </div>
-                              </div>
-                              <div className="w-1/2">
+                          </div>
+                          <div className="w-1/2">
                                 <div className="font-semibold">Meanings</div>
-                                <ul className="list-disc pl-3">
-                                  {analysis.meanings.map((meaning, i) => (
-                                    <li key={i}>{meaning}</li>
-                                  ))}
-                                </ul>
-                              </div>
+                              <ul className="list-disc pl-3">
+                                {analysis.meanings.map((meaning, i) => (
+                                  <li key={i}>{meaning}</li>
+                                ))}
+                              </ul>
                             </div>
+                          </div>
                             {/* Second Section: Two-column layout for Lemma and Lemma Meanings */}
-                            <div className="grid grid-cols-2 gap-2 mt-1">
-                              <div>
-                                <div className="font-semibold">Lemma</div>
-                                <div className="font-serif">{analysis.lemma}</div>
-                              </div>
-                              <div>
+                        <div className="grid grid-cols-2 gap-2 mt-1">
+                          <div>
+                            <div className="font-semibold">Lemma</div>
+                            <div className="font-serif">{analysis.lemma}</div>
+                          </div>
+                          <div>
                                 <div className="font-semibold">Lemma Meanings</div>
                                 <div>
                                   {Array.isArray(analysis.LemmaMeanings) 
                                     ? analysis.LemmaMeanings.join(', ') 
                                     : analysis.LemmaMeanings || analysis.bestLemmaTranslation || 'N/A'}
                                 </div>
-                              </div>
-                            </div>
                           </div>
-                        ))}
+                        </div>
                       </div>
-                    </div>
+                    ))}
+                  </div>
+                </div>
                   );
                 })}
               </div>
             </div>
           )}
-        </div>
+          </div>
       </div>
 
       {/* Tooltip for hovered word analysis - unchanged */}
