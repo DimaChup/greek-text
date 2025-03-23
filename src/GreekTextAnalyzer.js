@@ -37,7 +37,7 @@ const GreekTextAnalyzer = () => {
   // State
   const [text, setText] = useState('');
   const [matrix, setMatrix] = useState([]);
-  const [activeTypes, setActiveTypes] = useState([]); // Array for multiple types
+  const [activeTypes, setActiveTypes] = useState([]);
   const [wordAnalysis, setWordAnalysis] = useState([]);
   const [hoveredAnalysis, setHoveredAnalysis] = useState(null);
   const [excludedWords, setExcludedWords] = useState(new Set());
@@ -50,6 +50,15 @@ const GreekTextAnalyzer = () => {
     // Return true if explicitly set to 'true', false otherwise
     return savedPreference === 'true';
   });
+
+  // Add a new state for storing unique words from the text
+  const [uniqueWordsFromText, setUniqueWordsFromText] = useState([]);
+  const [showUniqueWordsPanel, setShowUniqueWordsPanel] = useState(false);
+
+  // Add state for tracking database generation process
+  const [isGeneratingDatabase, setIsGeneratingDatabase] = useState(false);
+  const [databaseGenerated, setDatabaseGenerated] = useState(false);
+  const [generatedDatabaseName, setGeneratedDatabaseName] = useState('');
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -101,8 +110,11 @@ const GreekTextAnalyzer = () => {
     });
   };
 
-  // Change the redGroup definition to become a function that checks if a part of speech is NOT in the main categories
+  // Update isRedGroup to handle empty parts of speech
   const isRedGroup = (part) => {
+    // If part is empty or undefined, consider it part of RED group
+    if (!part) return true;
+    
     const mainCategories = ['NOUN', 'VERB', 'ADJECTIVE', 'ADVERB'];
     return !mainCategories.includes(part);
   };
@@ -263,11 +275,20 @@ const GreekTextAnalyzer = () => {
     setActiveTypes(newActiveTypes);
   };
 
-  // Update the isWordTypeActiveCustom function
+  // Update isWordTypeActiveCustom to handle RED group properly
   const isWordTypeActiveCustom = (info, types) => {
+    // If RED is active and the word has no part of speech, it should be highlighted
+    if (types.includes('RED') && (!info.partOfSpeech || info.partOfSpeech === '')) {
+      return true;
+    }
+    
+    // If info doesn't have partOfSpeech, skip other checks
+    if (!info || !info.partOfSpeech) return false;
+    
     const part = info.partOfSpeech.toUpperCase();
     if (types.includes(part)) return true;
     if (types.includes('RED') && isRedGroup(part)) return true;
+    
     return false;
   };
 
@@ -282,10 +303,22 @@ const GreekTextAnalyzer = () => {
     // Check if this word is the currently hovered word
     const isHovered = hoveredWord === cleaned;
     
-    if (info && isWordTypeActiveCustom(info, activeTypes)) {
+    // Handle words with no part of speech in the RED group
+    if (info && activeTypes.includes('RED') && (!info.partOfSpeech || info.partOfSpeech === '')) {
+      classes += darkMode ? 'bg-red-900 ' : 'bg-red-200 ';
+      
+      if (isHovered) {
+        classes += 'ring-2 ring-offset-1 ring-opacity-80 scale-110 z-10 shadow-lg ring-red-500 ';
+      }
+      
+      return classes;
+    }
+    
+    // Otherwise proceed with regular highlighting
+    if (info && info.partOfSpeech && isWordTypeActiveCustom(info, activeTypes)) {
       const part = info.partOfSpeech.toUpperCase();
       
-      // Add the basic highlight color - darker shades for dark mode
+      // Add the basic highlight color
       if (part === 'VERB' && activeTypes.includes('VERB')) 
         classes += darkMode ? 'bg-pink-900 ' : 'bg-pink-200 ';
       else if (part === 'ADJECTIVE' && activeTypes.includes('ADJECTIVE')) 
@@ -297,7 +330,7 @@ const GreekTextAnalyzer = () => {
       else if (activeTypes.includes('RED') && isRedGroup(part)) 
         classes += darkMode ? 'bg-red-900 ' : 'bg-red-200 ';
       
-      // If this word or any of its instances is being hovered, add the glow effect
+      // If this word is being hovered, add the glow effect
       if (isHovered) {
         classes += 'ring-2 ring-offset-1 ring-opacity-80 scale-110 z-10 shadow-lg ';
         
@@ -309,7 +342,7 @@ const GreekTextAnalyzer = () => {
         else classes += 'ring-red-500 ';
       }
     } else {
-      classes += darkMode ? 'bg-gray-700 border-gray-600 ' : 'bg-white border ';
+      classes += darkMode ? 'bg-gray-700 border-gray-600 ' : '';
     }
     
     return classes;
@@ -475,6 +508,218 @@ const GreekTextAnalyzer = () => {
     }
   }, [darkMode]);
 
+  // Update the generateDatabase function to match the structure from text2db.py
+  const generateDatabase = async () => {
+    if (!text) {
+      alert("Please enter some text to analyze.");
+      return;
+    }
+    
+    setIsGeneratingDatabase(true);
+    
+    try {
+      // Create a text matrix from the full text
+      const textMatrix = createTextMatrix(text);
+      
+      // Use a Set to collect unique words
+      const uniqueWordsSet = new Set();
+      
+      // Process each word in the text and count frequencies
+      const wordFrequencies = {};
+      
+      textMatrix.forEach(row => {
+        row.forEach(word => {
+          if (word) {
+            const cleaned = cleanWord(word);
+            if (cleaned && cleaned.length > 1) { // Ignore single characters
+              uniqueWordsSet.add(cleaned);
+              
+              // Count frequency
+              wordFrequencies[cleaned] = (wordFrequencies[cleaned] || 0) + 1;
+            }
+          }
+        });
+      });
+      
+      // Convert the Set to Array and sort alphabetically
+      const uniqueWords = Array.from(uniqueWordsSet).sort();
+      
+      // Check which words exist in the database
+      const wordsWithStatus = uniqueWords.map(word => ({
+        word,
+        inDatabase: !!combinedDatabase[word],
+        databaseInfo: combinedDatabase[word] || null
+      }));
+      
+      // Update state
+      setUniqueWordsFromText(wordsWithStatus);
+      setShowUniqueWordsPanel(true);
+      
+      // Generate a unique name for the database based on timestamp
+      const timestamp = new Date().getTime();
+      
+      // Clean the text to create a valid JavaScript identifier (first few words)
+      const cleanedDbNameBase = text.trim().split(/\s+/).slice(0, 3).join('_')
+        .replace(/[^a-zA-Z0-9_]/g, '')
+        .replace(/^[0-9]/, 'text');
+      
+      // Make sure we have something valid left
+      const dbNameBase = cleanedDbNameBase || 'text';
+      
+      // Database name format matches Python script
+      const dbName = `${dbNameBase}Database`;
+      
+      // Create the database object - FORMAT MATCHING PYTHON SCRIPT
+      const database = {};
+      
+      // Add each word with its properties (with structure matching Python script)
+      uniqueWords.forEach((word, index) => {
+        database[word] = {
+          wordNumber: index + 1,
+          frequency: wordFrequencies[word] || 1,
+          partOfSpeech: combinedDatabase[word]?.partOfSpeech || '',
+          morphology: combinedDatabase[word]?.morphology || '',
+          meanings: combinedDatabase[word]?.meanings || [],
+          bestTranslation: combinedDatabase[word]?.bestTranslation || '',
+          lemma: combinedDatabase[word]?.lemma || '',
+          LemmaMeanings: combinedDatabase[word]?.LemmaMeanings || []
+        };
+      });
+      
+      // Create the JavaScript code for the database (matching Python script format)
+      const jsCode = `// Generated word frequency database with word numbers for ${dbNameBase} on ${new Date().toLocaleString()}
+const ${dbName} = ${JSON.stringify(database, null, 2)};
+
+export default ${dbName};`;
+      
+      // Define the API endpoint URL
+      const apiUrl = 'http://localhost:3001/api/save-database';
+      
+      // Send the database to the server
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          filename: `${dbName}.js`,
+          content: jsCode
+        }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Server error: ${errorData.error || response.statusText}`);
+      }
+      
+      const result = await response.json();
+      
+      // Update state with database name
+      setGeneratedDatabaseName(dbName);
+      setDatabaseGenerated(true);
+      
+      console.log("Generated database structure:", database);
+      
+      // Show success message
+      alert(
+        "Database has been saved successfully to the databases directory!\n\n" +
+        "To use the new database with the current text, you'll need to reload the page manually after you're done with this session."
+      );
+      
+    } catch (error) {
+      console.error("Error generating database:", error);
+      
+      // Provide a fallback option if server saving fails
+      const fallback = window.confirm(
+        `Error saving to server: ${error.message}\n\nWould you like to download the database file instead?`
+      );
+      
+      if (fallback) {
+        downloadDatabaseFile();
+      }
+    } finally {
+      setIsGeneratingDatabase(false);
+    }
+  };
+
+  // Update the fallback download function to match the same structure
+  const downloadDatabaseFile = () => {
+    try {
+      // Similar structure as above
+      const timestamp = new Date().getTime();
+      const cleanedDbNameBase = text.trim().split(/\s+/).slice(0, 3).join('_')
+        .replace(/[^a-zA-Z0-9_]/g, '')
+        .replace(/^[0-9]/, 'text');
+      
+      const dbNameBase = cleanedDbNameBase || 'text';
+      const dbName = `${dbNameBase}Database`;
+      
+      // Create database object with the same structure as Python script
+      const database = {};
+      
+      // Add each word with structure matching Python script
+      uniqueWordsFromText.forEach((item, index) => {
+        database[item.word] = {
+          wordNumber: index + 1,
+          frequency: 1, // Default frequency
+          partOfSpeech: item.databaseInfo?.partOfSpeech || '',
+          morphology: item.databaseInfo?.morphology || '',
+          meanings: item.databaseInfo?.meanings || [],
+          bestTranslation: item.databaseInfo?.bestTranslation || '',
+          lemma: item.databaseInfo?.lemma || '',
+          LemmaMeanings: item.databaseInfo?.LemmaMeanings || []
+        };
+      });
+      
+      const jsCode = `// Generated word frequency database with word numbers for ${dbNameBase} on ${new Date().toLocaleString()}
+const ${dbName} = ${JSON.stringify(database, null, 2)};
+
+export default ${dbName};`;
+      
+      // Create blob and download
+      const blob = new Blob([jsCode], { type: 'text/javascript' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${dbName}.js`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      alert("Database file has been downloaded. Please move it to the src/databases directory manually.");
+      
+      setGeneratedDatabaseName(dbName);
+      setDatabaseGenerated(true);
+    } catch (downloadError) {
+      console.error("Error in fallback download:", downloadError);
+      alert("Failed to generate database file: " + downloadError.message);
+    }
+  };
+
+  // Add a debug function to verify your generated database structure
+  const debugGeneratedDatabase = () => {
+    // Check if we have processed words
+    console.log("Unique words count:", uniqueWordsFromText.length);
+    
+    // Check if we have words with part of speech info
+    const wordsWithPos = uniqueWordsFromText.filter(w => 
+      w.inDatabase && w.databaseInfo && w.databaseInfo.partOfSpeech
+    );
+    console.log("Words with part of speech:", wordsWithPos.length);
+    
+    // Check if the combinedDatabase has words with part of speech
+    const dbWordsWithPos = Object.values(combinedDatabase).filter(info => 
+      info && info.partOfSpeech
+    );
+    console.log("Database words with part of speech:", dbWordsWithPos.length);
+    
+    // Log some samples
+    if (dbWordsWithPos.length > 0) {
+      console.log("Sample word data:", dbWordsWithPos[0]);
+    }
+  };
+
   return (
     <div className={`p-2 sm:p-4 relative ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
       <div className={`w-full max-w-4xl mx-auto rounded-lg shadow-lg p-2 sm:p-4 ${
@@ -514,6 +759,52 @@ const GreekTextAnalyzer = () => {
           onChange={handleTextChange}
           className="w-full h-72 p-2 border rounded mb-3 font-serif text-sm"
         />
+
+        {/* Replace the two buttons with a single button */}
+        <div className="mb-4 flex flex-wrap gap-2">
+          <button 
+            onClick={generateDatabase}
+            className={`px-3 py-1 sm:px-4 sm:py-2 text-sm rounded transition-colors ${
+              isGeneratingDatabase ? 
+                'bg-gray-400 cursor-not-allowed' : 
+                'bg-green-600 text-white hover:bg-green-700'
+            }`}
+            disabled={isGeneratingDatabase}
+          >
+            {isGeneratingDatabase ? 
+              'Processing...' : 
+              'Generate Database'
+            }
+          </button>
+        </div>
+
+        {/* Database generation success message */}
+        {databaseGenerated && (
+          <div className="mb-4 p-3 bg-green-100 border border-green-300 rounded text-sm">
+            <p className="font-semibold">Database file generated successfully!</p>
+            <p className="text-xs mt-1">
+              File name: <code>{generatedDatabaseName}.js</code>
+            </p>
+            <p className="text-xs mt-1">
+              The database file has been saved to the <code>src/databases</code> directory on the server.
+              You can continue working with your current text. When you're ready to use the new database, you can reload the application.
+            </p>
+            <div className="flex gap-2 mt-2">
+              <button 
+                onClick={() => window.location.reload()}
+                className="text-xs px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Reload Now (will lose current text)
+              </button>
+              <button 
+                onClick={() => setDatabaseGenerated(false)}
+                className="text-xs px-2 py-1 bg-green-200 rounded hover:bg-green-300"
+              >
+                Continue Working
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Improved Range slider section */}
         <div className="mb-4 p-2 sm:p-3 border rounded bg-gray-50">
@@ -600,37 +891,46 @@ const GreekTextAnalyzer = () => {
           </div>
         </div>
 
+        {/* Reorder and update the button section */}
         <div className="flex flex-wrap gap-1 sm:gap-2 mb-3">
-          <button 
-            onClick={() => handleTypeClick('NOUN')}
-            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('NOUN') ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-          >
-            Highlight Nouns
-          </button>
           <button 
             onClick={() => handleTypeClick('VERB')}
             className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('VERB') ? 'bg-pink-500 text-white' : 'bg-gray-200'}`}
           >
-            Highlight Verbs
+            {activeTypes.includes('VERB') ? 'Unhighlight Verbs' : 'Highlight Verbs'}
+          </button>
+          <button 
+            onClick={() => handleTypeClick('NOUN')}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('NOUN') ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          >
+            {activeTypes.includes('NOUN') ? 'Unhighlight Nouns' : 'Highlight Nouns'}
           </button>
           <button 
             onClick={() => handleTypeClick('ADJECTIVE')}
             className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('ADJECTIVE') ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
           >
-            Highlight Adjectives
-          </button>
-          <button 
-            onClick={() => handleTypeClick('RED')}
-            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200'}`}
-          >
-            Highlight Other Parts of Speech
+            {activeTypes.includes('ADJECTIVE') ? 'Unhighlight Adjectives' : 'Highlight Adjectives'}
           </button>
           <button 
             onClick={() => handleTypeClick('ADVERB')}
             className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('ADVERB') ? 'bg-yellow-500 text-white' : 'bg-gray-200'}`}
           >
-            Highlight Adverbs
+            {activeTypes.includes('ADVERB') ? 'Unhighlight Adverbs' : 'Highlight Adverbs'}
           </button>
+          <button 
+            onClick={() => handleTypeClick('RED')}
+            className={`px-2 py-1 sm:px-3 text-xs sm:text-sm rounded ${activeTypes.includes('RED') ? 'bg-red-500 text-white' : 'bg-gray-200'}`}
+          >
+            {activeTypes.includes('RED') ? 'Unhighlight Other Parts' : 'Highlight Other Parts'}
+          </button>
+          {activeTypes.length > 0 && (
+            <button 
+              onClick={() => setActiveTypes([])}
+              className="px-2 py-1 sm:px-3 text-xs sm:text-sm rounded bg-gray-500 text-white"
+            >
+              Clear All Highlights
+            </button>
+          )}
         </div>
 
         {/* Add Anki Export section */}
@@ -805,6 +1105,73 @@ const GreekTextAnalyzer = () => {
             </div>
           )}
           </div>
+
+        {/* Unique Words Panel - Enhanced with database generation option */}
+        {showUniqueWordsPanel && (
+          <div className="mt-4 border-t pt-4">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-lg font-semibold">Unique Words Found: {uniqueWordsFromText.length}</h2>
+              <div className="flex gap-2">
+                <button 
+                  onClick={generateDatabase}
+                  className={`text-xs px-2 py-1 ${
+                    isGeneratingDatabase ?
+                      'bg-gray-300 cursor-not-allowed' :
+                      'bg-green-500 text-white hover:bg-green-600'
+                  }`}
+                  disabled={isGeneratingDatabase}
+                >
+                  {isGeneratingDatabase ? 'Generating...' : 'Generate Database'}
+                </button>
+                <button 
+                  onClick={() => setShowUniqueWordsPanel(false)}
+                  className="text-xs px-2 py-1 bg-gray-200 rounded"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              <div className="border rounded p-2 bg-green-100">
+                <h3 className="font-medium text-sm mb-1">Words in Database: {uniqueWordsFromText.filter(w => w.inDatabase).length}</h3>
+                <div className="max-h-40 overflow-y-auto text-xs">
+                  {uniqueWordsFromText
+                    .filter(w => w.inDatabase)
+                    .map((item, idx) => (
+                      <div key={idx} className="mb-1 p-1 bg-white rounded">
+                        {item.word} {item.databaseInfo?.partOfSpeech ? `(${item.databaseInfo.partOfSpeech})` : ''}
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              
+              <div className="border rounded p-2 bg-red-100">
+                <h3 className="font-medium text-sm mb-1">Words NOT in Database: {uniqueWordsFromText.filter(w => !w.inDatabase).length}</h3>
+                <div className="max-h-40 overflow-y-auto text-xs">
+                  {uniqueWordsFromText
+                    .filter(w => !w.inDatabase)
+                    .map((item, idx) => (
+                      <div key={idx} className="mb-1 p-1 bg-white rounded">
+                        {item.word}
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              
+              <div className="border rounded p-2 bg-blue-100 md:col-span-2 lg:col-span-1">
+                <h3 className="font-medium text-sm mb-1">Statistics</h3>
+                <div className="text-xs">
+                  <p>Total unique words: {uniqueWordsFromText.length}</p>
+                  <p>Words in database: {uniqueWordsFromText.filter(w => w.inDatabase).length} ({Math.round(uniqueWordsFromText.filter(w => w.inDatabase).length / uniqueWordsFromText.length * 100)}%)</p>
+                  <p>Words missing from database: {uniqueWordsFromText.filter(w => !w.inDatabase).length} ({Math.round(uniqueWordsFromText.filter(w => !w.inDatabase).length / uniqueWordsFromText.length * 100)}%)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Tooltip for hovered word analysis - unchanged */}
