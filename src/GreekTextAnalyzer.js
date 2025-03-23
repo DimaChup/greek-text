@@ -508,7 +508,7 @@ const GreekTextAnalyzer = () => {
     }
   }, [darkMode]);
 
-  // Update the generateDatabase function to match the structure from text2db.py
+  // Update the generateDatabase function to run both Python scripts
   const generateDatabase = async () => {
     if (!text) {
       alert("Please enter some text to analyze.");
@@ -518,30 +518,53 @@ const GreekTextAnalyzer = () => {
     setIsGeneratingDatabase(true);
     
     try {
-      // Create a text matrix from the full text
+      console.log("Sending text to server for database generation...");
+      
+      // Call the server endpoint to run both Python scripts
+      const apiUrl = 'http://localhost:3001/api/run-text2db';
+      
+      // Send the text content
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          textContent: text
+        }),
+      });
+      
+      // Handle non-JSON responses
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const textContent = await response.text();
+        console.error("Non-JSON response:", textContent);
+        throw new Error("Server returned an invalid response format. Check server logs for details.");
+      }
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(`Server error: ${result.error || response.statusText}\n${result.details || ''}`);
+      }
+      
+      console.log("Server response:", result);
+      
+      // Process text to display unique words panel
       const textMatrix = createTextMatrix(text);
-      
-      // Use a Set to collect unique words
       const uniqueWordsSet = new Set();
-      
-      // Process each word in the text and count frequencies
-      const wordFrequencies = {};
       
       textMatrix.forEach(row => {
         row.forEach(word => {
           if (word) {
             const cleaned = cleanWord(word);
-            if (cleaned && cleaned.length > 1) { // Ignore single characters
+            if (cleaned && cleaned.length > 1) {
               uniqueWordsSet.add(cleaned);
-              
-              // Count frequency
-              wordFrequencies[cleaned] = (wordFrequencies[cleaned] || 0) + 1;
             }
           }
         });
       });
       
-      // Convert the Set to Array and sort alphabetically
       const uniqueWords = Array.from(uniqueWordsSet).sort();
       
       // Check which words exist in the database
@@ -555,88 +578,20 @@ const GreekTextAnalyzer = () => {
       setUniqueWordsFromText(wordsWithStatus);
       setShowUniqueWordsPanel(true);
       
-      // Generate a unique name for the database based on timestamp
-      const timestamp = new Date().getTime();
-      
-      // Clean the text to create a valid JavaScript identifier (first few words)
-      const cleanedDbNameBase = text.trim().split(/\s+/).slice(0, 3).join('_')
-        .replace(/[^a-zA-Z0-9_]/g, '')
-        .replace(/^[0-9]/, 'text');
-      
-      // Make sure we have something valid left
-      const dbNameBase = cleanedDbNameBase || 'text';
-      
-      // Database name format matches Python script
-      const dbName = `${dbNameBase}Database`;
-      
-      // Create the database object - FORMAT MATCHING PYTHON SCRIPT
-      const database = {};
-      
-      // Add each word with its properties (with structure matching Python script)
-      uniqueWords.forEach((word, index) => {
-        database[word] = {
-          wordNumber: index + 1,
-          frequency: wordFrequencies[word] || 1,
-          partOfSpeech: combinedDatabase[word]?.partOfSpeech || '',
-          morphology: combinedDatabase[word]?.morphology || '',
-          meanings: combinedDatabase[word]?.meanings || [],
-          bestTranslation: combinedDatabase[word]?.bestTranslation || '',
-          lemma: combinedDatabase[word]?.lemma || '',
-          LemmaMeanings: combinedDatabase[word]?.LemmaMeanings || []
-        };
-      });
-      
-      // Create the JavaScript code for the database (matching Python script format)
-      const jsCode = `// Generated word frequency database with word numbers for ${dbNameBase} on ${new Date().toLocaleString()}
-const ${dbName} = ${JSON.stringify(database, null, 2)};
-
-export default ${dbName};`;
-      
-      // Define the API endpoint URL
-      const apiUrl = 'http://localhost:3001/api/save-database';
-      
-      // Send the database to the server
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          filename: `${dbName}.js`,
-          content: jsCode
-        }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Server error: ${errorData.error || response.statusText}`);
-      }
-      
-      const result = await response.json();
-      
       // Update state with database name
-      setGeneratedDatabaseName(dbName);
+      setGeneratedDatabaseName(result.databaseName);
       setDatabaseGenerated(true);
       
-      console.log("Generated database structure:", database);
-      
-      // Show success message
+      // Success message
       alert(
-        "Database has been saved successfully to the databases directory!\n\n" +
-        "To use the new database with the current text, you'll need to reload the page manually after you're done with this session."
+        "Database has been generated successfully!\n\n" +
+        "The database file has been copied to the src/databases directory and temporary files have been cleaned up.\n\n" +
+        "To use the new database with the current text, you'll need to reload the page."
       );
       
     } catch (error) {
       console.error("Error generating database:", error);
-      
-      // Provide a fallback option if server saving fails
-      const fallback = window.confirm(
-        `Error saving to server: ${error.message}\n\nWould you like to download the database file instead?`
-      );
-      
-      if (fallback) {
-        downloadDatabaseFile();
-      }
+      alert(`Failed to generate database: ${error.message}\n\nPlease check the server logs for more details.`);
     } finally {
       setIsGeneratingDatabase(false);
     }

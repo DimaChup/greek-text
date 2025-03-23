@@ -4,6 +4,7 @@ import re
 import argparse
 from pathlib import Path
 import shutil
+import sys
 
 def create_word_list_from_text(text, max_lines=None):
     """
@@ -44,7 +45,8 @@ def create_word_list_from_text(text, max_lines=None):
                 
     return word_list
 
-def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_db_dir=False, db_dir=None):
+def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_db_dir=False, 
+                      db_dir=None, delete_output_dir=False):
     """
     Process a text file to generate CSV files with word list and frequency.
     
@@ -54,6 +56,7 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_d
         max_lines: Optional maximum number of lines to process
         copy_to_db_dir: Whether to copy the JS database to the databases directory
         db_dir: Path to the databases directory (default is "src/databases")
+        delete_output_dir: Whether to delete the output directory after copying
     
     Returns:
         Tuple of paths to the output CSV files
@@ -62,12 +65,16 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_d
     input_path = Path(input_filepath)
     input_filename = input_path.stem
     
+    print(f"Processing file: {input_filepath}")
+    print(f"Base filename: {input_filename}")
+    
     # Create output directory
     if output_dir:
         output_path = Path(output_dir)
     else:
         output_path = Path("data") / f"output_{input_filename}"
     
+    print(f"Output directory will be: {output_path}")
     output_path.mkdir(parents=True, exist_ok=True)
     
     # Copy input file to output directory
@@ -76,7 +83,7 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_d
     # Read input text
     with open(input_filepath, 'r', encoding='utf-8') as file:
         text = file.read()
-        
+    
     # Copy text to output directory
     with open(output_text_path, 'w', encoding='utf-8') as file:
         file.write(text)
@@ -120,6 +127,7 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_d
     generate_js_database_skeleton(freq_csv_path, js_db_path)
     print(f"Created JavaScript database scaffold: {js_db_path}")
     
+    db_copy_path = None
     # Copy JS database to the databases directory if requested
     if copy_to_db_dir:
         if db_dir is None:
@@ -133,6 +141,44 @@ def process_text_file(input_filepath, output_dir=None, max_lines=None, copy_to_d
         db_copy_path = db_dir / f"{input_filename}_db.js"
         shutil.copy2(js_db_path, db_copy_path)
         print(f"Copied database to: {db_copy_path}")
+        
+        # Delete the output directory if requested and copy was successful
+        if delete_output_dir:
+            if os.path.exists(db_copy_path):
+                print(f"Attempting to delete output directory: {output_path}")
+                try:
+                    # Force delete - try rmtree first
+                    if os.path.exists(output_path):
+                        shutil.rmtree(output_path)
+                        print(f"Successfully deleted output directory: {output_path}")
+                    else:
+                        print(f"Output directory not found: {output_path}")
+                except Exception as e:
+                    print(f"Error during rmtree deletion: {e}")
+                    
+                    # Try alternative deletion method
+                    try:
+                        # For Windows systems that might have permission issues
+                        for root, dirs, files in os.walk(output_path, topdown=False):
+                            for name in files:
+                                os.chmod(os.path.join(root, name), 0o777)
+                                os.remove(os.path.join(root, name))
+                            for name in dirs:
+                                os.chmod(os.path.join(root, name), 0o777)
+                                os.rmdir(os.path.join(root, name))
+                        os.rmdir(output_path)
+                        print(f"Successfully deleted output directory using alternative method: {output_path}")
+                    except Exception as e2:
+                        print(f"Alternative deletion also failed: {e2}")
+            else:
+                print(f"Database copy not found at {db_copy_path}, skipping directory deletion")
+    
+    # Print final status
+    if delete_output_dir:
+        if not os.path.exists(output_path):
+            print("CLEANUP SUCCESS: Output directory has been deleted.")
+        else:
+            print("CLEANUP FAILED: Output directory still exists.")
     
     return csv_path, freq_csv_path, js_db_path
 
@@ -202,9 +248,41 @@ def main():
                         help="Copy the generated JS database to the databases directory")
     parser.add_argument("--db-dir", "-d", type=str, default="src/databases",
                         help="Path to the databases directory (default: src/databases)")
+    parser.add_argument("--delete-output", action="store_true",
+                        help="Delete the output directory after copying the database (only works with --copy-to-db)")
+    
     args = parser.parse_args()
     
-    process_text_file(args.input, args.output, args.max_lines, args.copy_to_db, args.db_dir)
+    # Print the current working directory and command line arguments
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Command line arguments: {sys.argv}")
+    print(f"Parsed arguments: {args}")
+    
+    # Check if data directory exists
+    data_dir = Path("data")
+    if not data_dir.exists():
+        data_dir.mkdir(parents=True, exist_ok=True)
+        print(f"Created data directory: {data_dir}")
+    
+    process_text_file(
+        args.input, 
+        args.output, 
+        args.max_lines, 
+        args.copy_to_db, 
+        args.db_dir, 
+        args.delete_output
+    )
+    
+    # Final confirmation of cleanup status
+    if args.delete_output and args.copy_to_db:
+        input_path = Path(args.input)
+        input_filename = input_path.stem
+        output_path = Path("data") / f"output_{input_filename}"
+        
+        if not output_path.exists():
+            print("FINAL STATUS: Success - Output directory has been deleted.")
+        else:
+            print(f"FINAL STATUS: Warning - Output directory still exists at {output_path}")
 
 if __name__ == "__main__":
     main()
