@@ -22,6 +22,7 @@ import langid
 import time
 import importlib.util
 from collections import defaultdict
+import numpy as np
 
 # Try to import spaCy
 try:
@@ -60,8 +61,8 @@ SPACY_POS_MAP = {
 
 # Language code mapping (ISO 639-1 to spaCy model names)
 LANGUAGE_MODELS = {
-    'en': 'en_core_web_sm',
-    'es': 'es_core_news_sm',
+    'en': 'en_core_web_md',
+    'es': 'es_core_news_md',
     'fr': 'fr_core_news_sm',
     'de': 'de_core_news_sm',
     'it': 'it_core_news_sm',
@@ -170,9 +171,16 @@ def detect_language(database, sample_text_path=None):
     return lang
 
 def load_nlp_model(lang_code, use_spacy=True):
-    """Load the appropriate NLP model for the language."""
+    """Load the appropriate NLP model with preference for medium-sized models."""
     if not use_spacy or not SPACY_AVAILABLE:
         return None
+    
+    # Updated model mapping to prefer medium models
+    LANGUAGE_MODELS = {
+        'es': 'es_core_news_md',  # Spanish medium model
+        'en': 'en_core_web_md',   # English medium model
+        # Add other languages as needed
+    }
     
     model_name = LANGUAGE_MODELS.get(lang_code)
     if not model_name:
@@ -346,47 +354,75 @@ def is_proper_noun(word, nlp_model):
         
     return False
 
-def get_normalized_pos(word, nlp_model, lang_patterns=None):
-    """Get part of speech using more conservative overrides."""
-    # Process with spaCy
+def is_verb_form(word, nlp_model):
+    """More robust verb detection."""
+    word = word.lower()
+    
+    # 1. Check basic verb infinitive endings
+    if word.endswith(('ar', 'er', 'ir')):
+        # Verify minimum length to avoid false positives like "ir" (to go)
+        if len(word) > 3:
+            return True
+    
+    # 2. Check common verb conjugation patterns
+    # Present tense patterns
+    if re.search(r'[aei](s|mos|n|is)$', word):
+        return True
+        
+    # Past tense patterns
+    if re.search(r'(é|ó|í|aste|aron|ieron|imos)$', word):
+        return True
+    
+    # Imperative patterns (including with pronouns)
+    if re.search(r'[aei](d|n|me|te|le|nos|os|les)$', word):
+        return True
+    
+    # 3. Use spaCy's parser as additional verification
+    doc = nlp_model(word)
+    if len(doc) > 0:
+        token = doc[0]
+        # Check morphological features
+        if 'VerbForm' in token.morph:
+            return True
+        # Check dependency parsing
+        if token.dep_ in ['ROOT', 'aux', 'verb']:
+            return True
+    
+    return False
+
+def get_normalized_pos(word, nlp_model):
+    """Get part of speech only if word exists in model's lexicon."""
+    if not nlp_model:
+        return ''
+    
+    # Check if word exists in vocabulary
+    word_lower = word.lower()
+    if not word_lower in nlp_model.vocab:
+        return ''
+        
+    # Get lexeme (dictionary entry)
+    lexeme = nlp_model.vocab[word_lower]
+    if not lexeme.is_known:
+        return ''
+    
+    # Process with spaCy for additional verification
     doc = nlp_model(word)
     if len(doc) == 0:
         return ''
     
-    # Basic POS from spaCy
-    spacy_pos = doc[0].pos_
-    pos = SPACY_POS_MAP.get(spacy_pos, '')
+    token = doc[0]
+    spacy_pos = token.pos_
     
-    # Handle proper nouns first - they should almost always remain NOUN
-    if is_proper_noun(word, nlp_model):
-        return 'NOUN'
+    # Map only clear POS categories
+    pos_mapping = {
+        'VERB': 'VERB',
+        'AUX': 'VERB',  # Auxiliary verbs are still verbs
+        'NOUN': 'NOUN',
+        'ADJ': 'ADJECTIVE',
+        'ADV': 'ADVERB'
+    }
     
-    # Only override spaCy if we have high confidence
-    if lang_patterns:
-        # Check if it's in our word map with a known verb ending
-        if word in lang_patterns.get('word_map', {}):
-            lemma = lang_patterns['word_map'][word]
-            if any(lemma.endswith(ending) for ending in lang_patterns.get('verb_endings', [])):
-                return 'VERB'
-        
-        # Only use pattern matching for verbs if there's a clear match AND spaCy doesn't have high confidence
-        if spacy_pos not in ['VERB', 'AUX', 'NOUN', 'PROPN']:
-            # Check imperative patterns (more reliable)
-            for pattern, _ in lang_patterns.get('imperative_patterns', []):
-                if re.match(pattern, word):
-                    return 'VERB'
-            
-            # Check verb endings directly (if both past and verb endings are defined)
-            if lang_patterns.get('past_patterns') and lang_patterns.get('verb_endings'):
-                for pattern, _ in lang_patterns.get('past_patterns', []):
-                    if re.match(pattern, word):
-                        return 'VERB'
-    
-    # For a few very common POS tags, trust spaCy more
-    if spacy_pos in ['VERB', 'AUX', 'NOUN', 'PROPN', 'ADJ', 'ADV']:
-        return pos
-    
-    return pos
+    return pos_mapping.get(spacy_pos, '')
 
 def extract_imperative_pronoun(word, lang_patterns=None):
     """Attempt to extract a pronoun from an imperative verb form in a language-neutral way."""
@@ -411,95 +447,67 @@ def extract_imperative_pronoun(word, lang_patterns=None):
     return None, None
 
 def get_lemma(word, pos, nlp_model, lang_patterns=None):
-    """Get the lemma with improved validation."""
-    # Don't lemmatize proper nouns or numerals
-    if pos == 'NOUN' and is_proper_noun(word, nlp_model):
+    """Get lemma only if we're confident about it."""
+    # Check word map first
+    if lang_patterns and word in lang_patterns.get('word_map', {}):
+        return lang_patterns['word_map'][word].get('lemma', word)
+    
+    # For unknown words, return the word itself
+    if not pos:
         return word
     
-    if pos == 'NUMERAL' or word.isdigit():
-        return word
-    
-    # Check language-specific word map if available
-    if lang_patterns and 'word_map' in lang_patterns:
-        if word in lang_patterns['word_map']:
-            return lang_patterns['word_map'][word]
-    
-    # Process with spaCy
-    doc = nlp_model(word)
-    spacy_lemma = doc[0].lemma_ if len(doc) > 0 else word
-    
-    # If spaCy gives a plausible lemma different from the word, prioritize it
-    if spacy_lemma != word:
-        # Verify the lemma looks reasonable (e.g., not "confor yo")
-        if ' ' not in spacy_lemma and len(spacy_lemma) > 1:
-            return spacy_lemma
-    
-    # For verbs, apply language-specific patterns if available
-    if lang_patterns and pos == 'VERB':
+    # For verbs, try to get lemma from patterns
+    if pos == 'VERB' and lang_patterns:
+        # Check verb patterns
         for pattern_type in ['past_patterns', 'imperative_patterns']:
             if pattern_type in lang_patterns:
                 for pattern, replacement in lang_patterns[pattern_type]:
                     if re.match(pattern, word):
                         candidate = re.sub(pattern, replacement, word)
-                        # Verify candidate is a plausible lemma
+                        # Verify candidate is a valid verb form
                         if any(candidate.endswith(ending) for ending in lang_patterns.get('verb_endings', [])):
                             return candidate
     
-    # If we couldn't find a better lemma, return the word itself for stability
-    if spacy_lemma.strip() == '' or ' ' in spacy_lemma:
-        return word
-        
-    return spacy_lemma
+    # If we can't confidently determine the lemma, return the word itself
+    return word
 
 def clean_meaning_text(text):
     """More thorough cleaning of meaning text."""
-    # Skip invalid or empty meanings
-    if not text or len(text) <= 1 or text in [".", ",", "-", ";"]:
+    if not text or len(text) <= 1:
         return ""
     
-    # Strip HTML tags
+    # Remove HTML and brackets
     text = re.sub(r'<[^>]+>', '', text)
-    
-    # Remove brackets and their contents
     text = re.sub(r'\[[^\]]*\]', '', text)
     text = re.sub(r'\([^)]*\)', '', text)
     
-    # Remove quotes
+    # Remove quotes and trailing punctuation
     text = text.replace('"', '').replace('"', '').replace('"', '')
-    
-    # Remove trailing punctuation
     text = re.sub(r'[.,;:!?]+$', '', text)
     
-    # Remove common unwanted phrases
+    # Remove unwanted phrases
     unwanted = [
         "to i ", "to you ", "to he ", "to she ", "to we ", "to they ",
         " —", " -", "to then managed to", "to then", 
         "as viewed through", "previously,", "then",
-        "the ", "a ", "an ", "one "  # Common articles and quantifiers
+        "the ", "a ", "an ", "one ", "some ",
+        "therefore", "according to", "managed to",
+        "aid of", "viewed through", "subsequently",
+        "romantic cultural", "then managed", "flow procedure"
     ]
     for phrase in unwanted:
         text = text.replace(phrase, "")
     
-    # Fix common issues in translation API responses
-    text = text.replace("to I ", "I ")
-    text = text.replace("to He ", "He ")
-    text = text.replace("to She ", "She ")
+    # Clean up spaces
+    text = re.sub(r'\s+', ' ', text).strip()
     
-    # Remove multiple spaces
-    text = re.sub(r'\s+', ' ', text)
-    
-    # Trim
-    cleaned = text.strip()
-    
-    # Filter out obviously poor meanings
-    if len(cleaned) < 2 or not any(c.isalpha() for c in cleaned):
+    # Validate the cleaned text
+    if len(text) < 2 or not any(c.isalpha() for c in text):
         return ""
-    
-    # Remove meanings that are too specific (often incorrect)
-    if len(cleaned.split()) > 6:  # Too wordy to be a clean meaning
+    if len(text.split()) > 4:  # Too wordy
         return ""
         
-    return cleaned
+    return text
 
 def is_past_tense_verb(word, pos, lang_code, lang_patterns=None):
     """Determine if a word is a past tense verb form using language patterns."""
@@ -523,201 +531,91 @@ def is_past_tense_verb(word, pos, lang_code, lang_patterns=None):
     return False
 
 def improve_meanings_format(meanings, pos, lang_code, original_word='', lang_patterns=None):
-    """More consistent formatting of meanings."""
+    """Format meanings with better consistency."""
     if not meanings:
         return []
     
-    # Special handling for imperative forms
+    # Determine verb form
     is_imperative = False
+    is_past_verb = False
     if pos == 'VERB' and lang_patterns:
+        # Check imperative patterns
         for pattern, _ in lang_patterns.get('imperative_patterns', []):
             if re.match(pattern, original_word):
                 is_imperative = True
                 break
+        # Check past patterns
+        for pattern, _ in lang_patterns.get('past_patterns', []):
+            if re.match(pattern, original_word):
+                is_past_verb = True
+                break
     
-    # Determine if this is a past/conjugated verb form
-    is_past_verb = is_past_tense_verb(original_word, pos, lang_code, lang_patterns)
-    is_conjugated = is_past_verb or is_imperative
-    
-    # Get pronouns from language patterns
+    # Get pronouns list
     pronouns = lang_patterns.get('pronouns', []) if lang_patterns else []
     
-    # Normalize and remove duplicates
     normalized = []
     seen = set()
     
     for meaning in meanings:
-        # Clean and normalize the meaning
         clean_meaning = clean_meaning_text(meaning.lower())
-        
-        # Skip if empty or seen
         if not clean_meaning or clean_meaning in seen:
             continue
         
-        # Format based on part of speech AND tense/form
-        formatted_meaning = clean_meaning
-        
+        # Format based on POS and form
         if pos == 'VERB':
-            # Case 1: Already has personal pronoun - keep as is
-            if any(clean_meaning.startswith(pronoun) for pronoun in ['i ', 'he ', 'she ', 'we ', 'they ', 'you ']):
-                formatted_meaning = clean_meaning
-            
-            # Case 2: Has object pronouns - keep as is 
-            elif pronouns and any(f" {pronoun} " in f" {clean_meaning} " for pronoun in pronouns):
-                formatted_meaning = clean_meaning
-            
-            # Case 3: Imperative forms (like "llamadme") - remove "to" prefix
-            elif is_imperative:
+            # Handle different verb forms
+            if is_imperative or is_past_verb:
                 if clean_meaning.startswith('to '):
-                    formatted_meaning = clean_meaning[3:]
-                else:
-                    formatted_meaning = clean_meaning
-            
-            # Case 4: Conjugated verb forms - no "to" prefix
-            elif is_conjugated:
-                if clean_meaning.startswith('to '):
-                    formatted_meaning = clean_meaning[3:]
-                else:
-                    formatted_meaning = clean_meaning
-            
-            # Case 5: Infinitive verb form - add "to" if needed
-            elif lang_code != 'en' and not clean_meaning.startswith('to '):
-                formatted_meaning = f"to {clean_meaning}"
-            
-            # All other cases - use as is
-            else:
-                formatted_meaning = clean_meaning
-        else:
-            # For non-verbs, just use the cleaned form
-            formatted_meaning = clean_meaning
+                    clean_meaning = clean_meaning[3:]
+            elif not any(clean_meaning.startswith(p) for p in ['i ', 'he ', 'she ', 'we ', 'they ', 'you ']):
+                if not clean_meaning.startswith('to '):
+                    clean_meaning = f"to {clean_meaning}"
         
-        # Add to results if not seen
-        if formatted_meaning not in seen and formatted_meaning:
-            normalized.append(formatted_meaning)
-            seen.add(formatted_meaning)
+        if clean_meaning and clean_meaning not in seen:
+            normalized.append(clean_meaning)
             seen.add(clean_meaning)
     
-    # Ensure we don't exceed 4 meanings
     return normalized[:4]
 
-def get_meanings_from_api(word, lang_code, pos='', lang_patterns=None, nlp_model=None):
-    """Get word meanings with language-neutral handling of special cases."""
-    # Add nlp_model as a parameter to fix scope issues
-    
-    # Cache check
-    cache_key = f"{lang_code}:{word}:{pos}"
-    if cache_key in TRANSLATION_CACHE:
-        return TRANSLATION_CACHE[cache_key]
-    
-    # For numbers and digits, return empty meanings
-    if word.isdigit():
-        return []
-    
-    # For proper nouns, try to preserve the case
-    if pos == 'NOUN' and nlp_model and is_proper_noun(word, nlp_model):
-        try:
-            url = f"https://api.mymemory.translated.net/get?q={word}&langpair={lang_code}|en"
-            response = requests.get(url, timeout=5)
-            data = response.json()
-            
-            if 'matches' in data and data['matches']:
-                for match in data['matches']:
-                    if 'translation' in match:
-                        trans = match['translation'].strip()
-                        # Preserve capitalization for proper nouns
-                        if trans and trans[0].isupper():
-                            return [trans]
-        except Exception as e:
-            print(f"Error with proper noun translation for '{word}': {e}")
-    
-    # Special handling for imperative forms with attached pronouns
-    if pos == 'VERB' and lang_patterns:
-        pronoun, lemma = extract_imperative_pronoun(word, lang_patterns)
-        
-        if pronoun:
-            # Try to get direct translation first
-            try:
-                url = f"https://api.mymemory.translated.net/get?q={word}&langpair={lang_code}|en"
-                response = requests.get(url, timeout=5)
-                data = response.json()
-                
-                if 'matches' in data and data['matches']:
-                    for match in data['matches']:
-                        if 'translation' in match:
-                            trans = clean_meaning_text(match['translation'].lower())
-                            # Remove "to" prefix from imperatives
-                            if trans.startswith('to '):
-                                trans = trans[3:]
-                            # Return the clean form if it looks good
-                            if ' ' in trans and len(trans) > 3:
-                                return [trans]
-            except Exception:
-                pass
-            
-            # Fallback: try to construct from lemma + pronoun
-            try:
-                # Get lemma meaning first
-                lemma_url = f"https://api.mymemory.translated.net/get?q={lemma}&langpair={lang_code}|en"
-                lemma_response = requests.get(lemma_url, timeout=5)
-                lemma_data = lemma_response.json()
-                
-                # Then get pronoun translation
-                pronoun_url = f"https://api.mymemory.translated.net/get?q={pronoun}&langpair={lang_code}|en"
-                pronoun_response = requests.get(pronoun_url, timeout=5)
-                pronoun_data = pronoun_response.json()
-                
-                # Combine them intelligently
-                if 'matches' in lemma_data and 'matches' in pronoun_data:
-                    lemma_trans = ""
-                    pronoun_trans = ""
-                    
-                    for match in lemma_data['matches']:
-                        if 'translation' in match:
-                            lemma_trans = clean_meaning_text(match['translation'].lower())
-                            if lemma_trans.startswith('to '):
-                                lemma_trans = lemma_trans[3:]
-                            break
-                    
-                    for match in pronoun_data['matches']:
-                        if 'translation' in match:
-                            pronoun_trans = clean_meaning_text(match['translation'].lower())
-                            break
-                    
-                    if lemma_trans and pronoun_trans:
-                        return [f"{lemma_trans} {pronoun_trans}"]
-            except Exception as e:
-                print(f"Error with imperative form handling for '{word}': {e}")
-    
-    # Now try the regular API approach
+def format_translations(translations, is_verb_lemma=False):
+    """Format translations, adding 'to' for verb lemmas."""
+    formatted = []
+    for trans in translations:
+        trans = trans.lower().strip()
+        if is_verb_lemma and not trans.startswith('to '):
+            trans = f"to {trans}"
+        formatted.append(trans)
+    return formatted
+
+def get_translations(word, source_lang='es', is_verb_lemma=False, max_translations=4):
+    """Get multiple English translations using MyMemory API."""
+    translations = []
     try:
-        # Use MyMemory API for translation
-        url = f"https://api.mymemory.translated.net/get?q={word}&langpair={lang_code}|en"
+        url = f"https://api.mymemory.translated.net/get?q={word}&langpair={source_lang}|en"
         response = requests.get(url, timeout=5)
         data = response.json()
         
-        meanings = []
+        # Get main translation
+        if 'responseData' in data and data['responseData']['translatedText']:
+            main_trans = data['responseData']['translatedText'].lower().strip()
+            if main_trans:
+                translations.append(main_trans)
         
-        # Get translations from API response
+        # Get additional translations from matches
         if 'matches' in data:
             for match in data['matches']:
-                if 'translation' in match and match['translation']:
-                    # Clean up translation
-                    translation = clean_meaning_text(match['translation'])
-                    
-                    # Skip if empty or duplicate
-                    if translation and translation.lower() not in [m.lower() for m in meanings]:
-                        meanings.append(translation)
-                    if len(meanings) >= 4:  # Limit to 4 meanings
-                        break
-        
-        # Format meanings properly based on part of speech and original word
-        formatted = improve_meanings_format(meanings, pos, lang_code, word, lang_patterns)
-        TRANSLATION_CACHE[cache_key] = formatted
-        return formatted
+                if 'translation' in match:
+                    trans = match['translation'].lower().strip()
+                    if trans and trans not in translations:
+                        translations.append(trans)
+                        if len(translations) >= max_translations:
+                            break
     
     except Exception as e:
-        print(f"Error getting meanings for '{word}': {e}")
-        return []
+        print(f"Translation error: {e}")
+    
+    # Format translations based on whether it's a verb lemma
+    return format_translations(translations, is_verb_lemma)
 
 def get_lemma_meanings(lemma, lang_code, pos, nlp_model=None, lang_patterns=None):
     """Get accurate meanings for lemma words with improved filtering."""
@@ -800,132 +698,194 @@ def filter_poor_quality_meanings(meanings_list):
     return filtered
 
 def apply_quality_checks(entry, nlp_model=None):
-    """Apply quality checks to fix common issues in a language-neutral way."""
+    """Apply stricter quality checks."""
     word = entry.get('word', '')
     pos = entry.get('partOfSpeech', '')
     lemma = entry.get('lemma', '')
     
-    # Fix POS for proper nouns
-    if word and word[0].isupper() and pos != 'NOUN' and nlp_model:
-        if is_proper_noun(word, nlp_model):
+    # Fix proper noun handling
+    if word and word[0].isupper() and not word.isupper():
+        if pos != 'NOUN':
             entry['partOfSpeech'] = 'NOUN'
-    
-    # Ensure proper nouns keep their capitalization
-    if pos == 'NOUN' and word and word[0].isupper() and lemma != word:
-        # For proper nouns, prefer to keep the original capitalization
+        # Keep original capitalization for proper nouns
         entry['lemma'] = word
     
-    # Fix bad lemmas - if lemma contains spaces or is empty, use original word
-    if not lemma or ' ' in lemma:
+    # Fix empty or invalid lemmas
+    if not lemma or ' ' in lemma or len(lemma) < 2:
         entry['lemma'] = word
     
-    # Fix bad lemma meanings by removing suspicious entries
-    meanings = entry.get('LemmaMeanings', [])
-    cleaned_meanings = []
-    for meaning in meanings:
-        # Skip very short or suspicious entries
-        if len(meaning) < 2 or meaning in ['.', ',', '-']:
-            continue
-        # Skip obviously wrong patterns
-        if any(bad in meaning.lower() for bad in ['therefore', 'according to', 'viewed through']):
-            continue
-        cleaned_meanings.append(meaning)
+    # Clean up meanings
+    entry['meanings'] = filter_poor_quality_meanings(entry.get('meanings', []))
+    entry['LemmaMeanings'] = filter_poor_quality_meanings(entry.get('LemmaMeanings', []))
     
-    # If we filtered everything out but should have meanings, add a basic one
-    if not cleaned_meanings and pos == 'NOUN':
-        cleaned_meanings = [lemma.lower()]
-    
-    entry['LemmaMeanings'] = cleaned_meanings
+    # Ensure proper nouns have at least one meaning
+    if pos == 'NOUN' and word[0].isupper() and not entry['meanings']:
+        entry['meanings'] = [word]
+        entry['LemmaMeanings'] = [word]
     
     return entry
 
-def enrich_database(database, lang_code, args):
-    """Enrich the database with linguistic information."""
-    enriched_db = {}
-    words = list(database.keys())
-    
-    # Load NLP model
-    use_spacy = SPACY_AVAILABLE and not args.no_spacy
-    nlp_model = load_nlp_model(lang_code, use_spacy) if use_spacy else None
-    
-    # Load language-specific patterns
-    lang_patterns = load_language_patterns(lang_code)
-    
-    print(f"Processing {len(words)} words...")
-    
-    # Process words in batches
-    for i in tqdm(range(0, len(words), args.batch_size)):
-        batch = words[i:i+args.batch_size]
+def get_pos_from_model(word, nlp_model):
+    """Check word in es_core_news_md and return any valid POS found."""
+    if not nlp_model:
+        return ''
         
-        for word in batch:
-            word_data = database[word]
-            
-            # Skip words that already have complete data
-            if all(k in word_data and word_data[k] for k in ['partOfSpeech', 'morphology', 'meanings', 'lemma', 'LemmaMeanings']):
-                enriched_db[word] = word_data
-                continue
-            
-            try:
-                # Determine part of speech using spaCy (with language-specific patterns)
-                pos = ''
-                if nlp_model:
-                    pos = get_normalized_pos(word, nlp_model, lang_patterns)
-                
-                # Get lemma using NLP model and language patterns
-                lemma = word
-                if nlp_model:
-                    lemma = get_lemma(word, pos, nlp_model, lang_patterns)
-                
-                # Get word morphology
-                morphology = ''
-                if nlp_model and len(pos) > 0:
-                    morphology = get_morphology(word, pos, nlp_model)
-                
-                # Get word meanings from API using POS info and language patterns
-                # Pass nlp_model to fix scope issues
-                meanings = get_meanings_from_api(word, lang_code, pos, lang_patterns, nlp_model)
-                
-                # Get lemma meanings with improved function
-                lemma_meanings = []
-                if lemma != word:
-                    # Pass nlp_model to fix scope issues
-                    lemma_meanings = get_lemma_meanings(lemma, lang_code, pos, nlp_model, lang_patterns)
-                else:
-                    lemma_meanings = meanings
-                
-                # Apply quality checks to fix common issues
-                enriched_entry = {
-                    'word': word,  # Include the word for quality checks
-                    'wordNumber': word_data.get('wordNumber', 0),
-                    'frequency': word_data.get('frequency', 1),
-                    'partOfSpeech': pos,
-                    'morphology': morphology,
-                    'meanings': meanings,
-                    'bestTranslation': '',  # Leave blank as requested
-                    'lemma': lemma,
-                    'LemmaMeanings': lemma_meanings
-                }
-                
-                # Apply quality checks before storing
-                enriched_entry = apply_quality_checks(enriched_entry, nlp_model)
-                
-                # Remove temporary fields
-                if 'word' in enriched_entry:
-                    del enriched_entry['word']
-                
-                # Store the enriched data
-                enriched_db[word] = enriched_entry
-                
-                # Add a short delay to prevent API rate limiting
-                if i % 5 == 0:
-                    time.sleep(0.1)
-                
-            except Exception as e:
-                print(f"Error processing word '{word}': {e}")
-                # If error, keep original data
-                enriched_db[word] = word_data
+    # Process the word
+    doc = nlp_model(word)
+    if len(doc) == 0:
+        return ''
+        
+    # Get the POS and morphology
+    token = doc[0]
+    pos = token.pos_
+    morph = token.morph
     
-    return enriched_db
+    # Special case handling
+    if pos == 'VERB':
+        # Check if it might be an adjective misidentified as verb
+        if 'Gender' in morph and 'Number' in morph:
+            # Words with gender and number are more likely to be adjectives
+            if word.endswith(('a', 'o', 'as', 'os')):
+                return 'ADJECTIVE'
+    
+    # Map all valid spaCy POS tags
+    pos_mapping = {
+        'VERB': 'VERB',
+        'AUX': 'VERB',
+        'NOUN': 'NOUN',
+        'PROPN': 'NOUN',
+        'ADJ': 'ADJECTIVE',
+        'ADV': 'ADVERB',
+        'DET': 'DETERMINER',
+        'PRON': 'PRONOUN',
+        'ADP': 'PREPOSITION',
+        'CCONJ': 'CONJUNCTION',
+        'SCONJ': 'CONJUNCTION',
+        'NUM': 'NUMERAL',
+        'INTJ': 'INTERJECTION',
+        'PART': 'PARTICLE'
+    }
+    
+    return pos_mapping.get(pos, pos)
+
+def enrich_database(database, lang_code, args):
+    """Process each word in database with improved enrichment."""
+    try:
+        nlp_model = spacy.load(LANGUAGE_MODELS.get(lang_code, 'es_core_news_md'))
+    except:
+        print("Error: Please install the required model")
+        return database
+
+    print(f"\nProcessing {len(database)} words...")
+    enriched = {}
+    
+    for word in tqdm(database.keys()):
+        enriched[word] = database[word].copy()
+        
+        try:
+            # Process word
+            doc = nlp_model(word)
+            token = doc[0]
+            
+            # Get POS - keep all valid POS tags from spaCy
+            pos = token.pos_
+            
+            # Get lemma
+            lemma = token.lemma_
+            
+            # Get multiple translations
+            word_translations = get_translations(word, lang_code)
+            lemma_translations = get_translations(lemma, lang_code, is_verb_lemma=(pos == 'VERB'))
+            
+            # Update entry
+            enriched[word].update({
+                'partOfSpeech': pos,
+                'lemma': lemma,
+                'meanings': word_translations,
+                'LemmaMeanings': lemma_translations
+            })
+            
+        except Exception as e:
+            print(f"Error processing word '{word}': {e}")
+    
+    return enriched
+
+def get_verb_lemma(word, nlp_model):
+    """Get correct lemma for Spanish verbs, handling attached pronouns."""
+    word = word.lower()
+    
+    # If word already ends in ar/er/ir, it's likely already a lemma
+    if word.endswith(('ar', 'er', 'ir')) and len(word) > 3:
+        return word
+        
+    # Check for attached pronouns (me, te, le, nos, os, les)
+    pronouns = ['me', 'te', 'le', 'nos', 'os', 'les']
+    for pronoun in pronouns:
+        if word.endswith(pronoun):
+            # Remove pronoun and try to get base form
+            base = word[:-len(pronoun)]
+            # Check common imperative to infinitive patterns
+            if base.endswith('d'):  # llamad + me -> llamar
+                return base[:-1] + 'r'
+            if base.endswith('id'):  # decid + me -> decir
+                return base[:-2] + 'ir'
+    
+    # Use spaCy's lemmatizer as fallback
+    doc = nlp_model(word)
+    return doc[0].lemma_
+
+def test_single_word(word, lang_code=None):
+    """Enhanced test function with better translation formatting."""
+    print(f"\n===== ANALYZING WORD: '{word}' =====")
+    
+    # Detect language if not provided
+    if not lang_code:
+        lang_code, confidence = langid.classify(word)
+        print(f"\nLANGUAGE DETECTION:")
+        print(f"  Detected language: {LANGUAGE_NAMES.get(lang_code, lang_code)}")
+        print(f"  Confidence: {confidence:.2f}")
+    
+    try:
+        nlp_model = spacy.load(LANGUAGE_MODELS.get(lang_code, 'es_core_news_md'))
+    except:
+        print(f"ERROR: Please install required model")
+        return
+
+    # Process word
+    doc = nlp_model(word)
+    token = doc[0]
+    
+    # Get POS
+    pos = token.pos_
+    
+    # Get lemma with special handling for verbs
+    if pos == 'VERB':
+        lemma = get_verb_lemma(word, nlp_model)
+    else:
+        lemma = token.lemma_
+    
+    # Get translations (add 'to' for verb lemmas)
+    word_translations = get_translations(word, lang_code)
+    lemma_translations = get_translations(lemma, lang_code, is_verb_lemma=(pos == 'VERB'))
+    
+    print("\nANALYSIS:")
+    print(f"  Word: {word}")
+    print(f"  Part of Speech: {pos}")
+    print("  Translations:")
+    for i, trans in enumerate(word_translations, 1):
+        print(f"    {i}. {trans}")
+    print(f"  Lemma: {lemma}")
+    print("  Lemma translations:")
+    for i, trans in enumerate(lemma_translations, 1):
+        print(f"    {i}. {trans}")
+
+    return {
+        'word': word,
+        'pos': pos,
+        'translations': word_translations,
+        'lemma': lemma,
+        'lemma_translations': lemma_translations
+    }
 
 def format_database_code(database, database_name, lang_code):
     """Format the database exactly like the input format to avoid syntax issues."""
@@ -1015,114 +975,6 @@ def format_database_code(database, database_name, lang_code):
     
     # Join all parts with newlines
     return "\n".join(output_parts)
-
-def test_single_word(word, lang_code='es'):
-    """Test the enrichment pipeline on a single word with detailed output."""
-    print(f"\n===== ANALYZING WORD: '{word}' =====")
-    
-    # Load NLP model
-    if not SPACY_AVAILABLE:
-        print("ERROR: spaCy is required for this test")
-        return
-    
-    nlp_model = load_nlp_model(lang_code)
-    if not nlp_model:
-        print(f"ERROR: Could not load spaCy model for {lang_code}")
-        return
-    
-    # Load language patterns
-    lang_patterns = load_language_patterns(lang_code)
-    print(f"Using language patterns for: {lang_code}")
-    
-    print("\n1. SPACY ANALYSIS:")
-    doc = nlp_model(word)
-    if len(doc) == 0:
-        print("  No tokens found")
-    else:
-        token = doc[0]
-        print(f"  Raw token: {token.text}")
-        print(f"  spaCy POS tag: {token.pos_}")
-        print(f"  spaCy detailed tag: {token.tag_}")
-        print(f"  spaCy lemma: {token.lemma_}")
-        print(f"  spaCy morphology: {token.morph}")
-        
-        # Show spaCy's dependency parsing info
-        print(f"  Dependency relation: {token.dep_}")
-        if token.head.text != token.text:
-            print(f"  Head word: {token.head.text} (POS: {token.head.pos_})")
-    
-    # Get part of speech with our improved function
-    pos = get_normalized_pos(word, nlp_model, lang_patterns)
-    print(f"\n2. PART OF SPEECH:")
-    raw_pos = doc[0].pos_ if len(doc) > 0 else "UNKNOWN"
-    mapped_pos = SPACY_POS_MAP.get(raw_pos, "UNKNOWN")
-    print(f"  spaCy raw POS: {raw_pos}")
-    print(f"  Mapped POS: {mapped_pos}")
-    print(f"  Final POS: {pos}")
-    if pos != mapped_pos:
-        print(f"  Note: POS was corrected from '{mapped_pos}' to '{pos}'")
-    
-    # Get the lemma (base form)
-    lemma = get_lemma(word, pos, nlp_model, lang_patterns)
-    print(f"\n3. LEMMA ANALYSIS:")
-    print(f"  spaCy lemma: {doc[0].lemma_ if len(doc) > 0 else 'UNKNOWN'}")
-    print(f"  Our lemma: {lemma}")
-    if lemma != (doc[0].lemma_ if len(doc) > 0 else word):
-        print(f"  Note: Lemma was corrected from '{doc[0].lemma_ if len(doc) > 0 else word}' to '{lemma}'")
-    
-    # Get morphological features
-    morphology = get_morphology(word, pos, nlp_model)
-    print(f"\n4. MORPHOLOGY:")
-    print(f"  Morphological features: {morphology}")
-    
-    # Get meanings
-    print(f"\n5. WORD MEANINGS:")
-    meanings = get_meanings_from_api(word, lang_code, pos, lang_patterns, nlp_model)
-    if meanings:
-        for i, meaning in enumerate(meanings, 1):
-            print(f"  {i}. {meaning}")
-    else:
-        print("  No meanings found")
-    
-    # Get lemma meanings using our improved function
-    print(f"\n6. LEMMA MEANINGS:")
-    if lemma != word:
-        lemma_meanings = get_lemma_meanings(lemma, lang_code, pos, nlp_model, lang_patterns)
-        if lemma_meanings:
-            for i, meaning in enumerate(lemma_meanings, 1):
-                print(f"  {i}. {meaning}")
-        else:
-            print("  No lemma meanings found")
-    else:
-        print(f"  (Same as word meanings - lemma '{lemma}' is identical to word '{word}')")
-    
-    # Display enriched database entry
-    print("\n===== FINAL ENRICHED DATABASE ENTRY =====")
-    entry = {
-        'wordNumber': 1,
-        'frequency': 1,
-        'partOfSpeech': pos,
-        'morphology': morphology,
-        'meanings': meanings,
-        'bestTranslation': '',
-        'lemma': lemma,
-        'LemmaMeanings': get_lemma_meanings(lemma, lang_code, pos, nlp_model, lang_patterns) if lemma != word else meanings
-    }
-    
-    # Print in a readable format
-    for key, value in entry.items():
-        if isinstance(value, list):
-            print(f"  {key}:")
-            if value:
-                for i, item in enumerate(value, 1):
-                    print(f"    {i}. {item}")
-            else:
-                print("    []")
-        else:
-            print(f"  {key}: {value}")
-    
-    print("\n===== END OF ANALYSIS =====")
-    return entry
 
 def test_pos(words, lang_code='es'):
     """Test part of speech detection on multiple words."""
