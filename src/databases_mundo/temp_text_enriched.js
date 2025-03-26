@@ -8,7 +8,7 @@ const tempDatabase = {
       meanings: ['call me'],
       bestTranslation: 'call me',
       lemma: 'llamar',
-      LemmaMeanings: ['to call', 'to name']
+      LemmaMeanings: ['to call', 'to name', 'to knock']
     },
     'ismael': {
       wordNumber: 2,
@@ -38,17 +38,17 @@ const tempDatabase = {
       meanings: ['that', 'which', 'who'],
       bestTranslation: 'that',
       lemma: 'que',
-      LemmaMeanings: ['that', 'which', 'who']
+      LemmaMeanings: ['that', 'which', 'who', 'than']
     },
     'peso': {
       wordNumber: 5,
       frequency: 2,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['weight', 'burden', 'peso'],
+      meanings: ['weight', 'burden', 'pressure'],
       bestTranslation: 'weight',
       lemma: 'peso',
-      LemmaMeanings: ['weight', 'burden', 'peso']
+      LemmaMeanings: ['weight', 'burden', 'pressure', 'peso (currency)']
     },
     'repetí': {
       wordNumber: 6,
@@ -58,17 +58,17 @@ const tempDatabase = {
       meanings: ['I repeated'],
       bestTranslation: 'I repeated',
       lemma: 'repetir',
-      LemmaMeanings: ['to repeat']
+      LemmaMeanings: ['to repeat', 'to retake']
     },
     'varias': {
       wordNumber: 7,
       frequency: 1,
-      partOfSpeech: 'ADJECTIVE',
+      partOfSpeech: 'DETERMINER',
       morphology: '',
-      meanings: ['several', 'various'],
+      meanings: ['several', 'various', 'some'],
       bestTranslation: 'several',
       lemma: 'vario',
-      LemmaMeanings: ['various', 'several', 'different']
+      LemmaMeanings: ['various', 'several', 'diverse']
     },
     'veces': {
       wordNumber: 8,
@@ -83,7 +83,7 @@ const tempDatabase = {
     'mientras': {
       wordNumber: 9,
       frequency: 1,
-      partOfSpeech: 'ADVERB',
+      partOfSpeech: 'CONJUNCTION',
       morphology: '',
       meanings: ['while', 'whereas', 'as long as'],
       bestTranslation: 'while',
@@ -95,7 +95,7 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['was waiting', 'waited', 'was hoping'],
+      meanings: ['I was waiting', 'he/she was waiting', 'I hoped'],
       bestTranslation: 'was waiting',
       lemma: 'esperar',
       LemmaMeanings: ['to wait', 'to hope', 'to expect']
@@ -155,7 +155,7 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['felt', 'was feeling'],
+      meanings: ['I felt', 'he/she felt', 'I was feeling'],
       bestTranslation: 'felt',
       lemma: 'sentir',
       LemmaMeanings: ['to feel', 'to regret', 'to sense']
@@ -168,7 +168,7 @@ const tempDatabase = {
       meanings: ['a', 'an', 'one'],
       bestTranslation: 'a',
       lemma: 'uno',
-      LemmaMeanings: ['a', 'an', 'one']
+      LemmaMeanings: ['one', 'a', 'an']
     },
     'fuerza': {
       wordNumber: 18,
@@ -185,20 +185,20 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'ADJECTIVE',
       morphology: '',
-      meanings: ['strange', 'odd', 'weird'],
+      meanings: ['strange', 'odd', 'unfamiliar'],
       bestTranslation: 'strange',
       lemma: 'extraño',
-      LemmaMeanings: ['strange', 'odd', 'foreign']
+      LemmaMeanings: ['strange', 'odd', 'foreign', 'unfamiliar']
     },
     'otorgaba': {
       wordNumber: 20,
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['granted', 'gave', 'was granting'],
+      meanings: ['granted', 'bestowed', 'awarded'],
       bestTranslation: 'granted',
       lemma: 'otorgar',
-      LemmaMeanings: ['to grant', 'to give', 'to award']
+      LemmaMeanings: ['to grant', 'to bestow', 'to award']
     },
     'cada': {
       wordNumber: 21,
@@ -225,10 +225,10 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'ADJECTIVE',
       morphology: '',
-      meanings: ['greater', 'older', 'larger', 'major'],
+      meanings: ['greater', 'older', 'larger', 'main'],
       bestTranslation: 'greater',
       lemma: 'mayor',
-      LemmaMeanings: ['greater', 'older', 'larger', 'major']
+      LemmaMeanings: ['greater', 'older', 'larger', 'main', 'major']
     },
     'al': {
       wordNumber: 24,
@@ -275,37 +275,37 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['passage', 'ticket', 'fare'],
+      meanings: ['ticket', 'fare', 'passage'],
       bestTranslation: 'ticket',
       lemma: 'pasaje',
-      LemmaMeanings: ['passage', 'ticket', 'fare']
+      LemmaMeanings: ['ticket', 'fare', 'passage', 'way']
     },
     'aumentaba': {
       wordNumber: 29,
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['increased', 'was increasing', 'grew'],
+      meanings: ['increased', 'was increasing', 'augmented'],
       bestTranslation: 'increased',
       lemma: 'aumentar',
-      LemmaMeanings: ['to increase', 'to augment', 'to grow']
+      LemmaMeanings: ['to increase', 'to augment', 'to raise']
     },
     'conforme': {
       wordNumber: 30,
       frequency: 1,
       partOfSpeech: 'ADVERB',
       morphology: '',
-      meanings: ['as', 'according to', 'while'],
+      meanings: ['as', 'according to', 'in agreement'],
       bestTranslation: 'as',
       lemma: 'conforme',
-      LemmaMeanings: ['as', 'according to', 'in agreement']
+      LemmaMeanings: ['as', 'according to', 'in agreement', 'compliant']
     },
     'se': {
       wordNumber: 31,
       frequency: 1,
       partOfSpeech: 'PRONOUN',
       morphology: '',
-      meanings: ['oneself', 'himself', 'herself', 'itself', 'themselves'],
+      meanings: ['oneself', 'himself', 'herself', 'itself'],
       bestTranslation: 'oneself',
       lemma: 'se',
       LemmaMeanings: ['oneself', 'himself', 'herself', 'itself', 'themselves']
@@ -315,7 +315,7 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['approached', 'was approaching', 'got closer'],
+      meanings: ['approached', 'was approaching', 'came closer'],
       bestTranslation: 'approached',
       lemma: 'acercar',
       LemmaMeanings: ['to approach', 'to bring closer', 'to move closer']
@@ -325,30 +325,30 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'DETERMINER',
       morphology: '',
-      meanings: ['the'],
+      meanings: ['the', 'her', 'it'],
       bestTranslation: 'the',
       lemma: 'la',
-      LemmaMeanings: ['the']
+      LemmaMeanings: ['the', 'her', 'it']
     },
     'hora': {
       wordNumber: 34,
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['hour', 'time', 'o\'clock'],
+      meanings: ['hour', 'time'],
       bestTranslation: 'hour',
       lemma: 'hora',
-      LemmaMeanings: ['hour', 'time', 'o\'clock']
+      LemmaMeanings: ['hour', 'time']
     },
     'salida': {
       wordNumber: 35,
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['departure', 'exit', 'outlet'],
+      meanings: ['departure', 'exit', 'way out'],
       bestTranslation: 'departure',
       lemma: 'salida',
-      LemmaMeanings: ['departure', 'exit', 'outlet', 'outing']
+      LemmaMeanings: ['departure', 'exit', 'way out', 'outing']
     }
   };
   
