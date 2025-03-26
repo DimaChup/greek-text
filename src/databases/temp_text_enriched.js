@@ -38,7 +38,7 @@ const tempDatabase = {
       meanings: ['that', 'which', 'who'],
       bestTranslation: 'that',
       lemma: 'que',
-      LemmaMeanings: ['that', 'which', 'who']
+      LemmaMeanings: ['that', 'which', 'who', 'what']
     },
     'peso': {
       wordNumber: 5,
@@ -63,12 +63,12 @@ const tempDatabase = {
     'varias': {
       wordNumber: 7,
       frequency: 1,
-      partOfSpeech: 'ADJECTIVE',
+      partOfSpeech: 'DETERMINER',
       morphology: '',
       meanings: ['several', 'various'],
       bestTranslation: 'several',
       lemma: 'vario',
-      LemmaMeanings: ['various', 'several', 'different']
+      LemmaMeanings: ['several', 'various', 'diverse']
     },
     'veces': {
       wordNumber: 8,
@@ -83,7 +83,7 @@ const tempDatabase = {
     'mientras': {
       wordNumber: 9,
       frequency: 1,
-      partOfSpeech: 'ADVERB',
+      partOfSpeech: 'CONJUNCTION',
       morphology: '',
       meanings: ['while', 'whereas', 'as long as'],
       bestTranslation: 'while',
@@ -95,10 +95,10 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['was waiting', 'waited', 'was hoping'],
+      meanings: ['I was waiting', 'he/she/it was waiting', 'was hoping'],
       bestTranslation: 'was waiting',
       lemma: 'esperar',
-      LemmaMeanings: ['to wait', 'to hope', 'to expect']
+      LemmaMeanings: ['to wait for', 'to hope', 'to expect']
     },
     'en': {
       wordNumber: 11,
@@ -155,7 +155,7 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['felt', 'was feeling'],
+      meanings: ['I felt', 'he/she/it felt'],
       bestTranslation: 'felt',
       lemma: 'sentir',
       LemmaMeanings: ['to feel', 'to regret', 'to sense']
@@ -175,27 +175,27 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['force', 'strength', 'power'],
-      bestTranslation: 'force',
+      meanings: ['strength', 'force', 'power'],
+      bestTranslation: 'strength',
       lemma: 'fuerza',
-      LemmaMeanings: ['force', 'strength', 'power']
+      LemmaMeanings: ['strength', 'force', 'power']
     },
     'extraña': {
       wordNumber: 19,
       frequency: 1,
       partOfSpeech: 'ADJECTIVE',
       morphology: '',
-      meanings: ['strange', 'odd', 'weird'],
+      meanings: ['strange', 'weird', 'odd'],
       bestTranslation: 'strange',
       lemma: 'extraño',
-      LemmaMeanings: ['strange', 'odd', 'foreign']
+      LemmaMeanings: ['strange', 'weird', 'odd', 'foreign']
     },
     'otorgaba': {
       wordNumber: 20,
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['granted', 'gave', 'was granting'],
+      meanings: ['granted', 'gave', 'awarded'],
       bestTranslation: 'granted',
       lemma: 'otorgar',
       LemmaMeanings: ['to grant', 'to give', 'to award']
@@ -225,10 +225,10 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'ADJECTIVE',
       morphology: '',
-      meanings: ['greater', 'older', 'larger', 'major'],
+      meanings: ['greater', 'larger', 'older', 'main'],
       bestTranslation: 'greater',
       lemma: 'mayor',
-      LemmaMeanings: ['greater', 'older', 'larger', 'major']
+      LemmaMeanings: ['greater', 'larger', 'older', 'main']
     },
     'al': {
       wordNumber: 24,
@@ -255,10 +255,10 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['booklet', 'notebook', 'pamphlet'],
+      meanings: ['booklet', 'notebook'],
       bestTranslation: 'booklet',
       lemma: 'cuadernillo',
-      LemmaMeanings: ['booklet', 'notebook', 'pamphlet']
+      LemmaMeanings: ['booklet', 'notebook']
     },
     'del': {
       wordNumber: 27,
@@ -275,30 +275,30 @@ const tempDatabase = {
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['passage', 'ticket', 'fare'],
+      meanings: ['ticket', 'passage', 'fare'],
       bestTranslation: 'ticket',
       lemma: 'pasaje',
-      LemmaMeanings: ['passage', 'ticket', 'fare']
+      LemmaMeanings: ['ticket', 'passage', 'fare']
     },
     'aumentaba': {
       wordNumber: 29,
       frequency: 1,
       partOfSpeech: 'VERB',
       morphology: '',
-      meanings: ['increased', 'was increasing', 'grew'],
+      meanings: ['increased', 'was increasing', 'augmented'],
       bestTranslation: 'increased',
       lemma: 'aumentar',
-      LemmaMeanings: ['to increase', 'to augment', 'to grow']
+      LemmaMeanings: ['to increase', 'to augment', 'to raise']
     },
     'conforme': {
       wordNumber: 30,
       frequency: 1,
-      partOfSpeech: 'ADVERB',
+      partOfSpeech: 'CONJUNCTION',
       morphology: '',
-      meanings: ['as', 'according to', 'while'],
+      meanings: ['as', 'according to', 'in agreement'],
       bestTranslation: 'as',
       lemma: 'conforme',
-      LemmaMeanings: ['as', 'according to', 'in agreement']
+      LemmaMeanings: ['as', 'according to', 'satisfied', 'in agreement']
     },
     'se': {
       wordNumber: 31,
@@ -317,38 +317,38 @@ const tempDatabase = {
       morphology: '',
       meanings: ['approached', 'was approaching', 'got closer'],
       bestTranslation: 'approached',
-      lemma: 'acercar',
-      LemmaMeanings: ['to approach', 'to bring closer', 'to move closer']
+      lemma: 'acercarse',
+      LemmaMeanings: ['to approach', 'to get closer', 'to bring closer']
     },
     'la': {
       wordNumber: 33,
       frequency: 1,
       partOfSpeech: 'DETERMINER',
       morphology: '',
-      meanings: ['the'],
+      meanings: ['the', 'her', 'it'],
       bestTranslation: 'the',
       lemma: 'la',
-      LemmaMeanings: ['the']
+      LemmaMeanings: ['the', 'her', 'it', 'you']
     },
     'hora': {
       wordNumber: 34,
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['hour', 'time', 'o\'clock'],
+      meanings: ['hour', 'time'],
       bestTranslation: 'hour',
       lemma: 'hora',
-      LemmaMeanings: ['hour', 'time', 'o\'clock']
+      LemmaMeanings: ['hour', 'time']
     },
     'salida': {
       wordNumber: 35,
       frequency: 1,
       partOfSpeech: 'NOUN',
       morphology: '',
-      meanings: ['departure', 'exit', 'outlet'],
+      meanings: ['departure', 'exit', 'outing'],
       bestTranslation: 'departure',
       lemma: 'salida',
-      LemmaMeanings: ['departure', 'exit', 'outlet', 'outing']
+      LemmaMeanings: ['departure', 'exit', 'outing', 'solution']
     }
   };
   

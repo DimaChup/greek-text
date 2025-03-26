@@ -12,6 +12,8 @@ git clean -fd
 git branch -D v12
 
 
+python scripts/agents.py --input src/databases/temp_text.js --output src/databases/example_enriched.js
+
 python scripts/text2db.py -i data/input/natureA.txt --copy-to-db
 python scripts/delete_output_dir.py -t natureA
 Fill up db_A
