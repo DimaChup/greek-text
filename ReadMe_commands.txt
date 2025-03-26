@@ -29,3 +29,5 @@ node scripts/updateWordDatabase.js data/output_natureB/natureC_db.js
 delete temporrary files
 Fill up db_C
 node scripts/generate-anki-from-db.js --input src/databases/natureB_db_filtered_copy.js --pos VERB,NOUN
+
+ls ~/.ollama

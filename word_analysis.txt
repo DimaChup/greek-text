@@ -1,0 +1,39 @@
+Okay, here is the requested information for each word in the provided JavaScript database, formatted as a table. Since the original database had empty fields, the linguistic information has been determined based on general Spanish knowledge.
+
+| Word        | Translation                    | Part of Speech                 | Lemma       | Lemma Translation                     |
+| :---------- | :----------------------------- | :----------------------------- | :---------- | :------------------------------------ |
+| llamadme    | call me (plural informal)      | VERB                           | llamar      | to call                               |
+| ismael      | Ishmael                        | NOUN (Proper Noun)             | ismael      | Ishmael                               |
+| de          | of, from                       | PREPOSITION                    | de          | of, from                              |
+| que         | that, which, who, than         | CONJUNCTION / PRONOUN          | que         | that, which, who, than                |
+| peso        | weight / I weigh               | NOUN / VERB                    | peso / pesar| weight / to weigh                     |
+| repetí      | I repeated                     | VERB                           | repetir     | to repeat                             |
+| varias      | several, various               | ADJECTIVE / DETERMINER         | varios      | several, various                      |
+| veces       | times (occurrences)            | NOUN                           | vez         | time (occurrence)                     |
+| mientras    | while, whereas                 | CONJUNCTION / ADVERB           | mientras    | while, whereas                        |
+| esperaba    | I/he/she/it was waiting/hoping | VERB                           | esperar     | to wait, to hope                      |
+| en          | in, on, at                     | PREPOSITION                    | en          | in, on, at                            |
+| el          | the                            | ARTICLE (Definite)             | el          | the                                   |
+| aeropuerto  | airport                        | NOUN                           | aeropuerto  | airport                               |
+| hamburgo    | Hamburg                        | NOUN (Proper Noun)             | hamburgo    | Hamburg                               |
+| y           | and                            | CONJUNCTION                    | y           | and                                   |
+| sentía      | I/he/she/it felt / was feeling | VERB                           | sentir      | to feel, to regret, to be sorry       |
+| una         | a, an, one                     | ARTICLE (Indefinite) / NUMERAL | uno         | a, an, one                            |
+| fuerza      | force, strength                | NOUN                           | fuerza      | force, strength                       |
+| extraña     | strange / he/she/it misses     | ADJECTIVE / VERB               | extraño / extrañar | strange, weird / to miss, seem strange |
+| otorgaba    | I/he/she/it granted/awarded    | VERB                           | otorgar     | to grant, to award                    |
+| cada        | each, every                    | DETERMINER / ADJECTIVE         | cada        | each, every                           |
+| vez         | time (occurrence)              | NOUN                           | vez         | time (occurrence)                     |
+| mayor       | greater, bigger, older         | ADJECTIVE                      | mayor       | greater, bigger, older                |
+| al          | to the, at the                 | CONTRACTION (a + el)           | a + el      | to + the                              |
+| delgado     | thin, slim                     | ADJECTIVE                      | delgado     | thin, slim                            |
+| cuadernillo | booklet, small notebook        | NOUN                           | cuadernillo | booklet, small notebook               |
+| del         | of the, from the               | CONTRACTION (de + el)          | de + el     | of + the                              |
+| pasaje      | ticket, fare, passage          | NOUN                           | pasaje      | ticket, fare, passage                 |
+| aumentaba   | I/he/she/it increased/was increasing | VERB                           | aumentar    | to increase                           |
+| conforme    | as, according to               | ADVERB / CONJUNCTION           | conforme    | as, according to                      |
+| se          | oneself, himself, etc. (reflexive/passive) | PRONOUN            | se          | oneself, himself, etc.                |
+| acercaba    | I/he/she/it approached/was approaching | VERB                           | acercarse   | to approach, to get near              |
+| la          | the / her, it                  | ARTICLE (Definite) / PRONOUN | la          | the / her, it                         |
+| hora        | hour, time (o'clock)           | NOUN                           | hora        | hour, time (o'clock)                  |
+| salida      | departure, exit                | NOUN                           | salida      | departure, exit                       |
