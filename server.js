@@ -55,125 +55,120 @@ app.post('/api/save-database', (req, res) => {
 
 // Updated endpoint with better debugging for directory cleanup issues
 app.post('/api/run-text2db', async (req, res) => {
-  let tempFilePath = null;
+  console.log('Received request to generate database from text');
   
   try {
-    const { textContent } = req.body;
+    const { textContent, dbNameBase, isChapter, bookId, chapterTitle } = req.body;
     
     if (!textContent) {
-      return res.status(400).json({ error: 'Text content is required' });
+      return res.status(400).json({ error: 'Missing text content' });
     }
     
-    // Create temp directory if it doesn't exist
+    // Create a temporary file for the text
     const tempDir = path.join(__dirname, 'temp');
     if (!fs.existsSync(tempDir)) {
-      fs.mkdirSync(tempDir, { recursive: true });
+      fs.mkdirSync(tempDir);
     }
     
-    // Create a unique filename based on timestamp
-    const timestamp = Date.now();
-    const tempFileName = `temp_text_${timestamp}`;
-    tempFilePath = path.join(tempDir, `${tempFileName}.txt`);
+    const tempFilePath = path.join(tempDir, `temp_text_${Date.now()}.txt`);
+    fs.writeFileSync(tempFilePath, textContent);
     
-    // Write the text content to the temporary file
-    fs.writeFileSync(tempFilePath, textContent, 'utf8');
-    console.log(`Temporary file created: ${tempFilePath}`);
+    // Set up paths
+    const dbDir = path.join(__dirname, 'src/databases');
     
-    // Get the database directory path - use absolute path for clarity
-    const dbDir = path.resolve(__dirname, 'src', 'databases');
-    if (!fs.existsSync(dbDir)) {
-      fs.mkdirSync(dbDir, { recursive: true });
-    }
+    // Determine command based on whether this is a chapter or standalone
+    let command;
+    let outputDbName;
     
-    // Ensure data directory exists
-    const dataDir = path.join(__dirname, 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-    
-    // Check if the Python script exists
-    const pythonScriptPath = path.resolve(__dirname, 'scripts', 'text2db.py');
-    if (!fs.existsSync(pythonScriptPath)) {
-      throw new Error(`text2db.py script not found at path: ${pythonScriptPath}`);
-    }
-    
-    console.log("Running text2db.py script with delete-output option");
-    
-    // Use python or python3 depending on the platform
-    const pythonCommand = process.platform === 'win32' ? 'python' : 'python3';
-    
-    // Run the command from the project root directory to ensure paths are relative to it
-    // Use absolute paths for the input file and database directory
-    const command = `cd "${__dirname}" && ${pythonCommand} "${pythonScriptPath}" --input "${tempFilePath}" --copy-to-db --db-dir "${dbDir}" --delete-output`;
-    
-    console.log(`Executing command: ${command}`);
-    
-    // Execute text2db.py and capture output
-    const { stdout, stderr } = await new Promise((resolve, reject) => {
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error executing text2db.py: ${error.message}`);
-          console.error(`stderr: ${stderr}`);
-          reject({ error, stderr });
-        } else {
-          resolve({ stdout, stderr });
+    if (isChapter && bookId) {
+      // Chapter mode - need to check against existing book vocabulary
+      outputDbName = `${dbNameBase}`;
+      
+      // Step 1: Generate basic database
+      const text2dbCommand = `python scripts/text2db.py --input "${tempFilePath}" --output "${tempDir}/${outputDbName}_raw.js" --no-copy-to-db`;
+      console.log(`Executing: ${text2dbCommand}`);
+      await execPromise(text2dbCommand);
+      
+      // Step 2: Determine if we need to compare with a master vocabulary
+      const masterDbPath = path.join(dbDir, `${bookId}_master.js`);
+      
+      if (fs.existsSync(masterDbPath)) {
+        // Compare with master vocabulary to only get new words
+        const compareCommand = `node scripts/updateWordDatabase.js "${tempDir}/${outputDbName}_raw.js" --existing "${masterDbPath}" --output "${dbDir}/${outputDbName}.js"`;
+        console.log(`Executing comparison: ${compareCommand}`);
+        const { stdout: compareOutput } = await execPromise(compareCommand);
+        
+        // Extract the number of new words from the output
+        const newWordsMatch = compareOutput.match(/New words found[^:]*:\s*(\d+)/);
+        const newWordCount = newWordsMatch ? parseInt(newWordsMatch[1]) : 0;
+        
+        // Update the master database
+        const updateMasterCommand = `node scripts/updateMasterDb.js "${dbDir}/${outputDbName}.js" "${masterDbPath}"`;
+        console.log(`Updating master: ${updateMasterCommand}`);
+        await execPromise(updateMasterCommand);
+        
+        // Step 3: Enrich only if we have new words
+        if (newWordCount > 0) {
+          const enrichCommand = `python scripts/agents.py --file "${outputDbName}.js"`;
+          console.log(`Enriching: ${enrichCommand}`);
+          await execPromise(enrichCommand);
         }
-      });
-    });
-    
-    console.log(`Python script output: ${stdout}`);
-    
-    // Extract the database name from the output
-    const dbNameMatch = stdout.match(/Copied database to:.*[/\\](.+_db\.js)/);
-    const databaseName = dbNameMatch 
-      ? dbNameMatch[1].replace('.js', '') 
-      : `${tempFileName}_db`;
-    
-    // Check if output directory still exists
-    const outputDir = path.join(__dirname, 'data', `output_${tempFileName}`);
-    const outputDirExists = fs.existsSync(outputDir);
-    
-    console.log(`Output directory check: ${outputDirExists ? 'Still exists' : 'Successfully deleted'}`);
-    
-    // Try manual cleanup if directory still exists
-    if (outputDirExists) {
-      console.log(`Attempting manual cleanup of directory: ${outputDir}`);
-      try {
-        // Use rimraf for more reliable directory removal
-        const rimraf = require('rimraf');
-        rimraf.sync(outputDir);
-        console.log(`Manual cleanup successful: ${outputDir}`);
-      } catch (cleanupError) {
-        console.warn(`Manual cleanup failed: ${cleanupError.message}`);
+        
+        // Return results
+        return res.json({
+          success: true,
+          databaseName: outputDbName,
+          totalWords: parseInt(compareOutput.match(/Words in new database:\s*(\d+)/)[1] || 0),
+          newWordCount
+        });
+        
+      } else {
+        // First chapter - create master vocabulary from this chapter
+        fs.copyFileSync(`${tempDir}/${outputDbName}_raw.js`, `${dbDir}/${outputDbName}.js`);
+        fs.copyFileSync(`${tempDir}/${outputDbName}_raw.js`, masterDbPath);
+        
+        // Enrich the database
+        const enrichCommand = `python scripts/agents.py --file "${outputDbName}.js"`;
+        console.log(`Enriching first chapter: ${enrichCommand}`);
+        await execPromise(enrichCommand);
+        
+        // Get word count
+        const content = fs.readFileSync(`${dbDir}/${outputDbName}.js`, 'utf8');
+        const wordCount = Object.keys(JSON.parse(content.match(/=\s*({[\s\S]*?});/)[1])).length;
+        
+        return res.json({
+          success: true,
+          databaseName: outputDbName,
+          totalWords: wordCount,
+          newWordCount: wordCount
+        });
       }
+      
+    } else {
+      // Standard mode - just generate a standalone database
+      outputDbName = `${dbNameBase}Database`;
+      command = `python scripts/text2db.py --input "${tempFilePath}" --copy-to-db --db-dir "${dbDir}" --delete-output`;
+      
+      console.log(`Executing: ${command}`);
+      const { stdout } = await execPromise(command);
+      
+      // Enrich the database
+      const enrichCommand = `python scripts/agents.py --file "${outputDbName}.js"`;
+      console.log(`Enriching: ${enrichCommand}`);
+      await execPromise(enrichCommand);
+      
+      return res.json({
+        success: true,
+        databaseName: outputDbName
+      });
     }
-    
-    // Return success response
-    res.status(200).json({
-      success: true,
-      message: 'Database generated successfully',
-      databaseName,
-      pythonOutput: stdout,
-      cleanup: outputDirExists ? 'Manual cleanup attempted' : 'Python script cleaned up successfully'
-    });
     
   } catch (error) {
-    console.error('Error processing request:', error);
-    res.status(500).json({ 
-      error: 'Server error while processing request', 
-      details: error.message,
-      ...(error.stderr && { stderr: error.stderr })
+    console.error('Error in database generation:', error);
+    return res.status(500).json({
+      error: 'Database generation failed',
+      details: error.message
     });
-  } finally {
-    // Clean up temporary input file
-    try {
-      if (tempFilePath && fs.existsSync(tempFilePath)) {
-        fs.unlinkSync(tempFilePath);
-        console.log(`Temporary file deleted: ${tempFilePath}`);
-      }
-    } catch (cleanupError) {
-      console.warn(`Warning: Could not delete temporary file: ${cleanupError.message}`);
-    }
   }
 });
 

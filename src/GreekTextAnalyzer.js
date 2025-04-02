@@ -1,6 +1,7 @@
 // GreekTextAnalyzer.js
 
 import React, { useEffect, useState, useMemo } from 'react';
+import BookSelector from './components/BookSelector';
 
 const GreekTextAnalyzer = () => {
   // Dynamically load all databases from the databases directory
@@ -59,6 +60,11 @@ const GreekTextAnalyzer = () => {
   const [isGeneratingDatabase, setIsGeneratingDatabase] = useState(false);
   const [databaseGenerated, setDatabaseGenerated] = useState(false);
   const [generatedDatabaseName, setGeneratedDatabaseName] = useState('');
+
+  // Add these new state variables
+  const [currentBook, setCurrentBook] = useState(null);
+  const [chapterTitle, setChapterTitle] = useState('');
+  const [isChapterMode, setIsChapterMode] = useState(false);
 
   // RED group: Articles, Pronouns, Particles, Prepositions, Conjunctions, and Demonstrative Pronouns
   const redGroup = [
@@ -508,33 +514,59 @@ const GreekTextAnalyzer = () => {
     }
   }, [darkMode]);
 
-  // Update the generateDatabase function to run both Python scripts
+  // Update the generateDatabase function to be chapter-aware
   const generateDatabase = async () => {
     if (!text) {
       alert("Please enter some text to analyze.");
       return;
     }
     
+    // Check if a book is selected when in chapter mode
+    if (isChapterMode && !currentBook) {
+      alert("Please select or create a book first.");
+      return;
+    }
+    
     setIsGeneratingDatabase(true);
     
     try {
-      console.log("Sending text to server for database generation...");
+      console.log("Processing text...");
       
-      // Call the server endpoint to run both Python scripts
+      // Determine database name based on mode
+      let dbNameBase;
+      
+      if (isChapterMode) {
+        // Chapter mode: use book title + chapter number
+        const chapterNum = (currentBook.chapterCount || 0) + 1;
+        dbNameBase = `${currentBook.title.replace(/\s+/g, '_')}_ch${chapterNum}`;
+      } else {
+        // Standalone mode: use text snippet
+        const timestamp = new Date().getTime();
+        dbNameBase = text.trim().split(/\s+/).slice(0, 3).join('_')
+          .replace(/[^a-zA-Z0-9_]/g, '')
+          .replace(/^[0-9]/, 'text') || `text${timestamp}`;
+      }
+      
+      // Call the API endpoint to generate the database
       const apiUrl = 'http://localhost:3001/api/run-text2db';
       
-      // Send the text content
+      const payload = {
+        textContent: text,
+        dbNameBase: dbNameBase,
+        isChapter: isChapterMode,
+        bookId: currentBook?.id,
+        chapterTitle: chapterTitle || `Chapter ${(currentBook?.chapterCount || 0) + 1}`,
+      };
+      
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          textContent: text
-        }),
+        body: JSON.stringify(payload),
       });
       
-      // Handle non-JSON responses
+      // Process response handling as before...
       const contentType = response.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
         const textContent = await response.text();
@@ -550,44 +582,47 @@ const GreekTextAnalyzer = () => {
       
       console.log("Server response:", result);
       
-      // Process text to display unique words panel
-      const textMatrix = createTextMatrix(text);
-      const uniqueWordsSet = new Set();
+      // Update book information if in chapter mode
+      if (isChapterMode && currentBook) {
+        // Update book with new chapter info
+        const updatedBook = {
+          ...currentBook,
+          chapterCount: (currentBook.chapterCount || 0) + 1,
+          totalWords: (currentBook.totalWords || 0) + result.newWordCount,
+          lastUpdated: new Date().toISOString()
+        };
+        
+        // Update local storage
+        const savedBooks = JSON.parse(localStorage.getItem('languageBooks') || '[]');
+        const updatedBooks = savedBooks.map(book => 
+          book.id === currentBook.id ? updatedBook : book
+        );
+        
+        localStorage.setItem('languageBooks', JSON.stringify(updatedBooks));
+        setCurrentBook(updatedBook);
+        
+        // Success message for chapter
+        alert(
+          `Chapter processed successfully!\n\n` +
+          `Added to book: ${currentBook.title}\n` +
+          `Total words in chapter: ${result.totalWords}\n` +
+          `New unique words: ${result.newWordCount}\n\n` +
+          `The database has been enriched with translations.\n` +
+          `To use the updated vocabulary, please reload the page.`
+        );
+        
+      } else {
+        // Standard success message for standalone database
+        alert(
+          "Database has been generated successfully!\n\n" +
+          "The database file has been created and enriched with translations.\n\n" +
+          "To use the new database with the current text, you'll need to reload the page."
+        );
+      }
       
-      textMatrix.forEach(row => {
-        row.forEach(word => {
-          if (word) {
-            const cleaned = cleanWord(word);
-            if (cleaned && cleaned.length > 1) {
-              uniqueWordsSet.add(cleaned);
-            }
-          }
-        });
-      });
-      
-      const uniqueWords = Array.from(uniqueWordsSet).sort();
-      
-      // Check which words exist in the database
-      const wordsWithStatus = uniqueWords.map(word => ({
-        word,
-        inDatabase: !!combinedDatabase[word],
-        databaseInfo: combinedDatabase[word] || null
-      }));
-      
-      // Update state
-      setUniqueWordsFromText(wordsWithStatus);
-      setShowUniqueWordsPanel(true);
-      
-      // Update state with database name
+      // The rest of your existing function logic...
       setGeneratedDatabaseName(result.databaseName);
       setDatabaseGenerated(true);
-      
-      // Success message
-      alert(
-        "Database has been generated successfully!\n\n" +
-        "The database file has been copied to the src/databases directory and temporary files have been cleaned up.\n\n" +
-        "To use the new database with the current text, you'll need to reload the page."
-      );
       
     } catch (error) {
       console.error("Error generating database:", error);
@@ -715,23 +750,69 @@ export default ${dbName};`;
           className="w-full h-72 p-2 border rounded mb-3 font-serif text-sm"
         />
 
-        {/* Replace the two buttons with a single button */}
-        <div className="mb-4 flex flex-wrap gap-2">
-          <button 
-            onClick={generateDatabase}
-            className={`px-3 py-1 sm:px-4 sm:py-2 text-sm rounded transition-colors ${
-              isGeneratingDatabase ? 
-                'bg-gray-400 cursor-not-allowed' : 
-                'bg-green-600 text-white hover:bg-green-700'
-            }`}
-            disabled={isGeneratingDatabase}
-          >
-            {isGeneratingDatabase ? 
-              'Processing...' : 
-              'Generate Database'
-            }
-          </button>
+        {/* Book and Chapter Selection */}
+        <div className="mb-4 flex flex-col gap-2">
+          <div className="flex items-center">
+            <label className="inline-flex items-center cursor-pointer mr-4">
+              <input 
+                type="checkbox"
+                className="sr-only peer"
+                checked={isChapterMode}
+                onChange={() => setIsChapterMode(!isChapterMode)}
+              />
+              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              <span className="ml-2 text-sm font-medium">
+                Chapter Mode
+              </span>
+            </label>
+            <span className="text-xs text-gray-500">
+              {isChapterMode ? 
+                'Process as part of a book' : 
+                'Process as standalone text'}
+            </span>
+          </div>
+          
+          {isChapterMode && (
+            <>
+              {/* Import the BookSelector component */}
+              <BookSelector 
+                onBookSelect={setCurrentBook}
+                currentBook={currentBook}
+              />
+              
+              <div className="mb-2">
+                <label className="block text-xs font-medium mb-1">
+                  Chapter Title
+                </label>
+                <input
+                  type="text"
+                  value={chapterTitle}
+                  onChange={(e) => setChapterTitle(e.target.value)}
+                  placeholder={`Chapter ${(currentBook?.chapterCount || 0) + 1}`}
+                  className="w-full p-2 border rounded text-sm"
+                />
+              </div>
+            </>
+          )}
         </div>
+
+        {/* Update the button text */}
+        <button 
+          onClick={generateDatabase}
+          className={`px-3 py-1 sm:px-4 sm:py-2 text-sm rounded transition-colors ${
+            isGeneratingDatabase ? 
+              'bg-gray-400 cursor-not-allowed' : 
+              'bg-green-600 text-white hover:bg-green-700'
+          }`}
+          disabled={isGeneratingDatabase}
+        >
+          {isGeneratingDatabase ? 
+            'Processing...' : 
+            isChapterMode ? 
+              `Process ${currentBook ? `Chapter for "${currentBook.title}"` : 'Chapter'}` : 
+              'Generate Database'
+          }
+        </button>
 
         {/* Database generation success message */}
         {databaseGenerated && (
